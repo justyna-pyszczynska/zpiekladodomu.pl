@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Psy do adopcji - Z Piekła do Domu</title>
+  <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fafafa; color: #222; }
+    img { display: block; max-width: 100%; }
+
+    /* CONTAINERS */
+    .container { width: min(1200px, 92%); margin: 0 auto; }
+
+    /* NAVBAR */
+    header {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1200px, 92%);
+      z-index: 10;
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px; font-weight: 600; font-family: 'McLaren', cursive;
+    }
+    .brand img { width: 28px; height: 28px; }
+    .menu { display: flex; align-items: center; gap: 14px; }
+    .menu a {
+      text-decoration: none;
+      color: #222; 
+      font-weight: 500;
+      padding: 8px 12px; 
+      border-radius: 10px; 
+      transition: all 0.3s ease;
+    }
+    .menu a:hover {
+      background: rgba(0,0,0,0.05);
+      color: #374151;
+    }
+    .menu a.cta { 
+      background: linear-gradient(135deg,#ffedd5,#fecaca); 
+      font-weight: 700; 
+      transition: all 0.3s ease;
+    }
+    .menu a.cta:hover {
+      background: linear-gradient(135deg,#fbbf24,#f87171);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(251,191,36,0.4);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 120vh;
+      background: url('images/dog-1.jpg') center/cover no-repeat;
+      display: flex; align-items: center;
+    }
+    .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.02)); }
+    .hero-content { position: relative; z-index: 1; width: min(500px, 50%); margin-left: 12%; color: #fff; }
+    .hero h1 { 
+      font-family: 'McLaren', cursive; 
+      font-size: clamp(52px, 8vw, 62px); 
+      line-height: 1.2; 
+      font-weight: 450;
+      text-shadow: 2px 3px 12px rgba(0,0,0,.7);
+      padding-top: 10rem;
+      border-radius: 0.5rem;
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .hero-subtitle {
+      font-family: 'McLaren', cursive;
+      font-size: clamp(18px, 3vw, 24px);
+      line-height: 1.3;
+      font-weight: 450;
+      color: #fff;
+      text-shadow: 2px 3px 12px rgba(0,0,0,.7);
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      display: inline-block;
+      white-space: nowrap;
+      position: absolute;
+      top: 75%;
+      left: 12%;
+      z-index: 2;
+    }
+      .hero-button-left {
+        position: absolute;
+        top: 77%;
+        right: 25%;
+        z-index: 2;
+        width: 180px;
+        height: 44px;
+        font-family: 'McLaren', cursive;
+        text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      }
+      .hero-button {
+        position: absolute;
+        top: 77%;
+        right: 12%;
+        z-index: 2;
+        width: 180px;
+        height: 44px;
+      }
+    .btn-ghost { background: rgba(255,255,255,.2); color:#fff; border:1px solid rgba(255,255,255,.35); text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+    .btn-outline { 
+      background: transparent; 
+      color: #fff; 
+      border: 2px solid #fff; 
+      font-family: 'McLaren', cursive;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: #fca5a5;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* HERO ARROW BUTTONS */
+    .hero-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 3;
+    }
+    .hero-arrow:hover {
+      transform: translateY(-50%) scale(1.2);
+    }
+    .hero-arrow-left {
+      left: 12%;
+    }
+    .hero-arrow-right {
+      right: 12%;
+    }
+    .hero-arrow img {
+      width: 48px;
+      height: 48px;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+    .hero-arrow:hover img {
+      opacity: 1;
+    }
+
+    /* BIG CARD SECTION */
+    .section { padding: 3rem 0; }
+    .overlap { margin-top: -39.5vh; position: relative; z-index: 2; }
+    .big-card-container { 
+      display: flex; 
+      flex-direction: column;
+      align-items: center;
+      width: min(1200px, 100%);
+      margin: 0 auto;
+    }
+    .big-card { 
+      background: #fff; 
+      border-radius: 1.5rem; 
+      box-shadow: 0 20px 40px rgba(0,0,0,.15); 
+      overflow: hidden; 
+      width: 100%;
+      height: 600px;
+      display: flex;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .big-card:hover { 
+      transform: translateY(-8px); 
+      box-shadow: 0 30px 60px rgba(0,0,0,.2); 
+    }
+    .big-card-image {
+      flex: 1;
+      background: url('images/dog-1.jpg') center/cover no-repeat;
+      position: relative;
+    }
+    .big-card-content {
+      flex: 1;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .big-card h2 {
+      font-family: 'McLaren', cursive;
+      font-size: 2.5rem;
+      color: #1f2937;
+      margin: 0;
+      line-height: 1.2;
+    }
+    .big-card .muted {
+      color: #6b7280;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .big-card .btn {
+      align-self: flex-start;
+      padding: 1rem 2rem;
+      font-size: 1.125rem;
+    }
+    .muted { color: #6b7280; font-size: 0.875rem; line-height: 1.5; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding: .6875rem 1.125rem; border:none; border-radius: 9999px; cursor:pointer; font-weight: 700; }
+    .btn-primary { 
+      background: linear-gradient(135deg,#fca5a5,#fde68a); 
+      color:#fff; 
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg,#f87171,#fbbf24);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(252,165,165,0.4);
+    }
+    .center { text-align: center; }
+
+    /* FOOTER */
+    footer { background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); margin-top: 2.25rem; padding: 3rem 0; }
+    .footer-grid { display:grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
+    .footer-brand { display:flex; align-items:flex-start; gap: 1.5rem; }
+    .footer-brand img { width: 10rem; height: 10rem; }
+    .footer-content { flex: 1; }
+    .footer-title { font-family: 'McLaren', cursive; font-size: 1.5rem; color: #000; margin: 0 0 1rem 0; line-height: 1.3; }
+    .footer-email { display: flex; align-items: center; margin-bottom: 1rem; }
+    .footer-email svg { color: #000; transition: color 0.3s ease; }
+    .footer-email:hover svg { color: #666; }
+    .footer-email a { 
+      color: #000; 
+      text-decoration: none; 
+      font-size: 1rem; 
+      transition: all 0.3s ease;
+    }
+    .footer-email a:hover {
+      color: #666;
+      text-decoration: underline;
+      font-weight: 700;
+    }
+    .footer-copyright { color: #000; font-size: 0.875rem; line-height: 1.4; }
+    .footer-links { display: flex; gap: 7rem; }
+    .footer-links .links a {
+      position: relative;
+      display: inline-block;
+      font-weight: 500;
+      transition: font-weight 0.3s ease, color 0.3s ease;
+    }
+
+    .footer-links .links a::after {
+      content: attr(data-text);
+      visibility: hidden;
+      font-weight: 700;
+      height: 0;
+      overflow: hidden;
+      pointer-events: none;
+      display: block;
+    }
+
+    .footer-links .links a:hover {
+      font-weight: 700;
+      color: #666;
+    }
+    .links-column h4 { 
+      color: #000; 
+      font-size: 1rem; 
+      margin: 0 0 1rem 0; 
+      font-weight: 600; 
+      white-space: nowrap; 
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .links-column h4:hover {
+      font-weight: 700;
+      color: #333;
+    }
+    .links { display: flex; flex-direction: column; gap: 0.5rem; }
+    .links a { 
+      color: #000; 
+      text-decoration: none; 
+      font-size: 0.875rem; 
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      font-weight: 400;
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+    .links a:hover {
+      color: #666;
+      font-weight: 700;
+    }
+    .footer-social { display: flex; flex-direction: column; align-items: flex-end; gap: 3.75rem; }
+    .socials { display: flex; gap: 0.75rem; }
+    .socials a { 
+      display: inline-block; 
+      text-decoration: none; 
+      transition: all 0.3s ease;
+      width: 48px;
+      height: 48px;
+    }
+    .socials a:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+    .footer-social .footer-copyright { text-align: right; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      header { top: .625rem; }
+      .navbar { padding: .625rem .75rem; }
+      .menu { gap: .5rem; }
+      .menu a { padding: .375rem .5rem; }
+      .big-card { 
+        flex-direction: column; 
+        height: auto; 
+        max-width: 90%;
+      }
+      .big-card-image { 
+        height: 300px; 
+        flex: none; 
+      }
+      .big-card-content { 
+        padding: 2rem; 
+      }
+      .big-card h2 { 
+        font-size: 2rem; 
+      }
+      .overlap { margin-top: -18vh; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="brand">
+        <img src="images/logo.svg" alt="Logo" width="200" height="200">
+        <span>Z Piekła Do Domu</span>
+      </div>
+      <nav class="menu">
+        <a href="#home">Strona główna</a>
+        <a href="#adopcje">Adopcje</a>
+        <a href="#bazarek">Bazarek</a>
+        <a href="#onas">O nas</a>
+        <a href="#wspieraj" class="cta">Wsparcie</a>
+    </nav>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Kokos</h1>
+    </div>
+    <button class="hero-arrow hero-arrow-left" onclick="switchDog('left')">
+      <img src="images/arrow-left.svg" alt="Previous">
+    </button>
+    <button class="hero-arrow hero-arrow-right" onclick="switchDog('right')">
+      <img src="images/arrow-right.svg" alt="Next">
+    </button>
+  </section>
+
+  <main class="container">
+    <!-- BIG CARD SECTION -->
+    <section class="section overlap" id="dog-profile">
+      <div class="big-card-container">
+        <article class="big-card">
+          <div class="big-card-image"></div>
+          <div class="big-card-content">
+            <p class="muted">Kokos to wspaniały pies, który szuka swojego wymarzonego domu. Jest bardzo przyjazny, lubi zabawę i jest doskonałym towarzyszem dla całej rodziny. Ma około 3 lata i jest w pełni zaszczepiony. Kocha spacery i jest bardzo posłuszny. Idealny dla rodzin z dziećmi lub osób, które szukają wiernego przyjaciela.</p>
+            <button class="btn btn-primary">Adoptuj ↗</button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <img src="images/logo.svg" alt="Logo" width="120" height="120">
+          <div class="footer-content">
+            <h2 class="footer-title">Z Piekła do Domu - ratujemy psy i koty z Turcji</h2>
+            <div class="footer-email">
+              <svg width="16" height="16" style="margin-right: 8px;"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <a href="mailto:zpiekladodomu@gmail.com">zpiekladodomu@gmail.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="links-column">
+          <h4>Linki</h4>
+          <div class="links">
+            <a href="#" data-text="Fanpage">Fanpage</a>
+            <a href="#" data-text="Nasze inicjatywy">Nasze inicjatywy</a>
+            <a href="#" data-text="Dołącz do grupy">Dołącz do grupy</a>
+            <a href="#" data-text="Współpraca">Współpraca</a>
+          </div>
+        </div>
+        <div class="links-column">
+          <h4>Zobacz też</h4>
+          <div class="links">
+            <a href="#" data-text="Wioska Burçak">Wioska Burçak</a>
+            <a href="#" data-text="Pani Adalet">Pani Adalet</a>
+            <a href="#" data-text="Artykuły">Artykuły</a>
+            <a href="#" data-text="Zostań sponsorem">Zostań sponsorem</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-social">
+        <div class="socials">
+          <a href="https://www.instagram.com/z_piekla_do_domu_/" aria-label="Instagram" target="_blank"><img src="images/instagram.svg" alt="Instagram" width="48" height="48"></a>
+          <a href="https://www.facebook.com/profile.php?id=61577219922888" aria-label="Facebook" target="_blank"><img src="images/facebook.svg" alt="Facebook" width="48" height="48"></a>
+        </div>
+        <div class="footer-copyright">
+          <div>Z Piekła do domu 2025 ©</div>
+          <div>Wszelkie prawa zastrzeżone</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let currentDogIndex = 0;
+    const dogImages = ['images/dog-1.jpg', 'images/dog-2.jpg'];
+    
+    function switchDog(direction) {
+      const hero = document.querySelector('.hero');
+      
+      // Cycle through the dog images
+      if (direction === 'right') {
+        currentDogIndex = (currentDogIndex + 1) % dogImages.length;
+      } else if (direction === 'left') {
+        currentDogIndex = (currentDogIndex - 1 + dogImages.length) % dogImages.length;
+      }
+      
+      // Update the background image
+      hero.style.backgroundImage = `url('${dogImages[currentDogIndex]}')`;
+      
+      // Add smooth transition effect
+      hero.style.transition = "background-image 0.5s ease-in-out";
+      
+      console.log(`Switched to ${dogImages[currentDogIndex]} (${direction} arrow clicked)`);
+    }
+  </script>
+</body>
+</html>

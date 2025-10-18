@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Z Piekła do Domu</title>
+  <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fafafa; color: #222; }
+    img { display: block; max-width: 100%; }
+
+    /* CONTAINERS */
+    .container { width: min(1200px, 92%); margin: 0 auto; }
+
+    /* NAVBAR */
+    header {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1200px, 92%);
+      z-index: 10;
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px; font-weight: 600; font-family: 'McLaren', cursive;
+    }
+    .brand img { width: 28px; height: 28px; }
+    .menu { display: flex; align-items: center; gap: 14px; }
+    .menu a {
+      text-decoration: none;
+      color: #222; 
+      font-weight: 500;
+      padding: 8px 12px; 
+      border-radius: 10px; 
+      transition: all 0.3s ease;
+    }
+    .menu a:hover {
+      background: rgba(0,0,0,0.05);
+      color: #374151;
+    }
+    .menu a.cta { 
+      background: linear-gradient(135deg,#ffedd5,#fecaca); 
+      font-weight: 700; 
+      transition: all 0.3s ease;
+    }
+    .menu a.cta:hover {
+      background: linear-gradient(135deg,#fbbf24,#f87171);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(251,191,36,0.4);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 120vh;
+      background: url('images/landing.png') center/cover no-repeat;
+      display: flex; align-items: center;
+    }
+    .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.2)); }
+    .hero-content { position: relative; z-index: 1; width: min(500px, 50%); margin-left: 12%; color: #fff; }
+    .hero h1 { 
+      font-family: 'McLaren', cursive; 
+      font-size: clamp(32px, 6vw, 42px); 
+      line-height: 1.2; 
+      font-weight: 450;
+      text-shadow: 2px 3px 12px rgba(0,0,0,.7);
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .hero-subtitle {
+      font-family: 'McLaren', cursive;
+      font-size: clamp(18px, 3vw, 24px);
+      line-height: 1.3;
+      font-weight: 450;
+      color: #fff;
+      text-shadow: 2px 3px 12px rgba(0,0,0,.7);
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      display: inline-block;
+      white-space: nowrap;
+      position: absolute;
+      top: 75%;
+      left: 12%;
+      z-index: 2;
+    }
+      .hero-button-left {
+        position: absolute;
+        top: 77%;
+        right: 25%;
+        z-index: 2;
+        width: 180px;
+        height: 44px;
+        font-family: 'McLaren', cursive;
+        text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      }
+      .hero-button {
+        position: absolute;
+        top: 77%;
+        right: 12%;
+        z-index: 2;
+        width: 180px;
+        height: 44px;
+      }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding: .6875rem 1.125rem; border:none; border-radius: 9999px; cursor:pointer; font-weight: 700; }
+    .btn-primary { 
+      background: linear-gradient(135deg,#fca5a5,#fde68a); 
+      color:#fff; 
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg,#f87171,#fbbf24);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(252,165,165,0.4);
+    }
+    .btn-ghost { background: rgba(255,255,255,.2); color:#fff; border:1px solid rgba(255,255,255,.35); text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+    .btn-outline { 
+      background: transparent; 
+      color: #fff; 
+      border: 2px solid #fff; 
+      font-family: 'McLaren', cursive;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: #fca5a5;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* DONATION CARDS */
+    .section { padding: 3rem 0; }
+    .overlap { margin-top: -39.5vh; position: relative; z-index: 2; }
+    .cards-3 { display:grid; grid-template-columns: repeat(3,1fr); gap: 1.125rem; --card-h: 475px; }
+    .span-2 { grid-column: span 2; }
+    .card { background:#fff; border-radius: 1rem; box-shadow:0 12px 22px rgba(0,0,0,.1); overflow: hidden; height: var(--card-h); display:flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,.15); }
+    .card-body { padding: .875rem 1rem 1rem; display:flex; flex-direction: column; gap: .5rem; flex: 1; }
+    .pomagam iframe {scale: 0.95; text-align: center; margin-left: -21px; transform: scaleX(1.1rem); transform: scaleY(1.08);}
+    .dog-card { text-align: center;}
+    .dog-card .circle { width: 14rem; height: 14rem; border-radius: 50%; object-fit: cover; margin: 1rem auto 0.75rem; }
+    .dog-card h3 { font-family: 'McLaren', cursive; font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .dog-card .card-footer { justify-content: center; margin-top: 0.75rem; }
+    .dog-card.span-2 { 
+      display: flex !important; 
+      align-items: center;
+      text-align: left;
+      padding: 2rem; 
+      flex-direction: row !important;
+    }
+    .dog-card.span-2 .circle { 
+      width: 15rem !important; 
+      height: 15rem !important; 
+      border-radius: 50% !important; 
+      object-fit: cover !important; 
+      margin: 0 2rem 0 0 !important; 
+      flex-shrink: 0;
+    }
+    .dog-card.span-2 .card-body { 
+      flex: 1; 
+      padding: 0 !important; 
+      display: flex !important; 
+      flex-direction: column; 
+      justify-content: center; 
+    }
+    .dog-card.span-2 h3 { 
+      font-family: 'McLaren', cursive; 
+      font-size: 1.5rem; 
+      margin-bottom: 1rem; 
+    }
+    .dog-card.span-2 p { 
+      font-size: 0.9rem; 
+      line-height: 1.5; 
+      margin-bottom: 1.5rem; 
+      color: #6b7280; 
+    }
+    .dog-card.span-2 .card-footer { 
+      justify-content: flex-start; 
+      padding-top: 0; 
+    }
+    .chip { font-size: .75rem; padding: .375rem .625rem; background:#f4f4f5; border-radius: 9999px; display:inline-block; margin-top: .5rem; }
+    .progress { height: .5rem; background:#eee; border-radius: 9999px; overflow:hidden; margin: .625rem 0 .5rem; }
+    .progress > span { display:block; height:100%; background: linear-gradient(90deg,#f59e0b,#ef4444); width: 51%; }
+    .card-footer { display:flex; align-items:center; justify-content: space-between; padding-top: .375rem; }
+    .mini-badge { font-size: .6875rem; opacity:.75; }
+
+    .center { text-align:center; }
+
+    /* INITIATIVES DARK CARD */
+    .initiatives { margin-top: .625rem; }
+    .dark-card { background: linear-gradient(135deg, #000000, #404040); color:#fff; border-radius: 1.125rem; padding: 1.375rem; display:grid; grid-template-columns: 1.1fr 1fr; gap: 1.125rem; align-items: center; box-shadow:0 12px 28px rgba(0,0,0,.25); }
+    .dark-card h3 { font-family: 'McLaren', cursive; font-size: 1.375rem; margin-bottom: .5rem; }
+    .dark-card p { opacity:.9; font-size: .875rem; }
+    .dark-card img { border-radius: .75rem; }
+
+    /* SPLIT SECTION */
+    .split { display:grid; grid-template-columns: 1.2fr 1fr; gap: 1.625rem; align-items: center; }
+    .split-text h3 { font-family: 'McLaren', cursive; }
+    .split img { border-radius: 0.75rem; box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+    .muted { color:#4b5563; }
+
+    /* SHOP */
+    .shop-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .shop-header h3 { font-family: 'McLaren', cursive; margin: 0; }
+    .shop-disclaimer { color: #6b7280; font-size: 0.875rem; margin: 0; }
+    .shop-grid { display:grid; grid-template-columns: repeat(3,1fr); gap: 1.125rem; }
+    .shop-card { background:#fff; border-radius: 1rem; box-shadow:0 10px 18px rgba(0,0,0,.08); padding: 1.5rem; text-align:center; height: 25rem; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .shop-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,.15); }
+    .shop-card h4 { font-family: 'McLaren', cursive; margin: 1rem 0; font-size: 1.125rem; }
+    .circle { width: 12rem; height: 12rem; border-radius: 50%; object-fit: cover; margin: 1rem auto 1.5rem; }
+    .price { font-weight: 700; margin-top: 0.5rem; font-size: 1.125rem; }
+    .shop-button { 
+      padding: 0.875rem 2rem; 
+      font-size: 1.125rem; 
+      font-weight: 600;
+    }
+
+    /* PARTNERS */
+    .logos { display:grid; grid-template-columns: repeat(4,1fr); gap: 1.125rem; align-items:center; }
+    .logos img { 
+      filter: grayscale(100%); 
+      opacity:.9; 
+      transition: all 0.3s ease;
+    }
+    .logos img:hover {
+      filter: grayscale(0%);
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    /* FOOTER */
+    footer { background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); margin-top: 2.25rem; padding: 3rem 0; }
+    .footer-grid { display:grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
+    .footer-brand { display:flex; align-items:flex-start; gap: 1.5rem; }
+    .footer-brand img { width: 10rem; height: 10rem; }
+    .footer-content { flex: 1; }
+    .footer-title { font-family: 'McLaren', cursive; font-size: 1.5rem; color: #000; margin: 0 0 1rem 0; line-height: 1.3; }
+    .footer-email { display: flex; align-items: center; margin-bottom: 1rem; }
+    .footer-email svg { color: #000; transition: color 0.3s ease; }
+    .footer-email:hover svg { color: #666; }
+    .footer-email a { 
+      color: #000; 
+      text-decoration: none; 
+      font-size: 1rem; 
+      transition: all 0.3s ease;
+    }
+    .footer-email a:hover {
+      color: #666;
+      text-decoration: underline;
+      font-weight: 700;
+    }
+    .footer-copyright { color: #000; font-size: 0.875rem; line-height: 1.4; }
+    .footer-links { display: flex; gap: 7rem; }
+    .footer-links .links a {
+      position: relative;
+      display: inline-block;
+      font-weight: 500;
+      transition: font-weight 0.3s ease, color 0.3s ease;
+    }
+
+    .footer-links .links a::after {
+      content: attr(data-text);
+      visibility: hidden;
+      font-weight: 700;
+      height: 0;
+      overflow: hidden;
+      pointer-events: none;
+      display: block;
+    }
+
+    .footer-links .links a:hover {
+      font-weight: 700;
+      color: #666;
+    }
+    .links-column h4 { 
+      color: #000; 
+      font-size: 1rem; 
+      margin: 0 0 1rem 0; 
+      font-weight: 600; 
+      white-space: nowrap; 
+      width: 100%;
+      cursor: pointer;
+    }
+    .links-column h4:hover {
+      font-weight: 700;
+      color: #333;
+    }
+    .links { display: flex; flex-direction: column; gap: 0.5rem; flex-grow: 1}
+    .links a { 
+      color: #000; 
+      text-decoration: none; 
+      font-size: 0.875rem; 
+      white-space: nowrap;
+      font-weight: 400;
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+    .links a:hover {
+      color: #666;
+      font-weight: 700;
+    }
+    .footer-social { display: flex; flex-direction: column; align-items: flex-end; gap: 3.75rem; }
+    .socials { display: flex; gap: 0.75rem; }
+    .socials a { 
+      display: inline-block; 
+      text-decoration: none; 
+      transition: all 0.3s ease;
+    }
+    .socials a:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+    .footer-social .footer-copyright { text-align: right; }
+
+    /* MAP SECTION */
+    .map-section { padding: 4rem 0; }
+    .map-container { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start; margin-top: 2rem; }
+    .map-wrapper { 
+      background: none; 
+      padding: 0; 
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 60%; /* 5:3 aspect ratio */
+      overflow: hidden;
+    }
+    .turkey-map { 
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+    }
+    
+    .map-info { background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .map-info h4 { font-family: 'McLaren', cursive; font-size: 1.5rem; color: #1f2937; margin: 0 0 1rem 0; }
+    .map-info p { color: #6b7280; margin: 0 0 2rem 0; line-height: 1.6; }
+    .map-stats { display: flex; gap: 2rem; }
+    .stat-item { text-align: center; }
+    .stat-number { display: block; font-family: 'McLaren', cursive; font-size: 2rem; font-weight: bold; color: #ef4444; }
+    .stat-label { display: block; font-size: 0.875rem; color: #6b7280; margin-top: 0.5rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      header { top: .625rem; }
+      .navbar { padding: .625rem .75rem; }
+      .menu { gap: .5rem; }
+      .menu a { padding: .375rem .5rem; }
+      .cards-3, .shop-grid, .logos { grid-template-columns: 1fr; }
+      .dark-card, .split { grid-template-columns: 1fr; }
+      .hero { min-height: 100vh; }
+      .overlap { margin-top: -18vh; }
+      .map-container { grid-template-columns: 1fr; gap: 2rem; }
+      .map-wrapper { padding-bottom: 50%; /* Slightly taller on mobile */ }
+      .map-stats { justify-content: center; }
+    }
+  </style>
+  
+  
+  <!-- Simple inline icons -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="icon-ig" viewBox="0 0 24 24"><path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5m5 5.8A4.2 4.2 0 1 0 16.2 12 4.2 4.2 0 0 0 12 7.8M19 6.5a1 1 0 1 0 1 1a1 1 0 0 0-1-1"/></symbol>
+    <symbol id="icon-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12A10 10 0 1 0 10.3 21.9v-7h-2.6V12h2.6V9.7c0-2.6 1.5-4 3.8-4c1.1 0 2.3.2 2.3.2v2.6h-1.3c-1.3 0-1.8.8-1.8 1.7V12h3l-.5 2.9h-2.5v7A10 10 0 0 0 22 12"/></symbol>
+    <symbol id="icon-paw" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2c-2.2 0-4 1.8-4 4 0 1.1.4 2.1 1.1 2.8L12 12l2.9-3.2c.7-.7 1.1-1.7 1.1-2.8 0-2.2-1.8-4-4-4zM6 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM8 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm8 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></symbol>
+  </svg>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="brand">
+        <img src="images/logo.svg" alt="Logo" width="200" height="200">
+        <span>Z Piekła Do Domu</span>
+      </div>
+      <nav class="menu">
+        <a href="#home">Strona główna</a>
+        <a href="#adopcje">Adopcje</a>
+        <a href="#bazarek">Bazarek</a>
+        <a href="#onas">O nas</a>
+        <a href="#wspieraj" class="cta">Wsparcie</a>
+    </nav>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Zmiana zaczyna<br>się tu, gdzie<br>odmawiamy<br>odwracać wzrok<br>w milczeniu.</h1>
+    </div>
+    <div class="hero-subtitle">Wspieraj lub zostań nowym opiekunem!</div>
+    <button class="btn btn-primary hero-button-left">Wsparcie</button>
+    <button class="btn btn-outline hero-button">Wszystkie psiaki <img src="images/paw-icon.svg" alt="paw" width="16" height="16"></button>
+  </section>
+
+  <main class="container">
+    <!-- DONATION + DOG CARDS GRID (2 rows) -->
+    <section class="section overlap" id="donations">
+      <div class="cards-3">
+        <!-- Row 1: Fundraising widget + two dog cards -->
+        <article class="card pomagam">
+          <iframe frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/zpiekladodomu/widget/large"></iframe>
+        </article>
+
+        <article class="card dog-card">
+          <img src="images/dog-1.jpg" alt="Kokos" class="circle">
+          <div class="card-body">
+            <h3>Kokos</h3>
+            <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <div class="card-footer">
+              <button class="btn btn-primary">Więcej ↗</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card dog-card">
+          <img src="images/dog-2.jpg" alt="Dżeki" class="circle">
+          <div class="card-body">
+            <h3>Dżeki</h3>
+            <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <div class="card-footer">
+              <button class="btn btn-primary">Więcej ↗</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Row 2: Second fundraising widget + wide dog card spanning two columns -->
+        <article class="card pomagam">
+          <iframe frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/aph8gm/widget/large"></iframe>
+        </article>
+
+        <article class="card dog-card span-2">
+          <img src="images/dog-3.jpg" alt="Gaja" class="circle">
+          <div class="card-body">
+            <h3>Gaja</h3>
+            <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <div class="card-footer">
+              <button class="btn btn-primary">Więcej ↗</button>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="center" style="margin-top:12px">
+    </div>
+    </section>
+
+    <!-- INTERACTIVE MAP -->
+    <section class="section map-section">
+      <h3>Nasze działania na mapie</h3>
+      <div class="map-container">
+        <div class="map-wrapper">
+          <img src="images/map-turkey.svg" alt="Mapa Turcji" class="turkey-map">
+        </div>
+        
+        <!-- Map info panel -->
+        <div class="map-info" id="mapInfo">
+          <div class="map-info-content">
+            <h4>Nasze osiągnięcia</h4>
+            <p>Od początku naszej działalności udało nam się uratować setki zwierząt i znaleźć im nowe, kochające domy.</p>
+            <div class="map-stats">
+              <div class="stat-item">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Uratowanych zwierząt</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Szczęśliwych adopcji</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INITIATIVES DARK CARD -->
+    <section class="section initiatives">
+      <div class="dark-card">
+        <img src="images/inicjatywy.png" alt="Inicjatywy">
+        <div>
+          <h3>Nasze inicjatywy</h3>
+          <p>Aliqua, id eiusmod tempor elit deserunt adipisicing elit. Nostrud occaecat aliquip, elit veniam minim voluntate. Elit nisi aliquip ea commodo consequat.</p>
+          <div style="margin-top:12px"><button class="btn btn-outline">Czytaj dalej ↗</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WIOSKA BURÇAK -->
+    <section class="section">
+      <div class="split">
+        <div class="split-text">
+          <h3>Wioska Burçak</h3>
+          <p class="muted" style="margin-top:8px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p class="muted" style="margin-top:8px">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+        <img src="images/burcak.jpg" alt="Wioska Burçak">
+    </div>
+    </section>
+
+    <!-- SHOP PRODUCTS -->
+    <section class="section">
+      <div class="shop-header">
+        <h3>Gadżety dla wspierających</h3>
+        <p class="shop-disclaimer">100% zysków finansuje nasze działania na rzecz zwierząt</p>
+      </div>
+      <div class="shop-grid">
+        <div class="shop-card">
+          <img class="circle" src="images/product-1.jpg" alt="Kubek wspieracza">
+          <h4>Kubek wspieracza</h4>
+          <div class="price">55,-</div>
+        </div>
+        <div class="shop-card">
+          <img class="circle" src="images/product-2.jpg" alt="Kubek LOGO">
+          <h4>Kubek LOGO</h4>
+          <div class="price">55,-</div>
+        </div>
+        <div class="shop-card">
+          <img class="circle" src="images/product-3.jpg" alt="iPhone 15 case SPRZECIW">
+          <h4>iPhone 15 case SPRZECIW</h4>
+          <div class="price">45,-</div>
+        </div>
+      </div>
+      <div class="center" style="margin-top:2rem"><button class="btn btn-primary shop-button">Zobacz wszystkie ↗</button></div>
+    </section>
+
+    <!-- PARTNERS LOGOS -->
+    <section class="section">
+      <h3>Wsparli nas już:</h3>
+      <div class="logos" style="margin-top:10px">
+        <img src="images/partner1.svg" alt="Partner 1">
+        <img src="images/partner2.svg" alt="Partner 2">
+        <img src="images/partner3.svg" alt="Partner 3">
+        <img src="images/partner4.svg" alt="Partner 4">
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <img src="images/logo.svg" alt="Logo" width="120" height="120">
+          <div class="footer-content">
+            <h2 class="footer-title">Z Piekła do Domu - ratujemy psy i koty z Turcji</h2>
+            <div class="footer-email">
+              <svg width="16" height="16" style="margin-right: 8px;"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <a href="mailto:zpiekladodomu@gmail.com">zpiekladodomu@gmail.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="links-column">
+          <h4>Linki</h4>
+          <div class="links">
+            <a href="#" data-text="Fanpage">Fanpage</a>
+            <a href="#" data-text="Nasze inicjatywy">Nasze inicjatywy</a>
+            <a href="#" data-text="Dołącz do grupy">Dołącz do grupy</a>
+            <a href="#" data-text="Współpraca">Współpraca</a>
+          </div>
+        </div>
+        <div class="links-column">
+          <h4>Zobacz też</h4>
+          <div class="links">
+            <a href="#" data-text="Wioska Burçak">Wioska Burçak</a>
+            <a href="#" data-text="Pani Adalet">Pani Adalet</a>
+            <a href="#" data-text="Artykuły">Artykuły</a>
+            <a href="#" data-text="Zostań sponsorem">Zostań sponsorem</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-social">
+        <div class="socials">
+          <a href="https://www.instagram.com/z_piekla_do_domu_/" aria-label="Instagram" target="_blank"><img src="images/instagram.svg" alt="Instagram" width="48" height="48"></a>
+          <a href="https://www.facebook.com/profile.php?id=61577219922888" aria-label="Facebook" target="_blank"><img src="images/facebook.svg" alt="Facebook" width="48" height="48"></a>
+        </div>
+        <div class="footer-copyright">
+          <div>Z Piekła do domu 2025 ©</div>
+          <div>Wszelkie prawa zastrzeżone</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

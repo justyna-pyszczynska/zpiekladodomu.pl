@@ -1,0 +1,18 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "dogs"
+    label: "Dogs for Adoption"
+    folder: "content/dogs"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: "name", label: "Name", widget: "string" }
+      - { name: "age", label: "Age", widget: "number" }
+      - { name: "description", label: "Description", widget: "text" }
+      - { name: "image", label: "Photo", widget: "image" }
