@@ -1,5 +1,6 @@
 backend:
   name: git-gateway
+  repo: justyna/pyszczynska/zpiekladodomu.pl
   branch: main
 
 media_folder: "public/uploads"
