@@ -439,6 +439,20 @@
     </div>
   </footer>
 
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+
   <script>
     let currentDogIndex = 0;
     const dogImages = ['images/dog-1.jpg', 'images/dog-2.jpg'];

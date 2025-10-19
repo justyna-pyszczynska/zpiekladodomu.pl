@@ -1,19 +1,90 @@
 backend:
   name: git-gateway
-  repo: justyna-pyszczynska/zpiekladodomu.pl
   branch: main
 
-media_folder: "public/uploads"
-public_folder: "/uploads"
+media_folder: "images"
+public_folder: "/images"
 
 collections:
   - name: "dogs"
-    label: "Dogs for Adoption"
+    label: "Psy do adopcji"
     folder: "content/dogs"
     create: true
     slug: "{{slug}}"
     fields:
-      - { name: "name", label: "Name", widget: "string" }
-      - { name: "age", label: "Age", widget: "number" }
-      - { name: "description", label: "Description", widget: "text" }
-      - { name: "image", label: "Photo", widget: "image" }
+      - {label: "Nazwa", name: "name", widget: "string"}
+      - {label: "Opis", name: "description", widget: "text"}
+      - {label: "Zdjęcie", name: "image", widget: "image"}
+      - {label: "Wiek", name: "age", widget: "string"}
+      - {label: "Płeć", name: "gender", widget: "select", options: ["Samiec", "Samica"]}
+      - {label: "Rozmiar", name: "size", widget: "select", options: ["Mały", "Średni", "Duży"]}
+      - {label: "Status", name: "status", widget: "select", options: ["Dostępny", "Zarezerwowany", "Adoptowany"]}
+      - {label: "Data dodania", name: "date", widget: "datetime"}
+      - {label: "Cechy szczególne", name: "special_features", widget: "list", field: {label: "Cecha", name: "feature", widget: "string"}}
+      - {label: "Historia", name: "story", widget: "text"}
+      - {label: "Wymagania adopcyjne", name: "adoption_requirements", widget: "text"}
+
+  - name: "pages"
+    label: "Strony"
+    files:
+      - label: "Strona główna"
+        name: "home"
+        file: "content/pages/home.md"
+        fields:
+          - {label: "Tytuł", name: "title", widget: "string"}
+          - {label: "Podtytuł", name: "subtitle", widget: "string"}
+          - {label: "Treść główna", name: "content", widget: "markdown"}
+          - {label: "Zdjęcie tła", name: "hero_image", widget: "image"}
+          - {label: "Przycisk 1 - tekst", name: "button1_text", widget: "string"}
+          - {label: "Przycisk 1 - link", name: "button1_link", widget: "string"}
+          - {label: "Przycisk 2 - tekst", name: "button2_text", widget: "string"}
+          - {label: "Przycisk 2 - link", name: "button2_link", widget: "string"}
+
+      - label: "O nas"
+        name: "about"
+        file: "content/pages/about.md"
+        fields:
+          - {label: "Tytuł", name: "title", widget: "string"}
+          - {label: "Opis", name: "description", widget: "text"}
+          - {label: "Historia", name: "history", widget: "markdown"}
+          - {label: "Misja", name: "mission", widget: "text"}
+          - {label: "Wizja", name: "vision", widget: "text"}
+          - {label: "Zdjęcie", name: "image", widget: "image"}
+
+  - name: "products"
+    label: "Produkty"
+    folder: "content/products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Nazwa", name: "name", widget: "string"}
+      - {label: "Opis", name: "description", widget: "text"}
+      - {label: "Cena", name: "price", widget: "number"}
+      - {label: "Zdjęcie", name: "image", widget: "image"}
+      - {label: "Dostępność", name: "available", widget: "boolean", default: true}
+      - {label: "Kategoria", name: "category", widget: "select", options: ["Kubki", "Etui", "Inne"]}
+
+  - name: "initiatives"
+    label: "Inicjatywy"
+    folder: "content/initiatives"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Tytuł", name: "title", widget: "string"}
+      - {label: "Opis", name: "description", widget: "text"}
+      - {label: "Zdjęcie", name: "image", widget: "image"}
+      - {label: "Data", name: "date", widget: "datetime"}
+      - {label: "Status", name: "status", widget: "select", options: ["Aktywna", "Zakończona", "Planowana"]}
+      - {label: "Treść", name: "content", widget: "markdown"}
+
+  - name: "partners"
+    label: "Partnerzy"
+    folder: "content/partners"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Nazwa", name: "name", widget: "string"}
+      - {label: "Opis", name: "description", widget: "text"}
+      - {label: "Logo", name: "logo", widget: "image"}
+      - {label: "Strona internetowa", name: "website", widget: "string"}
+      - {label: "Aktywny", name: "active", widget: "boolean", default: true}
