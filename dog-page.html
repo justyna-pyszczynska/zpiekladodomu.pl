@@ -356,11 +356,11 @@
         <span>Z Piekła Do Domu</span>
       </div>
       <nav class="menu">
-        <a href="#home">Strona główna</a>
-        <a href="#adopcje">Adopcje</a>
+        <a href="index.html">Strona główna</a>
+        <a href="adopcje.html">Adopcje</a>
         <a href="#bazarek">Bazarek</a>
-        <a href="#onas">O nas</a>
-        <a href="#wspieraj" class="cta">Wsparcie</a>
+        <a href="onas.html">O nas</a>
+        <a href="wsparcie.html" class="cta">Wsparcie</a>
     </nav>
     </div>
   </header>
@@ -385,7 +385,10 @@
           <div class="big-card-image"></div>
           <div class="big-card-content">
             <p class="muted">Kokos to wspaniały pies, który szuka swojego wymarzonego domu. Jest bardzo przyjazny, lubi zabawę i jest doskonałym towarzyszem dla całej rodziny. Ma około 3 lata i jest w pełni zaszczepiony. Kocha spacery i jest bardzo posłuszny. Idealny dla rodzin z dziećmi lub osób, które szukają wiernego przyjaciela.</p>
-            <button class="btn btn-primary">Adoptuj ↗</button>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <button class="btn btn-primary">Adoptuj ↗</button>
+              <a href="adopcje.html" class="btn btn-outline" style="color: #000; border-color: #6b7280;">← Wróć do adopcji</a>
+            </div>
           </div>
         </article>
       </div>
@@ -452,6 +455,9 @@
       });
     }
   </script>
+
+  <!-- Dog Data Loader -->
+  <script src="js/dog-data.js"></script>
 
   <script>
     let currentDogIndex = 0;

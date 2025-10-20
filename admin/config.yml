@@ -50,6 +50,17 @@ collections:
           - {label: "Misja", name: "mission", widget: "text"}
           - {label: "Wizja", name: "vision", widget: "text"}
           - {label: "Zdjęcie", name: "image", widget: "image"}
+          - {label: "Tytuł głównej karty", name: "main_card_title", widget: "string"}
+          - {label: "Treść głównej karty", name: "main_card_content", widget: "text"}
+          - {label: "Tekst przycisku", name: "button_text", widget: "string"}
+          - {label: "Link przycisku", name: "button_link", widget: "string"}
+          - {label: "Tytuł mapy", name: "map_title", widget: "string"}
+          - {label: "Tytuł panelu mapy", name: "map_panel_title", widget: "string"}
+          - {label: "Opis panelu mapy", name: "map_panel_description", widget: "text"}
+          - {label: "Statystyka 1 - liczba", name: "stat1_number", widget: "string"}
+          - {label: "Statystyka 1 - opis", name: "stat1_label", widget: "string"}
+          - {label: "Statystyka 2 - liczba", name: "stat2_number", widget: "string"}
+          - {label: "Statystyka 2 - opis", name: "stat2_label", widget: "string"}
 
   - name: "products"
     label: "Produkty"

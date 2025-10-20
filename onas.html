@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>O nas - Z Piekła do Domu</title>
+  <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fafafa; color: #222; }
+    img { display: block; max-width: 100%; }
+
+    /* CONTAINERS */
+    .container { width: min(1200px, 100%); margin: 0 auto; }
+
+    /* NAVBAR */
+    header {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1200px, 92%);
+      z-index: 10;
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px; font-weight: 600; font-family: 'McLaren', cursive;
+    }
+    .brand img { width: 28px; height: 28px; }
+    .menu { display: flex; align-items: center; gap: 14px; }
+    .menu a {
+      text-decoration: none;
+      color: #222; 
+      font-weight: 500;
+      padding: 8px 12px; 
+      border-radius: 10px; 
+      transition: all 0.3s ease;
+    }
+    .menu a:hover {
+      background: rgba(0,0,0,0.05);
+      color: #374151;
+    }
+    .menu a.cta { 
+      background: linear-gradient(135deg,#ffedd5,#fecaca); 
+      font-weight: 700; 
+      transition: all 0.3s ease;
+    }
+    .menu a.cta:hover {
+      background: linear-gradient(135deg,#fbbf24,#f87171);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(251,191,36,0.4);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 120vh;
+      background: url('images/onas.jpg') center 30%/100% no-repeat;
+      display: flex; align-items: center;
+    }
+    .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.02)); }
+    .hero-content { position: relative; z-index: 1; width: min(500px, 50%); margin-left: 12%; color: #fff; }
+    .hero h1 { 
+      font-family: 'McLaren', cursive; 
+      font-size: clamp(52px, 8vw, 62px); 
+      line-height: 1.2; 
+      font-weight: 450;
+      text-shadow: 2px 3px 12px rgba(0,0,0,.7);
+      padding-top: 10rem;
+      border-radius: 0.5rem;
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .hero-subtitle {
+      font-family: 'McLaren', cursive;
+      font-size: clamp(18px, 3vw, 24px);
+      line-height: 1.3;
+      font-weight: 450;
+      color: #fff;
+      text-shadow: 2px 3px 12px rgba(0,0,0,.7);
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      display: inline-block;
+      white-space: nowrap;
+      position: absolute;
+      top: 75%;
+      left: 12%;
+      z-index: 2;
+    }
+      .hero-button-left {
+        position: absolute;
+        top: 77%;
+        right: 25%;
+        z-index: 2;
+        width: 180px;
+        height: 44px;
+        font-family: 'McLaren', cursive;
+        text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      }
+      .hero-button {
+        position: absolute;
+        top: 77%;
+        right: 12%;
+        z-index: 2;
+        width: 180px;
+        height: 44px;
+      }
+    .btn-ghost { background: rgba(255,255,255,.2); color:#fff; border:1px solid rgba(255,255,255,.35); text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+    .btn-outline { 
+      background: transparent; 
+      color: #fff; 
+      border: 2px solid #fff; 
+      font-family: 'McLaren', cursive;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: #fca5a5;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* HERO ARROW BUTTONS */
+    .hero-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 3;
+    }
+    .hero-arrow:hover {
+      transform: translateY(-50%) scale(1.2);
+    }
+    .hero-arrow-left {
+      left: 12%;
+    }
+    .hero-arrow-right {
+      right: 12%;
+    }
+    .hero-arrow img {
+      width: 48px;
+      height: 48px;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+    .hero-arrow:hover img {
+      opacity: 1;
+    }
+
+    /* BIG CARD SECTION */
+    .section { padding: 3rem 0; }
+    .overlap { margin-top: -39.5vh; position: relative; z-index: 2; }
+    .big-card-container { 
+      display: flex; 
+      flex-direction: column;
+      align-items: center;
+      width: min(1200px, 100%);
+      margin: 0 auto;
+    }
+    .big-card { 
+      background: #fff; 
+      border-radius: 1.5rem; 
+      box-shadow: 0 20px 40px rgba(0,0,0,.15); 
+      overflow: hidden; 
+      width: 100%;
+      height: 600px;
+      display: flex;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .big-card:hover { 
+      transform: translateY(-8px); 
+      box-shadow: 0 30px 60px rgba(0,0,0,.2); 
+    }
+    .big-card-image {
+      flex: 1;
+      background: url('images/logo.svg') center/contain no-repeat;
+      background-size: 75%;
+      background-color: #ffffff;
+      position: relative;
+    }
+    .big-card-content {
+      flex: 1;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .big-card h2 {
+      font-family: 'McLaren', cursive;
+      font-size: 2.5rem;
+      color: #1f2937;
+      margin: 0;
+      line-height: 1.2;
+    }
+    .big-card .muted {
+      color: #6b7280;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .big-card .btn {
+      align-self: flex-start;
+      padding: 1rem 2rem;
+      font-size: 1.125rem;
+    }
+    .muted { color: #6b7280; font-size: 0.875rem; line-height: 1.5; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding: .6875rem 1.125rem; border:none; border-radius: 9999px; cursor:pointer; font-weight: 700; }
+    .btn-primary { 
+      background: linear-gradient(135deg,#fca5a5,#fde68a); 
+      color:#fff; 
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg,#f87171,#fbbf24);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(252,165,165,0.4);
+    }
+    .center { text-align: center; }
+
+    /* MAP SECTION */
+    .map-section { padding: 2rem 0; }
+    #map-title-new { 
+      text-align: center; 
+      margin-bottom: 2.5rem; 
+      font-family: 'McLaren', cursive; 
+      font-size: 2rem; 
+      color: #1f2937; 
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 0;
+    }
+    .map-container { 
+      display: flex;
+      flex-direction: row;
+      gap: 3rem; 
+      align-items: flex-start; 
+      margin: 1rem auto; 
+      max-width: 1200px;
+      width: 100%;
+      padding: 0 2rem;
+    }
+    .map-wrapper { 
+      background: none; 
+      padding: 0; 
+      position: relative;
+      flex: 1;
+      max-width: 700px;
+      margin: 0 auto;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-self: flex-start;
+    }
+    
+    #turkeyMapContainer {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 400px;
+      padding-top: 60;
+    }
+    .turkey-map { 
+      width: 100%;
+      height: auto;
+      max-height: 600px;
+      border: none;
+      outline: none;
+    }
+    
+    /* Enhanced interactive map styles */
+    .map-wrapper object {
+      width: 100%;
+      height: auto;
+      max-width: 800px;
+      max-height: 500px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      display: block;
+      margin: 0 auto;
+      border: 3px solid #007bff;
+      background-color: #f8f9fa;
+    }
+    
+    /* SVG-specific styles for precise hover targeting */
+    .map-wrapper object svg {
+      width: 100%;
+      height: auto;
+    }
+    
+    .map-wrapper object svg path,
+    .map-wrapper object svg circle {
+      transition: all 0.3s ease;
+    }
+    
+       /* Province hover effects - only for actual shapes */
+       .province {
+         cursor: pointer;
+         transition: all 0.3s ease;
+         pointer-events: all;
+         fill: #f0f0f0 !important;
+         stroke: #ffffff !important;
+         stroke-width: 1 !important;
+       }
+
+       .province:hover {
+         fill: #c59d61 !important;
+         stroke: #ffffff !important;
+         stroke-width: 4 !important;
+         opacity: 1 !important;
+         filter: drop-shadow(0 4px 8px #c59d61) !important;
+         transform: scale(1.05);
+         transform-origin: center;
+       }
+
+       .province.selected {
+         fill: #c59d61 !important;
+         stroke: #ffffff !important;
+         stroke-width: 5 !important;
+         filter: drop-shadow(0 6px 12px #c59d61) !important;
+         opacity: 1 !important;
+         transform: scale(1.1);
+         transform-origin: center;
+       }
+    
+    /* Enable pointer events so hover/click work on embedded SVG */
+    .map-wrapper object { pointer-events: auto; }
+    .map-wrapper object svg { pointer-events: auto; }
+    .map-wrapper object svg * { pointer-events: auto; }
+    
+    /* Additional CSS injection for SVG hover effects */
+    .map-wrapper object svg path.province,
+    .map-wrapper object svg circle.province {
+      cursor: pointer !important;
+      transition: all 0.3s ease !important;
+      fill: #e5e7eb !important;
+      stroke: #c59d61 !important;
+      stroke-width: 0.8 !important;
+    }
+    
+    .map-wrapper object svg path.province:hover,
+    .map-wrapper object svg circle.province:hover {
+      fill: #c59d61 !important;
+      stroke: #c59d61 !important;
+      stroke-width: 3 !important;
+      opacity: 1 !important;
+      filter: drop-shadow(0 4px 8px #c59d61) !important;
+    }
+    
+    .map-info { 
+      background: white; 
+      border-radius: 1rem; 
+      padding: 1.5rem; 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      flex: 0 0 320px;
+      max-width: 320px;
+    }
+    .map-info h4 { font-family: 'McLaren', cursive; font-size: 1.5rem; color: #1f2937; margin: 0 0 0.5rem 0; }
+    .map-info p { color: #6b7280; margin: 0 0 1.25rem 0; line-height: 1.4; }
+    .map-stats { display: flex; gap: 2rem; }
+    .stat-item { text-align: center; }
+    .stat-number { display: block; font-family: 'McLaren', cursive; font-size: 2rem; font-weight: bold; color: #ef4444; }
+    .stat-label { display: block; font-size: 0.875rem; color: #6b7280; margin-top: 0.5rem; }
+
+        /* Pin Tooltip Styles */
+        .pin-tooltip {
+          position: absolute;
+          background: white;
+          border-radius: 5px;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+          padding: 6px 10px;
+          font-size: 11px;
+          z-index: 1000;
+          pointer-events: none;
+          opacity: 0;
+          transform: translateY(6px);
+          transition: all 0.3s ease;
+          min-width: 120px;
+          max-width: 160px;
+        }
+    
+    .pin-tooltip.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+        .pin-tooltip::after {
+          content: '';
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          margin-left: -6px;
+          border-width: 6px;
+          border-style: solid;
+          border-color: white transparent transparent transparent;
+        }
+        .pin-tooltip.istanbul-tooltip::after {
+          top: -6px;
+          border-color: transparent transparent white transparent;
+        }
+    
+        .pin-tooltip-header {
+          font-family: 'McLaren', cursive;
+          font-size: 13px;
+          font-weight: 600;
+          color: #000;
+          margin: 0 0 3px 0;
+        }
+        
+        .pin-tooltip-description {
+          color: #6b7280;
+          font-size: 10px;
+          line-height: 1.2;
+          margin: 0;
+        }
+
+    /* GALLERY SECTION */
+    .gallery-section { padding: 4rem 0; background: #f8fafc; }
+    .gallery-section-no-padding { padding: 0; background: #f8fafc; margin-top: -2rem; }
+    .gallery-header { text-align: center; margin-bottom: 3rem; }
+    .gallery-header h3 { font-family: 'McLaren', cursive; font-size: 2rem; color: #1f2937; margin-bottom: 1rem; }
+    .gallery-header p { color: #6b7280; font-size: 1.125rem; }
+    .gallery-grid { 
+      display: grid; 
+      grid-template-columns: 1fr 1fr 1fr; 
+      grid-template-rows: 1fr 1fr;
+      gap: 2rem; 
+      margin-top: 2rem; 
+      width: min(1200px, 100%) !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      height: 600px;
+    }
+    .gallery-item.featured {
+      grid-row: span 2;
+      cursor: pointer;
+    }
+    .gallery-item.featured img, .gallery-item.featured video { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      border-radius: 1rem; 
+      min-height: 476px;
+    }
+    .facebook-video-embed {
+      width: 100%;
+      height: 100%;
+      min-height: 476px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .facebook-video-embed iframe {
+      width: 100% !important;
+      height: 100% !important;
+      min-height: 476px !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .facebook-photo-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .facebook-photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.3s ease;
+    }
+    .facebook-photo-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .facebook-icon {
+      background: #1877f2;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      margin-bottom: 10px;
+    }
+    .facebook-text {
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+    }
+    .gallery-item.facebook-photo {
+      cursor: default;
+    }
+    .gallery-item { 
+      background: white; 
+      border-radius: 1rem; 
+      overflow: hidden; 
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gallery-item:hover { 
+      transform: translateY(-4px); 
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15); 
+    }
+    .gallery-item img, .gallery-item video { 
+      width: 100%; 
+      height: 350px; 
+      object-fit: cover; 
+    }
+    .gallery-item.video { position: relative; }
+    
+    /* Additional cards styling */
+    .gallery-item.image-card {
+      height: 300px;
+    }
+    
+    .gallery-item.image-card.featured-image {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: 400px;
+      height: 400px;
+    }
+    
+    .gallery-item.image-card.large-card {
+      height: 400px;
+    }
+    
+    .gallery-item.video-card {
+      height: 300px;
+      cursor: pointer;
+    }
+    
+    .gallery-item.video-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .gallery-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 1rem;
+    }
+    
+    /* Specific positioning for each dog image */
+    .gallery-grid-five-cards .gallery-item:nth-child(1) .gallery-image {
+      object-position: center 30%;
+      object-fit: cover;
+    }
+    
+    .gallery-grid-five-cards .gallery-item:nth-child(2) .gallery-image {
+      object-position: center 40%;
+      object-fit: cover;
+    }
+    
+    .gallery-grid-five-cards .gallery-item:nth-child(4) .gallery-image {
+      object-position: center 35%;
+      object-fit: cover;
+    }
+    
+    .gallery-grid-five-cards .gallery-item:nth-child(5) .gallery-image {
+      object-position: center 25%;
+      object-fit: cover;
+    }
+    
+    .image-container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 1rem;
+    }
+    
+    /* Sensitive content overlay */
+    .sensitive-content {
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .sensitive-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1rem;
+      transition: opacity 0.3s ease;
+    }
+    
+    .sensitive-content.revealed .sensitive-overlay {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .visibility-icon-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 10;
+    }
+    
+    .visibility-icon {
+      width: 20px !important;
+      height: 20px !important;
+      background-image: url('images/visibility-icon.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      filter: brightness(0) invert(1);
+      transition: transform 0.3s ease;
+      display: block;
+      flex-shrink: 0;
+    }
+    
+    .sensitive-content:hover .visibility-icon {
+      transform: scale(1.05);
+    }
+    
+    .sensitive-text {
+      color: white;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    /* Facebook Widget Section */
+    .facebook-widget-section {
+      background: #f8fafc;
+      padding: 2rem 0;
+    }
+
+    .social-widgets-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2rem;
+      width: 100%;
+      margin: 0 auto;
+      flex-wrap: nowrap;
+    }
+
+    .facebook-widget-container,
+    .instagram-widget-container {
+      text-align: center;
+    }
+
+    .facebook-widget-header h2,
+    .instagram-widget-header h2 {
+      font-size: 1.1rem;
+      color: #1f2937;
+      margin-bottom: 0.25rem;
+    }
+
+    .facebook-widget-header p,
+    .instagram-widget-header p {
+      color: #6b7280;
+      font-size: 0.8rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .fb-widget-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f9f9fb;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 8px;
+      width: 500px;
+      height: 200px;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .fb-page {
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    /* Instagram Widget */
+    .insta-widget {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #f9f9fb;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 15px 20px;
+      width: 500px;
+      height: 200px;
+      max-width: 100%;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .insta-widget:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transform: translateY(-1px);
+      transition: all 0.3s ease;
+    }
+
+    .insta-profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      margin-bottom: 8px;
+    }
+
+    .insta-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      object-fit: cover;
+      border: 3px solid #fff;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .insta-info h3 {
+      margin: 0 0 5px 0;
+      font-size: 1rem;
+      color: #1f2937;
+      font-weight: 600;
+    }
+
+    .insta-info p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #6b7280;
+      line-height: 1.3;
+    }
+
+    .insta-btn {
+      background: linear-gradient(135deg, #fca5a5, #fde68a);
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+      padding: 8px 16px;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-family: 'McLaren', cursive;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 8px rgba(252, 165, 165, 0.3);
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .insta-btn:hover {
+      background: linear-gradient(135deg, #f87171, #fbbf24);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(252, 165, 165, 0.4);
+    }
+
+    .insta-btn::before {
+      content: "";
+      width: 16px;
+      height: 16px;
+      background-image: url('images/instagram.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      filter: brightness(0) invert(1) drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.8));
+    }
+
+    @media (max-width: 900px) {
+      .social-widgets-container {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      
+      .fb-widget-wrapper,
+      .insta-widget {
+        width: 100%;
+        max-width: 500px;
+        height: 180px;
+        margin: 0 auto;
+      }
+      
+      .fb-widget-wrapper {
+        padding: 6px;
+      }
+      
+      .insta-widget {
+        padding: 12px 15px;
+      }
+      
+      .insta-avatar {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .insta-info h3 {
+        font-size: 0.9rem;
+      }
+      
+      .insta-info p {
+        font-size: 0.8rem;
+      }
+      
+      .insta-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+      }
+      
+      .facebook-widget-header h2,
+      .instagram-widget-header h2 {
+        font-size: 1.1rem;
+      }
+      
+      .facebook-widget-header p,
+      .instagram-widget-header p {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* THREE CARD GALLERY GRID */
+    .gallery-grid-three-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 0;
+      width: min(1200px, 100%);
+      margin-left: auto;
+      margin-right: auto;
+      height: 600px;
+    }
+    
+    /* Card 1 - top left, single column */
+    .gallery-grid-three-cards .gallery-item:nth-child(1) {
+      height: 100%;
+    }
+    
+    /* Card 2 - bottom left, single column */
+    .gallery-grid-three-cards .gallery-item:nth-child(2) {
+      height: 100%;
+    }
+    
+    /* Card 3 - right side, spanning both rows and 2 columns */
+    .gallery-grid-three-cards .gallery-item:nth-child(3) {
+      grid-row: 1 / -1;
+      grid-column: 2 / -1;
+      height: 100%;
+    }
+    
+    /* Card 3 image - fill completely */
+    .gallery-grid-three-cards .gallery-item:nth-child(3) .gallery-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* FIVE CARD GALLERY GRID */
+    .gallery-grid-five-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 4rem;
+      width: min(1200px, 100%);
+      margin-left: auto;
+      margin-right: auto;
+      height: 600px;
+    }
+    
+    /* Left column - 1 smaller card (first row) */
+    .gallery-grid-five-cards .gallery-item:nth-child(1) {
+      grid-column: 1;
+      grid-row: 1;
+      height: 100%;
+    }
+    
+    /* Right column - 1 smaller card (first row) */
+    .gallery-grid-five-cards .gallery-item:nth-child(2) {
+      grid-column: 3;
+      grid-row: 1;
+      height: 100%;
+    }
+    
+    /* Middle column - 1 longer video card spanning 2 rows */
+    .gallery-grid-five-cards .gallery-item:nth-child(3) {
+      grid-column: 2;
+      grid-row: 1 / -1;
+      height: 100%;
+    }
+    
+    /* Left column - 1 smaller card (second row) */
+    .gallery-grid-five-cards .gallery-item:nth-child(4) {
+      grid-column: 1;
+      grid-row: 2;
+      height: 100%;
+    }
+    
+    /* Right column - 1 smaller card (second row) */
+    .gallery-grid-five-cards .gallery-item:nth-child(5) {
+      grid-column: 3;
+      grid-row: 2;
+      height: 100%;
+    }
+
+    /* VIDEO MODAL */
+    .video-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .video-modal.active {
+      display: flex;
+    }
+    .video-modal-content {
+      position: relative;
+      max-width: 100%;
+      max-height: 100%;
+      background: #000;
+  
+      overflow: hidden;
+    }
+    .video-modal video {
+      width: 100%;
+      height: 100%;
+      max-height: 100vh;
+    }
+    .video-modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+    }
+    .video-modal-close:hover {
+      background: rgba(255, 255, 255, 1);
+    }
+
+    /* FOOTER */
+    footer { background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); margin-top: 2.25rem; padding: 3rem 0; }
+    .footer-grid { display:grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
+    .footer-brand { display:flex; align-items:flex-start; gap: 1.5rem; }
+    .footer-brand img { width: 10rem; height: 10rem; }
+    .footer-content { flex: 1; }
+    .footer-title { font-family: 'McLaren', cursive; font-size: 1.5rem; color: #000; margin: 0 0 1rem 0; line-height: 1.3; }
+    .footer-email { display: flex; align-items: center; margin-bottom: 1rem; }
+    .footer-email svg { color: #000; transition: color 0.3s ease; }
+    .footer-email:hover svg { color: #666; }
+    .footer-email a { 
+      color: #000; 
+      text-decoration: none; 
+      font-size: 1rem; 
+      transition: all 0.3s ease;
+    }
+    .footer-email a:hover {
+      color: #666;
+      text-decoration: underline;
+      font-weight: 700;
+    }
+    .footer-copyright { color: #000; font-size: 0.875rem; line-height: 1.4; }
+    .footer-links { display: flex; gap: 7rem; }
+    .footer-links .links a {
+      position: relative;
+      display: inline-block;
+      font-weight: 500;
+      transition: font-weight 0.3s ease, color 0.3s ease;
+    }
+
+    .footer-links .links a::after {
+      content: attr(data-text);
+      visibility: hidden;
+      font-weight: 700;
+      height: 0;
+      overflow: hidden;
+      pointer-events: none;
+      display: block;
+    }
+
+    .footer-links .links a:hover {
+      font-weight: 700;
+      color: #666;
+    }
+    .links-column h4 { 
+      color: #000; 
+      font-size: 1rem; 
+      margin: 0 0 1rem 0; 
+      font-weight: 600; 
+      white-space: nowrap; 
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .links-column h4:hover {
+      font-weight: 700;
+      color: #333;
+    }
+    .links { display: flex; flex-direction: column; gap: 0.5rem; }
+    .links a { 
+      color: #000; 
+      text-decoration: none; 
+      font-size: 0.875rem; 
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      font-weight: 400;
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+    .links a:hover {
+      color: #666;
+      font-weight: 700;
+    }
+    .footer-social { display: flex; flex-direction: column; align-items: flex-end; gap: 3.75rem; }
+    .socials { display: flex; gap: 0.75rem; }
+    .socials a { 
+      display: inline-block; 
+      text-decoration: none; 
+      transition: all 0.3s ease;
+      width: 48px;
+      height: 48px;
+    }
+    .socials a:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+    .footer-social .footer-copyright { text-align: right; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      header { top: .625rem; }
+      .navbar { padding: .625rem .75rem; }
+      .menu { gap: .5rem; }
+      .menu a { padding: .375rem .5rem; }
+      .big-card { 
+        flex-direction: column; 
+        height: auto; 
+        max-width: 90%;
+      }
+      .big-card-image { 
+        height: 300px; 
+        flex: none; 
+      }
+      .big-card-content { 
+        padding: 2rem; 
+      }
+      .big-card h2 { 
+        font-size: 2rem; 
+      }
+      .overlap { margin-top: -18vh; }
+      .map-container { flex-direction: column; gap: 2rem; }
+      .map-info { max-width: 100%; }
+      .map-wrapper { padding-bottom: 50%; /* Slightly taller on mobile */ }
+      .map-stats { justify-content: center; }
+      .gallery-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .gallery-item img, .gallery-item video { height: 300px; }
+      .gallery-item.featured img, .gallery-item.featured video { min-height: 400px; }
+      .facebook-video-embed iframe { min-height: 400px !important; }
+      .facebook-photo-img { height: 300px; }
+      .gallery-grid-three-cards { 
+        grid-template-columns: 1fr; 
+        grid-template-rows: auto auto auto;
+        gap: 1rem; 
+      }
+      .gallery-grid-three-cards .gallery-item:nth-child(3) {
+        grid-row: 3;
+        height: 300px;
+      }
+      .gallery-grid-five-cards { 
+        grid-template-columns: 1fr; 
+        grid-template-rows: auto auto auto auto auto;
+        gap: 1rem; 
+      }
+      .gallery-grid-five-cards .gallery-item:nth-child(3) {
+        grid-row: 3;
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" 
+    src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v19.0" nonce="xyz123"></script>
+  <header>
+    <div class="navbar">
+      <div class="brand">
+        <img src="images/logo.svg" alt="Logo" width="200" height="200">
+        <span>Z Piekła Do Domu</span>
+      </div>
+      <nav class="menu">
+        <a href="index.html">Strona główna</a>
+        <a href="adopcje.html">Adopcje</a>
+        <a href="#bazarek">Bazarek</a>
+        <a href="onas.html" style="background: rgba(0,0,0,0.1);">O nas</a>
+        <a href="wsparcie.html" class="cta">Wsparcie</a>
+    </nav>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>O nas</h1>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- BIG CARD SECTION -->
+    <section class="section overlap" id="about-us">
+      <div class="big-card-container">
+        <article class="big-card">
+          <div class="big-card-image"></div>
+          <div class="big-card-content">
+            <h2 id="main-card-title">Bo każde istnienie<br>ma dla nas znaczenie</h2>
+            <p class="muted" id="main-card-content">Z Piekła do Domu to organizacja, która ratuje psy i koty z trudnych warunków w Turcji, dając im szansę na nowe, lepsze życie w Polsce. Nasza misja to nie tylko ratowanie zwierząt, ale także budowanie świadomości o problemie bezdomności zwierząt na całym świecie. Od początku naszej działalności udało nam się uratować ponad 500 zwierząt i znaleźć im nowe, kochające domy.</p>
+            <button class="btn btn-primary" id="main-card-button">Wspomóż nas ↗</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Facebook Page Widget Section -->
+    <section class="section facebook-widget-section">
+      <div class="container">
+        <div class="social-widgets-container">
+          <div class="facebook-widget-container">
+            <div class="facebook-widget-header">
+              <h2>Śledź nas na Facebooku</h2>
+              <p>Bądź na bieżąco z naszymi działaniami i historiami zwierząt</p>
+            </div>
+            <div class="fb-widget-wrapper">
+              <div class="fb-page"
+                data-href="https://www.facebook.com/profile.php?id=61577219922888"
+                data-tabs=""
+                data-width="400"
+                data-height="600"
+                data-small-header="false"
+                data-adapt-container-width="true"
+                data-hide-cover="false"
+                data-show-facepile="true">
+              </div>
+            </div>
+          </div>
+          
+          <div class="instagram-widget-container">
+            <div class="instagram-widget-header">
+              <h2>Śledź nas na Instagramie</h2>
+              <p>Zobacz najnowsze zdjęcia i historie naszych podopiecznych</p>
+            </div>
+            <div class="insta-widget">
+              <a href="https://www.instagram.com/z_piekla_do_domu_/" target="_blank" class="insta-profile">
+                <img src="images/logo.svg" 
+                     alt="Z Piekła do Domu Logo" class="insta-avatar">
+                <div class="insta-info">
+                  <h3>@z_piekla_do_domu_</h3>
+                  <p>Profil na Instagramie — zobacz więcej postów!</p>
+                </div>
+              </a>
+              <a href="https://www.instagram.com/z_piekla_do_domu_/" target="_blank" class="insta-btn">
+                Zobacz na Instagramie
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE MAP -->
+    <section class="section map-section">
+      <h3 id="map-title-new">Tu pomagamy</h3>
+      <div class="map-container">
+        <div class="map-wrapper">
+          <!-- TEST: This should definitely be visible -->
+          <p id="debug-info" style="color: #666; font-size: 14px; text-align: center; margin: 10px 0; display: none;">Interactive map loaded successfully</p>
+          
+             <!-- INTERACTIVE TURKEY MAP -->
+             <div class="map-wrapper">
+               <div id="turkeyMapContainer" style="width: 100%; height: auto; max-height: 500px; text-align: center; padding: 20px;">
+                 <p style="color: #666; font-size: 16px;">Loading interactive map...</p>
+               </div>
+             </div>
+        </div>
+        
+        <!-- Map info panel -->
+        <div class="map-info" id="mapInfo">
+          <div class="map-info-content">
+            <h4 id="map-panel-title">Nasze osiągnięcia</h4>
+            <p id="map-panel-description">Od początku naszej działalności udało nam się uratować setki zwierząt i znaleźć im nowe, kochające domy.</p>
+            <div class="map-stats">
+              <div class="stat-item">
+                <span class="stat-number" id="stat1-number">500+</span>
+                <span class="stat-label" id="stat1-label">Uratowanych zwierząt</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number" id="stat2-number">50+</span>
+                <span class="stat-label" id="stat2-label">Szczęśliwych adopcji</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEDIA GALLERY -->
+    <section class="section gallery-section">
+      <div class="container">
+        <div class="gallery-header">
+          <h3>Nasze działania w obiektywie</h3>
+          <p>Zobacz jak wygląda nasza codzienna praca na rzecz zwierząt</p>
+        </div>
+        <div class="gallery-grid">
+          <!-- Left column - Featured video card - spans 2 rows -->
+          <div class="gallery-item featured video">
+            <div class="facebook-video-embed">
+              <iframe 
+                src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F61577219922888%2Fvideos%2F1109763807595155%2F&show_text=false&width=267&t=0" 
+                width="267" 
+                height="476" 
+                style="border:none;overflow:hidden" 
+                scrolling="no" 
+                frameborder="0" 
+                allowfullscreen="true" 
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" 
+                allowFullScreen="true">
+              </iframe>
+            </div>
+          </div>
+          
+          <!-- Middle column - First dog photo -->
+          <div class="gallery-item facebook-photo">
+            <div class="facebook-photo-container">
+              <img src="images/dog-4.jpg" alt="Dog Photo" class="facebook-photo-img">
+            </div>
+          </div>
+          
+          <!-- Right column - Second featured video card - spans 2 rows -->
+          <div class="gallery-item featured video">
+            <div class="facebook-video-embed">
+              <iframe 
+                src="https://www.facebook.com/plugins/video.php?height=400&href=https%3A%2F%2Fwww.facebook.com%2F61577219922888%2Fvideos%2F1531819384534901%2F&show_text=false&width=300&t=0" 
+                width="300" 
+                height="400" 
+                style="border:none;overflow:hidden" 
+                scrolling="no" 
+                frameborder="0" 
+                allowfullscreen="true" 
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" 
+                allowFullScreen="true">
+              </iframe>
+            </div>
+          </div>
+          
+          <!-- Middle column - Second dog photo -->
+          <div class="gallery-item facebook-photo">
+            <div class="facebook-photo-container">
+              <img src="images/dog-5.jpg" alt="Dog Photo" class="facebook-photo-img">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADDITIONAL CARDS - NO HEADER -->
+    <section class="gallery-section-no-padding">
+      <div class="container">
+        <div class="gallery-grid-three-cards">
+          <!-- Left column - 2 cards stacked -->
+          <div class="gallery-item image-card">
+            <div class="image-container">
+              <img src="images/dog-7.jpg" alt="Dog 7" class="gallery-image">
+            </div>
+          </div>
+          
+          <div class="gallery-item image-card">
+            <div class="image-container">
+              <img src="images/dog-8.jpg" alt="Dog 8" class="gallery-image">
+            </div>
+          </div>
+          
+          <!-- Right side - 1 big card -->
+          <div class="gallery-item image-card big-card">
+            <div class="image-container">
+              <img src="images/dog-6.jpg" alt="Dog 6" class="gallery-image">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL GALLERY SECTION - 5 CARDS -->
+    <section class="gallery-section-no-padding">
+      <div class="container">
+        <div class="gallery-grid-five-cards">
+          <!-- Left column - 1 smaller card (first row) -->
+          <div class="gallery-item image-card">
+            <div class="image-container" style="background-image: url('images/dog-10.jpg'); background-size: cover; background-position: center 75%; background-repeat: no-repeat;">
+              <img src="images/dog-10.jpg" alt="Dog 10" class="gallery-image" style="opacity: 0;">
+            </div>
+          </div>
+          
+          <!-- Right column - 1 smaller card (first row) -->
+          <div class="gallery-item image-card sensitive-content" onclick="toggleSensitiveContent(this)">
+            <div class="image-container" style="background-image: url('images/dog-9.jpg'); background-size: cover; background-position: center 40%; background-repeat: no-repeat;">
+              <img src="images/dog-9.jpg" alt="Dog 9" class="gallery-image" style="opacity: 0;">
+            </div>
+            <div class="sensitive-overlay">
+              <div class="visibility-icon-container">
+                <div class="visibility-icon"></div>
+                <span class="sensitive-text">Click to view</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Middle column - 1 longer video card spanning 2 rows -->
+          <div class="gallery-item video-card" onclick="openVideoModal('facebook4')">
+            <div class="facebook-video-embed">
+              <iframe 
+                src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Fwatch%2F%3Fv%3D24565340453125411&show_text=false&width=267&t=0" 
+                width="267" 
+                height="476" 
+                style="border:none;overflow:hidden" 
+                scrolling="no" 
+                frameborder="0" 
+                allowfullscreen="true" 
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" 
+                allowFullScreen="true">
+              </iframe>
+            </div>
+          </div>
+          
+          <!-- Left column - 1 smaller card (second row) -->
+          <div class="gallery-item image-card">
+            <div class="image-container" style="background-image: url('images/dog-11.jpg'); background-size: cover; background-position: center 70%; background-repeat: no-repeat;">
+              <img src="images/dog-11.jpg" alt="Dog 11" class="gallery-image" style="opacity: 0;">
+            </div>
+          </div>
+          
+          <!-- Right column - 1 smaller card (second row) -->
+          <div class="gallery-item image-card">
+            <div class="image-container" style="background-image: url('images/dog-12.jpg'); background-size: cover; background-position: center 70%; background-repeat: no-repeat;">
+              <img src="images/dog-12.jpg" alt="Dog 12" class="gallery-image" style="opacity: 0;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <img src="images/logo.svg" alt="Logo" width="120" height="120">
+          <div class="footer-content">
+            <h2 class="footer-title">Z Piekła do Domu - ratujemy psy i koty z Turcji</h2>
+            <div class="footer-email">
+              <svg width="16" height="16" style="margin-right: 8px;"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <a href="mailto:zpiekladodomu@gmail.com">zpiekladodomu@gmail.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="links-column">
+          <h4>Linki</h4>
+          <div class="links">
+            <a href="#" data-text="Fanpage">Fanpage</a>
+            <a href="#" data-text="Nasze inicjatywy">Nasze inicjatywy</a>
+            <a href="#" data-text="Dołącz do grupy">Dołącz do grupy</a>
+            <a href="#" data-text="Współpraca">Współpraca</a>
+          </div>
+        </div>
+        <div class="links-column">
+          <h4>Zobacz też</h4>
+          <div class="links">
+            <a href="#" data-text="Wioska Burçak">Wioska Burçak</a>
+            <a href="#" data-text="Pani Adalet">Pani Adalet</a>
+            <a href="#" data-text="Artykuły">Artykuły</a>
+            <a href="#" data-text="Zostań sponsorem">Zostań sponsorem</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-social">
+        <div class="socials">
+          <a href="https://www.instagram.com/z_piekla_do_domu_/" aria-label="Instagram" target="_blank"><img src="images/instagram.svg" alt="Instagram" width="48" height="48"></a>
+          <a href="https://www.facebook.com/profile.php?id=61577219922888" aria-label="Facebook" target="_blank"><img src="images/facebook.svg" alt="Facebook" width="48" height="48"></a>
+        </div>
+        <div class="footer-copyright">
+          <div>Z Piekła do domu 2025 ©</div>
+          <div>Wszelkie prawa zastrzeżone</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+
+  <!-- CMS Content Loader -->
+  <script src="js/cms-content.js"></script>
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="video-modal">
+    <div class="video-modal-content">
+      <button class="video-modal-close" onclick="closeVideoModal()">&times;</button>
+      <video id="modalVideo" controls autoplay>
+        <source src="" type="video/mp4">
+        Twoja przeglądarka nie obsługuje odtwarzania wideo.
+      </video>
+    </div>
+  </div>
+
+  <script>
+    // Interactive Map Enhancement
+       function initializeInteractiveMap() {
+         const mapContainer = document.getElementById('turkeyMapContainer');
+         if (!mapContainer) {
+           console.error('Map container not found!');
+           return;
+         }
+
+         // Load the SVG file and embed it directly
+         fetch('images/map-turkey.svg')
+           .then(response => {
+             if (!response.ok) {
+               throw new Error(`HTTP error! status: ${response.status}`);
+             }
+             return response.text();
+           })
+           .then(svgText => {
+             mapContainer.innerHTML = svgText;
+             
+             const svg = mapContainer.querySelector('svg');
+             if (!svg) {
+               console.error('SVG not found in loaded content');
+               return;
+             }
+
+          // Style the SVG
+          svg.style.width = '100%';
+          svg.style.height = 'auto';
+          svg.style.maxHeight = '500px';
+          svg.style.display = 'block';
+          svg.style.margin = '0 auto';
+
+          // Add Istanbul pin - positioned at the northwest corner (European side)
+          const istanbulPin = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+          istanbulPin.setAttribute('href', 'images/map-pin.svg');
+          istanbulPin.setAttribute('x', '19%');  // Positioned in northwest (Istanbul location)
+          istanbulPin.setAttribute('y', '13%');  // Slightly higher, near the Black Sea
+          istanbulPin.setAttribute('width', '24');
+          istanbulPin.setAttribute('height', '32');
+          istanbulPin.setAttribute('class', 'istanbul-pin');
+          istanbulPin.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+          istanbulPin.style.transition = 'all 0.3s ease';
+          
+          // Create tooltip for Istanbul pin and add to map container
+          const istanbulTooltip = document.createElement('div');
+          istanbulTooltip.className = 'pin-tooltip istanbul-tooltip';
+          istanbulTooltip.innerHTML = `
+            <div class="pin-tooltip-header">Istanbul</div>
+            <div class="pin-tooltip-description">Główne centrum naszych działań ratunkowych w Turcji. Miasto łączące Europę i Azję.</div>
+          `;
+          mapContainer.appendChild(istanbulTooltip);
+
+          // Add hover effect for the pin with tooltip
+          istanbulPin.addEventListener('mouseenter', function(e) {
+            this.style.filter = 'drop-shadow(0 4px 8px rgba(220, 38, 38, 0.6))';
+            
+            // Position tooltip directly above the pin
+            const svgRect = svg.getBoundingClientRect();
+            const mapRect = mapContainer.getBoundingClientRect();
+            
+            // Calculate pin position relative to SVG (19% from left, 13% from top)
+            const pinX = svgRect.left + (svgRect.width * 0.19);
+            const pinY = svgRect.top + (svgRect.height * 0.13);
+            
+            // Position tooltip below the pin
+            istanbulTooltip.style.left = (pinX - mapRect.left - (istanbulTooltip.offsetWidth / 2)) + 'px';
+            istanbulTooltip.style.top = (pinY - mapRect.top + 40) + 'px';
+            istanbulTooltip.style.position = 'absolute';
+            istanbulTooltip.classList.add('show');
+          });
+          
+          istanbulPin.addEventListener('mouseleave', function() {
+            this.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+            istanbulTooltip.classList.remove('show');
+          });
+
+
+          svg.appendChild(istanbulPin);
+
+          // Add Ankara pin - positioned in the north-central part of Turkey
+          const ankaraPin = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+          ankaraPin.setAttribute('href', 'images/map-pin.svg');
+          ankaraPin.setAttribute('x', '36%');  // Positioned more to the left (Ankara location)
+          ankaraPin.setAttribute('y', '32%');  // Slightly higher
+          ankaraPin.setAttribute('width', '24');
+          ankaraPin.setAttribute('height', '32');
+          ankaraPin.setAttribute('class', 'ankara-pin');
+          ankaraPin.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+          ankaraPin.style.transition = 'all 0.3s ease';
+          
+          // Create tooltip for Ankara pin and add to map container
+          const ankaraTooltip = document.createElement('div');
+          ankaraTooltip.className = 'pin-tooltip';
+          ankaraTooltip.innerHTML = `
+            <div class="pin-tooltip-header">Ankara</div>
+            <div class="pin-tooltip-description">Stolica Turcji i ważny ośrodek naszych działań ratunkowych w regionie centralnym.</div>
+          `;
+          mapContainer.appendChild(ankaraTooltip);
+          console.log('Ankara tooltip created');
+
+          // Add hover effect for the Ankara pin with tooltip
+          ankaraPin.addEventListener('mouseenter', function(e) {
+            this.style.filter = 'drop-shadow(0 4px 8px rgba(220, 38, 38, 0.6))';
+            
+            // Position tooltip directly above the pin
+            const svgRect = svg.getBoundingClientRect();
+            const mapRect = mapContainer.getBoundingClientRect();
+            
+            // Calculate pin position relative to SVG (36% from left, 32% from top)
+            const pinX = svgRect.left + (svgRect.width * 0.36);
+            const pinY = svgRect.top + (svgRect.height * 0.32);
+            
+            // Position tooltip above the pin
+            ankaraTooltip.style.left = (pinX - mapRect.left - (ankaraTooltip.offsetWidth / 2)) + 'px';
+            ankaraTooltip.style.top = (pinY - mapRect.top - ankaraTooltip.offsetHeight - 15) + 'px';
+            ankaraTooltip.style.position = 'absolute';
+            ankaraTooltip.classList.add('show');
+          });
+          
+          ankaraPin.addEventListener('mouseleave', function() {
+            this.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+            ankaraTooltip.classList.remove('show');
+          });
+
+
+          svg.appendChild(ankaraPin);
+
+          // Add Elazig pin - positioned in the eastern region of Turkey
+          const elazigPin = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+          elazigPin.setAttribute('href', 'images/map-pin.svg');
+          elazigPin.setAttribute('x', '72%');  // Positioned in eastern Turkey (Elazig location)
+          elazigPin.setAttribute('y', '45%');  // Lower in the eastern region
+          elazigPin.setAttribute('width', '24');
+          elazigPin.setAttribute('height', '32');
+          elazigPin.setAttribute('class', 'elazig-pin');
+          elazigPin.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+          elazigPin.style.transition = 'all 0.3s ease';
+          
+          // Create tooltip for Elazig pin and add to map container
+          const elazigTooltip = document.createElement('div');
+          elazigTooltip.className = 'pin-tooltip';
+          elazigTooltip.innerHTML = `
+            <div class="pin-tooltip-header">Elazig</div>
+            <div class="pin-tooltip-description">Ważny ośrodek naszych działań ratunkowych we wschodniej Turcji. Region o strategicznym znaczeniu.</div>
+          `;
+          mapContainer.appendChild(elazigTooltip);
+
+          // Add hover effect for the Elazig pin with tooltip
+          elazigPin.addEventListener('mouseenter', function(e) {
+            this.style.filter = 'drop-shadow(0 4px 8px rgba(220, 38, 38, 0.6))';
+            
+            // Position tooltip directly above the pin
+            const svgRect = svg.getBoundingClientRect();
+            const mapRect = mapContainer.getBoundingClientRect();
+            
+            // Calculate pin position relative to SVG (72% from left, 45% from top)
+            const pinX = svgRect.left + (svgRect.width * 0.72);
+            const pinY = svgRect.top + (svgRect.height * 0.45);
+            
+            // Position tooltip above the pin
+            elazigTooltip.style.left = (pinX - mapRect.left - (elazigTooltip.offsetWidth / 2)) + 'px';
+            elazigTooltip.style.top = (pinY - mapRect.top - elazigTooltip.offsetHeight - 15) + 'px';
+            elazigTooltip.style.position = 'absolute';
+            elazigTooltip.classList.add('show');
+          });
+          
+          elazigPin.addEventListener('mouseleave', function() {
+            this.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+            elazigTooltip.classList.remove('show');
+          });
+
+          svg.appendChild(elazigPin);
+
+          // Add Mersin pin - positioned in the southern coastal region of Turkey
+          const mersinPin = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+          mersinPin.setAttribute('href', 'images/map-pin.svg');
+          mersinPin.setAttribute('x', '42%');  // Positioned in southern coastal region (Mersin location)
+          mersinPin.setAttribute('y', '75%');  // Bottom of the country, coastal area
+          mersinPin.setAttribute('width', '24');
+          mersinPin.setAttribute('height', '32');
+          mersinPin.setAttribute('class', 'mersin-pin');
+          mersinPin.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+          mersinPin.style.transition = 'all 0.3s ease';
+          
+          // Create tooltip for Mersin pin and add to map container
+          const mersinTooltip = document.createElement('div');
+          mersinTooltip.className = 'pin-tooltip';
+          mersinTooltip.innerHTML = `
+            <div class="pin-tooltip-header">Mersin</div>
+            <div class="pin-tooltip-description">Ważny port na południowym wybrzeżu Turcji. Centrum naszych działań ratunkowych w regionie śródziemnomorskim.</div>
+          `;
+          mapContainer.appendChild(mersinTooltip);
+
+          // Add hover effect for the Mersin pin with tooltip
+          mersinPin.addEventListener('mouseenter', function(e) {
+            this.style.filter = 'drop-shadow(0 4px 8px rgba(220, 38, 38, 0.6))';
+            
+            // Position tooltip directly above the pin
+            const svgRect = svg.getBoundingClientRect();
+            const mapRect = mapContainer.getBoundingClientRect();
+            
+            // Calculate pin position relative to SVG (42% from left, 75% from top)
+            const pinX = svgRect.left + (svgRect.width * 0.42);
+            const pinY = svgRect.top + (svgRect.height * 0.75);
+            
+            // Position tooltip above the pin
+            mersinTooltip.style.left = (pinX - mapRect.left - (mersinTooltip.offsetWidth / 2)) + 'px';
+            mersinTooltip.style.top = (pinY - mapRect.top - mersinTooltip.offsetHeight - 15) + 'px';
+            mersinTooltip.style.position = 'absolute';
+            mersinTooltip.classList.add('show');
+          });
+          
+          mersinPin.addEventListener('mouseleave', function() {
+            this.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+            mersinTooltip.classList.remove('show');
+          });
+
+          svg.appendChild(mersinPin);
+
+          // Add Tunceli pin - positioned slightly above Elazig in the eastern region
+          const tunceliPin = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+          tunceliPin.setAttribute('href', 'images/map-pin.svg');
+          tunceliPin.setAttribute('x', '72%');  // Same horizontal position as Elazig
+          tunceliPin.setAttribute('y', '38%');  // Slightly above Elazig (which is at 45%)
+          tunceliPin.setAttribute('width', '24');
+          tunceliPin.setAttribute('height', '32');
+          tunceliPin.setAttribute('class', 'tunceli-pin');
+          tunceliPin.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+          tunceliPin.style.transition = 'all 0.3s ease';
+          
+          // Create tooltip for Tunceli pin and add to map container
+          const tunceliTooltip = document.createElement('div');
+          tunceliTooltip.className = 'pin-tooltip';
+          tunceliTooltip.innerHTML = `
+            <div class="pin-tooltip-header">Tunceli</div>
+            <div class="pin-tooltip-description">Ważny ośrodek naszych działań ratunkowych we wschodniej Turcji. Region o strategicznym znaczeniu w górzystym terenie.</div>
+          `;
+          mapContainer.appendChild(tunceliTooltip);
+
+          // Add hover effect for the Tunceli pin with tooltip
+          tunceliPin.addEventListener('mouseenter', function(e) {
+            this.style.filter = 'drop-shadow(0 4px 8px rgba(220, 38, 38, 0.6))';
+            
+            // Position tooltip directly above the pin
+            const svgRect = svg.getBoundingClientRect();
+            const mapRect = mapContainer.getBoundingClientRect();
+            
+            // Calculate pin only to SVG (72% from left, 38% from top)
+            const pinX = svgRect.left + (svgRect.width * 0.72);
+            const pinY = svgRect.top + (svgRect.height * 0.38);
+            
+            // Position tooltip above the pin
+            tunceliTooltip.style.left = (pinX - mapRect.left - (tunceliTooltip.offsetWidth / 2)) + 'px';
+            tunceliTooltip.style.top = (pinY - mapRect.top - tunceliTooltip.offsetHeight - 15) + 'px';
+            tunceliTooltip.style.position = 'absolute';
+            tunceliTooltip.classList.add('show');
+          });
+          
+          tunceliPin.addEventListener('mouseleave', function() {
+            this.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+            tunceliTooltip.classList.remove('show');
+          });
+
+          svg.appendChild(tunceliPin);
+
+          const provinces = svg.querySelectorAll('path');
+             console.log('Found', provinces.length, 'province elements');
+
+             provinces.forEach(function(province) {
+               // Set initial styles
+               province.style.fill = '#E3C5AB';
+               province.style.stroke = '#C59C79';
+               province.style.strokeWidth = '1';
+               province.style.transition = 'all 0.3s ease';
+
+               const onEnter = function() {
+                 this.style.fill = '#C59C79';
+                 this.style.stroke = '#A67C52';
+                 this.style.strokeWidth = '3';
+                 this.style.filter = 'drop-shadow(0 4px 8px rgba(197, 156, 121, 0.5))';
+                 console.log('Hovering over province');
+               };
+
+               const onLeave = function() {
+                 if (!this.classList.contains('selected')) {
+                   this.style.fill = '#E3C5AB';
+                   this.style.stroke = '#C59C79';
+                   this.style.strokeWidth = '1';
+                   this.style.filter = 'none';
+                 }
+               };
+
+               province.addEventListener('mouseenter', onEnter);
+               province.addEventListener('mouseleave', onLeave);
+
+             });
+             console.log('Map initialized successfully with Istanbul and Ankara pins');
+           })
+           .catch(error => {
+             console.error('Error loading SVG:', error);
+             mapContainer.innerHTML = '<p style="color: red;">Error loading map. Please refresh the page.</p>';
+           });
+       }
+    
+    // Initialize the interactive map when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+         console.log('Page loaded, initializing map...');
+         const debugInfo = document.getElementById('debug-info');
+         if (debugInfo) debugInfo.textContent = 'Loading interactive map...';
+      
+      initializeInteractiveMap();
+    });
+
+    function openVideoModal(videoSrc) {
+      const modal = document.getElementById('videoModal');
+      const video = document.getElementById('modalVideo');
+      
+      if (videoSrc === 'facebook') {
+        // For Facebook video, we'll open it in a new tab
+        try {
+          const facebookUrl = 'https://www.facebook.com/61577219922888/videos/1109763807595155/';
+          const newWindow = window.open(facebookUrl, '_blank');
+          if (!newWindow) {
+            // If popup was blocked, try alternative approach
+            window.location.href = facebookUrl;
+          }
+        } catch (error) {
+          console.error('Error opening Facebook video:', error);
+          // Fallback: try to open the video in the same window
+          window.location.href = 'https://www.facebook.com/61577219922888/videos/1109763807595155/';
+        }
+        return;
+      }
+      
+      if (videoSrc === 'facebook2') {
+        // For second Facebook video, we'll open it in a new tab
+        try {
+          const facebookUrl = 'https://www.facebook.com/61577219922888/videos/1531819384534901/';
+          const newWindow = window.open(facebookUrl, '_blank');
+          if (!newWindow) {
+            // If popup was blocked, try alternative approach
+            window.location.href = facebookUrl;
+          }
+        } catch (error) {
+          console.error('Error opening Facebook video:', error);
+          // Fallback: try to open the video in the same window
+          window.location.href = 'https://www.facebook.com/61577219922888/videos/1531819384534901/';
+        }
+        return;
+      }
+      
+      if (videoSrc === 'facebook3') {
+        // For third Facebook video, we'll open it in a new tab
+        try {
+          const facebookUrl = 'https://www.facebook.com/61577219922888/videos/1109763807595155/';
+          const newWindow = window.open(facebookUrl, '_blank');
+          if (!newWindow) {
+            // If popup was blocked, try alternative approach
+            window.location.href = facebookUrl;
+          }
+        } catch (error) {
+          console.error('Error opening Facebook video:', error);
+          // Fallback: try to open the video in the same window
+          window.location.href = 'https://www.facebook.com/61577219922888/videos/1109763807595155/';
+        }
+        return;
+      }
+      
+      if (videoSrc === 'facebook4') {
+        // For fourth Facebook video, we'll open it in a new tab
+        try {
+          const facebookUrl = 'https://www.facebook.com/watch/?v=24565340453125411';
+          const newWindow = window.open(facebookUrl, '_blank');
+          if (!newWindow) {
+            // If popup was blocked, try alternative approach
+            window.location.href = facebookUrl;
+          }
+        } catch (error) {
+          console.error('Error opening Facebook video:', error);
+          // Fallback: try to open the video in the same window
+          window.location.href = 'https://www.facebook.com/watch/?v=24565340453125411';
+        }
+        return;
+      }
+      
+      video.src = videoSrc;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    function openFacebookPhoto(photoUrl) {
+      // Open Facebook photo in a new tab
+      window.open(photoUrl, '_blank');
+    }
+
+    function closeVideoModal() {
+      const modal = document.getElementById('videoModal');
+      const video = document.getElementById('modalVideo');
+      modal.classList.remove('active');
+      video.pause();
+      video.src = '';
+      document.body.style.overflow = 'auto'; // Restore scrolling
+    }
+
+    function toggleSensitiveContent(element) {
+      element.classList.toggle('revealed');
+    }
+
+    // Close modal when clicking outside the video
+    document.getElementById('videoModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeVideoModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeVideoModal();
+      }
+    });
+  </script>
+
+</body>
+</html>

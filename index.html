@@ -333,30 +333,152 @@
     .footer-social .footer-copyright { text-align: right; }
 
     /* MAP SECTION */
-    .map-section { padding: 4rem 0; }
-    .map-container { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start; margin-top: 2rem; }
+    .map-section { padding: 2rem 0; }
+    #map-title-new { 
+      text-align: center; 
+      margin-bottom: 2.5rem; 
+      font-family: 'McLaren', cursive; 
+      font-size: 2rem; 
+      color: #1f2937; 
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 0;
+    }
+    .map-container { 
+      display: flex;
+      flex-direction: row;
+      gap: 3rem; 
+      align-items: flex-start; 
+      margin: 1rem auto; 
+      max-width: 1200px;
+      width: 100%;
+      padding: 0 2rem;
+    }
     .map-wrapper { 
       background: none; 
       padding: 0; 
       position: relative;
-      width: 100%;
-      height: 0;
-      padding-bottom: 60%; /* 5:3 aspect ratio */
+      flex: 1;
+      max-width: 700px;
+      margin: 0 auto;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-self: flex-start;
+    }
+    
+    #turkeyMapContainer {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 400px;
+      padding-top: 60;
     }
     .turkey-map { 
       width: 100%;
       height: auto;
-      max-height: 400px;
+      max-height: 600px;
+      border: none;
+      outline: none;
     }
     
-    .map-info { background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-    .map-info h4 { font-family: 'McLaren', cursive; font-size: 1.5rem; color: #1f2937; margin: 0 0 1rem 0; }
-    .map-info p { color: #6b7280; margin: 0 0 2rem 0; line-height: 1.6; }
+    /* Enhanced interactive map styles */
+    .map-wrapper object {
+      width: 100%;
+      height: auto;
+      max-height: 600px;
+      border: none;
+      outline: none;
+    }
+
+    /* Pin Styles */
+    .istanbul-pin, .ankara-pin, .elazig-pin, .mersin-pin, .tunceli-pin {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .istanbul-pin:hover, .ankara-pin:hover, .elazig-pin:hover, .mersin-pin:hover, .tunceli-pin:hover {
+      filter: drop-shadow(0 4px 8px rgba(220, 38, 38, 0.6));
+    }
+
+    /* Province hover effects */
+    .province-hover {
+      fill: #f87171 !important;
+      stroke: #dc2626 !important;
+      stroke-width: 3 !important;
+      opacity: 1 !important;
+      filter: drop-shadow(0 4px 8px #c59d61) !important;
+    }
+    
+    .map-info { 
+      background: white; 
+      border-radius: 1rem; 
+      padding: 1.5rem; 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      flex: 0 0 320px;
+      max-width: 320px;
+    }
+    .map-info h4 { font-family: 'McLaren', cursive; font-size: 1.5rem; color: #1f2937; margin: 0 0 0.5rem 0; }
+    .map-info p { color: #6b7280; margin: 0 0 1.25rem 0; line-height: 1.4; }
     .map-stats { display: flex; gap: 2rem; }
     .stat-item { text-align: center; }
     .stat-number { display: block; font-family: 'McLaren', cursive; font-size: 2rem; font-weight: bold; color: #ef4444; }
     .stat-label { display: block; font-size: 0.875rem; color: #6b7280; margin-top: 0.5rem; }
+
+    /* Pin Tooltip Styles */
+    .pin-tooltip {
+      position: absolute;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 6px 10px;
+      font-size: 11px;
+      z-index: 1000;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: all 0.3s ease;
+      min-width: 120px;
+      max-width: 160px;
+    }
+
+    .pin-tooltip.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .pin-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -6px;
+      border-width: 6px;
+      border-style: solid;
+      border-color: white transparent transparent transparent;
+    }
+    .pin-tooltip.istanbul-tooltip::after {
+      top: -6px;
+      border-color: transparent transparent white transparent;
+    }
+    
+    .pin-tooltip-header {
+      font-family: 'McLaren', cursive;
+      font-size: 13px;
+      font-weight: 600;
+      color: #000;
+      margin: 0 0 3px 0;
+    }
+    
+    .pin-tooltip-description {
+      color: #6b7280;
+      font-size: 10px;
+      line-height: 1.2;
+      margin: 0;
+    }
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
@@ -390,11 +512,11 @@
         <span>Z Piekła Do Domu</span>
       </div>
       <nav class="menu">
-        <a href="#home">Strona główna</a>
-        <a href="#adopcje">Adopcje</a>
+        <a href="index.html">Strona główna</a>
+        <a href="adopcje.html">Adopcje</a>
         <a href="#bazarek">Bazarek</a>
-        <a href="#onas">O nas</a>
-        <a href="#wspieraj" class="cta">Wsparcie</a>
+        <a href="onas.html">O nas</a>
+        <a href="wsparcie.html" class="cta">Wsparcie</a>
     </nav>
     </div>
   </header>
@@ -404,7 +526,7 @@
       <h1>Zmiana zaczyna<br>się tu, gdzie<br>odmawiamy<br>odwracać wzrok<br>w milczeniu.</h1>
     </div>
     <div class="hero-subtitle">Wspieraj lub zostań nowym opiekunem!</div>
-    <button class="btn btn-primary hero-button-left">Wsparcie</button>
+    <a href="wsparcie.html" class="btn btn-primary hero-button-left" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">Wsparcie</a>
     <button class="btn btn-outline hero-button">Wszystkie psiaki <img src="images/paw-icon.svg" alt="paw" width="16" height="16"></button>
   </section>
 
@@ -423,7 +545,7 @@
             <h3>Kokos</h3>
             <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <div class="card-footer">
-              <button class="btn btn-primary">Więcej ↗</button>
+              <a href="dog-page.html?dog=kokos" class="btn btn-primary">Więcej ↗</a>
             </div>
           </div>
         </article>
@@ -434,7 +556,7 @@
             <h3>Dżeki</h3>
             <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <div class="card-footer">
-              <button class="btn btn-primary">Więcej ↗</button>
+              <a href="dog-page.html?dog=dzeki" class="btn btn-primary">Więcej ↗</a>
             </div>
           </div>
         </article>
@@ -450,7 +572,7 @@
             <h3>Gaja</h3>
             <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <div class="card-footer">
-              <button class="btn btn-primary">Więcej ↗</button>
+              <a href="dog-page.html?dog=gaja" class="btn btn-primary">Więcej ↗</a>
             </div>
           </div>
         </article>
@@ -461,25 +583,33 @@
 
     <!-- INTERACTIVE MAP -->
     <section class="section map-section">
-      <h3>Nasze działania na mapie</h3>
+      <h3 id="map-title-new">Tu pomagamy</h3>
       <div class="map-container">
         <div class="map-wrapper">
-          <img src="images/map-turkey.svg" alt="Mapa Turcji" class="turkey-map">
+          <!-- TEST: This should definitely be visible -->
+          <p id="debug-info" style="color: #666; font-size: 14px; text-align: center; margin: 10px 0; display: none;">Interactive map loaded successfully</p>
+          
+             <!-- INTERACTIVE TURKEY MAP -->
+             <div class="map-wrapper">
+               <div id="turkeyMapContainer" style="width: 100%; height: auto; max-height: 500px; text-align: center; padding: 20px;">
+                 <p style="color: #666; font-size: 16px;">Loading interactive map...</p>
+               </div>
+             </div>
         </div>
         
         <!-- Map info panel -->
         <div class="map-info" id="mapInfo">
           <div class="map-info-content">
-            <h4>Nasze osiągnięcia</h4>
-            <p>Od początku naszej działalności udało nam się uratować setki zwierząt i znaleźć im nowe, kochające domy.</p>
+            <h4 id="map-panel-title">Nasze osiągnięcia</h4>
+            <p id="map-panel-description">Od początku naszej działalności udało nam się uratować setki zwierząt i znaleźć im nowe, kochające domy.</p>
             <div class="map-stats">
               <div class="stat-item">
-                <span class="stat-number">500+</span>
-                <span class="stat-label">Uratowanych zwierząt</span>
+                <span class="stat-number" id="stat1-number">500+</span>
+                <span class="stat-label" id="stat1-label">Uratowanych zwierząt</span>
               </div>
               <div class="stat-item">
-                <span class="stat-number">50+</span>
-                <span class="stat-label">Szczęśliwych adopcji</span>
+                <span class="stat-number" id="stat2-number">50+</span>
+                <span class="stat-label" id="stat2-label">Szczęśliwych adopcji</span>
               </div>
             </div>
           </div>
@@ -599,6 +729,351 @@
   <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
+    // Interactive Map Enhancement
+       function initializeInteractiveMap() {
+         const mapContainer = document.getElementById('turkeyMapContainer');
+         if (!mapContainer) {
+           console.error('Map container not found!');
+           return;
+         }
+
+         // Try to load the SVG file directly as an object first
+         console.log('Attempting to load map...');
+         
+         // Create an object element to load the SVG
+         const svgObject = document.createElement('object');
+         svgObject.setAttribute('type', 'image/svg+xml');
+         svgObject.setAttribute('data', 'images/map-turkey.svg');
+         svgObject.style.width = '100%';
+         svgObject.style.height = 'auto';
+         svgObject.style.maxHeight = '500px';
+         svgObject.style.display = 'block';
+         svgObject.style.margin = '0 auto';
+         
+         // Wait for the object to load
+         svgObject.addEventListener('load', function() {
+           console.log('SVG object loaded successfully');
+           const svg = svgObject.contentDocument.querySelector('svg');
+           if (!svg) {
+             console.error('SVG not found in loaded content');
+             return;
+           }
+           
+           // Continue with pin creation...
+           initializePins(svg);
+         });
+         
+         svgObject.addEventListener('error', function() {
+           console.error('Failed to load SVG object, trying fetch...');
+           // Fallback to fetch method
+           fetch('images/map-turkey.svg')
+             .then(response => {
+               console.log('Fetch response received:', response.status, response.statusText);
+               if (!response.ok) {
+                 throw new Error(`HTTP error! status: ${response.status}`);
+               }
+               return response.text();
+             })
+             .then(svgText => {
+               mapContainer.innerHTML = svgText;
+               const svg = mapContainer.querySelector('svg');
+               if (!svg) {
+                 console.error('SVG not found in loaded content');
+                 return;
+               }
+               initializePins(svg);
+             })
+             .catch(error => {
+               console.error('Error loading SVG:', error);
+               mapContainer.innerHTML = '<p style="color: red;">Error loading map. Please refresh the page.</p>';
+             });
+         });
+         
+         mapContainer.appendChild(svgObject);
+         return;
+       }
+       
+       function initializePins(svg) {
+          // Style the SVG
+          svg.style.width = '100%';
+          svg.style.height = 'auto';
+          svg.style.maxHeight = '500px';
+          svg.style.display = 'block';
+          svg.style.margin = '0 auto';
+
+          // Add Istanbul pin - positioned at the northwest corner (European side)
+          const istanbulPin = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+          istanbulPin.setAttribute('href', 'images/map-pin.svg');
+          istanbulPin.setAttribute('x', '19%');  // Positioned in northwest (Istanbul location)
+          istanbulPin.setAttribute('y', '13%');  // Slightly higher, near the Black Sea
+          istanbulPin.setAttribute('width', '24');
+          istanbulPin.setAttribute('height', '32');
+          istanbulPin.setAttribute('class', 'istanbul-pin');
+          istanbulPin.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+          istanbulPin.style.transition = 'all 0.3s ease';
+          
+          // Create tooltip for Istanbul pin and add to map container
+          const istanbulTooltip = document.createElement('div');
+          istanbulTooltip.className = 'pin-tooltip istanbul-tooltip';
+          istanbulTooltip.innerHTML = `
+            <div class="pin-tooltip-header">Istanbul</div>
+            <div class="pin-tooltip-description">Główne centrum naszych działań ratunkowych w Turcji. Miasto łączące Europę i Azję.</div>
+          `;
+          mapContainer.appendChild(istanbulTooltip);
+
+          // Add hover effect for the pin with tooltip
+          istanbulPin.addEventListener('mouseenter', function(e) {
+            this.style.filter = 'drop-shadow(0 4px 8px rgba(220, 38, 38, 0.6))';
+            
+            // Position tooltip directly above the pin
+            const svgRect = svg.getBoundingClientRect();
+            const mapRect = mapContainer.getBoundingClientRect();
+            
+            // Calculate pin position relative to SVG (19% from left, 13% from top)
+            const pinX = svgRect.left + (svgRect.width * 0.19);
+            const pinY = svgRect.top + (svgRect.height * 0.13);
+            
+            // Position tooltip below the pin
+            istanbulTooltip.style.left = (pinX - mapRect.left - (istanbulTooltip.offsetWidth / 2)) + 'px';
+            istanbulTooltip.style.top = (pinY - mapRect.top + 40) + 'px';
+            istanbulTooltip.style.position = 'absolute';
+            istanbulTooltip.classList.add('show');
+          });
+          
+          istanbulPin.addEventListener('mouseleave', function() {
+            this.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+            istanbulTooltip.classList.remove('show');
+          });
+
+          svg.appendChild(istanbulPin);
+
+          // Add Ankara pin - positioned in the north-central part of Turkey
+          const ankaraPin = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+          ankaraPin.setAttribute('href', 'images/map-pin.svg');
+          ankaraPin.setAttribute('x', '36%');  // Positioned more to the left (Ankara location)
+          ankaraPin.setAttribute('y', '32%');  // Slightly higher
+          ankaraPin.setAttribute('width', '24');
+          ankaraPin.setAttribute('height', '32');
+          ankaraPin.setAttribute('class', 'ankara-pin');
+          ankaraPin.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+          ankaraPin.style.transition = 'all 0.3s ease';
+          
+          // Create tooltip for Ankara pin and add to map container
+          const ankaraTooltip = document.createElement('div');
+          ankaraTooltip.className = 'pin-tooltip';
+          ankaraTooltip.innerHTML = `
+            <div class="pin-tooltip-header">Ankara</div>
+            <div class="pin-tooltip-description">Stolica Turcji i ważny ośrodek naszych działań ratunkowych w regionie centralnym.</div>
+          `;
+          mapContainer.appendChild(ankaraTooltip);
+
+          // Add hover effect for the Ankara pin with tooltip
+          ankaraPin.addEventListener('mouseenter', function(e) {
+            this.style.filter = 'drop-shadow(0 4px 8px rgba(220, 38, 38, 0.6))';
+            
+            // Position tooltip directly above the pin
+            const svgRect = svg.getBoundingClientRect();
+            const mapRect = mapContainer.getBoundingClientRect();
+            
+            // Calculate pin position relative to SVG (36% from left, 32% from top)
+            const pinX = svgRect.left + (svgRect.width * 0.36);
+            const pinY = svgRect.top + (svgRect.height * 0.32);
+            
+            // Position tooltip above the pin
+            ankaraTooltip.style.left = (pinX - mapRect.left - (ankaraTooltip.offsetWidth / 2)) + 'px';
+            ankaraTooltip.style.top = (pinY - mapRect.top - ankaraTooltip.offsetHeight - 15) + 'px';
+            ankaraTooltip.style.position = 'absolute';
+            ankaraTooltip.classList.add('show');
+          });
+          
+          ankaraPin.addEventListener('mouseleave', function() {
+            this.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+            ankaraTooltip.classList.remove('show');
+          });
+
+          svg.appendChild(ankaraPin);
+
+          // Add Elazig pin - positioned in the eastern region of Turkey
+          const elazigPin = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+          elazigPin.setAttribute('href', 'images/map-pin.svg');
+          elazigPin.setAttribute('x', '72%');  // Positioned in eastern Turkey (Elazig location)
+          elazigPin.setAttribute('y', '45%');  // Lower in the eastern region
+          elazigPin.setAttribute('width', '24');
+          elazigPin.setAttribute('height', '32');
+          elazigPin.setAttribute('class', 'elazig-pin');
+          elazigPin.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+          elazigPin.style.transition = 'all 0.3s ease';
+          
+          // Create tooltip for Elazig pin and add to map container
+          const elazigTooltip = document.createElement('div');
+          elazigTooltip.className = 'pin-tooltip';
+          elazigTooltip.innerHTML = `
+            <div class="pin-tooltip-header">Elazig</div>
+            <div class="pin-tooltip-description">Ważny ośrodek naszych działań ratunkowych we wschodniej Turcji. Region o strategicznym znaczeniu.</div>
+          `;
+          mapContainer.appendChild(elazigTooltip);
+
+          // Add hover effect for the Elazig pin with tooltip
+          elazigPin.addEventListener('mouseenter', function(e) {
+            this.style.filter = 'drop-shadow(0 4px 8px rgba(220, 38, 38, 0.6))';
+            
+            // Position tooltip directly above the pin
+            const svgRect = svg.getBoundingClientRect();
+            const mapRect = mapContainer.getBoundingClientRect();
+            
+            // Calculate pin position relative to SVG (72% from left, 45% from top)
+            const pinX = svgRect.left + (svgRect.width * 0.72);
+            const pinY = svgRect.top + (svgRect.height * 0.45);
+            
+            // Position tooltip above the pin
+            elazigTooltip.style.left = (pinX - mapRect.left - (elazigTooltip.offsetWidth / 2)) + 'px';
+            elazigTooltip.style.top = (pinY - mapRect.top - elazigTooltip.offsetHeight - 15) + 'px';
+            elazigTooltip.style.position = 'absolute';
+            elazigTooltip.classList.add('show');
+          });
+          
+          elazigPin.addEventListener('mouseleave', function() {
+            this.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+            elazigTooltip.classList.remove('show');
+          });
+
+          svg.appendChild(elazigPin);
+
+          // Add Mersin pin - positioned in the southern coastal region of Turkey
+          const mersinPin = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+          mersinPin.setAttribute('href', 'images/map-pin.svg');
+          mersinPin.setAttribute('x', '42%');  // Positioned in southern coastal region (Mersin location)
+          mersinPin.setAttribute('y', '75%');  // Bottom of the country, coastal area
+          mersinPin.setAttribute('width', '24');
+          mersinPin.setAttribute('height', '32');
+          mersinPin.setAttribute('class', 'mersin-pin');
+          mersinPin.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+          mersinPin.style.transition = 'all 0.3s ease';
+          
+          // Create tooltip for Mersin pin and add to map container
+          const mersinTooltip = document.createElement('div');
+          mersinTooltip.className = 'pin-tooltip';
+          mersinTooltip.innerHTML = `
+            <div class="pin-tooltip-header">Mersin</div>
+            <div class="pin-tooltip-description">Ważny port na południowym wybrzeżu Turcji. Centrum naszych działań ratunkowych w regionie śródziemnomorskim.</div>
+          `;
+          mapContainer.appendChild(mersinTooltip);
+
+          // Add hover effect for the Mersin pin with tooltip
+          mersinPin.addEventListener('mouseenter', function(e) {
+            this.style.filter = 'drop-shadow(0 4px 8px rgba(220, 38, 38, 0.6))';
+            
+            // Position tooltip directly above the pin
+            const svgRect = svg.getBoundingClientRect();
+            const mapRect = mapContainer.getBoundingClientRect();
+            
+            // Calculate pin position relative to SVG (42% from left, 75% from top)
+            const pinX = svgRect.left + (svgRect.width * 0.42);
+            const pinY = svgRect.top + (svgRect.height * 0.75);
+            
+            // Position tooltip above the pin
+            mersinTooltip.style.left = (pinX - mapRect.left - (mersinTooltip.offsetWidth / 2)) + 'px';
+            mersinTooltip.style.top = (pinY - mapRect.top - mersinTooltip.offsetHeight - 15) + 'px';
+            mersinTooltip.style.position = 'absolute';
+            mersinTooltip.classList.add('show');
+          });
+          
+          mersinPin.addEventListener('mouseleave', function() {
+            this.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+            mersinTooltip.classList.remove('show');
+          });
+
+          svg.appendChild(mersinPin);
+
+          // Add Tunceli pin - positioned slightly above Elazig in the eastern region
+          const tunceliPin = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+          tunceliPin.setAttribute('href', 'images/map-pin.svg');
+          tunceliPin.setAttribute('x', '72%');  // Same horizontal position as Elazig
+          tunceliPin.setAttribute('y', '38%');  // Slightly above Elazig (which is at 45%)
+          tunceliPin.setAttribute('width', '24');
+          tunceliPin.setAttribute('height', '32');
+          tunceliPin.setAttribute('class', 'tunceli-pin');
+          tunceliPin.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+          tunceliPin.style.transition = 'all 0.3s ease';
+          
+          // Create tooltip for Tunceli pin and add to map container
+          const tunceliTooltip = document.createElement('div');
+          tunceliTooltip.className = 'pin-tooltip';
+          tunceliTooltip.innerHTML = `
+            <div class="pin-tooltip-header">Tunceli</div>
+            <div class="pin-tooltip-description">Ważny ośrodek naszych działań ratunkowych we wschodniej Turcji. Region o strategicznym znaczeniu w górzystym terenie.</div>
+          `;
+          mapContainer.appendChild(tunceliTooltip);
+
+          // Add hover effect for the Tunceli pin with tooltip
+          tunceliPin.addEventListener('mouseenter', function(e) {
+            this.style.filter = 'drop-shadow(0 4px 8px rgba(220, 38, 38, 0.6))';
+            
+            // Position tooltip directly above the pin
+            const svgRect = svg.getBoundingClientRect();
+            const mapRect = mapContainer.getBoundingClientRect();
+            
+            // Calculate pin only to SVG (72% from left, 38% from top)
+            const pinX = svgRect.left + (svgRect.width * 0.72);
+            const pinY = svgRect.top + (svgRect.height * 0.38);
+            
+            // Position tooltip above the pin
+            tunceliTooltip.style.left = (pinX - mapRect.left - (tunceliTooltip.offsetWidth / 2)) + 'px';
+            tunceliTooltip.style.top = (pinY - mapRect.top - tunceliTooltip.offsetHeight - 15) + 'px';
+            tunceliTooltip.style.position = 'absolute';
+            tunceliTooltip.classList.add('show');
+          });
+          
+          tunceliPin.addEventListener('mouseleave', function() {
+            this.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
+            tunceliTooltip.classList.remove('show');
+          });
+
+          svg.appendChild(tunceliPin);
+
+          const provinces = svg.querySelectorAll('path');
+             console.log('Found', provinces.length, 'province elements');
+
+             provinces.forEach(function(province) {
+               // Set initial styles
+               province.style.fill = '#E3C5AB';
+               province.style.stroke = '#C59C79';
+               province.style.strokeWidth = '1';
+               province.style.transition = 'all 0.3s ease';
+
+               const onEnter = function() {
+                 this.style.fill = '#C59C79';
+                 this.style.stroke = '#A67C52';
+                 this.style.strokeWidth = '3';
+                 this.style.filter = 'drop-shadow(0 4px 8px rgba(197, 156, 121, 0.5))';
+                 console.log('Hovering over province');
+               };
+
+               const onLeave = function() {
+                 if (!this.classList.contains('selected')) {
+                   this.style.fill = '#E3C5AB';
+                   this.style.stroke = '#C59C79';
+                   this.style.strokeWidth = '1';
+                   this.style.filter = 'none';
+                 }
+               };
+
+               province.addEventListener('mouseenter', onEnter);
+               province.addEventListener('mouseleave', onLeave);
+
+             });
+             console.log('Map initialized successfully with all pins');
+       }
+    
+    // Initialize the interactive map when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+         console.log('Page loaded, initializing map...');
+         const debugInfo = document.getElementById('debug-info');
+         if (debugInfo) debugInfo.textContent = 'Loading interactive map...';
+      
+      initializeInteractiveMap();
+    });
+
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
         if (!user) {

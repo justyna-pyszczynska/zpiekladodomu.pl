@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adopcje - Z Piekła do Domu</title>
+  <title>Wsparcie - Z Piekła do Domu</title>
   <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -67,15 +67,15 @@
       background: url('images/adopcje-main.jpg') center/cover no-repeat;
       display: flex; align-items: center;
     }
-    .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.2)); }
+    .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.02)); }
     .hero-content { position: relative; z-index: 1; width: min(500px, 50%); margin-left: 12%; color: #fff; }
     .hero h1 { 
       font-family: 'McLaren', cursive; 
-      font-size: clamp(32px, 6vw, 42px); 
+      font-size: clamp(52px, 8vw, 62px); 
       line-height: 1.2; 
       font-weight: 450;
       text-shadow: 2px 3px 12px rgba(0,0,0,.7);
-      padding: 1.5rem;
+      padding-top: 10rem;
       border-radius: 0.5rem;
       display: inline-block;
       position: absolute;
@@ -98,27 +98,14 @@
       left: 12%;
       z-index: 2;
     }
-      .hero-button-left {
-        position: absolute;
-        top: 77%;
-        right: 25%;
-        z-index: 2;
-        width: 180px;
-        height: 44px;
-        font-family: 'McLaren', cursive;
-        text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      }
-      .hero-button {
-        position: absolute;
-        top: 77%;
-        right: 12%;
-        z-index: 2;
-        width: 180px;
-        height: 44px;
-      }
+    .hero-button {
+      position: absolute;
+      top: 77%;
+      right: 12%;
+      z-index: 2;
+      width: 180px;
+      height: 44px;
+    }
     .btn-ghost { background: rgba(255,255,255,.2); color:#fff; border:1px solid rgba(255,255,255,.35); text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
     .btn-outline { 
       background: transparent; 
@@ -135,49 +122,52 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    /* DONATION CARDS */
+    /* SUPPORT SECTIONS */
     .section { padding: 3rem 0; }
     .overlap { margin-top: -39.5vh; position: relative; z-index: 2; }
-    .cards-3 { display:grid; grid-template-columns: repeat(3,1fr); gap: 1.125rem; --card-h: 475px; }
-    .span-2 { grid-column: span 2; }
-    .card { background:#fff; border-radius: 1rem; box-shadow:0 12px 22px rgba(0,0,0,.1); overflow: hidden; height: var(--card-h); display:flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,.15); }
-    .card-body { padding: .875rem 1rem 1rem; display:flex; flex-direction: column; gap: .5rem; flex: 1; }
-    .dog-card { text-align: center;}
-    .dog-card .circle { width: 14rem; height: 14rem; border-radius: 50%; object-fit: cover; margin: 1rem auto 0.75rem; }
-    .dog-card h3 { font-family: 'McLaren', cursive; font-size: 1.25rem; margin-bottom: 0.5rem; }
-    .dog-card .card-footer { justify-content: center; margin-top: 0.75rem; }
-    .dog-card.span-2 { 
-      display: flex !important; 
-      flex-direction: row !important; 
-      width: 100% !important; 
-      height: var(--card-h) !important; 
-      border-radius: 1rem !important; 
-      object-fit: cover !important; 
-      margin: 0 !important; 
-      padding: 1.5rem !important; 
+    .support-container { 
+      display: flex; 
+      flex-direction: column;
+      align-items: center;
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      gap: 2rem;
     }
-    .dog-card.span-2 .circle { 
-      width: 12rem !important; 
-      height: 12rem !important; 
-      border-radius: 50% !important; 
-      object-fit: cover !important; 
-      margin: 0 1.5rem 0 0 !important; 
+    .support-card { 
+      background: #fff; 
+      border-radius: 1.5rem; 
+      box-shadow: 0 20px 40px rgba(0,0,0,.15); 
+      overflow: hidden; 
+      width: 100%;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .dog-card.span-2 .card-body { 
-      flex: 1 !important; 
-      padding: 0 !important; 
-      display: flex !important; 
-      flex-direction: column !important; 
-      justify-content: center !important; 
+    .support-card:hover { 
+      transform: translateY(-8px); 
+      box-shadow: 0 30px 60px rgba(0,0,0,.2); 
     }
-    .dog-card.span-2 h3 { 
-      font-family: 'McLaren', cursive !important; 
-      font-size: 1.5rem !important; 
-      margin-bottom: 1rem !important; 
+    .support-card-content {
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
     }
-    .dog-card.span-2 .card-footer { 
-      margin-top: 1rem !important; 
+    .support-card h2 {
+      font-family: 'McLaren', cursive;
+      font-size: 2.5rem;
+      color: #1f2937;
+      margin: 0;
+      line-height: 1.2;
+    }
+    .support-card .muted {
+      color: #6b7280;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .support-card .btn {
+      align-self: flex-start;
+      padding: 1rem 2rem;
+      font-size: 1.125rem;
     }
     .muted { color: #6b7280; font-size: 0.875rem; line-height: 1.5; }
     .btn { display:inline-flex; align-items:center; gap:.5rem; padding: .6875rem 1.125rem; border:none; border-radius: 9999px; cursor:pointer; font-weight: 700; }
@@ -193,6 +183,39 @@
       box-shadow: 0 6px 20px rgba(252,165,165,0.4);
     }
     .center { text-align: center; }
+
+    /* PAYMENT METHODS */
+    .payment-methods {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .payment-method {
+      background: #f8f9fa;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      flex: 1;
+      min-width: 200px;
+      transition: all 0.3s ease;
+    }
+    .payment-method:hover {
+      border-color: #fca5a5;
+      background: #fff;
+      transform: translateY(-2px);
+    }
+    .payment-method h4 {
+      font-size: 1.125rem;
+      margin-bottom: 0.5rem;
+      color: #1f2937;
+    }
+    .payment-method p {
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin: 0;
+    }
 
     /* FOOTER */
     footer { background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); margin-top: 2.25rem; padding: 3rem 0; }
@@ -287,9 +310,73 @@
       header { top: .625rem; }
       .navbar { padding: .625rem .75rem; }
       .menu { gap: .5rem; }
-      .menu a { padding: .375rem .5rem; }
-      .cards-3 { grid-template-columns: 1fr; }
+      .menu a { padding: .375rem .5rem; font-size: 0.875rem; }
+      .hero h1 { 
+        font-size: clamp(32px, 6vw, 48px); 
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        margin-left: 0;
+        text-align: center;
+        width: 90%;
+      }
+      .hero-subtitle {
+        font-size: clamp(16px, 2.5vw, 20px);
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        white-space: normal;
+      }
+      .hero-button {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+      }
+      .support-card-content { 
+        padding: 2rem; 
+      }
+      .support-card h2 { 
+        font-size: 2rem; 
+      }
       .overlap { margin-top: -18vh; }
+      .payment-methods {
+        flex-direction: column;
+      }
+      .payment-method {
+        min-width: 100%;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+      .footer-links {
+        gap: 2rem;
+        justify-content: center;
+      }
+      .footer-social {
+        align-items: center;
+      }
+      .footer-social .footer-copyright {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+      .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .support-card-content {
+        padding: 1.5rem;
+      }
+      .support-card h2 {
+        font-size: 1.75rem;
+      }
     }
   </style>
 </head>
@@ -302,7 +389,7 @@
       </div>
       <nav class="menu">
         <a href="index.html">Strona główna</a>
-        <a href="adopcje.html" style="background: rgba(0,0,0,0.1);">Adopcje</a>
+        <a href="adopcje.html">Adopcje</a>
         <a href="#bazarek">Bazarek</a>
         <a href="onas.html">O nas</a>
         <a href="wsparcie.html" class="cta">Wsparcie</a>
@@ -312,86 +399,93 @@
 
   <section id="home" class="hero">
     <div class="hero-content">
-      <h1>Otwórz serce na jednego <br> z nich, a przywieziemy <br> Ci przyjaciela!</h1>
+      <h1>Wesprzyj naszą misję</h1>
     </div>
-    <div class="hero-subtitle">Wspieraj lub zostań nowym opiekunem!</div>
-    <a href="wsparcie.html" class="btn btn-primary hero-button-left" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">Wsparcie</a>
-    <button class="btn btn-outline hero-button">Wszystkie psiaki <img src="images/paw-icon.svg" alt="paw" width="16" height="16"></button>
+    <div class="hero-subtitle">Każda złotówka pomaga ratować życie</div>
+    <button class="btn btn-outline hero-button" onclick="document.getElementById('donate').scrollIntoView({behavior: 'smooth'})">
+      Wspomóż teraz
+    </button>
   </section>
 
   <main class="container">
-    <!-- DONATION + DOG CARDS GRID (2 rows) -->
-    <section class="section overlap" id="donations">
-      <div class="cards-3" id="dogs-container">
-        <!-- Row 1: Three different dogs -->
-        <article class="card dog-card">
-          <img src="images/dog-1.jpg" alt="Kokos" class="circle">
-          <div class="card-body">
-            <h3>Kokos</h3>
-            <p class="muted">Przyjazny pies, który szuka swojego wymarzonego domu. Idealny dla rodzin z dziećmi.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=kokos" class="btn btn-primary">Więcej ↗</a>
+    <!-- SUPPORT SECTION -->
+    <section class="section overlap" id="donate">
+      <div class="support-container">
+        <article class="support-card">
+          <div class="support-card-content">
+            <h2>Jak możesz pomóc?</h2>
+            <p class="muted">Nasza fundacja ratuje psy i koty z Turcji, ale potrzebujemy Twojego wsparcia, aby kontynuować naszą misję. Każda darowizna, niezależnie od kwoty, pomaga nam opłacić leczenie, transport, karmę i opiekę nad naszymi podopiecznymi.</p>
+            
+            <div class="payment-methods">
+              <div class="payment-method">
+                <h4>💰 Przelew bankowy</h4>
+                <p>Konto: 12 3456 7890 1234 5678<br>
+                Tytuł: "Wsparcie dla zwierząt"</p>
+              </div>
+              <div class="payment-method">
+                <h4>💳 PayPal</h4>
+                <p>Bezpieczne płatności online<br>
+                <strong>zpiekladodomu@gmail.com</strong></p>
+              </div>
+              <div class="payment-method">
+                <h4>📱 BLIK</h4>
+                <p>Płatności mobilne<br>
+                Kod: 123456</p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <button class="btn btn-primary" onclick="window.open('mailto:zpiekladodomu@gmail.com', '_blank')">Napisz do nas ↗</button>
+              <a href="adopcje.html" class="btn btn-outline" style="color: #000; border-color: #6b7280;">Zobacz adopcje</a>
             </div>
           </div>
         </article>
 
-        <article class="card dog-card">
-          <img src="images/dog-2.jpg" alt="Dżeki" class="circle">
-          <div class="card-body">
-            <h3>Dżeki</h3>
-            <p class="muted">Energiczny i radosny pies, który uwielbia aktywność fizyczną. Bardzo inteligentny.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=dzeki" class="btn btn-primary">Więcej ↗</a>
-            </div>
+        <article class="support-card">
+          <div class="support-card-content">
+            <h2>Inne formy wsparcia</h2>
+            <p class="muted">Wsparcie to nie tylko pieniądze. Możesz pomóc na wiele innych sposobów:</p>
+            <ul style="color: #6b7280; font-size: 1.125rem; line-height: 1.6; margin: 1rem 0;">
+              <li>🏠 Zostań domem tymczasowym</li>
+              <li>🚗 Pomóż w transporcie zwierząt</li>
+              <li>📢 Udostępnij nasze posty w mediach społecznościowych</li>
+              <li>🛍️ Kup produkty z naszego bazarku</li>
+              <li>📝 Zostań wolontariuszem</li>
+            </ul>
+            <button class="btn btn-primary" onclick="window.open('mailto:zpiekladodomu@gmail.com', '_blank')">
+              Dowiedz się więcej ↗
+            </button>
           </div>
         </article>
 
-        <article class="card dog-card">
-          <img src="images/dog-3.jpg" alt="Gaja" class="circle">
-          <div class="card-body">
-            <h3>Gaja</h3>
-            <p class="muted">Spokojna i delikatna suczka, która szuka cichego i kochającego domu.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=gaja" class="btn btn-primary">Więcej ↗</a>
+        <article class="support-card">
+          <div class="support-card-content">
+            <h2>Gdzie trafiają Twoje pieniądze?</h2>
+            <p class="muted">Transparentność jest dla nas bardzo ważna. Oto jak wykorzystujemy otrzymane środki:</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+              <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 12px;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏥</div>
+                <strong>40%</strong><br>
+                <small>Leczenie weterynaryjne</small>
+              </div>
+              <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 12px;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚛</div>
+                <strong>25%</strong><br>
+                <small>Transport z Turcji</small>
+              </div>
+              <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 12px;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🍽️</div>
+                <strong>20%</strong><br>
+                <small>Karma i opieka</small>
+              </div>
+              <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 12px;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">📋</div>
+                <strong>15%</strong><br>
+                <small>Administracja</small>
+              </div>
             </div>
           </div>
         </article>
-
-        <!-- Row 2: More dogs or empty space -->
-        <article class="card dog-card">
-          <img src="images/dog-1.jpg" alt="Kokos" class="circle">
-          <div class="card-body">
-            <h3>Kokos</h3>
-            <p class="muted">Przyjazny pies, który szuka swojego wymarzonego domu. Idealny dla rodzin z dziećmi.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=kokos" class="btn btn-primary">Więcej ↗</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card dog-card">
-          <img src="images/dog-2.jpg" alt="Dżeki" class="circle">
-          <div class="card-body">
-            <h3>Dżeki</h3>
-            <p class="muted">Energiczny i radosny pies, który uwielbia aktywność fizyczną. Bardzo inteligentny.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=dzeki" class="btn btn-primary">Więcej ↗</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card dog-card">
-          <img src="images/dog-3.jpg" alt="Gaja" class="circle">
-          <div class="card-body">
-            <h3>Gaja</h3>
-            <p class="muted">Spokojna i delikatna suczka, która szuka cichego i kochającego domu.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=gaja" class="btn btn-primary">Więcej ↗</a>
-            </div>
-          </div>
-        </article>
-      </div>
-      <div class="center" style="margin-top:12px">
       </div>
     </section>
   </main>
@@ -443,32 +537,20 @@
     </div>
   </footer>
 
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
-    async function loadDogs() {
-      const container = document.getElementById('dogs-container');
-      const dogsFolder = '/content/dogs/';
-      const dogFiles = ['kokos.json', 'gaja.json', 'beleth.json'];
-
-      for (const file of dogFiles) {
-        const res = await fetch(dogsFolder + file);
-        const dog = await res.json();
-
-        const card = document.createElement('div');
-        card.className = 'dog-card';
-        card.innerHTML = `
-          <img src="${dog.image}" alt="${dog.name}">
-          <h3>${dog.name}</h3>
-          <p>Wiek: ${dog.age} lat</p>
-          <p>${dog.description}</p>
-        `;
-        container.appendChild(card);
-      }
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
     }
-
-    loadDogs();
   </script>
-
-  <!-- Dog Data Loader -->
-  <script src="js/dog-data.js"></script>
 </body>
 </html>
+
+
