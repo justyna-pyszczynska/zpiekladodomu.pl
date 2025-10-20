@@ -64,7 +64,7 @@
     .hero {
       position: relative;
       min-height: 120vh;
-      background: url('images/adopcje-main.jpg') center/cover no-repeat;
+      background: url('images/dog-13.jpg') 50% 30%/cover no-repeat;
       display: flex; align-items: center;
     }
     .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.02)); }
@@ -81,6 +81,7 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
+      white-space: nowrap;
     }
     .hero-subtitle {
       font-family: 'McLaren', cursive;
@@ -151,6 +152,31 @@
       flex-direction: column;
       gap: 1.5rem;
     }
+    .support-card-content h2 {
+      text-align: left;
+      max-width: 892px; /* 430px (widget 1) + 32px (gap) + 430px (widget 2) */
+      padding-left: 6.5rem;
+      margin: 0;
+    }
+    .support-card-content p {
+      text-align: left;
+      max-width: 892px; /* 430px (widget 1) + 32px (gap) + 430px (widget 2) */
+      padding-left: 6.5rem;
+      margin: 0;
+    }
+    .fundraising-widgets {
+      display: flex;
+      gap: 2rem;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin-top: 2rem;
+      margin-left: 0;
+    }
+    .fundraising-widget {
+      flex: 1;
+      max-width: 430px;
+      margin-left: 0;
+    }
     .support-card h2 {
       font-family: 'McLaren', cursive;
       font-size: 2.5rem;
@@ -183,6 +209,83 @@
       box-shadow: 0 6px 20px rgba(252,165,165,0.4);
     }
     .center { text-align: center; }
+
+    /* FUNDRAISING WIDGETS */
+    .fundraising-widgets {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 2rem;
+    }
+    .fundraising-widget {
+      flex: 1;
+      max-width: 430px;
+    }
+    .fundraising-widget iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    /* FACEBOOK GROUP WIDGET */
+    .facebook-group-widget {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 0;
+      width: 350px;
+      height: 400px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+    }
+    .facebook-group-widget:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    .group-cover {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 0;
+    }
+    .group-content {
+      padding: 1.5rem;
+    }
+    .group-title {
+      font-family: 'McLaren', cursive;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin: 0 0 0.375rem 0;
+    }
+    .group-description {
+      font-size: 0.8125rem;
+      color: #6b7280;
+      margin: 0 0 0.75rem 0;
+      line-height: 1.3;
+    }
+    .group-button {
+      display: inline-block;
+      padding: 0.625rem 1.25rem;
+      background: linear-gradient(135deg, #1877f2, #42a5f5);
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.8125rem;
+      transition: all 0.3s ease;
+    }
+    .group-button:hover {
+      background: linear-gradient(135deg, #166fe5, #1976d2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+    }
 
     /* PAYMENT METHODS */
     .payment-methods {
@@ -338,6 +441,14 @@
         font-size: 2rem; 
       }
       .overlap { margin-top: -18vh; }
+      .fundraising-widgets {
+        flex-direction: column;
+        align-items: center;
+      }
+      .fundraising-widget {
+        max-width: 100%;
+        width: 100%;
+      }
       .payment-methods {
         flex-direction: column;
       }
@@ -413,30 +524,16 @@
       <div class="support-container">
         <article class="support-card">
           <div class="support-card-content">
-            <h2>Jak możesz pomóc?</h2>
-            <p class="muted">Nasza fundacja ratuje psy i koty z Turcji, ale potrzebujemy Twojego wsparcia, aby kontynuować naszą misję. Każda darowizna, niezależnie od kwoty, pomaga nam opłacić leczenie, transport, karmę i opiekę nad naszymi podopiecznymi.</p>
+            <h2>Wesprzyj naszą misję</h2>
+            <p class="muted">Każda złotówka pomaga ratować życie zwierząt z Turcji. Wybierz jedną z naszych zbiórek i dołącz do grona osób, które już pomagają.</p>
             
-            <div class="payment-methods">
-              <div class="payment-method">
-                <h4>💰 Przelew bankowy</h4>
-                <p>Konto: 12 3456 7890 1234 5678<br>
-                Tytuł: "Wsparcie dla zwierząt"</p>
+            <div class="fundraising-widgets">
+              <div class="fundraising-widget">
+                <iframe frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/zpiekladodomu/widget/large"></iframe>
               </div>
-              <div class="payment-method">
-                <h4>💳 PayPal</h4>
-                <p>Bezpieczne płatności online<br>
-                <strong>zpiekladodomu@gmail.com</strong></p>
+              <div class="fundraising-widget">
+                <iframe frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/aph8gm/widget/large"></iframe>
               </div>
-              <div class="payment-method">
-                <h4>📱 BLIK</h4>
-                <p>Płatności mobilne<br>
-                Kod: 123456</p>
-              </div>
-            </div>
-
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-              <button class="btn btn-primary" onclick="window.open('mailto:zpiekladodomu@gmail.com', '_blank')">Napisz do nas ↗</button>
-              <a href="adopcje.html" class="btn btn-outline" style="color: #000; border-color: #6b7280;">Zobacz adopcje</a>
             </div>
           </div>
         </article>
@@ -445,16 +542,21 @@
           <div class="support-card-content">
             <h2>Inne formy wsparcia</h2>
             <p class="muted">Wsparcie to nie tylko pieniądze. Możesz pomóc na wiele innych sposobów:</p>
-            <ul style="color: #6b7280; font-size: 1.125rem; line-height: 1.6; margin: 1rem 0;">
-              <li>🏠 Zostań domem tymczasowym</li>
-              <li>🚗 Pomóż w transporcie zwierząt</li>
-              <li>📢 Udostępnij nasze posty w mediach społecznościowych</li>
-              <li>🛍️ Kup produkty z naszego bazarku</li>
-              <li>📝 Zostań wolontariuszem</li>
-            </ul>
-            <button class="btn btn-primary" onclick="window.open('mailto:zpiekladodomu@gmail.com', '_blank')">
-              Dowiedz się więcej ↗
-            </button>
+            
+            <!-- Facebook Group Widget -->
+            <div class="facebook-group-widget">
+              <img src="images/facebook-cover.jpg" 
+                   alt="Facebook Group Cover" 
+                   class="group-cover">
+              <div class="group-content">
+                <h4 class="group-title">Adopcje - Z Piekła do Domu</h4>
+                <a href="https://www.facebook.com/groups/1483167953136280" 
+                   target="_blank" 
+                   class="group-button">
+                   Dołącz
+                </a>
+              </div>
+            </div>
           </div>
         </article>
 
@@ -552,5 +654,6 @@
   </script>
 </body>
 </html>
+
 
 

@@ -729,71 +729,31 @@
   <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
-    // Interactive Map Enhancement
-       function initializeInteractiveMap() {
+     // Interactive Map Enhancement
+     function initializeInteractiveMap() {
          const mapContainer = document.getElementById('turkeyMapContainer');
          if (!mapContainer) {
            console.error('Map container not found!');
            return;
          }
 
-         // Try to load the SVG file directly as an object first
-         console.log('Attempting to load map...');
-         
-         // Create an object element to load the SVG
-         const svgObject = document.createElement('object');
-         svgObject.setAttribute('type', 'image/svg+xml');
-         svgObject.setAttribute('data', 'images/map-turkey.svg');
-         svgObject.style.width = '100%';
-         svgObject.style.height = 'auto';
-         svgObject.style.maxHeight = '500px';
-         svgObject.style.display = 'block';
-         svgObject.style.margin = '0 auto';
-         
-         // Wait for the object to load
-         svgObject.addEventListener('load', function() {
-           console.log('SVG object loaded successfully');
-           const svg = svgObject.contentDocument.querySelector('svg');
-           if (!svg) {
-             console.error('SVG not found in loaded content');
-             return;
-           }
-           
-           // Continue with pin creation...
-           initializePins(svg);
-         });
-         
-         svgObject.addEventListener('error', function() {
-           console.error('Failed to load SVG object, trying fetch...');
-           // Fallback to fetch method
-           fetch('images/map-turkey.svg')
-             .then(response => {
-               console.log('Fetch response received:', response.status, response.statusText);
-               if (!response.ok) {
-                 throw new Error(`HTTP error! status: ${response.status}`);
-               }
-               return response.text();
-             })
-             .then(svgText => {
-               mapContainer.innerHTML = svgText;
-               const svg = mapContainer.querySelector('svg');
-               if (!svg) {
-                 console.error('SVG not found in loaded content');
-                 return;
-               }
-               initializePins(svg);
-             })
-             .catch(error => {
-               console.error('Error loading SVG:', error);
-               mapContainer.innerHTML = '<p style="color: red;">Error loading map. Please refresh the page.</p>';
-             });
-         });
-         
-         mapContainer.appendChild(svgObject);
-         return;
-       }
-       
-       function initializePins(svg) {
+         // Load the SVG file and embed it directly
+         fetch('images/map-turkey.svg')
+           .then(response => {
+             if (!response.ok) {
+               throw new Error(`HTTP error! status: ${response.status}`);
+             }
+             return response.text();
+           })
+           .then(svgText => {
+             mapContainer.innerHTML = svgText;
+             
+             const svg = mapContainer.querySelector('svg');
+             if (!svg) {
+               console.error('SVG not found in loaded content');
+               return;
+             }
+
           // Style the SVG
           svg.style.width = '100%';
           svg.style.height = 'auto';
@@ -845,6 +805,7 @@
             istanbulTooltip.classList.remove('show');
           });
 
+
           svg.appendChild(istanbulPin);
 
           // Add Ankara pin - positioned in the north-central part of Turkey
@@ -866,6 +827,7 @@
             <div class="pin-tooltip-description">Stolica Turcji i ważny ośrodek naszych działań ratunkowych w regionie centralnym.</div>
           `;
           mapContainer.appendChild(ankaraTooltip);
+          console.log('Ankara tooltip created');
 
           // Add hover effect for the Ankara pin with tooltip
           ankaraPin.addEventListener('mouseenter', function(e) {
@@ -890,6 +852,7 @@
             this.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))';
             ankaraTooltip.classList.remove('show');
           });
+
 
           svg.appendChild(ankaraPin);
 
@@ -1062,7 +1025,12 @@
                province.addEventListener('mouseleave', onLeave);
 
              });
-             console.log('Map initialized successfully with all pins');
+             console.log('Map initialized successfully with Istanbul and Ankara pins');
+           })
+           .catch(error => {
+             console.error('Error loading SVG:', error);
+             mapContainer.innerHTML = '<p style="color: red;">Error loading map. Please refresh the page.</p>';
+           });
        }
     
     // Initialize the interactive map when page loads
