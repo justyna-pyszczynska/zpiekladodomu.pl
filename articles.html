@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artykuły - Z Piekła do Domu</title>
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+  <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Facebook SDK for embeds -->
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v18.0" nonce=""></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fafafa; color: #222; }
+    img { display: block; max-width: 100%; }
+
+    /* CONTAINERS */
+    .container { width: min(1200px, 92%); margin: 0 auto; }
+
+    /* NAVBAR */
+    header {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1200px, 92%);
+      z-index: 10;
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px; font-weight: 600; font-family: 'McLaren', cursive;
+    }
+    .brand img { width: 28px; height: 28px; }
+    .menu { display: flex; align-items: center; gap: 14px; }
+    .menu a {
+      text-decoration: none;
+      color: #222; 
+      font-weight: 500;
+      padding: 8px 12px; 
+      border-radius: 10px; 
+      transition: all 0.3s ease;
+    }
+    .menu a:hover {
+      background: rgba(0,0,0,0.05);
+      color: #374151;
+    }
+    .menu a.cta { 
+      background: linear-gradient(135deg,#ffedd5,#fecaca); 
+      font-weight: 700; 
+      transition: all 0.3s ease;
+    }
+    .menu a.cta:hover {
+      background: linear-gradient(135deg,#fbbf24,#f87171);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(251,191,36,0.4);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 120vh;
+      background: url('images/adopcje-main.jpg') center/cover no-repeat;
+      display: flex; align-items: center;
+    }
+    .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.2)); }
+    .hero-content { position: relative; z-index: 1; width: min(600px, 60%); margin-left: 12%; color: #fff; }
+    .hero h1 { 
+      font-family: 'McLaren', cursive; 
+      font-size: clamp(32px, 6vw, 42px); 
+      line-height: 1.2; 
+      font-weight: 450;
+      text-shadow: 2px 3px 12px rgba(0,0,0,.7);
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .hero-subtitle {
+      font-family: 'McLaren', cursive;
+      font-size: clamp(18px, 3vw, 24px);
+      line-height: 1.3;
+      font-weight: 450;
+      color: #fff;
+      text-shadow: 2px 3px 12px rgba(0,0,0,.7);
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      display: inline-block;
+      white-space: nowrap;
+      position: absolute;
+      top: 75%;
+      left: 12%;
+      z-index: 2;
+    }
+      .hero-button-left {
+        position: absolute;
+        top: 77%;
+        right: 25%;
+        z-index: 2;
+        width: 180px;
+        height: 44px;
+        font-family: 'McLaren', cursive;
+        text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      }
+      .hero-button {
+        position: absolute;
+        top: 77%;
+        right: 12%;
+        z-index: 2;
+        width: 180px;
+        height: 44px;
+      }
+    .btn-ghost { background: rgba(255,255,255,.2); color:#fff; border:1px solid rgba(255,255,255,.35); text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+    .btn-outline { 
+      background: transparent; 
+      color: #fff; 
+      border: 2px solid #fff; 
+      font-family: 'McLaren', cursive;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: #fca5a5;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* ARTICLES LAYOUT */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: -6rem;
+    }
+
+    .article-card {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 12px 22px rgba(0,0,0,.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .article-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,.15);
+    }
+
+    .featured-article {
+      grid-column: 1;
+      display: flex;
+      flex-direction: row;
+      min-height: 300px;
+    }
+
+    .featured-article .article-image {
+      flex: 1;
+      position: relative;
+    }
+
+    .featured-article .article-content {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .article-image {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .featured-article .article-image {
+      height: 100%;
+    }
+
+    .article-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .article-card:hover .article-img {
+      transform: scale(1.05);
+    }
+
+    .article-category {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: linear-gradient(135deg, #fca5a5, #fde68a);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
+
+    .article-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .article-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    .article-date {
+      font-weight: 500;
+    }
+
+    .article-read-time {
+      font-style: italic;
+    }
+
+    .article-title {
+      font-family: 'McLaren', cursive;
+      font-size: 1.5rem;
+      color: #1f2937;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .featured-article .article-title {
+      font-size: 2rem;
+    }
+
+    .article-excerpt {
+      color: #6b7280;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+
+    .article-link {
+      color: #fca5a5;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      align-self: flex-start;
+    }
+
+    .article-link:hover {
+      color: #f87171;
+      transform: translateX(4px);
+    }
+
+    .arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .article-link:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    .loading, .no-articles, .error {
+      text-align: center;
+      padding: 3rem;
+      color: #6b7280;
+      font-size: 1.125rem;
+    }
+
+    /* FACEBOOK POST STYLING */
+    .facebook-post-card {
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+    }
+    .facebook-post-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem 0.5rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .facebook-icon {
+      font-size: 1.5rem;
+    }
+    .facebook-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .facebook-source {
+      font-weight: 600;
+      color: #1f2937;
+      font-size: 0.875rem;
+    }
+    .facebook-embed-container {
+      padding: 1rem 1.5rem;
+      background: #fff;
+      border-radius: 0.5rem;
+      margin: 1rem 1.5rem;
+    }
+    .facebook-embed-container .fb-post {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .facebook-post-card .article-content {
+      padding: 1rem 1.5rem 1.5rem;
+    }
+    .facebook-post-card .article-title {
+      margin-bottom: 0.75rem;
+    }
+    .facebook-post-card .article-excerpt {
+      margin-bottom: 0;
+    }
+
+    .error {
+      color: #ef4444;
+    }
+
+    /* Responsive Design */
+    @media (min-width: 768px) {
+      .articles-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .featured-article {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .articles-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+      
+      .featured-article {
+        grid-column: 1 / -1;
+      }
+    }
+
+    /* DONATION CARDS */
+    .section { padding: 3rem 0; }
+    .overlap { margin-top: -39.5vh; position: relative; z-index: 2; }
+    .cards-3 { display:grid; grid-template-columns: repeat(3,1fr); gap: 1.125rem; --card-h: 475px; }
+    .span-2 { grid-column: span 2; }
+    .card { background:#fff; border-radius: 1rem; box-shadow:0 12px 22px rgba(0,0,0,.1); overflow: hidden; height: var(--card-h); display:flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,.15); }
+    .card-body { padding: .875rem 1rem 1rem; display:flex; flex-direction: column; gap: .5rem; flex: 1; }
+    .dog-card { text-align: center;}
+    .dog-card .circle { width: 14rem; height: 14rem; border-radius: 50%; object-fit: cover; margin: 1rem auto 0.75rem; }
+    .dog-card h3 { font-family: 'McLaren', cursive; font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .dog-card .card-footer { justify-content: center; margin-top: 0.75rem; }
+    .dog-card.span-2 { 
+      display: flex !important; 
+      flex-direction: row !important; 
+      width: 100% !important; 
+      height: var(--card-h) !important; 
+      border-radius: 1rem !important; 
+      object-fit: cover !important; 
+      margin: 0 !important; 
+      padding: 1.5rem !important; 
+    }
+    .dog-card.span-2 .circle { 
+      width: 12rem !important; 
+      height: 12rem !important; 
+      border-radius: 50% !important; 
+      object-fit: cover !important; 
+      margin: 0 1.5rem 0 0 !important; 
+    }
+    .dog-card.span-2 .card-body { 
+      flex: 1 !important; 
+      padding: 0 !important; 
+      display: flex !important; 
+      flex-direction: column !important; 
+      justify-content: center !important; 
+    }
+    .dog-card.span-2 h3 { 
+      font-family: 'McLaren', cursive !important; 
+      font-size: 1.5rem !important; 
+      margin-bottom: 1rem !important; 
+    }
+    .dog-card.span-2 .card-footer { 
+      margin-top: 1rem !important; 
+    }
+    .muted { color: #6b7280; font-size: 0.875rem; line-height: 1.5; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding: .6875rem 1.125rem; border:none; border-radius: 9999px; cursor:pointer; font-weight: 700; }
+    .btn-primary { 
+      background: linear-gradient(135deg,#fca5a5,#fde68a); 
+      color:#fff; 
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg,#f87171,#fbbf24);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(252,165,165,0.4);
+    }
+    .center { text-align: center; }
+
+    /* FOOTER */
+    footer { background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); margin-top: 2.25rem; padding: 3rem 0; }
+    .footer-grid { display:grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
+    .footer-brand { display:flex; align-items:flex-start; gap: 1.5rem; }
+    .footer-brand img { width: 10rem; height: 10rem; }
+    .footer-content { flex: 1; }
+    .footer-title { font-family: 'McLaren', cursive; font-size: 1.5rem; color: #000; margin: 0 0 1rem 0; line-height: 1.3; }
+    .footer-email { display: flex; align-items: center; margin-bottom: 1rem; }
+    .footer-email svg { color: #000; transition: color 0.3s ease; }
+    .footer-email:hover svg { color: #666; }
+    .footer-email a { 
+      color: #000; 
+      text-decoration: none; 
+      font-size: 1rem; 
+      transition: all 0.3s ease;
+    }
+    .footer-email a:hover {
+      color: #666;
+      text-decoration: underline;
+      font-weight: 700;
+    }
+    .footer-copyright { color: #000; font-size: 0.875rem; line-height: 1.4; }
+    .footer-links { display: flex; gap: 7rem; }
+    .footer-links .links a {
+      position: relative;
+      display: inline-block;
+      font-weight: 500;
+      transition: font-weight 0.3s ease, color 0.3s ease;
+    }
+
+    .footer-links .links a::after {
+      content: attr(data-text);
+      visibility: hidden;
+      font-weight: 700;
+      height: 0;
+      overflow: hidden;
+      pointer-events: none;
+      display: block;
+    }
+
+    .footer-links .links a:hover {
+      font-weight: 700;
+      color: #666;
+    }
+    .links-column h4 { 
+      color: #000; 
+      font-size: 1rem; 
+      margin: 0 0 1rem 0; 
+      font-weight: 600; 
+      white-space: nowrap; 
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .links-column h4:hover {
+      font-weight: 700;
+      color: #333;
+    }
+    .links { display: flex; flex-direction: column; gap: 0.5rem; }
+    .links a { 
+      color: #000; 
+      text-decoration: none; 
+      font-size: 0.875rem; 
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      font-weight: 400;
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+    .links a:hover {
+      color: #666;
+      font-weight: 700;
+    }
+    .footer-social { display: flex; flex-direction: column; align-items: flex-end; gap: 3.75rem; }
+    .socials { display: flex; gap: 0.75rem; }
+    .socials a { 
+      display: inline-block; 
+      text-decoration: none; 
+      transition: all 0.3s ease;
+      width: 48px;
+      height: 48px;
+    }
+    .socials a:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+    .footer-social .footer-copyright { text-align: right; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      header { top: .625rem; }
+      .navbar { padding: .625rem .75rem; }
+      .menu { gap: .5rem; }
+      .menu a { padding: .375rem .5rem; }
+      .cards-3 { grid-template-columns: 1fr; }
+      .overlap { margin-top: -18vh; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="brand">
+        <img src="images/logo.svg" alt="Logo" width="200" height="200">
+        <span>Z Piekła Do Domu</span>
+      </div>
+      <nav class="menu">
+        <a href="index.html">Strona główna</a>
+        <a href="adopcje.html" style="background: rgba(0,0,0,0.1);">Adopcje</a>
+        <a href="#bazarek">Bazarek</a>
+        <a href="onas.html">O nas</a>
+        <a href="wsparcie.html" class="cta">Wsparcie</a>
+    </nav>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Co nowego?</h1>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- DONATION + DOG CARDS GRID (2 rows) -->
+    <section class="section overlap" id="donations">
+      <!-- Articles Grid -->
+      <div class="articles-grid" id="articles-container">
+        <div class="loading">Ładowanie artykułów...</div>
+      </div>
+
+      <!-- Load More Button -->
+      <div class="center" style="margin-top: 3rem;">
+        <button class="btn btn-outline">Załaduj więcej artykułów</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <img src="images/logo.svg" alt="Logo" width="120" height="120">
+          <div class="footer-content">
+            <h2 class="footer-title">Z Piekła do Domu - ratujemy psy i koty z Turcji</h2>
+            <div class="footer-email">
+              <svg width="16" height="16" style="margin-right: 8px;"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <a href="mailto:zpiekladodomu@gmail.com">zpiekladodomu@gmail.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="links-column">
+          <h4>Linki</h4>
+          <div class="links">
+            <a href="https://www.facebook.com/profile.php?id=61577219922888" data-text="Fanpage">Fanpage</a>
+            <a href="inicjatywy.html" data-text="Nasze inicjatywy">Nasze inicjatywy</a>
+            <a href="https://www.facebook.com/groups/1483167953136280" data-text="Dołącz do grupy">Dołącz do grupy</a>
+            <a href="#" data-text="Współpraca">Współpraca</a>
+          </div>
+        </div>
+        <div class="links-column">
+          <h4>Zobacz też</h4>
+          <div class="links">
+            <a href="#" data-text="Wioska Burçak">Wioska Burçak</a>
+            <a href="#" data-text="Pani Adalet">Pani Adalet</a>
+            <a href="#" data-text="Artykuły">Artykuły</a>
+            <a href="#" data-text="Zostań sponsorem">Zostań sponsorem</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-social">
+        <div class="socials">
+          <a href="https://www.instagram.com/z_piekla_do_domu_/" aria-label="Instagram" target="_blank"><img src="images/instagram.svg" alt="Instagram" width="48" height="48"></a>
+          <a href="https://www.facebook.com/profile.php?id=61577219922888" aria-label="Facebook" target="_blank"><img src="images/facebook.svg" alt="Facebook" width="48" height="48"></a>
+        </div>
+        <div class="footer-copyright">
+          <div>Z Piekła do domu 2025 ©</div>
+          <div>Wszelkie prawa zastrzeżone</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    // Function to parse markdown front matter
+    function parseMarkdownFrontMatter(content) {
+      const lines = content.split('\n');
+      const frontMatter = {};
+      let inFrontMatter = false;
+      let contentStart = 0;
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        
+        if (line === '---') {
+          if (!inFrontMatter) {
+            inFrontMatter = true;
+            continue;
+          } else {
+            contentStart = i + 1;
+            break;
+          }
+        }
+        
+        if (inFrontMatter && line.includes(':')) {
+          const [key, ...valueParts] = line.split(':');
+          const value = valueParts.join(':').trim().replace(/^["']|["']$/g, '');
+          frontMatter[key.trim()] = value;
+        }
+      }
+
+      return frontMatter;
+    }
+
+    // Function to format date
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      const months = [
+        'Stycznia', 'Lutego', 'Marca', 'Kwietnia', 'Maja', 'Czerwca',
+        'Lipca', 'Sierpnia', 'Września', 'Października', 'Listopada', 'Grudnia'
+      ];
+      return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+    }
+
+    // Function to create article card HTML
+    function createArticleCard(article, isFeatured = false) {
+      const cardClass = isFeatured ? 'article-card featured-article' : 'article-card';
+      const titleTag = isFeatured ? 'h2' : 'h3';
+      
+      // Check if this is a Facebook post
+      if (article.type === 'facebook_post' && article.facebook_url) {
+        return `
+          <article class="${cardClass} facebook-post-card">
+            <div class="facebook-post-header">
+              <div class="facebook-icon">📘</div>
+              <div class="facebook-meta">
+                <span class="facebook-source">Facebook Post</span>
+                <span class="article-date">${formatDate(article.date)}</span>
+              </div>
+            </div>
+            <div class="facebook-embed-container">
+              <div class="fb-post" data-href="${article.facebook_url}" data-width="500" data-show-text="true">
+                <blockquote cite="${article.facebook_url}" class="fb-xfbml-parse-ignore">
+                  <a href="${article.facebook_url}">Facebook Post</a>
+                </blockquote>
+              </div>
+            </div>
+            <div class="article-content">
+              <${titleTag} class="article-title">${article.title}</${titleTag}>
+              <p class="article-excerpt">${article.excerpt}</p>
+            </div>
+          </article>
+        `;
+      }
+      
+      // Regular article
+      // Create slug from title for URL
+      const slug = article.title.toLowerCase()
+        .replace(/[ąćęłńóśźż]/g, function(match) {
+          const map = {
+            'ą': 'a', 'ć': 'c', 'ę': 'e', 'ł': 'l', 'ń': 'n',
+            'ó': 'o', 'ś': 's', 'ź': 'z', 'ż': 'z'
+          };
+          return map[match] || match;
+        })
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim();
+      
+      return `
+        <article class="${cardClass}">
+          <div class="article-image">
+            <img src="${article.image}" alt="${article.title}" class="article-img">
+            <div class="article-category">${article.category}</div>
+          </div>
+          <div class="article-content">
+            <div class="article-meta">
+              <span class="article-date">${formatDate(article.date)}</span>
+              <span class="article-read-time">${article.read_time}</span>
+            </div>
+            <${titleTag} class="article-title">${article.title}</${titleTag}>
+            <p class="article-excerpt">${article.excerpt}</p>
+            <a href="article.html?article=${slug}" class="article-link">Czytaj więcej <span class="arrow">→</span></a>
+          </div>
+        </article>
+      `;
+    }
+
+    // Embedded articles data as fallback
+    const embeddedArticles = [
+      {
+        title: "Wioska Burcak - Nasza najnowsza inicjatywa",
+        excerpt: "Poznaj historię naszej najnowszej inicjatywy w Wiosce Burcak, gdzie ratujemy psy i koty z trudnych warunków. Dowiedz się, jak możesz pomóc w tej misji.",
+        category: "Inicjatywy",
+        date: "2024-12-15",
+        read_time: "5 min czytania",
+        image: "images/burcak.jpg",
+        featured: "true"
+      },
+      {
+        title: "Nowy pies w naszej opiece!",
+        excerpt: "Zobacz nasz najnowszy post na Facebooku o psie, który właśnie trafił pod naszą opiekę. Śledź nasze działania na bieżąco!",
+        type: "facebook_post",
+        facebook_url: "https://www.facebook.com/profile.php?id=61577219922888",
+        category: "Aktualności",
+        date: "2025-01-27",
+        read_time: "1 min czytania",
+        image: "images/dog-1.jpg",
+        featured: "false"
+      },
+      {
+        title: "Historia Kokosa - od ulicy do domu",
+        excerpt: "Wzruszająca historia o tym, jak Kokos znalazł swój wymarzony dom po trudnych przeżyciach na ulicach Turcji.",
+        category: "Historie",
+        date: "2024-12-10",
+        read_time: "3 min czytania",
+        image: "images/dog-1.jpg",
+        featured: "false"
+      },
+      {
+        title: "Jak przygotować dom na nowego psa?",
+        excerpt: "Kompletny przewodnik dla przyszłych opiekunów - od przygotowania mieszkania po pierwsze dni z nowym członkiem rodziny.",
+        category: "Poradniki",
+        date: "2024-12-05",
+        read_time: "7 min czytania",
+        image: "images/dog-2.jpg",
+        featured: "false"
+      },
+      {
+        title: "Opieka weterynaryjna naszych podopiecznych",
+        excerpt: "Dowiedz się, jak zapewniamy kompleksową opiekę medyczną wszystkim psom i kotom w naszej organizacji.",
+        category: "Zdrowie",
+        date: "2024-12-01",
+        read_time: "4 min czytania",
+        image: "images/dog-3.jpg",
+        featured: "false"
+      },
+      {
+        title: "Jak organizujemy transport z Turcji do Polski?",
+        excerpt: "Poznaj szczegóły naszego procesu transportu zwierząt - od przygotowań po bezpieczne dotarcie do nowych domów.",
+        category: "Logistyka",
+        date: "2024-11-28",
+        read_time: "6 min czytania",
+        image: "images/dog-4.jpg",
+        featured: "false"
+      },
+      {
+        title: "Zostań wolontariuszem - jak możesz pomóc?",
+        excerpt: "Odkryj różne sposoby, w jakie możesz wesprzeć naszą misję jako wolontariusz - od opieki nad zwierzętami po organizację wydarzeń.",
+        category: "Wolontariat",
+        date: "2024-11-25",
+        read_time: "5 min czytania",
+        image: "images/dog-5.jpg",
+        featured: "false"
+      }
+    ];
+
+    // Function to load articles from .md files
+    async function loadArticles() {
+      const container = document.getElementById('articles-container');
+      console.log('Loading articles...');
+      
+      // Check if we're running on localhost (web server) or file:// (direct file access)
+      const isLocalhost = window.location.protocol === 'http:' || window.location.protocol === 'https:';
+      console.log('Protocol:', window.location.protocol, 'Is localhost:', isLocalhost);
+      
+      if (isLocalhost) {
+        try {
+          // Try to fetch articles list from a directory listing or predefined list
+          const articleFiles = [
+            'wioska-burcak.md',
+            'historia-kokosa.md', 
+            'poradnik-adopcji.md',
+            'opieka-weterynaryjna.md',
+            'transport-turcja-polska.md',
+            'wolontariat.md'
+          ];
+
+          const articles = [];
+          const featuredArticles = [];
+
+          for (const file of articleFiles) {
+            try {
+              console.log(`Fetching: content/articles/${file}`);
+              const response = await fetch(`content/articles/${file}`);
+              if (!response.ok) {
+                console.log(`Failed to fetch ${file}: ${response.status}`);
+                continue;
+              }
+              
+              const content = await response.text();
+              console.log(`Loaded ${file}, content length:`, content.length);
+              const articleData = parseMarkdownFrontMatter(content);
+              console.log('Parsed article data:', articleData);
+              
+              if (articleData.featured === 'true') {
+                featuredArticles.push(articleData);
+              } else {
+                articles.push(articleData);
+              }
+            } catch (error) {
+              console.error(`Error loading article ${file}:`, error);
+            }
+          }
+
+          // If we loaded articles from files, use them
+          if (articles.length > 0 || featuredArticles.length > 0) {
+            console.log('Using articles from .md files');
+            // Sort articles by date (newest first)
+            articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+            featuredArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            // Clear loading message
+            container.innerHTML = '';
+
+            // Add featured articles first
+            featuredArticles.forEach(article => {
+              container.innerHTML += createArticleCard(article, true);
+            });
+
+            // Add regular articles
+            articles.forEach(article => {
+              container.innerHTML += createArticleCard(article, false);
+            });
+            return;
+          }
+        } catch (error) {
+          console.error('Error loading articles from files:', error);
+        }
+      }
+      
+      // Fallback to embedded data
+      console.log('Using embedded articles data');
+      const articles = [];
+      const featuredArticles = [];
+
+      embeddedArticles.forEach(article => {
+        if (article.featured === 'true') {
+          featuredArticles.push(article);
+        } else {
+          articles.push(article);
+        }
+      });
+
+      // Sort articles by date (newest first)
+      articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+      featuredArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      // Clear loading message
+      container.innerHTML = '';
+
+      // Add featured articles first
+      featuredArticles.forEach(article => {
+        container.innerHTML += createArticleCard(article, true);
+      });
+
+      // Add regular articles
+      articles.forEach(article => {
+        container.innerHTML += createArticleCard(article, false);
+      });
+    }
+
+    // Function to initialize Facebook embeds
+    function initializeFacebookEmbeds() {
+      if (typeof FB !== 'undefined') {
+        FB.XFBML.parse();
+      } else {
+        // Retry after a short delay if FB is not yet loaded
+        setTimeout(initializeFacebookEmbeds, 500);
+      }
+    }
+
+    // Load articles when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      loadArticles();
+      // Initialize Facebook embeds after articles are loaded
+      setTimeout(initializeFacebookEmbeds, 1000);
+    });
+  </script>
+</body>
+</html>

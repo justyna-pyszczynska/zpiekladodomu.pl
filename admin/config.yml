@@ -6,74 +6,22 @@ media_folder: "images"
 public_folder: "/images"
 
 collections:
-  - name: "dogs"
-    label: "Psy do adopcji"
-    folder: "content/dogs"
+  - name: "articles"
+    label: "Artykuły"
+    folder: "content/articles"
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Nazwa", name: "name", widget: "string"}
-      - {label: "Opis", name: "description", widget: "text"}
-      - {label: "Zdjęcie", name: "image", widget: "image"}
-      - {label: "Wiek", name: "age", widget: "string"}
-      - {label: "Płeć", name: "gender", widget: "select", options: ["Samiec", "Samica"]}
-      - {label: "Rozmiar", name: "size", widget: "select", options: ["Mały", "Średni", "Duży"]}
-      - {label: "Status", name: "status", widget: "select", options: ["Dostępny", "Zarezerwowany", "Adoptowany"]}
-      - {label: "Data dodania", name: "date", widget: "datetime"}
-      - {label: "Cechy szczególne", name: "special_features", widget: "list", field: {label: "Cecha", name: "feature", widget: "string"}}
-      - {label: "Historia", name: "story", widget: "text"}
-      - {label: "Wymagania adopcyjne", name: "adoption_requirements", widget: "text"}
-
-  - name: "pages"
-    label: "Strony"
-    files:
-      - label: "Strona główna"
-        name: "home"
-        file: "content/pages/home.md"
-        fields:
-          - {label: "Tytuł", name: "title", widget: "string"}
-          - {label: "Podtytuł", name: "subtitle", widget: "string"}
-          - {label: "Treść główna", name: "content", widget: "markdown"}
-          - {label: "Zdjęcie tła", name: "hero_image", widget: "image"}
-          - {label: "Przycisk 1 - tekst", name: "button1_text", widget: "string"}
-          - {label: "Przycisk 1 - link", name: "button1_link", widget: "string"}
-          - {label: "Przycisk 2 - tekst", name: "button2_text", widget: "string"}
-          - {label: "Przycisk 2 - link", name: "button2_link", widget: "string"}
-
-      - label: "O nas"
-        name: "about"
-        file: "content/pages/about.md"
-        fields:
-          - {label: "Tytuł", name: "title", widget: "string"}
-          - {label: "Opis", name: "description", widget: "text"}
-          - {label: "Historia", name: "history", widget: "markdown"}
-          - {label: "Misja", name: "mission", widget: "text"}
-          - {label: "Wizja", name: "vision", widget: "text"}
-          - {label: "Zdjęcie", name: "image", widget: "image"}
-          - {label: "Tytuł głównej karty", name: "main_card_title", widget: "string"}
-          - {label: "Treść głównej karty", name: "main_card_content", widget: "text"}
-          - {label: "Tekst przycisku", name: "button_text", widget: "string"}
-          - {label: "Link przycisku", name: "button_link", widget: "string"}
-          - {label: "Tytuł mapy", name: "map_title", widget: "string"}
-          - {label: "Tytuł panelu mapy", name: "map_panel_title", widget: "string"}
-          - {label: "Opis panelu mapy", name: "map_panel_description", widget: "text"}
-          - {label: "Statystyka 1 - liczba", name: "stat1_number", widget: "string"}
-          - {label: "Statystyka 1 - opis", name: "stat1_label", widget: "string"}
-          - {label: "Statystyka 2 - liczba", name: "stat2_number", widget: "string"}
-          - {label: "Statystyka 2 - opis", name: "stat2_label", widget: "string"}
-
-  - name: "products"
-    label: "Produkty"
-    folder: "content/products"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Nazwa", name: "name", widget: "string"}
-      - {label: "Opis", name: "description", widget: "text"}
-      - {label: "Cena", name: "price", widget: "number"}
-      - {label: "Zdjęcie", name: "image", widget: "image"}
-      - {label: "Dostępność", name: "available", widget: "boolean", default: true}
-      - {label: "Kategoria", name: "category", widget: "select", options: ["Kubki", "Etui", "Inne"]}
+      - {label: "Tytuł", name: "title", widget: "string"}
+      - {label: "Opis", name: "excerpt", widget: "text"}
+      - {label: "Typ", name: "type", widget: "select", options: ["article", "facebook_post"], default: "article"}
+      - {label: "URL Facebook", name: "facebook_url", widget: "string", required: false}
+      - {label: "Kategoria", name: "category", widget: "string"}
+      - {label: "Data", name: "date", widget: "datetime"}
+      - {label: "Czas czytania", name: "read_time", widget: "string"}
+      - {label: "Obraz", name: "image", widget: "image"}
+      - {label: "Wyróżniony", name: "featured", widget: "boolean", default: false}
+      - {label: "Treść", name: "body", widget: "markdown"}
 
   - name: "initiatives"
     label: "Inicjatywy"
@@ -83,19 +31,22 @@ collections:
     fields:
       - {label: "Tytuł", name: "title", widget: "string"}
       - {label: "Opis", name: "description", widget: "text"}
-      - {label: "Zdjęcie", name: "image", widget: "image"}
+      - {label: "Obraz", name: "image", widget: "image"}
       - {label: "Data", name: "date", widget: "datetime"}
-      - {label: "Status", name: "status", widget: "select", options: ["Aktywna", "Zakończona", "Planowana"]}
+      - {label: "Status", name: "status", widget: "string", default: "Aktywna"}
       - {label: "Treść", name: "content", widget: "markdown"}
 
-  - name: "partners"
-    label: "Partnerzy"
-    folder: "content/partners"
+  - name: "dogs"
+    label: "Psy"
+    folder: "content/dogs"
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Nazwa", name: "name", widget: "string"}
-      - {label: "Opis", name: "description", widget: "text"}
-      - {label: "Logo", name: "logo", widget: "image"}
-      - {label: "Strona internetowa", name: "website", widget: "string"}
-      - {label: "Aktywny", name: "active", widget: "boolean", default: true}
+      - {label: "Imię", name: "name", widget: "string"}
+      - {label: "Wiek", name: "age", widget: "string"}
+      - {label: "Płeć", name: "gender", widget: "select", options: ["Samiec", "Suczka"]}
+      - {label: "Rozmiar", name: "size", widget: "select", options: ["Mały", "Średni", "Duży"]}
+      - {label: "Cechy szczególne", name: "special_features", widget: "list", field: {label: "Cecha", name: "feature", widget: "string"}}
+      - {label: "Historia", name: "story", widget: "text"}
+      - {label: "Główne zdjęcie", name: "image", widget: "image"}
+      - {label: "Galeria zdjęć", name: "images", widget: "list", field: {label: "Zdjęcie", name: "image", widget: "image"}}

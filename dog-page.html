@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Psy do adopcji - Z Piekła do Domu</title>
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
   <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -235,6 +236,125 @@
     }
     .center { text-align: center; }
 
+    /* NEW SECTION STYLES */
+    .section-title {
+      font-family: 'McLaren', cursive;
+      font-size: 2rem;
+      color: #1f2937;
+      margin: 0 0 1.5rem 0;
+      line-height: 1.3;
+    }
+    .text-content {
+      padding: 0;
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      text-align: left;
+    }
+    .text-content p {
+      color: #374151;
+      font-size: 1.125rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+    .loading {
+      color: #6b7280;
+      font-style: italic;
+      text-align: center;
+      padding: 2rem;
+    }
+    .dog-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 8rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+    .dog-info-item {
+      background: #f9fafb;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      border-left: 4px solid #fca5a5;
+      display: flex;
+      flex-direction: column;
+    }
+    .dog-info-label {
+      font-weight: 600;
+      color: #1f2937;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      min-height: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+    }
+    .dog-info-value {
+      color: #374151;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    .special-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .special-features li {
+      padding: 0.25rem 0;
+      color: #374151;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .special-features li:before {
+      content: "✓";
+      color: #fca5a5;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+    .story-section {
+      background: #f9fafb;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      border-left: 4px solid #fde68a;
+    }
+    .story-section .dog-info-label {
+      margin-bottom: 1rem;
+    }
+    .story-section .dog-info-value {
+      font-size: 1.125rem;
+      line-height: 1.7;
+    }
+    .basic-info-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .info-row:last-child {
+      border-bottom: none;
+    }
+    .info-label {
+      font-weight: 600;
+      color: #6b7280;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .info-value {
+      color: #374151;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    .special-features-section {
+      border-left-color: #fca5a5;
+    }
+
     /* FOOTER */
     footer { background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); margin-top: 2.25rem; padding: 3rem 0; }
     .footer-grid { display:grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
@@ -386,11 +506,21 @@
           <div class="big-card-content">
             <p class="muted">Kokos to wspaniały pies, który szuka swojego wymarzonego domu. Jest bardzo przyjazny, lubi zabawę i jest doskonałym towarzyszem dla całej rodziny. Ma około 3 lata i jest w pełni zaszczepiony. Kocha spacery i jest bardzo posłuszny. Idealny dla rodzin z dziećmi lub osób, które szukają wiernego przyjaciela.</p>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-              <button class="btn btn-primary">Adoptuj ↗</button>
+              <a href="ankieta-adopcyjna.html" class="btn btn-primary" id="adoptButton">Adoptuj ↗</a>
               <a href="adopcje.html" class="btn btn-outline" style="color: #000; border-color: #6b7280;">← Wróć do adopcji</a>
             </div>
           </div>
         </article>
+      </div>
+    </section>
+
+    <!-- NEW SECTION -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Informacje o psie</h2>
+        <div class="text-content" id="dog-info">
+          <div class="loading">Ładowanie informacji o psie...</div>
+        </div>
       </div>
     </section>
   </main>
@@ -413,9 +543,9 @@
         <div class="links-column">
           <h4>Linki</h4>
           <div class="links">
-            <a href="#" data-text="Fanpage">Fanpage</a>
-            <a href="#" data-text="Nasze inicjatywy">Nasze inicjatywy</a>
-            <a href="#" data-text="Dołącz do grupy">Dołącz do grupy</a>
+            <a href="https://www.facebook.com/profile.php?id=61577219922888" data-text="Fanpage">Fanpage</a>
+            <a href="inicjatywy.html" data-text="Nasze inicjatywy">Nasze inicjatywy</a>
+            <a href="https://www.facebook.com/groups/1483167953136280" data-text="Dołącz do grupy">Dołącz do grupy</a>
             <a href="#" data-text="Współpraca">Współpraca</a>
           </div>
         </div>
@@ -424,7 +554,7 @@
           <div class="links">
             <a href="#" data-text="Wioska Burçak">Wioska Burçak</a>
             <a href="#" data-text="Pani Adalet">Pani Adalet</a>
-            <a href="#" data-text="Artykuły">Artykuły</a>
+            <a href="articles.html" data-text="Artykuły">Artykuły</a>
             <a href="#" data-text="Zostań sponsorem">Zostań sponsorem</a>
           </div>
         </div>
@@ -461,26 +591,386 @@
 
   <script>
     let currentDogIndex = 0;
-    const dogImages = ['images/dog-1.jpg', 'images/dog-2.jpg'];
+    const defaultDogImages = ['images/dog-1.jpg', 'images/dog-2.jpg']; // Fallback for general page
+    let currentDogImages = null; // Store the current dog's specific images array
+    let currentDogImage = null; // Store the current dog's main image for card
     
     function switchDog(direction) {
       const hero = document.querySelector('.hero');
       
-      // Cycle through the dog images
+      console.log('switchDog called with direction:', direction);
+      console.log('currentDogImages:', currentDogImages);
+      console.log('currentDogIndex:', currentDogIndex);
+      
+      // If we have specific dog images, cycle through those
+      if (currentDogImages && currentDogImages.length > 1) {
+        if (direction === 'right') {
+          currentDogIndex = (currentDogIndex + 1) % currentDogImages.length;
+        } else if (direction === 'left') {
+          currentDogIndex = (currentDogIndex - 1 + currentDogImages.length) % currentDogImages.length;
+        }
+        
+        // Update the background image with current dog's photos
+        hero.style.backgroundImage = `url('${currentDogImages[currentDogIndex]}')`;
+        
+        console.log(`Switched to ${currentDogImages[currentDogIndex]} (${direction} arrow clicked) - Dog's photo ${currentDogIndex + 1}/${currentDogImages.length}`);
+        return;
+      }
+      
+      // If only one photo or no specific dog, don't cycle
+      if (currentDogImages && currentDogImages.length === 1) {
+        console.log('Only one photo available - carousel disabled');
+        return;
+      }
+      
+      // Fallback: cycle through default images (for general page)
       if (direction === 'right') {
-        currentDogIndex = (currentDogIndex + 1) % dogImages.length;
+        currentDogIndex = (currentDogIndex + 1) % defaultDogImages.length;
       } else if (direction === 'left') {
-        currentDogIndex = (currentDogIndex - 1 + dogImages.length) % dogImages.length;
+        currentDogIndex = (currentDogIndex - 1 + defaultDogImages.length) % defaultDogImages.length;
       }
       
       // Update the background image
-      hero.style.backgroundImage = `url('${dogImages[currentDogIndex]}')`;
+      hero.style.backgroundImage = `url('${defaultDogImages[currentDogIndex]}')`;
       
-      // Add smooth transition effect
-      hero.style.transition = "background-image 0.5s ease-in-out";
-      
-      console.log(`Switched to ${dogImages[currentDogIndex]} (${direction} arrow clicked)`);
+      console.log(`Switched to ${defaultDogImages[currentDogIndex]} (${direction} arrow clicked) - General page`);
     }
+
+    // Function to get URL parameter
+    function getUrlParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    // Function to parse YAML front matter from markdown content
+    function parseMarkdownFrontMatter(content) {
+      const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+      if (!frontMatterMatch) return null;
+      
+      const yamlContent = frontMatterMatch[1];
+      const data = {};
+      
+      // Simple YAML parser for our specific format
+      const lines = yamlContent.split('\n');
+      let currentKey = null;
+      let currentValue = [];
+      let inArray = false;
+      
+      for (let line of lines) {
+        line = line.trim();
+        if (!line) continue;
+        
+        if (line.includes(':') && !line.startsWith('-')) {
+          // Save previous key-value pair
+          if (currentKey) {
+            if (inArray) {
+              data[currentKey] = currentValue;
+            } else {
+              data[currentKey] = currentValue.join(' ').replace(/^["']|["']$/g, '');
+            }
+          }
+          
+          // Start new key-value pair
+          const colonIndex = line.indexOf(':');
+          currentKey = line.substring(0, colonIndex).trim();
+          const value = line.substring(colonIndex + 1).trim();
+          
+          if (value === '') {
+            // Empty value - might be start of array
+            currentValue = [];
+            inArray = true;
+          } else {
+            // Simple value
+            currentValue = [value.replace(/^["']|["']$/g, '')];
+            inArray = false;
+          }
+        } else if (line.startsWith('-')) {
+          // Array item
+          const item = line.substring(1).trim().replace(/^["']|["']$/g, '');
+          if (inArray) {
+            currentValue.push(item);
+          } else {
+            // Start new array
+            if (currentKey) {
+              data[currentKey] = currentValue.join(' ').replace(/^["']|["']$/g, '');
+            }
+            currentKey = 'images'; // Default key for arrays
+            currentValue = [item];
+            inArray = true;
+          }
+        }
+      }
+      
+      // Save last key-value pair
+      if (currentKey) {
+        if (inArray) {
+          data[currentKey] = currentValue;
+        } else {
+          data[currentKey] = currentValue.join(' ').replace(/^["']|["']$/g, '');
+        }
+      }
+      
+      return data;
+    }
+
+    // Embedded dog data (fallback for CORS issues)
+    const dogDataEmbedded = {
+      'kokos': {
+        age: "3 lata",
+        gender: "Samiec", 
+        size: "Średni",
+        image: "images/dog-1.jpg", // Main photo for card
+        images: ["images/dog-1.jpg", "images/dog-2.jpg"], // All photos for hero carousel
+        special_features: [
+          "Przyjazny wobec dzieci",
+          "Lubi spacery", 
+          "Posłuszny",
+          "Zaszczepiony"
+        ],
+        story: "Kokos został uratowany z trudnych warunków w Turcji. Mimo trudnych początków, jest bardzo ufny i kochający. Uwielbia zabawę z piłką i długie spacery. Jest idealnym kandydatem na pierwszego psa dla rodziny."
+      },
+      'dzeki': {
+        age: "2 lata",
+        gender: "Samiec",
+        size: "Duży",
+        image: "images/dog-2.jpg", // Main photo for card
+        images: ["images/dog-2.jpg", "images/dog-6.jpg", "images/dog-7.jpg"], // All photos for hero carousel
+        special_features: [
+          "Bardzo energiczny",
+          "Inteligentny",
+          "Lubi bieganie",
+          "Przyjazny wobec ludzi"
+        ],
+        story: "Dżeki został znaleziony jako szczeniak na ulicach Stambułu. Mimo młodego wieku, już pokazuje się jako bardzo mądry i posłuszny pies. Uwielbia zabawy z innymi psami i jest bardzo towarzyski."
+      },
+      'dżeki': {
+        age: "2 lata",
+        gender: "Samiec",
+        size: "Duży",
+        image: "images/dog-2.jpg", // Main photo for card
+        images: ["images/dog-2.jpg", "images/dog-6.jpg", "images/dog-7.jpg"], // All photos for hero carousel
+        special_features: [
+          "Bardzo energiczny",
+          "Inteligentny",
+          "Lubi bieganie",
+          "Przyjazny wobec ludzi"
+        ],
+        story: "Dżeki został znaleziony jako szczeniak na ulicach Stambułu. Mimo młodego wieku, już pokazuje się jako bardzo mądry i posłuszny pies. Uwielbia zabawy z innymi psami i jest bardzo towarzyski."
+      },
+      'gaja': {
+        age: "4 lata",
+        gender: "Suczka",
+        size: "Mały",
+        image: "images/dog-3.jpg", // Main photo for card
+        images: ["images/dog-3.jpg", "images/dog-4.jpg", "images/dog-5.jpg"], // All photos for hero carousel
+        special_features: [
+          "Spokojna i łagodna",
+          "Idealna do mieszkania",
+          "Przyjazna wobec kotów",
+          "W pełni zaszczepiona"
+        ],
+        story: "Gaja to spokojna i łagodna suczka, która idealnie nadaje się do mieszkania. Jest bardzo przyjazna wobec innych zwierząt i ludzi. Uwielbia spokojne spacery i przytulanie się na kanapie."
+      }
+    };
+
+    // Function to load and display dog information
+    async function loadDogInfo() {
+      const dogName = getUrlParameter('dog');
+      console.log('Dog name from URL:', dogName);
+      
+      if (!dogName) {
+        document.getElementById('dog-info').innerHTML = '<p>Nie znaleziono informacji o psie.</p>';
+        return;
+      }
+      
+      // Check if we're running on localhost (web server) or file:// (direct file access)
+      const isLocalhost = window.location.protocol === 'http:' || window.location.protocol === 'https:';
+      console.log('Protocol:', window.location.protocol, 'Is localhost:', isLocalhost);
+      
+      if (isLocalhost) {
+        // Try file loading first (preferred method for web server)
+        try {
+          const dogFileMap = {
+            'kokos': 'kokos.md',
+            'dzeki': 'dzeki.md', 
+            'dżeki': 'dzeki.md',
+            'gaja': 'gaja.md'
+          };
+          
+          const fileName = dogFileMap[dogName.toLowerCase()];
+          console.log('Mapped file name:', fileName);
+          
+          if (!fileName) {
+            throw new Error('No file mapping found for dog: ' + dogName);
+          }
+          
+          const fileUrl = `content/dogs/${fileName}`;
+          console.log('Fetching from URL:', fileUrl);
+          
+          const response = await fetch(fileUrl);
+          console.log('Response status:', response.status);
+          
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          
+          const content = await response.text();
+          console.log('File content length:', content.length);
+          console.log('File content preview:', content.substring(0, 200));
+          
+          const dogData = parseMarkdownFrontMatter(content);
+          console.log('Parsed dog data:', dogData);
+          console.log('Images array from .md file:', dogData.images);
+          
+          if (!dogData) {
+            throw new Error('Failed to parse dog data from .md file');
+          }
+          
+          displayDogInfo(dogData);
+          // Add small delay to ensure DOM is ready
+          setTimeout(() => {
+            updateHeroImage(dogData);
+            updateCardImage(dogData);
+          }, 100);
+          return;
+          
+        } catch (error) {
+          console.error('Error loading from .md file:', error);
+          console.log('Error details:', error.message);
+          console.log('Falling back to embedded data...');
+        }
+      } else {
+        console.log('File protocol detected - using embedded data directly');
+      }
+      
+      // Fallback to embedded data (for file:// protocol or if .md loading failed)
+      const embeddedData = dogDataEmbedded[dogName.toLowerCase()];
+      if (embeddedData) {
+        console.log('Using embedded data for:', dogName);
+        console.log('Embedded data:', embeddedData);
+        console.log('Embedded images:', embeddedData.images);
+        displayDogInfo(embeddedData);
+        // Add small delay to ensure DOM is ready
+        setTimeout(() => {
+          updateHeroImage(embeddedData);
+          updateCardImage(embeddedData);
+        }, 100);
+      } else {
+        document.getElementById('dog-info').innerHTML = '<p>Nie znaleziono informacji o psie.</p>';
+      }
+    }
+
+    // Function to update hero section image
+    function updateHeroImage(data) {
+      if (data.image) {
+        const heroSection = document.querySelector('.hero');
+        if (heroSection) {
+          // Store the current dog's main image for card
+          currentDogImage = data.image;
+          
+          // Set up carousel for this dog's images
+          if (data.images && data.images.length > 0) {
+            currentDogImages = data.images;
+            currentDogIndex = 0; // Start with first image
+            
+            // Use setProperty with important to override CSS
+            heroSection.style.setProperty('background-image', `url('${data.images[0]}')`, 'important');
+            heroSection.style.setProperty('background-position', 'center', 'important');
+            heroSection.style.setProperty('background-size', 'cover', 'important');
+            heroSection.style.setProperty('background-repeat', 'no-repeat', 'important');
+            
+            console.log('Updated hero carousel with', data.images.length, 'photos:', data.images);
+            console.log('Showing photo 1/' + data.images.length + ':', data.images[0]);
+          } else {
+            // Fallback to single image
+            heroSection.style.setProperty('background-image', `url('${data.image}')`, 'important');
+            heroSection.style.setProperty('background-position', 'center', 'important');
+            heroSection.style.setProperty('background-size', 'cover', 'important');
+            heroSection.style.setProperty('background-repeat', 'no-repeat', 'important');
+            console.log('Updated hero image to:', data.image);
+          }
+        } else {
+          console.log('Hero section not found!');
+        }
+      } else {
+        console.log('No image data provided');
+      }
+    }
+
+    // Function to update card image
+    function updateCardImage(data) {
+      if (data.image) {
+        const cardImage = document.querySelector('.big-card-image');
+        if (cardImage) {
+          // Use setProperty with important to override CSS
+          cardImage.style.setProperty('background-image', `url('${data.image}')`, 'important');
+          cardImage.style.setProperty('background-position', 'center', 'important');
+          cardImage.style.setProperty('background-size', 'cover', 'important');
+          cardImage.style.setProperty('background-repeat', 'no-repeat', 'important');
+          console.log('Updated card image to:', data.image);
+        } else {
+          console.log('Card image not found!');
+        }
+      } else {
+        console.log('No image data provided for card');
+      }
+    }
+
+    // Function to display dog information
+    function displayDogInfo(data) {
+      const dogInfo = document.getElementById('dog-info');
+      
+      let specialFeaturesHtml = '';
+      if (data.special_features && Array.isArray(data.special_features)) {
+        specialFeaturesHtml = data.special_features.map(feature => `<li>${feature}</li>`).join('');
+      }
+      
+      dogInfo.innerHTML = `
+        <div class="dog-info-grid">
+          <div class="dog-info-item basic-info">
+            <div class="dog-info-label">Podstawowe informacje</div>
+            <div class="basic-info-content">
+              <div class="info-row">
+                <span class="info-label">Wiek:</span>
+                <span class="info-value">${data.age || 'Nie podano'}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Płeć:</span>
+                <span class="info-value">${data.gender || 'Nie podano'}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Rozmiar:</span>
+                <span class="info-value">${data.size || 'Nie podano'}</span>
+              </div>
+            </div>
+          </div>
+          <div class="dog-info-item special-features-section">
+            <div class="dog-info-label">Cechy szczególne</div>
+            <div class="dog-info-value">
+              <ul class="special-features">${specialFeaturesHtml}</ul>
+            </div>
+          </div>
+        </div>
+        <div class="story-section">
+          <div class="dog-info-label">Historia</div>
+          <div class="dog-info-value">${data.story || 'Brak historii do wyświetlenia.'}</div>
+        </div>
+      `;
+    }
+
+    // Update adopt button with dog name parameter
+    document.addEventListener('DOMContentLoaded', function() {
+      const dogName = getUrlParameter('dog');
+      if (dogName) {
+        const adoptButton = document.getElementById('adoptButton');
+        if (adoptButton) {
+          adoptButton.href = `ankieta-adopcyjna.html?dog=${encodeURIComponent(dogName)}`;
+        }
+      }
+      
+      // Load dog information
+      loadDogInfo();
+    });
   </script>
 </body>
 </html>

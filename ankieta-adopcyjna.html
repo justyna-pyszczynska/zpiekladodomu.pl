@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adopcje - Z Piekła do Domu</title>
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+  <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fafafa; color: #222; }
+    img { display: block; max-width: 100%; }
+
+    /* CONTAINERS */
+    .container { width: min(1200px, 92%); margin: 0 auto; }
+
+    /* NAVBAR */
+    header {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1200px, 92%);
+      z-index: 10;
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px; font-weight: 600; font-family: 'McLaren', cursive;
+    }
+    .brand img { width: 28px; height: 28px; }
+    .menu { display: flex; align-items: center; gap: 14px; }
+    .menu a {
+      text-decoration: none;
+      color: #222; 
+      font-weight: 500;
+      padding: 8px 12px; 
+      border-radius: 10px; 
+      transition: all 0.3s ease;
+    }
+    .menu a:hover {
+      background: rgba(0,0,0,0.05);
+      color: #374151;
+    }
+    .menu a.cta { 
+      background: linear-gradient(135deg,#ffedd5,#fecaca); 
+      font-weight: 700; 
+      transition: all 0.3s ease;
+    }
+    .menu a.cta:hover {
+      background: linear-gradient(135deg,#fbbf24,#f87171);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(251,191,36,0.4);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 120vh;
+      background: url('images/ankieta.jpg') center/cover no-repeat;
+      display: flex; align-items: center;
+    }
+    .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.2)); }
+    .hero-content { position: relative; z-index: 1; width: min(500px, 50%); margin-left: 12%; color: #fff; }
+    .hero h1 { 
+      font-family: 'McLaren', cursive; 
+      font-size: clamp(32px, 6vw, 42px); 
+      line-height: 1.2; 
+      font-weight: 450;
+      text-shadow: 2px 3px 12px rgba(0,0,0,.7);
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .hero-subtitle {
+      font-family: 'McLaren', cursive;
+      font-size: clamp(18px, 3vw, 24px);
+      line-height: 1.3;
+      font-weight: 450;
+      color: #fff;
+      text-shadow: 2px 3px 12px rgba(0,0,0,.7);
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      display: inline-block;
+      white-space: nowrap;
+      position: absolute;
+      top: 75%;
+      left: 12%;
+      z-index: 2;
+    }
+      .hero-button-left {
+        position: absolute;
+        top: 77%;
+        right: 25%;
+        z-index: 2;
+        width: 180px;
+        height: 44px;
+        font-family: 'McLaren', cursive;
+        text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      }
+      .hero-button {
+        position: absolute;
+        top: 77%;
+        right: 12%;
+        z-index: 2;
+        width: 180px;
+        height: 44px;
+      }
+    .btn-ghost { background: rgba(255,255,255,.2); color:#fff; border:1px solid rgba(255,255,255,.35); text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+    .btn-outline { 
+      background: transparent; 
+      color: #fff; 
+      border: 2px solid #fff; 
+      font-family: 'McLaren', cursive;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: #fca5a5;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* DONATION CARDS */
+    .section { padding: 3rem 0; }
+    .overlap { margin-top: -39.5vh; position: relative; z-index: 2; }
+    .cards-3 { display:grid; grid-template-columns: repeat(3,1fr); gap: 1.125rem; --card-h: 475px; }
+    .span-2 { grid-column: span 2; }
+    .card { background:#fff; border-radius: 1rem; box-shadow:0 12px 22px rgba(0,0,0,.1); overflow: hidden; height: var(--card-h); display:flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,.15); }
+    .card-body { padding: .875rem 1rem 1rem; display:flex; flex-direction: column; gap: .5rem; flex: 1; }
+    .dog-card { text-align: center;}
+    .dog-card .circle { width: 14rem; height: 14rem; border-radius: 50%; object-fit: cover; margin: 1rem auto 0.75rem; }
+    .dog-card h3 { font-family: 'McLaren', cursive; font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .dog-card .card-footer { justify-content: center; margin-top: 0.75rem; }
+    .dog-card.span-2 { 
+      display: flex !important; 
+      flex-direction: row !important; 
+      width: 100% !important; 
+      height: var(--card-h) !important; 
+      border-radius: 1rem !important; 
+      object-fit: cover !important; 
+      margin: 0 !important; 
+      padding: 1.5rem !important; 
+    }
+    .dog-card.span-2 .circle { 
+      width: 12rem !important; 
+      height: 12rem !important; 
+      border-radius: 50% !important; 
+      object-fit: cover !important; 
+      margin: 0 1.5rem 0 0 !important; 
+    }
+    .dog-card.span-2 .card-body { 
+      flex: 1 !important; 
+      padding: 0 !important; 
+      display: flex !important; 
+      flex-direction: column !important; 
+      justify-content: center !important; 
+    }
+    .dog-card.span-2 h3 { 
+      font-family: 'McLaren', cursive !important; 
+      font-size: 1.5rem !important; 
+      margin-bottom: 1rem !important; 
+    }
+    .dog-card.span-2 .card-footer { 
+      margin-top: 1rem !important; 
+    }
+    .muted { color: #6b7280; font-size: 0.875rem; line-height: 1.5; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding: .6875rem 1.125rem; border:none; border-radius: 9999px; cursor:pointer; font-weight: 700; }
+    .btn-primary { 
+      background: linear-gradient(135deg,#fca5a5,#fde68a); 
+      color:#fff; 
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg,#f87171,#fbbf24);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(252,165,165,0.4);
+    }
+    .center { text-align: center; }
+
+    /* FORM STYLES */
+    .form-card {
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      padding: 3rem;
+      margin: 0;
+      width: 100%;
+    }
+    .form-card h2 {
+      font-family: 'McLaren', cursive;
+      font-size: 2.5rem;
+      color: #1f2937;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+    .form-card p {
+      color: #6b7280;
+      font-size: 1.125rem;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #1f2937;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #f59e0b;
+    }
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .checkbox-group input[type="checkbox"],
+    .checkbox-group input[type="radio"] {
+      width: auto;
+      margin: 0;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+    .checkbox-group label {
+      margin: 0;
+      line-height: 1.4;
+      font-weight: 400;
+      vertical-align: middle;
+      display: inline-block;
+    }
+    .btn-secondary {
+      background: #f3f4f6;
+      color: #1f2937;
+      border: 2px solid #e5e7eb;
+    }
+    .btn-secondary:hover {
+      background: #e5e7eb;
+    }
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    /* FOOTER */
+    footer { background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); margin-top: 2.25rem; padding: 3rem 0; }
+    .footer-grid { display:grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
+    .footer-brand { display:flex; align-items:flex-start; gap: 1.5rem; }
+    .footer-brand img { width: 10rem; height: 10rem; }
+    .footer-content { flex: 1; }
+    .footer-title { font-family: 'McLaren', cursive; font-size: 1.5rem; color: #000; margin: 0 0 1rem 0; line-height: 1.3; }
+    .footer-email { display: flex; align-items: center; margin-bottom: 1rem; }
+    .footer-email svg { color: #000; transition: color 0.3s ease; }
+    .footer-email:hover svg { color: #666; }
+    .footer-email a { 
+      color: #000; 
+      text-decoration: none; 
+      font-size: 1rem; 
+      transition: all 0.3s ease;
+    }
+    .footer-email a:hover {
+      color: #666;
+      text-decoration: underline;
+      font-weight: 700;
+    }
+    .footer-copyright { color: #000; font-size: 0.875rem; line-height: 1.4; }
+    .footer-links { display: flex; gap: 7rem; }
+    .footer-links .links a {
+      position: relative;
+      display: inline-block;
+      font-weight: 500;
+      transition: font-weight 0.3s ease, color 0.3s ease;
+    }
+
+    .footer-links .links a::after {
+      content: attr(data-text);
+      visibility: hidden;
+      font-weight: 700;
+      height: 0;
+      overflow: hidden;
+      pointer-events: none;
+      display: block;
+    }
+
+    .footer-links .links a:hover {
+      font-weight: 700;
+      color: #666;
+    }
+    .links-column h4 { 
+      color: #000; 
+      font-size: 1rem; 
+      margin: 0 0 1rem 0; 
+      font-weight: 600; 
+      white-space: nowrap; 
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .links-column h4:hover {
+      font-weight: 700;
+      color: #333;
+    }
+    .links { display: flex; flex-direction: column; gap: 0.5rem; }
+    .links a { 
+      color: #000; 
+      text-decoration: none; 
+      font-size: 0.875rem; 
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      font-weight: 400;
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+    .links a:hover {
+      color: #666;
+      font-weight: 700;
+    }
+    .footer-social { display: flex; flex-direction: column; align-items: flex-end; gap: 3.75rem; }
+    .socials { display: flex; gap: 0.75rem; }
+    .socials a { 
+      display: inline-block; 
+      text-decoration: none; 
+      transition: all 0.3s ease;
+      width: 48px;
+      height: 48px;
+    }
+    .socials a:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+    .footer-social .footer-copyright { text-align: right; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      header { top: .625rem; }
+      .navbar { padding: .625rem .75rem; }
+      .menu { gap: .5rem; }
+      .menu a { padding: .375rem .5rem; }
+      .cards-3 { grid-template-columns: 1fr; }
+      .overlap { margin-top: -18vh; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="brand">
+        <img src="images/logo.svg" alt="Logo" width="200" height="200">
+        <span>Z Piekła Do Domu</span>
+      </div>
+      <nav class="menu">
+        <a href="index.html">Strona główna</a>
+        <a href="adopcje.html" style="background: rgba(0,0,0,0.1);">Adopcje</a>
+        <a href="#bazarek">Bazarek</a>
+        <a href="onas.html">O nas</a>
+        <a href="wsparcie.html" class="cta">Wsparcie</a>
+    </nav>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Wypełnij ankietę<br> i rozpocznij proces adopcyjny!
+      </h1>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- FORM SECTION -->
+    <section class="section overlap" id="form">
+      <div class="form-card">
+        <h2>Formularz Adopcyjny</h2>
+        <p>Wypełnij poniższy formularz, aby rozpocząć proces adopcji. Twoje odpowiedzi pomogą nam dopasować idealnego zwierzaka do Twojego domu i stylu życia.</p>
+        
+        <form id="adoptionForm">
+          <!-- Wybór psa -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="selectedDog">Który pies Cię interesuje? *</label>
+            <select id="selectedDog" name="selectedDog" required style="max-width: 300px;">
+              <option value="">Wybierz psa</option>
+              <option value="other">Inny pies (opisz w dodatkowych informacjach)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="homeType2">Jaki typ domu oferujesz?*</label>
+            <select id="homeType2" name="homeType2" required style="max-width: 300px;">
+              <option value="">Wybierz</option>
+              <option value="house">Dom stały</option>
+              <option value="apartment">Dom tymczasowy</option>
+            </select>
+          </div>
+        </div>
+
+          <!-- Dane osobowe -->
+          <h3 style="font-family: 'McLaren', cursive; color: #1f2937; margin: 2rem 0 1rem 0; font-size: 1.5rem;">Dane osobowe</h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">Imię i Nazwisko *</label>
+              <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Telefon *</label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Adres zamieszkania *</label>
+            <input type="text" id="address" name="address" required>
+          </div>
+
+          <!-- Informacje o domu -->
+          <h3 style="font-family: 'McLaren', cursive; color: #1f2937; margin: 2rem 0 1rem 0; font-size: 1.5rem;">Informacje o domu</h3>
+          
+          <div class="form-group">
+            <label for="homeType">Typ mieszkania *</label>
+            <select id="homeType" name="homeType" required style="max-width: 300px;">
+              <option value="">Wybierz typ mieszkania</option>
+              <option value="house">Dom jednorodzinny</option>
+              <option value="apartment">Mieszkanie w bloku</option>
+              <option value="townhouse">Kamienica</option>
+              <option value="other">Inne</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Czy wszyscy domownicy zgadzają się na adopcję psa?*</label>
+            <div class="checkbox-group">
+              <input type="radio" id="onlineMeetingHomeYes" name="onlineMeetingHome" value="tak" required>
+              <label for="onlineMeetingHomeYes">Tak</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="radio" id="onlineMeetingHomeNo" name="onlineMeetingHome" value="nie" required>
+              <label for="onlineMeetingHomeNo">Nie</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Gdzie pies będzie spał i spędzał większość czasu?*</label>
+            <div class="checkbox-group">
+              <input type="radio" id="householdAgreementYes" name="householdAgreement" value="tak" required>
+              <label for="householdAgreementYes">W domu</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="radio" id="householdAgreementNo" name="householdAgreement" value="nie" required>
+              <label for="householdAgreementNo">Na podwórku</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="radio" id="householdAgreementPartial" name="householdAgreement" value="częściowo" required>
+              <label for="householdAgreementPartial">Inne - opisz</label>
+            </div>
+            <div class="form-group" id="householdAgreementTextGroup" style="display: none; margin-top: 0.5rem;">
+              <textarea id="householdAgreementText" name="householdAgreementText" placeholder="Opisz proszę warunki bytowania psa"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Czy masz inne zwierzęta?*</label>
+            <div class="checkbox-group">
+              <input type="radio" id="otherPetsYes" name="otherPets" value="tak" required>
+              <label for="otherPetsYes">Tak</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="radio" id="otherPetsNo" name="otherPets" value="nie" required>
+              <label for="otherPetsNo">Nie</label>
+            </div>
+            <div class="form-group" id="otherPetsTextGroup" style="display: none; margin-top: 0.5rem;">
+              <textarea id="otherPetsText" name="otherPetsText" placeholder="Opisz swoje zwierzęta (gatunek, płeć, wiek, charakter)"></textarea>
+            </div>
+          </div>
+
+          <!-- Doświadczenie ze zwierzętami -->
+          <h3 style="font-family: 'McLaren', cursive; color: #1f2937; margin: 2rem 0 1rem 0; font-size: 1.5rem;">Dodatkowe informacje</h3>
+          
+
+          <div class="form-group">
+            <label>Rozmowy adopcyjne przeprowadzamy online na żywo - na platformie Messenger lub WhatsApp. Czy ma Pan/i taką możliwość, żeby się z nami połączyć i porozmawiać? *</label>
+            <div class="checkbox-group">
+              <input type="radio" id="onlineMeetingYes" name="onlineMeeting" value="tak" required>
+              <label for="onlineMeetingYes">Tak</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="radio" id="onlineMeetingNo" name="onlineMeeting" value="nie" required>
+              <label for="onlineMeetingNo">Nie</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Psy przyjeżdżają z Turcji w różnej kondycji zdrowotnej. Po przyjeździe należy wykonać rozszerzone badania krwi, badanie kału (z 3 dni) oraz ewentualne testy. Czy jest Pan/i gotowa na taki wydatek?*</label>
+            <div class="checkbox-group">
+              <input type="radio" id="onlineMeetingYes3" name="onlineMeeting3" value="tak" required>
+              <label for="onlineMeetingYes3">Tak</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="radio" id="onlineMeetingNo3" name="onlineMeeting3" value="nie" required>
+              <label for="onlineMeetingNo3">Nie</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Koszt sprowadzenia psa z Turcji to 2100zł, czy jest Pan/i w stanie pokryć ten koszt, bądź jego część?*</label>
+            <div class="checkbox-group">
+              <input type="radio" id="onlineMeetingYes2" name="onlineMeeting2" value="tak" required>
+              <label for="onlineMeetingYes2">Tak, mogę pokryć cały koszt transportu</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="radio" id="onlineMeetingNo2" name="onlineMeeting2" value="nie" required>
+              <label for="onlineMeetingNo2">Tak, jestem w stanie pokryć część kosztu</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="radio" id="onlineMeetingMaybe2" name="onlineMeeting2" value="może" required>
+              <label for="onlineMeetingMaybe2">Nie, nie mam takiej możliwości</label>
+            </div>
+          </div>
+
+
+          <!-- Zgody -->
+          <h3 style="font-family: 'McLaren', cursive; color: #1f2937; margin: 2rem 0 1rem 0; font-size: 1.5rem;">Zgody i zobowiązania</h3>
+          
+          <div class="form-group">
+            <div class="checkbox-group">
+              <input type="checkbox" id="homeVisit" name="homeVisit" required>
+              <label for="homeVisit">Zgadzam się na spisanie umowy adopcyjnej oraz jej warunki takie jak wizyty przed/po adopcyjne, kastracja.*</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox-group">
+              <input type="checkbox" id="followUp" name="followUp" required>
+              <label for="followUp">Zgadzam się na kontakt telefoniczny w sprawie adopcji na podany przeze mnie numer telefonu.</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox-group">
+              <input type="checkbox" id="privacy" name="privacy" required>
+              <label for="privacy">Zgadzam się na przetwarzanie moich danych osobowych zawartych w formularzu na potrzeby procesu adopcyjnego.*</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="additionalInfo">Dodatkowe informacje</label>
+            <textarea id="additionalInfo" name="additionalInfo" placeholder="Czy jest coś jeszcze, o czym powinniśmy wiedzieć?"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="resetForm()">Wyczyść formularz</button>
+            <button type="submit" class="btn btn-primary">Wyślij ankietę</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <img src="images/logo.svg" alt="Logo" width="120" height="120">
+          <div class="footer-content">
+            <h2 class="footer-title">Z Piekła do Domu - ratujemy psy i koty z Turcji</h2>
+            <div class="footer-email">
+              <svg width="16" height="16" style="margin-right: 8px;"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <a href="mailto:zpiekladodomu@gmail.com">zpiekladodomu@gmail.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="links-column">
+          <h4>Linki</h4>
+          <div class="links">
+            <a href="https://www.facebook.com/profile.php?id=61577219922888" data-text="Fanpage">Fanpage</a>
+            <a href="inicjatywy.html" data-text="Nasze inicjatywy">Nasze inicjatywy</a>
+            <a href="https://www.facebook.com/groups/1483167953136280" data-text="Dołącz do grupy">Dołącz do grupy</a>
+            <a href="#" data-text="Współpraca">Współpraca</a>
+          </div>
+        </div>
+        <div class="links-column">
+          <h4>Zobacz też</h4>
+          <div class="links">
+            <a href="#" data-text="Wioska Burçak">Wioska Burçak</a>
+            <a href="#" data-text="Pani Adalet">Pani Adalet</a>
+            <a href="articles.html" data-text="Artykuły">Artykuły</a>
+            <a href="#" data-text="Zostań sponsorem">Zostań sponsorem</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-social">
+        <div class="socials">
+          <a href="https://www.instagram.com/z_piekla_do_domu_/" aria-label="Instagram" target="_blank"><img src="images/instagram.svg" alt="Instagram" width="48" height="48"></a>
+          <a href="https://www.facebook.com/profile.php?id=61577219922888" aria-label="Facebook" target="_blank"><img src="images/facebook.svg" alt="Facebook" width="48" height="48"></a>
+        </div>
+        <div class="footer-copyright">
+          <div>Z Piekła do domu 2025 ©</div>
+          <div>Wszelkie prawa zastrzeżone</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Dynamic dog loading function
+    async function loadAvailableDogs() {
+      try {
+        // Try to load from index.html first
+        const response = await fetch('index.html');
+        const html = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        
+        // Find all dog cards and extract names
+        const dogCards = doc.querySelectorAll('.dog-card h3');
+        const dropdown = document.getElementById('selectedDog');
+        
+        // Clear existing options except the first two
+        while (dropdown.children.length > 2) {
+          dropdown.removeChild(dropdown.lastChild);
+        }
+        
+        // Add each dog as an option
+        dogCards.forEach(card => {
+          const dogName = card.textContent.trim();
+          if (dogName) {
+            const option = document.createElement('option');
+            option.value = dogName.toLowerCase().replace(/[^a-z0-9]/g, '');
+            option.textContent = dogName;
+            dropdown.insertBefore(option, dropdown.children[dropdown.children.length - 1]);
+          }
+        });
+        
+        console.log(`Loaded ${dogCards.length} dogs dynamically`);
+        console.log('Available dogs after loading:', Array.from(dropdown.options).map(opt => opt.textContent));
+        
+        // Try to pre-select dog after loading
+        setTimeout(() => {
+          console.log('Calling preSelectDog after dynamic loading...');
+          preSelectDog();
+        }, 500);
+      } catch (error) {
+        console.log('Could not load dogs dynamically, using fallback');
+        // Fallback: add some default dogs if dynamic loading fails
+        const dropdown = document.getElementById('selectedDog');
+        const fallbackDogs = ['Kokos', 'Dżeki', 'Gaja'];
+        
+        fallbackDogs.forEach(dogName => {
+          const option = document.createElement('option');
+          option.value = dogName.toLowerCase().replace(/[^a-z0-9]/g, '');
+          option.textContent = dogName;
+          dropdown.insertBefore(option, dropdown.children[dropdown.children.length - 1]);
+        });
+        
+        // Try to pre-select dog after fallback loading
+        setTimeout(() => {
+          console.log('Calling preSelectDog after fallback loading...');
+          preSelectDog();
+        }, 500);
+      }
+    }
+
+    function resetForm() {
+      document.getElementById('adoptionForm').reset();
+    }
+
+    // Initialize EmailJS
+    (function() {
+      emailjs.init("YOUR_PUBLIC_KEY"); // You'll need to replace this with your EmailJS public key
+    })();
+
+    document.getElementById('adoptionForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Show loading state
+      const submitBtn = document.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Wysyłanie...';
+      submitBtn.disabled = true;
+      
+      // Collect form data
+      const formData = new FormData(this);
+      const formObject = {};
+      formData.forEach((value, key) => {
+        formObject[key] = value;
+      });
+      
+      // Prepare email template parameters
+      const templateParams = {
+        to_email: 'justyna.pyszczynska@gmail.com',
+        from_name: formObject.firstName,
+        from_email: formObject.email,
+        phone: formObject.phone,
+        address: formObject.address,
+        selected_dog: formObject.selectedDog,
+        home_type: formObject.homeType,
+        online_meeting_home: formObject.onlineMeetingHome || 'Nie wybrano',
+        household_agreement: formObject.householdAgreement || 'Nie wybrano',
+        household_agreement_text: formObject.householdAgreementText || 'Brak',
+        other_pets: formObject.otherPets || 'Nie wybrano',
+        other_pets_text: formObject.otherPetsText || 'Brak',
+        online_meeting: formObject.onlineMeeting || 'Nie wybrano',
+        online_meeting2: formObject.onlineMeeting2 || 'Nie wybrano',
+        online_meeting3: formObject.onlineMeeting3 || 'Nie wybrano',
+        home_visit: formObject.homeVisit ? 'Tak' : 'Nie',
+        follow_up: formObject.followUp ? 'Tak' : 'Nie',
+        privacy: formObject.privacy ? 'Tak' : 'Nie',
+        additional_info: formObject.additionalInfo || 'Brak',
+        message: `
+Nowa ankieta adopcyjna od: ${formObject.firstName}
+
+DANE OSOBOWE:
+- Imię i Nazwisko: ${formObject.firstName}
+- Email: ${formObject.email}
+- Telefon: ${formObject.phone}
+- Adres: ${formObject.address}
+
+WYBRANY PIES: ${formObject.selectedDog}
+
+INFORMACJE O DOMU:
+- Typ mieszkania: ${formObject.homeType}
+- Możliwość rozmowy online (Messenger/WhatsApp): ${formObject.onlineMeetingHome}
+- Zgoda domowników na adopcję: ${formObject.householdAgreement}
+- Opis sytuacji z domownikami: ${formObject.householdAgreementText}
+- Inne zwierzęta: ${formObject.otherPets}
+- Opis innych zwierząt: ${formObject.otherPetsText}
+
+DODATKOWE INFORMACJE:
+- Możliwość rozmowy online (Messenger/WhatsApp): ${formObject.onlineMeeting}
+- Możliwość rozmowy online (druga opcja): ${formObject.onlineMeeting2}
+- Możliwość rozmowy online (trzecia opcja): ${formObject.onlineMeeting3}
+
+ZGODY:
+- Wizyta przedadopcyjna: ${formObject.homeVisit ? 'Tak' : 'Nie'}
+- Kontakt telefoniczny: ${formObject.followUp ? 'Tak' : 'Nie'}
+- RODO: ${formObject.privacy ? 'Tak' : 'Nie'}
+
+DODATKOWE INFORMACJE:
+${formObject.additionalInfo || 'Brak'}
+        `
+      };
+      
+      // Send email using EmailJS
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+        .then(function(response) {
+          console.log('SUCCESS!', response.status, response.text);
+          alert('Dziękujemy za wypełnienie ankiety! Skontaktujemy się z Tobą w ciągu 48 godzin.');
+          resetForm();
+        }, function(error) {
+          console.log('FAILED...', error);
+          alert('Wystąpił błąd podczas wysyłania ankiety. Spróbuj ponownie lub skontaktuj się z nami bezpośrednio.');
+        })
+        .finally(function() {
+          // Reset button state
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+        });
+    });
+
+    // Show/hide text field for household agreement
+    function toggleHouseholdAgreementText() {
+      const partialRadio = document.getElementById('householdAgreementPartial');
+      const textGroup = document.getElementById('householdAgreementTextGroup');
+      
+      if (partialRadio.checked) {
+        textGroup.style.display = 'block';
+      } else {
+        textGroup.style.display = 'none';
+        document.getElementById('householdAgreementText').value = '';
+      }
+    }
+
+    // Show/hide text field for other pets
+    function toggleOtherPetsText() {
+      const yesRadio = document.getElementById('otherPetsYes');
+      const textGroup = document.getElementById('otherPetsTextGroup');
+      
+      if (yesRadio.checked) {
+        textGroup.style.display = 'block';
+      } else {
+        textGroup.style.display = 'none';
+        document.getElementById('otherPetsText').value = '';
+      }
+    }
+
+    // Function to get URL parameter
+    function getUrlParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    // Function to pre-select dog from URL parameter
+    function preSelectDog(attempt = 1) {
+      const dogName = getUrlParameter('dog');
+      
+      if (dogName) {
+        const dropdown = document.getElementById('selectedDog');
+        if (dropdown) {
+          // Try to find the option with matching text
+          let found = false;
+          for (let option of dropdown.options) {
+            const optionText = option.textContent.toLowerCase();
+            const dogNameLower = dogName.toLowerCase();
+            
+            // Normalize both strings for better matching
+            const normalizedOptionText = optionText.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            const normalizedDogName = dogNameLower.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            
+            if (optionText.includes(dogNameLower) || 
+                option.value.toLowerCase() === dogNameLower ||
+                optionText === dogNameLower ||
+                normalizedOptionText.includes(normalizedDogName) ||
+                normalizedOptionText === normalizedDogName) {
+              option.selected = true;
+              found = true;
+              break;
+            }
+          }
+          
+          if (!found && attempt < 3) {
+            setTimeout(() => preSelectDog(attempt + 1), 1000);
+          }
+        }
+      }
+    }
+
+
+    // Load dogs when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      loadAvailableDogs();
+      
+      // Add event listener for household agreement radio buttons
+      document.getElementById('householdAgreementPartial').addEventListener('change', toggleHouseholdAgreementText);
+      document.getElementById('householdAgreementYes').addEventListener('change', toggleHouseholdAgreementText);
+      document.getElementById('householdAgreementNo').addEventListener('change', toggleHouseholdAgreementText);
+      
+      // Add event listener for other pets radio buttons
+      document.getElementById('otherPetsYes').addEventListener('change', toggleOtherPetsText);
+      document.getElementById('otherPetsNo').addEventListener('change', toggleOtherPetsText);
+    });
+  </script>
+</body>
+</html>

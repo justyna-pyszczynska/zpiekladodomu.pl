@@ -2,6 +2,9 @@
 name: "Kokos"
 description: "Kokos to wspaniały pies, który szuka swojego wymarzonego domu. Jest bardzo przyjazny, lubi zabawę i jest doskonałym towarzyszem dla całej rodziny."
 image: "images/dog-1.jpg"
+images:
+  - "images/dog-1.jpg"
+  - "images/dog-2.jpg"
 age: "3 lata"
 gender: "Samiec"
 size: "Średni"

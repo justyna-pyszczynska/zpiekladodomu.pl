@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adopcje - Z Piekła do Domu</title>
+  <title>Inicjatywy - Z Piekła do Domu</title>
   <link rel="icon" type="image/svg+xml" href="images/logo.svg">
   <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -97,6 +97,166 @@
       border-color: #fca5a5;
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* INITIATIVES LAYOUT */
+    .initiatives-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: -6rem;
+    }
+
+    .initiative-card {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 12px 22px rgba(0,0,0,.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .initiative-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,.15);
+    }
+
+    .featured-initiative {
+      grid-column: 1;
+      display: flex;
+      flex-direction: row;
+      min-height: 300px;
+    }
+
+    .featured-initiative .initiative-image {
+      flex: 1;
+      position: relative;
+    }
+
+    .featured-initiative .initiative-content {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .initiative-image {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .featured-initiative .initiative-image {
+      height: 100%;
+    }
+
+    .initiative-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .initiative-card:hover .initiative-img {
+      transform: scale(1.05);
+    }
+
+
+    .initiative-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .initiative-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    .initiative-date {
+      font-weight: 500;
+    }
+
+
+    .initiative-title {
+      font-family: 'McLaren', cursive;
+      font-size: 1.5rem;
+      color: #1f2937;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .featured-initiative .initiative-title {
+      font-size: 2rem;
+    }
+
+    .initiative-description {
+      color: #6b7280;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+
+    .initiative-link {
+      color: #fca5a5;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      align-self: flex-start;
+    }
+
+    .initiative-link:hover {
+      color: #f87171;
+      transform: translateX(4px);
+    }
+
+    .arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .initiative-link:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    .loading, .no-initiatives, .error {
+      text-align: center;
+      padding: 3rem;
+      color: #6b7280;
+      font-size: 1.125rem;
+    }
+
+    .error {
+      color: #ef4444;
+    }
+
+    /* Responsive Design */
+    @media (min-width: 768px) {
+      .initiatives-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .featured-initiative {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .initiatives-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+      
+      .featured-initiative {
+        grid-column: 1 / -1;
+      }
     }
 
     /* DONATION CARDS */
@@ -266,7 +426,7 @@
       </div>
       <nav class="menu">
         <a href="index.html">Strona główna</a>
-        <a href="adopcje.html" style="background: rgba(0,0,0,0.1);">Adopcje</a>
+        <a href="adopcje.html">Adopcje</a>
         <a href="#bazarek">Bazarek</a>
         <a href="onas.html">O nas</a>
         <a href="wsparcie.html" class="cta">Wsparcie</a>
@@ -276,83 +436,21 @@
 
   <section id="home" class="hero">
     <div class="hero-content">
-      <h1>Otwórz serce na jednego <br> z nich, a zorganizujemy transport <br> Twojego nowego przyjaciela!</h1>
+      <h1>Nasze inicjatywy</h1>
     </div>
   </section>
 
   <main class="container">
-    <!-- DONATION + DOG CARDS GRID (2 rows) -->
-    <section class="section overlap" id="donations">
-      <div class="cards-3" id="dogs-container">
-        <!-- Row 1: Three different dogs -->
-        <article class="card dog-card">
-          <img src="images/dog-1.jpg" alt="Kokos" class="circle">
-          <div class="card-body">
-            <h3>Kokos</h3>
-            <p class="muted">Przyjazny pies, który szuka swojego wymarzonego domu. Idealny dla rodzin z dziećmi.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=kokos" class="btn btn-primary">Więcej ↗</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card dog-card">
-          <img src="images/dog-2.jpg" alt="Dżeki" class="circle">
-          <div class="card-body">
-            <h3>Dżeki</h3>
-            <p class="muted">Energiczny i radosny pies, który uwielbia aktywność fizyczną. Bardzo inteligentny.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=dzeki" class="btn btn-primary">Więcej ↗</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card dog-card">
-          <img src="images/dog-3.jpg" alt="Gaja" class="circle">
-          <div class="card-body">
-            <h3>Gaja</h3>
-            <p class="muted">Spokojna i delikatna suczka, która szuka cichego i kochającego domu.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=gaja" class="btn btn-primary">Więcej ↗</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Row 2: More dogs or empty space -->
-        <article class="card dog-card">
-          <img src="images/dog-1.jpg" alt="Kokos" class="circle">
-          <div class="card-body">
-            <h3>Kokos</h3>
-            <p class="muted">Przyjazny pies, który szuka swojego wymarzonego domu. Idealny dla rodzin z dziećmi.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=kokos" class="btn btn-primary">Więcej ↗</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card dog-card">
-          <img src="images/dog-2.jpg" alt="Dżeki" class="circle">
-          <div class="card-body">
-            <h3>Dżeki</h3>
-            <p class="muted">Energiczny i radosny pies, który uwielbia aktywność fizyczną. Bardzo inteligentny.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=dzeki" class="btn btn-primary">Więcej ↗</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card dog-card">
-          <img src="images/dog-3.jpg" alt="Gaja" class="circle">
-          <div class="card-body">
-            <h3>Gaja</h3>
-            <p class="muted">Spokojna i delikatna suczka, która szuka cichego i kochającego domu.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=gaja" class="btn btn-primary">Więcej ↗</a>
-            </div>
-          </div>
-        </article>
+    <!-- INITIATIVES GRID -->
+    <section class="section overlap" id="initiatives">
+      <!-- Initiatives Grid -->
+      <div class="initiatives-grid" id="initiatives-container">
+        <div class="loading">Ładowanie inicjatyw...</div>
       </div>
-      <div class="center" style="margin-top:12px">
+
+      <!-- Load More Button -->
+      <div class="center" style="margin-top: 3rem;">
+        <button class="btn btn-outline">Załaduj więcej inicjatyw</button>
       </div>
     </section>
   </main>
@@ -404,32 +502,198 @@
     </div>
   </footer>
 
+
   <script>
-    async function loadDogs() {
-      const container = document.getElementById('dogs-container');
-      const dogsFolder = '/content/dogs/';
-      const dogFiles = ['kokos.json', 'gaja.json', 'beleth.json'];
+    // Function to parse markdown front matter
+    function parseMarkdownFrontMatter(content) {
+      const lines = content.split('\n');
+      const frontMatter = {};
+      let inFrontMatter = false;
+      let contentStart = 0;
 
-      for (const file of dogFiles) {
-        const res = await fetch(dogsFolder + file);
-        const dog = await res.json();
-
-        const card = document.createElement('div');
-        card.className = 'dog-card';
-        card.innerHTML = `
-          <img src="${dog.image}" alt="${dog.name}">
-          <h3>${dog.name}</h3>
-          <p>Wiek: ${dog.age} lat</p>
-          <p>${dog.description}</p>
-        `;
-        container.appendChild(card);
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        
+        if (line === '---') {
+          if (!inFrontMatter) {
+            inFrontMatter = true;
+            continue;
+          } else {
+            contentStart = i + 1;
+            break;
+          }
+        }
+        
+        if (inFrontMatter && line.includes(':')) {
+          const [key, ...valueParts] = line.split(':');
+          const value = valueParts.join(':').trim().replace(/^["']|["']$/g, '');
+          frontMatter[key.trim()] = value;
+        }
       }
+
+      return frontMatter;
     }
 
-    loadDogs();
-  </script>
+    // Function to format date
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      const months = [
+        'Stycznia', 'Lutego', 'Marca', 'Kwietnia', 'Maja', 'Czerwca',
+        'Lipca', 'Sierpnia', 'Września', 'Października', 'Listopada', 'Grudnia'
+      ];
+      return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+    }
 
-  <!-- Dog Data Loader -->
-  <script src="js/dog-data.js"></script>
+    // Function to create initiative card HTML
+    function createInitiativeCard(initiative, isFeatured = false) {
+      const cardClass = isFeatured ? 'initiative-card featured-initiative' : 'initiative-card';
+      const titleTag = isFeatured ? 'h2' : 'h3';
+      
+      // Create slug from title for URL
+      const slug = initiative.title.toLowerCase()
+        .replace(/[ąćęłńóśźż]/g, function(match) {
+          const map = {
+            'ą': 'a', 'ć': 'c', 'ę': 'e', 'ł': 'l', 'ń': 'n',
+            'ó': 'o', 'ś': 's', 'ź': 'z', 'ż': 'z'
+          };
+          return map[match] || match;
+        })
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim();
+      
+      return `
+        <article class="${cardClass}">
+          <div class="initiative-image">
+            <img src="${initiative.image}" alt="${initiative.title}" class="initiative-img">
+          </div>
+          <div class="initiative-content">
+            <div class="initiative-meta">
+              <span class="initiative-date">${formatDate(initiative.date)}</span>
+            </div>
+            <${titleTag} class="initiative-title">${initiative.title}</${titleTag}>
+            <p class="initiative-description">${initiative.description}</p>
+            <a href="inicjatywa.html?initiative=${slug}" class="initiative-link">Dowiedz się więcej <span class="arrow">→</span></a>
+          </div>
+        </article>
+      `;
+    }
+
+    // Embedded initiatives data as fallback
+    const embeddedInitiatives = [
+      {
+        title: "Wioska Burçak",
+        description: "Nasz główny projekt - wioska w Turcji, gdzie opiekujemy się uratowanymi zwierzętami przed ich transportem do Polski.",
+        status: "Aktywna",
+        date: "2025-01-19",
+        image: "images/burcak.jpg",
+        featured: "true"
+      }
+    ];
+
+    // Function to load initiatives from .md files
+    async function loadInitiatives() {
+      const container = document.getElementById('initiatives-container');
+      console.log('Loading initiatives...');
+      
+      // Check if we're running on localhost (web server) or file:// (direct file access)
+      const isLocalhost = window.location.protocol === 'http:' || window.location.protocol === 'https:';
+      console.log('Protocol:', window.location.protocol, 'Is localhost:', isLocalhost);
+      
+      if (isLocalhost) {
+        try {
+          // Try to fetch initiatives list from a directory listing or predefined list
+          const initiativeFiles = [
+            'wioska-burcak.md'
+          ];
+
+          const initiatives = [];
+          const featuredInitiatives = [];
+
+          for (const file of initiativeFiles) {
+            try {
+              console.log(`Fetching: content/initiatives/${file}`);
+              const response = await fetch(`content/initiatives/${file}`);
+              if (!response.ok) {
+                console.log(`Failed to fetch ${file}: ${response.status}`);
+                continue;
+              }
+              
+              const content = await response.text();
+              console.log(`Loaded ${file}, content length:`, content.length);
+              const initiativeData = parseMarkdownFrontMatter(content);
+              console.log('Parsed initiative data:', initiativeData);
+              
+              if (initiativeData.featured === 'true') {
+                featuredInitiatives.push(initiativeData);
+              } else {
+                initiatives.push(initiativeData);
+              }
+            } catch (error) {
+              console.error(`Error loading initiative ${file}:`, error);
+            }
+          }
+
+          // If we loaded initiatives from files, use them
+          if (initiatives.length > 0 || featuredInitiatives.length > 0) {
+            console.log('Using initiatives from .md files');
+            // Sort initiatives by date (newest first)
+            initiatives.sort((a, b) => new Date(b.date) - new Date(a.date));
+            featuredInitiatives.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            // Clear loading message
+            container.innerHTML = '';
+
+            // Add featured initiatives first
+            featuredInitiatives.forEach(initiative => {
+              container.innerHTML += createInitiativeCard(initiative, true);
+            });
+
+            // Add regular initiatives
+            initiatives.forEach(initiative => {
+              container.innerHTML += createInitiativeCard(initiative, false);
+            });
+            return;
+          }
+        } catch (error) {
+          console.error('Error loading initiatives from files:', error);
+        }
+      }
+      
+      // Fallback to embedded data
+      console.log('Using embedded initiatives data');
+      const initiatives = [];
+      const featuredInitiatives = [];
+
+      embeddedInitiatives.forEach(initiative => {
+        if (initiative.featured === 'true') {
+          featuredInitiatives.push(initiative);
+        } else {
+          initiatives.push(initiative);
+        }
+      });
+
+      // Sort initiatives by date (newest first)
+      initiatives.sort((a, b) => new Date(b.date) - new Date(a.date));
+      featuredInitiatives.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      // Clear loading message
+      container.innerHTML = '';
+
+      // Add featured initiatives first
+      featuredInitiatives.forEach(initiative => {
+        container.innerHTML += createInitiativeCard(initiative, true);
+      });
+
+      // Add regular initiatives
+      initiatives.forEach(initiative => {
+        container.innerHTML += createInitiativeCard(initiative, false);
+      });
+    }
+
+    // Load initiatives when page loads
+    document.addEventListener('DOMContentLoaded', loadInitiatives);
+  </script>
 </body>
 </html>

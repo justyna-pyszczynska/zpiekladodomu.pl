@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wsparcie - Z Piekła do Domu</title>
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
   <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -147,7 +148,7 @@
       box-shadow: 0 30px 60px rgba(0,0,0,.2); 
     }
     .support-card-content {
-      padding: 3rem;
+      padding: 4.5rem;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
@@ -171,6 +172,7 @@
       align-items: flex-start;
       margin-top: 2rem;
       margin-left: 0;
+      margin-bottom: -1.5rem;
     }
     .fundraising-widget {
       flex: 1;
@@ -224,7 +226,7 @@
     }
     .fundraising-widget iframe {
       width: 100%;
-      height: 500px;
+      height: 470px;
       border: none;
       border-radius: 12px;
       box-shadow: 0 8px 16px rgba(0,0,0,0.1);
@@ -250,28 +252,70 @@
     }
     .group-cover {
       width: 100%;
-      height: 120px;
+      height: 150px;
       object-fit: cover;
       border-radius: 0;
     }
     .group-content {
       padding: 1.5rem;
     }
+    .group-header {
+      position: relative;
+      margin-bottom: 0.75rem;
+      height: 100px;
+    }
+    .group-icon {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      position: relative;
+      top: 0px;
+      left: -10px;
+    }
+    .group-text-box {
+      position: absolute;
+      left: 100px;
+      top: 50%;
+      transform: translateY(-60%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      align-items: flex-start;
+      max-width: 200px;
+    }
+    .group-text-box * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .group-header .group-description {
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin: 0;
+      padding: 0;
+      line-height: 1.3;
+      white-space: nowrap;
+      text-align: left;
+      width: 100%;
+    }
     .group-title {
       font-family: 'McLaren', cursive;
-      font-size: 1.125rem;
+      font-size: 0.95rem;
       font-weight: 600;
       color: #1f2937;
-      margin: 0 0 0.375rem 0;
-    }
-    .group-description {
-      font-size: 0.8125rem;
-      color: #6b7280;
-      margin: 0 0 0.75rem 0;
-      line-height: 1.3;
+      margin: 0;
+      padding: 0;
+      white-space: nowrap;
+      text-align: left;
+      width: 100%;
     }
     .group-button {
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
       padding: 0.625rem 1.25rem;
       background: linear-gradient(135deg, #1877f2, #42a5f5);
       color: #fff;
@@ -280,11 +324,99 @@
       font-weight: 600;
       font-size: 0.8125rem;
       transition: all 0.3s ease;
+      margin: 2.5rem auto 0;
+      width: fit-content;
+    }
+    .button-icon {
+      width: 16px;
+      height: 16px;
+      filter: brightness(0) invert(1);
     }
     .group-button:hover {
       background: linear-gradient(135deg, #166fe5, #1976d2);
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+    }
+    .group-button.heart-button {
+      background: linear-gradient(135deg, #fca5a5, #fde68a);
+    }
+    .group-button.heart-button:hover {
+      background: linear-gradient(135deg, #f87171, #fbbf24);
+      box-shadow: 0 4px 12px rgba(252, 165, 165, 0.4);
+    }
+    .group-button.heart-button .button-icon {
+      width: 16px;
+      height: 16px;
+      filter: brightness(0) invert(1) drop-shadow(1px 1px 2px rgba(0,0,0,0.8));
+    }
+    .group-button.heart-button {
+      background: linear-gradient(135deg, #fca5a5, #fde68a);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
+
+    /* WIDGETS CONTAINER */
+    .widgets-container {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin-top: 2rem;
+    }
+
+    /* DOG WIDGET TITLE */
+    .dog-widget-title {
+      font-family: 'McLaren', cursive;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin: 0;
+      padding: 1.5rem 1rem 0.5rem 1rem;
+      text-align: center;
+      line-height: 1.3;
+    }
+    /* DOG THINKING IMAGE */
+    .dog-thinking-image {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      padding: 2rem 1rem 0.5rem 1rem;
+    }
+
+    /* PLACEHOLDER STYLES FOR EMPTY CARD */
+    .group-cover-placeholder {
+      width: 100%;
+      height: 150px;
+      background: #f3f4f6;
+      border-radius: 0;
+    }
+    .group-icon-placeholder {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #e5e7eb;
+      position: relative;
+      top: 0px;
+      left: -10px;
+    }
+    .group-description-placeholder {
+      width: 120px;
+      height: 16px;
+      background: #e5e7eb;
+      border-radius: 4px;
+    }
+    .group-title-placeholder {
+      width: 160px;
+      height: 20px;
+      background: #d1d5db;
+      border-radius: 4px;
+      margin-top: 0.25rem;
+    }
+    .group-button-placeholder {
+      width: 140px;
+      height: 36px;
+      background: #e5e7eb;
+      border-radius: 6px;
+      margin: 2.5rem auto 0;
     }
 
     /* PAYMENT METHODS */
@@ -524,15 +656,15 @@
       <div class="support-container">
         <article class="support-card">
           <div class="support-card-content">
-            <h2>Wesprzyj naszą misję</h2>
+            <h2>Jak możesz pomóc?</h2>
             <p class="muted">Każda złotówka pomaga ratować życie zwierząt z Turcji. Wybierz jedną z naszych zbiórek i dołącz do grona osób, które już pomagają.</p>
             
             <div class="fundraising-widgets">
               <div class="fundraising-widget">
-                <iframe frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/zpiekladodomu/widget/large"></iframe>
+                <iframe frameborder="0" width="430" height="470" scrolling="no" src="https://pomagam.pl/zpiekladodomu/widget/large"></iframe>
               </div>
               <div class="fundraising-widget">
-                <iframe frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/aph8gm/widget/large"></iframe>
+                <iframe frameborder="0" width="430" height="470" scrolling="no" src="https://pomagam.pl/aph8gm/widget/large"></iframe>
               </div>
             </div>
           </div>
@@ -541,20 +673,57 @@
         <article class="support-card">
           <div class="support-card-content">
             <h2>Inne formy wsparcia</h2>
-            <p class="muted">Wsparcie to nie tylko pieniądze. Możesz pomóc na wiele innych sposobów:</p>
+            <p class="muted">Wsparcie to nie tylko zbiórki. Możesz pomóc na wiele innych sposobów:</p>
             
-            <!-- Facebook Group Widget -->
-            <div class="facebook-group-widget">
-              <img src="images/facebook-cover.jpg" 
-                   alt="Facebook Group Cover" 
-                   class="group-cover">
-              <div class="group-content">
-                <h4 class="group-title">Adopcje - Z Piekła do Domu</h4>
-                <a href="https://www.facebook.com/groups/1483167953136280" 
-                   target="_blank" 
-                   class="group-button">
-                   Dołącz
-                </a>
+            <!-- Widgets Container -->
+            <div class="widgets-container">
+              <!-- Facebook Group Widget -->
+              <div class="facebook-group-widget">
+                <img src="images/facebook-cover.jpg" 
+                     alt="Facebook Group Cover" 
+                     class="group-cover">
+                <div class="group-content">
+                  <div class="group-header">
+                    <img src="images/logo.svg" alt="Logo" class="group-icon">
+                    <div class="group-text-box">
+                      <p class="group-description">Dołącz do grupy</p>
+                      <h4 class="group-title">Adopcje - Z Piekła do Domu</h4>
+                    </div>
+                  </div>
+                  <a href="https://www.facebook.com/groups/1483167953136280" 
+                     target="_blank" 
+                     class="group-button">
+                     <img src="images/facebook-icon.svg" alt="Facebook" class="button-icon">
+                     Dołącz do grupy
+                  </a>
+                </div>
+              </div>
+
+              <!-- Dog Thinking Widget -->
+              <div class="facebook-group-widget">
+                <h4 class="dog-widget-title">Zostań opiekunem stałym lub tymczasowym</h4>
+                <img src="images/dog-thinking.svg" alt="Dog Thinking" class="dog-thinking-image">
+                <div class="group-content">
+                  <a href="ankieta-adopcyjna.html" 
+                     class="group-button heart-button">
+                     <img src="images/heart.svg" alt="Heart" class="button-icon">
+                     Ankieta adopcyjna
+                  </a>
+                </div>
+              </div>
+
+              <!-- Dog Thinking Widget (Copy for editing) -->
+              <div class="facebook-group-widget">
+                <h4 class="dog-widget-title">Zostań oficjalnym partnerem naszych działań</h4>
+                <img src="images/hand-paw.svg" alt="Hand Paw" class="dog-thinking-image">
+                <div class="group-content">
+                  <a href="https://www.facebook.com/groups/1483167953136280" 
+                     target="_blank" 
+                     class="group-button heart-button">
+                     <img src="images/heart.svg" alt="Heart" class="button-icon">
+                     Współpraca
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -610,9 +779,9 @@
         <div class="links-column">
           <h4>Linki</h4>
           <div class="links">
-            <a href="#" data-text="Fanpage">Fanpage</a>
-            <a href="#" data-text="Nasze inicjatywy">Nasze inicjatywy</a>
-            <a href="#" data-text="Dołącz do grupy">Dołącz do grupy</a>
+            <a href="https://www.facebook.com/profile.php?id=61577219922888" data-text="Fanpage">Fanpage</a>
+            <a href="inicjatywy.html" data-text="Nasze inicjatywy">Nasze inicjatywy</a>
+            <a href="https://www.facebook.com/groups/1483167953136280" data-text="Dołącz do grupy">Dołącz do grupy</a>
             <a href="#" data-text="Współpraca">Współpraca</a>
           </div>
         </div>
@@ -621,7 +790,7 @@
           <div class="links">
             <a href="#" data-text="Wioska Burçak">Wioska Burçak</a>
             <a href="#" data-text="Pani Adalet">Pani Adalet</a>
-            <a href="#" data-text="Artykuły">Artykuły</a>
+            <a href="articles.html" data-text="Artykuły">Artykuły</a>
             <a href="#" data-text="Zostań sponsorem">Zostań sponsorem</a>
           </div>
         </div>
