@@ -61,6 +61,88 @@
       box-shadow: 0 6px 20px rgba(251,191,36,0.4);
     }
 
+    /* Mobile Menu Toggle Button */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      gap: 4px;
+    }
+    
+    .hamburger-line {
+      width: 25px;
+      height: 3px;
+      background: #222;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+    
+    /* Mobile Menu Overlay */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu.active {
+      display: flex;
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .mobile-menu a {
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #222;
+      padding: 1rem 2rem;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu a:hover {
+      background: rgba(0,0,0,0.1);
+      transform: scale(1.05);
+    }
+    
+    .mobile-menu a.cta {
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
+      font-weight: 700;
+    }
+    
+    .mobile-menu a.cta:hover {
+      background: linear-gradient(135deg,#fbbf24,#f87171);
+      transform: scale(1.05);
+    }
+
     /* HERO */
     .hero {
       position: relative;
@@ -69,7 +151,7 @@
       display: flex; align-items: center;
     }
     .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.2)); }
-    .hero-content { position: relative; z-index: 1; width: min(500px, 50%); margin-left: 12%; color: #fff; }
+    .hero-content { position: relative; z-index: 1; width: min(500px, 50%); margin-left: 11%; color: #fff; top: -9vh; }
     .hero h1 { 
       font-family: 'McLaren', cursive; 
       font-size: clamp(32px, 6vw, 42px); 
@@ -80,7 +162,7 @@
       border-radius: 0.5rem;
       display: inline-block;
       position: absolute;
-      top: 50%;
+      top: 40% !important;
       transform: translateY(-50%);
     }
     .hero-subtitle {
@@ -99,9 +181,17 @@
       left: 12%;
       z-index: 2;
     }
+    
+    /* Desktop-only subtitle positioning */
+    @media (min-width: 901px) {
+      .hero-subtitle {
+        top: 63%;
+        left: 11%;
+      }
+    }
       .hero-button-left {
         position: absolute;
-        top: 77%;
+        top: 64%;
         right: 25%;
         z-index: 2;
         width: 180px;
@@ -114,7 +204,7 @@
       }
       .hero-button {
         position: absolute;
-        top: 77%;
+        top: 64%;
         right: 12%;
         z-index: 2;
         width: 180px;
@@ -214,10 +304,21 @@
     .dark-card img { border-radius: .75rem; }
 
     /* SPLIT SECTION */
-    .split { display:grid; grid-template-columns: 1.2fr 1fr; gap: 1.625rem; align-items: center; }
+    .split { display:grid; grid-template-columns: 1fr 1fr; gap: 1.625rem; align-items: center; }
     .split-text h3 { font-family: 'McLaren', cursive; }
+    .split-text p { 
+      display: -webkit-box;
+      -webkit-line-clamp: 8;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
     .split img { border-radius: 0.75rem; box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
     .muted { color:#4b5563; }
+    
+    /* Desktop - Hide mobile card links */
+    .card-link-mobile {
+      display: contents;
+    }
 
     /* SHOP */
     .shop-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
@@ -332,6 +433,16 @@
       opacity: 0.8;
     }
     .footer-social .footer-copyright { text-align: right; }
+    
+    /* EMAIL ICON STYLING */
+    .footer-email img { 
+      width: 25px !important;
+      height: 25px !important;
+      max-width: 25px !important;
+      max-height: 25px !important;
+      min-width: 25px !important;
+      min-height: 25px !important;
+    }
 
     /* MAP SECTION */
     .map-section { padding: 2rem 0; }
@@ -485,15 +596,325 @@
     @media (max-width: 900px) {
       header { top: .625rem; }
       .navbar { padding: .625rem .75rem; }
-      .menu { gap: .5rem; }
-      .menu a { padding: .375rem .5rem; }
-      .cards-3, .shop-grid, .logos { grid-template-columns: 1fr; }
-      .dark-card, .split { grid-template-columns: 1fr; }
+      
+      /* Hide desktop menu on mobile */
+      .menu { display: none; }
+      
+      /* Show hamburger menu on mobile */
+      .mobile-menu-toggle { display: flex; }
+      .cards-3, .shop-grid { grid-template-columns: 1fr; }
+      .logos { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+      .logos img { max-width: 100%; max-height: 200px; width: 100%; height: auto; }
+      .dark-card { grid-template-columns: 1fr; }
+      .split { grid-template-columns: 0.8fr 0.9fr; gap: 2rem; }
+      .split-text h3 { font-size: 1rem; }
+      .split-text p { font-size: 0.8rem; }
+      
+      /* Mobile Fundraising Card Links */
+      .card-link-mobile {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+      }
+      .card-link-mobile .card {
+        pointer-events: none;
+      }
+      .card-link-mobile .card iframe {
+        pointer-events: none;
+      }
       .hero { min-height: 100vh; }
       .overlap { margin-top: -18vh; }
       .map-container { grid-template-columns: 1fr; gap: 2rem; }
       .map-wrapper { padding-bottom: 50%; /* Slightly taller on mobile */ }
       .map-stats { justify-content: center; }
+      
+      /* Mobile Map Section Reordering */
+      .map-container {
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 0 !important;
+      }
+      
+      .map-wrapper {
+        order: 1 !important;
+        padding: 0 1rem !important;
+      }
+      
+      .map-info {
+        order: 2 !important;
+      }
+      
+      /* Mobile Achievement Card Styling */
+      .map-info {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 1.5rem !important;
+      }
+      
+      .map-info-content {
+        text-align: center !important;
+        max-width: 100% !important;
+      }
+      
+      .map-info h4 {
+        text-align: center !important;
+        margin-bottom: 1rem !important;
+      }
+      
+      .map-info p {
+        text-align: center !important;
+        margin-bottom: 1.5rem !important;
+      }
+      
+      /* Mobile Cards Layout - First Row Side by Side */
+      .cards-3 {
+        grid-template-columns: 1fr 1fr 1fr !important;
+        gap: 0.125rem !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+      
+      /* Mobile Card Styling - Equal Size */
+      .card {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        height: 320px !important;
+        overflow: visible !important;
+        padding: 0.5rem !important;
+      }
+      
+      /* Mobile Fundraising Widget - Better Size */
+      .pomagam iframe {
+        zoom: 0.7 !important;
+        width: 100% !important;
+        height: 100% !important;
+        margin-left: 0 !important;
+        transform: none !important;
+      }
+      
+      /* Mobile Dog Cards */
+      .dog-card .circle {
+        width: 7rem !important;
+        height: 7rem !important;
+      }
+      
+      .dog-card h3 {
+        font-size: 0.875rem !important;
+        margin-bottom: 0.25rem !important;
+      }
+      
+      .dog-card .card-body {
+        padding: 0.5rem !important;
+        gap: 0.25rem !important;
+      }
+      
+      .dog-card .card-body p {
+        font-size: 0.625rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 0.5rem !important;
+      }
+      
+      .dog-card .btn {
+        font-size: 0.75rem !important;
+        padding: 0.375rem 0.75rem !important;
+      }
+      
+      /* Mobile Large Card Layout Adjustments */
+      .dog-card.span-2 {
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 1rem !important;
+      }
+      
+      .dog-card.span-2 .card-body {
+        flex: 0.6 !important;
+        max-width: 60% !important;
+        padding: 0 !important;
+      }
+      
+      .dog-card.span-2 .circle {
+        width: 10rem !important;
+        height: 10rem !important;
+        border-radius: 50% !important;
+        object-fit: cover !important;
+        flex-shrink: 0 !important;
+        flex-grow: 0 !important;
+        flex-basis: auto !important;
+        margin: 0 1.5rem 0 0 !important;
+      }
+      
+      /* Mobile Section Padding */
+      .section {
+        padding: 2rem 0 !important;
+      }
+      
+      /* Mobile Hero Positioning */
+      .hero-content {
+        text-align: left !important;
+        margin-left: 1rem !important;
+        margin-right: auto !important;
+        max-width: 90% !important;
+      }
+      
+      .hero-subtitle {
+        left: 1rem !important;
+        text-align: left !important;
+        max-width: 90% !important;
+        font-size: clamp(14px, 2.5vw, 18px) !important;
+      }
+      
+      /* Mobile Hero Buttons */
+      .hero-button-left,
+      .hero-button {
+        font-size: 0.75rem !important;
+        padding: 0.375rem 0.75rem !important;
+        min-width: auto !important;
+        width: auto !important;
+        top: 76% !important;
+      }
+      
+      /* Mobile Wsparcie Button Positioning */
+      .hero-button-left {
+        left: 66% !important;
+        right: auto !important;
+      }
+      
+      /* Mobile Wszystkie psiaki Button Positioning */
+      .hero-button {
+        right: 4% !important;
+        left: auto !important;
+      }
+      
+      /* Mobile Footer Styling */
+      .footer-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        padding: 0 1rem !important;
+        text-align: center !important;
+        align-items: center !important;
+      }
+      
+      .footer-main {
+        order: 1 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+      }
+      
+      .footer-brand {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+        max-width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        display: flex !important;
+      }
+      
+      .footer-brand img {
+        width: 9rem !important;
+        height: 9rem !important;
+        flex-shrink: 0 !important;
+      }
+      
+      .footer-content {
+        flex: 1 !important;
+        text-align: left !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        max-width: 40% !important;
+      }
+      
+      .footer-title {
+        font-size: 1.25rem !important;
+        margin-bottom: 1rem !important;
+        line-height: 1.2 !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+        text-align: left !important;
+        width: 100% !important;
+      }
+      
+      .footer-email {
+        justify-content: flex-start !important;
+        margin-bottom: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        width: 100% !important;
+      }
+      
+      .footer-email a {
+        font-size: 1rem !important;
+      }
+      
+      .footer-links {
+        order: 2 !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        align-items: center !important;
+        margin-bottom: 1rem !important;
+        justify-content: center !important;
+        width: 100% !important;
+        display: flex !important;
+      }
+      
+      .links-column {
+        text-align: center !important;
+        width: 100% !important;
+      }
+      
+      .links-column h4 {
+        text-align: center !important;
+        margin-bottom: 0.75rem !important;
+        font-size: 1rem !important;
+      }
+      
+      .links-column .links {
+        align-items: center !important;
+        gap: 0.5rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      
+      .links a {
+        text-align: center !important;
+        font-size: 0.9rem !important;
+      }
+      
+      .footer-social {
+        order: 3 !important;
+        align-items: center !important;
+        gap: 2rem !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      
+      .socials {
+        gap: 1.5rem !important;
+        display: flex !important;
+        justify-content: center !important;
+      }
+      
+      .socials a {
+        width: 56px !important;
+        height: 56px !important;
+      }
+      
+      .footer-social .footer-copyright {
+        text-align: center !important;
+        font-size: 1rem !important;
+        line-height: 1.4 !important;
+        width: 100% !important;
+      }
     }
   </style>
   
@@ -512,6 +933,14 @@
         <img src="images/logo.svg" alt="Logo" width="200" height="200">
         <span>Z Piekła Do Domu</span>
       </div>
+      
+      <!-- Hamburger Menu Button -->
+      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      
       <nav class="menu">
         <a href="index.html">Strona główna</a>
         <a href="adopcje.html">Adopcje</a>
@@ -520,6 +949,15 @@
         <a href="wsparcie.html" class="cta">Wsparcie</a>
     </nav>
     </div>
+
+    <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="closeMobileMenu()">Strona główna</a>
+    <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
+    <a href="#bazarek" onclick="closeMobileMenu()">Bazarek</a>
+    <a href="onas.html" onclick="closeMobileMenu()">O nas</a>
+    <a href="wsparcie.html" class="cta" onclick="closeMobileMenu()">Wsparcie</a>
+  </div>
   </header>
 
   <section id="home" class="hero">
@@ -528,7 +966,7 @@
     </div>
     <div class="hero-subtitle">Wspieraj lub zostań nowym opiekunem!</div>
     <a href="wsparcie.html" class="btn btn-primary hero-button-left" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">Wsparcie</a>
-    <button class="btn btn-outline hero-button">Wszystkie psiaki <img src="images/paw-icon.svg" alt="paw" width="16" height="16"></button>
+    <a href="adopcje.html" class="btn btn-outline hero-button" style="text-decoration: none; white-space: nowrap;">Wszystkie psiaki <img src="images/paw-icon.svg" alt="paw" width="16" height="16"></a>
   </section>
 
   <main class="container">
@@ -536,9 +974,11 @@
     <section class="section overlap" id="donations">
       <div class="cards-3">
         <!-- Row 1: Fundraising widget + two dog cards -->
+        <a href="https://pomagam.pl/zpiekladodomu" target="_blank" class="card-link-mobile">
         <article class="card pomagam">
           <iframe frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/zpiekladodomu/widget/large"></iframe>
         </article>
+        </a>
 
         <article class="card dog-card">
           <img src="images/dog-1.jpg" alt="Kokos" class="circle">
@@ -563,9 +1003,11 @@
         </article>
 
         <!-- Row 2: Second fundraising widget + wide dog card spanning two columns -->
+        <a href="https://pomagam.pl/aph8gm" target="_blank" class="card-link-mobile">
         <article class="card pomagam">
           <iframe frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/aph8gm/widget/large"></iframe>
         </article>
+        </a>
 
         <article class="card dog-card span-2">
           <img src="images/dog-3.jpg" alt="Gaja" class="circle">
@@ -637,6 +1079,7 @@
           <h3>Wioska Burçak</h3>
           <p class="muted" style="margin-top:8px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
           <p class="muted" style="margin-top:8px">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <a href="inicjatywa.html" class="read-more-link" style="color: #000; text-decoration: none; font-weight: 600; margin-top: 8px; display: inline-block;">Czytaj dalej →</a>
         </div>
         <img src="images/burcak.jpg" alt="Wioska Burçak">
     </div>
@@ -688,7 +1131,7 @@
           <div class="footer-content">
             <h2 class="footer-title">Z Piekła do Domu - ratujemy psy i koty z Turcji</h2>
             <div class="footer-email">
-              <svg width="16" height="16" style="margin-right: 8px;"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <img src="images/email-icon.svg" alt="Email" style="margin-right: 8px;">
               <a href="mailto:zpiekladodomu@gmail.com">zpiekladodomu@gmail.com</a>
             </div>
           </div>
@@ -1031,9 +1474,9 @@
            .catch(error => {
              console.error('Error loading SVG:', error);
              mapContainer.innerHTML = '<p style="color: red;">Error loading map. Please refresh the page.</p>';
-           });
-       }
-    
+      });
+    }
+
     // Initialize the interactive map when page loads
     document.addEventListener('DOMContentLoaded', function() {
          console.log('Page loaded, initializing map...');
@@ -1052,6 +1495,51 @@
         }
       });
     }
+    
+    // Mobile Menu Functions
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const hamburgerLines = document.querySelectorAll('.hamburger-line');
+      
+      mobileMenu.classList.toggle('active');
+      
+      // Animate hamburger lines
+      hamburgerLines.forEach((line, index) => {
+        if (mobileMenu.classList.contains('active')) {
+          if (index === 0) line.style.transform = 'rotate(45deg) translate(5px, 5px)';
+          if (index === 1) line.style.opacity = '0';
+          if (index === 2) line.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+        } else {
+          line.style.transform = 'none';
+          line.style.opacity = '1';
+        }
+      });
+    }
+    
+    function closeMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const hamburgerLines = document.querySelectorAll('.hamburger-line');
+      
+      mobileMenu.classList.remove('active');
+      
+      // Reset hamburger lines
+      hamburgerLines.forEach(line => {
+        line.style.transform = 'none';
+        line.style.opacity = '1';
+      });
+    }
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      
+      if (mobileMenu.classList.contains('active') && 
+          !mobileMenu.contains(event.target) && 
+          !mobileMenuToggle.contains(event.target)) {
+        closeMobileMenu();
+      }
+    });
   </script>
 </body>
 </html>

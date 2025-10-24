@@ -182,7 +182,7 @@
       box-shadow: 0 20px 40px rgba(0,0,0,.15); 
       overflow: hidden; 
       width: 100%;
-      height: 600px;
+      height: 700px;
       display: flex;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
@@ -199,7 +199,7 @@
     }
     .big-card-content {
       flex: 1;
-      padding: 3rem;
+      padding: 2.5rem 3rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -821,6 +821,17 @@
       .social-widgets-container {
         flex-direction: column;
         gap: 1.5rem;
+        align-items: center;
+        text-align: center;
+      }
+      
+      .facebook-widget-container,
+      .instagram-widget-container {
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
       
       .fb-widget-wrapper,
@@ -865,6 +876,25 @@
       .facebook-widget-header p,
       .instagram-widget-header p {
         font-size: 0.9rem;
+      }
+      
+      /* Mobile Widget Links */
+      .widget-link-mobile {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        width: 100%;
+      }
+      
+      .widget-link-mobile .fb-widget-wrapper,
+      .widget-link-mobile .insta-widget {
+        pointer-events: none;
+        cursor: pointer;
+      }
+      
+      .widget-link-mobile .fb-widget-wrapper iframe,
+      .widget-link-mobile .insta-widget * {
+        pointer-events: none;
       }
     }
 
@@ -1090,54 +1120,452 @@
     }
     .footer-social .footer-copyright { text-align: right; }
 
+    /* EMAIL ICON STYLING */
+    .footer-email img { 
+      width: 25px !important;
+      height: 25px !important;
+      max-width: 25px !important;
+      max-height: 25px !important;
+      min-width: 25px !important;
+      min-height: 25px !important;
+    }
+
     /* RESPONSIVE */
     @media (max-width: 900px) {
       header { top: .625rem; }
       .navbar { padding: .625rem .75rem; }
       .menu { gap: .5rem; }
       .menu a { padding: .375rem .5rem; }
+      
+      /* Mobile Menu Toggle Button */
+      .mobile-menu-toggle {
+        display: flex;
+        flex-direction: column;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        gap: 4px;
+      }
+      
+      .hamburger-line {
+        width: 25px;
+        height: 3px;
+        background: #222;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+      }
+      
+      .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+      }
+      
+      .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+      }
+      
+      /* Hide desktop menu on mobile */
+      .menu { display: none; }
+      
+      /* Show hamburger menu on mobile */
+      .mobile-menu-toggle { display: flex; }
+      
+      /* Mobile Menu Overlay */
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .mobile-menu.active {
+        display: flex;
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      .mobile-menu a {
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-decoration: none;
+        color: #222;
+        padding: 1rem 2rem;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+      }
+      
+      .mobile-menu a:hover {
+        background: rgba(0,0,0,0.1);
+        transform: scale(1.05);
+      }
+      
+      .mobile-menu a.cta {
+        background: linear-gradient(135deg,#ffedd5,#fecaca);
+        font-weight: 700;
+      }
+      
+      .mobile-menu a.cta:hover {
+        background: linear-gradient(135deg,#fbbf24,#f87171);
+        transform: scale(1.05);
+      }
       .big-card { 
-        flex-direction: column; 
+      flex-direction: column;
         height: auto; 
+        min-height: 650px;
         max-width: 90%;
+        overflow: hidden;
+        border-radius: 1.5rem;
       }
       .big-card-image { 
-        height: 300px; 
+        height: 250px; 
         flex: none; 
+        background-size: 40%;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: 30px;
+        margin: 10px;
       }
       .big-card-content { 
-        padding: 2rem; 
+        padding: 2.5rem 2rem; 
+        min-height: 400px;
+      }
+      .big-card .muted {
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
       }
       .big-card h2 { 
         font-size: 2rem; 
       }
-      .overlap { margin-top: -18vh; }
+      .overlap { margin-top: -22vh; }
       .map-container { flex-direction: column; gap: 2rem; }
       .map-info { max-width: 100%; }
       .map-wrapper { padding-bottom: 50%; /* Slightly taller on mobile */ }
       .map-stats { justify-content: center; }
-      .gallery-grid { grid-template-columns: 1fr; gap: 1rem; }
-      .gallery-item img, .gallery-item video { height: 300px; }
-      .gallery-item.featured img, .gallery-item.featured video { min-height: 400px; }
-      .facebook-video-embed iframe { min-height: 400px !important; }
-      .facebook-photo-img { height: 300px; }
-      .gallery-grid-three-cards { 
-        grid-template-columns: 1fr; 
-        grid-template-rows: auto auto auto;
-        gap: 1rem; 
+      /* Mobile Gallery - Full Width with Desktop Shapes */
+      .gallery-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr 1fr !important;
+        grid-template-rows: 200px 200px !important;
+        gap: 1rem !important;
+        margin-top: 1rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 1rem !important;
       }
+      
+      .gallery-grid-three-cards {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr 1fr !important;
+        grid-template-rows: 200px 200px !important;
+        gap: 1rem !important;
+        margin-top: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 1rem !important;
+      }
+      
+      .gallery-grid-five-cards {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr 1fr !important;
+        grid-template-rows: 200px 200px !important;
+        gap: 1rem !important;
+        margin-top: 2rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 1rem !important;
+      }
+      
+      .gallery-item {
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        flex-shrink: 0 !important;
+        transform: none !important;
+      }
+      
+      .gallery-item.featured {
+        height: 100% !important;
+        grid-row: span 2 !important;
+      }
+      
+      /* Restore desktop positioning for three cards */
+      .gallery-grid-three-cards .gallery-item:nth-child(1) {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+        height: 100% !important;
+      }
+      
+      .gallery-grid-three-cards .gallery-item:nth-child(2) {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+        height: 100% !important;
+      }
+      
       .gallery-grid-three-cards .gallery-item:nth-child(3) {
-        grid-row: 3;
-        height: 300px;
+        grid-row: 1 / -1 !important;
+        grid-column: 2 / -1 !important;
+        height: 100% !important;
       }
-      .gallery-grid-five-cards { 
-        grid-template-columns: 1fr; 
-        grid-template-rows: auto auto auto auto auto;
-        gap: 1rem; 
+      
+      /* Restore desktop positioning for five cards */
+      .gallery-grid-five-cards .gallery-item:nth-child(1) {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+        height: 100% !important;
       }
+      
+      .gallery-grid-five-cards .gallery-item:nth-child(2) {
+        grid-column: 3 !important;
+        grid-row: 1 !important;
+        height: 100% !important;
+      }
+      
       .gallery-grid-five-cards .gallery-item:nth-child(3) {
-        grid-row: 3;
-        height: 300px;
+        grid-column: 2 !important;
+        grid-row: 1 / -1 !important;
+        height: 100% !important;
+      }
+      
+      .gallery-grid-five-cards .gallery-item:nth-child(4) {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+        height: 100% !important;
+      }
+      
+      .gallery-grid-five-cards .gallery-item:nth-child(5) {
+        grid-column: 3 !important;
+        grid-row: 2 !important;
+        height: 100% !important;
+      }
+      
+      .gallery-item img,
+      .gallery-item video {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        border-radius: 0.5rem !important;
+      }
+      
+      .facebook-video-embed {
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
+        border-radius: 0.5rem !important;
+      }
+      
+      .facebook-video-embed iframe {
+        width: 100% !important;
+        height: 100% !important;
+        border: none !important;
+        border-radius: 0.5rem !important;
+      }
+      
+      .facebook-photo-container {
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      
+      .facebook-photo-img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        border-radius: 0.5rem !important;
+      }
+      
+      .image-container {
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      
+      .gallery-image {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        border-radius: 0.5rem !important;
+      }
+      
+      /* Scale down entire gallery sections */
+      .gallery-section {
+        padding: 1rem 0 !important;
+        transform: scale(0.8) !important;
+        transform-origin: top center !important;
+        margin-bottom: -15% !important;
+      }
+      
+      .gallery-section-no-padding {
+        padding: 0.5rem 0 !important;
+        margin-top: -1rem !important;
+        transform: scale(0.8) !important;
+        transform-origin: top center !important;
+        margin-bottom: -15% !important;
+      }
+      
+      .gallery-header {
+        margin-bottom: 1rem !important;
+        transform: scale(0.9) !important;
+        transform-origin: center !important;
+      }
+      
+      .gallery-header h3 {
+        font-size: 1.2rem !important;
+      }
+      
+      .gallery-header p {
+        font-size: 0.9rem !important;
+      }
+      
+      /* Mobile Footer Styling */
+      .footer-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        padding: 0 1rem !important;
+        text-align: center !important;
+        align-items: center !important;
+      }
+      
+      .footer-main {
+        order: 1 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+      }
+      
+      .footer-brand {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+        max-width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        display: flex !important;
+      }
+      
+      .footer-brand img {
+        width: 9rem !important;
+        height: 9rem !important;
+        flex-shrink: 0 !important;
+      }
+      
+      .footer-content {
+        flex: 1 !important;
+        text-align: left !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        max-width: 40% !important;
+      }
+      
+      .footer-title {
+        font-size: 1.25rem !important;
+        margin-bottom: 1rem !important;
+        line-height: 1.2 !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+        text-align: left !important;
+        width: 100% !important;
+      }
+      
+      .footer-email {
+        justify-content: flex-start !important;
+        margin-bottom: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        width: 100% !important;
+      }
+      
+      .footer-email a {
+        font-size: 1rem !important;
+      }
+      
+      .footer-links {
+        order: 2 !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        align-items: center !important;
+        margin-bottom: 1rem !important;
+        justify-content: center !important;
+        width: 100% !important;
+        display: flex !important;
+      }
+      
+      .links-column {
+        text-align: center !important;
+        width: 100% !important;
+      }
+      
+      .links-column h4 {
+        text-align: center !important;
+        margin-bottom: 0.75rem !important;
+        font-size: 1rem !important;
+      }
+      
+      .links-column .links {
+        align-items: center !important;
+        gap: 0.5rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      
+      .links a {
+        text-align: center !important;
+        font-size: 0.9rem !important;
+      }
+      
+      .footer-social {
+        order: 3 !important;
+        align-items: center !important;
+        gap: 2rem !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      
+      .socials {
+        gap: 1.5rem !important;
+        display: flex !important;
+        justify-content: center !important;
+      }
+      
+      .socials a {
+        width: 56px !important;
+        height: 56px !important;
+      }
+      
+      .footer-social .footer-copyright {
+        text-align: center !important;
+        font-size: 1rem !important;
+        line-height: 1.4 !important;
+        width: 100% !important;
       }
     }
   </style>
@@ -1152,6 +1580,13 @@
         <img src="images/logo.svg" alt="Logo" width="200" height="200">
         <span>Z Piekła Do Domu</span>
       </div>
+      <!-- Hamburger Menu Button -->
+      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      
       <nav class="menu">
         <a href="index.html">Strona główna</a>
         <a href="adopcje.html">Adopcje</a>
@@ -1161,6 +1596,15 @@
     </nav>
     </div>
   </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobileMenu" class="mobile-menu">
+    <a href="index.html">Strona główna</a>
+    <a href="adopcje.html">Adopcje</a>
+    <a href="#bazarek">Bazarek</a>
+    <a href="onas.html">O nas</a>
+    <a href="wsparcie.html" class="cta">Wsparcie</a>
+  </div>
 
   <section id="home" class="hero">
     <div class="hero-content">
@@ -1176,7 +1620,7 @@
           <div class="big-card-image"></div>
           <div class="big-card-content">
             <h2 id="main-card-title">Bo każde istnienie<br>ma dla nas znaczenie</h2>
-            <p class="muted" id="main-card-content">Z Piekła do Domu to organizacja, która ratuje psy i koty z trudnych warunków w Turcji, dając im szansę na nowe, lepsze życie w Polsce. Nasza misja to nie tylko ratowanie zwierząt, ale także budowanie świadomości o problemie bezdomności zwierząt na całym świecie. Od początku naszej działalności udało nam się uratować ponad 500 zwierząt i znaleźć im nowe, kochające domy.</p>
+            <p class="muted" id="main-card-content">Jesteśmy grupą kobiet - wolontariuszek, które założyły inicjatywę <strong>"Z Piekła do Domu"</strong> w marcu 2025 roku. Naszym celem jest ratowanie psów i kotów z trudnych, często śmiertelnych warunków panujących obecnie w Turcji. Na początku była nas garstka, ale projekt nabrał tempa i nadal rośnie w siłę. Dowiedziałyśmy się z mediów i od naszych tureckich znajomych o <strong>ustawie nr 5911</strong>, która została wdrożona w Turcji w 2024 roku. Ustawa ma na celu <strong>całkowitą eskterminacje psów bezdomnych w kraju</strong>. Nie zgadzamy się na takie okrucieństwo. Uważamy, że zwierzęta mają prawo żyć, i to godnie żyć. Szerzymy świadomość. Karmimy, leczymy psy i koty w Turcji, organizujemy transport do Polski i szukamy dobrych, odpowiedzialnych domów adopcyjnych dla naszych skrzywdzonych podopiecznych.</p>
             <a href="wsparcie.html" class="btn btn-primary" id="main-card-button" style="text-decoration: none;">Wspomóż nas ↗</a>
           </div>
         </article>
@@ -1192,6 +1636,7 @@
               <h2>Śledź nas na Facebooku</h2>
               <p>Bądź na bieżąco z naszymi działaniami i historiami zwierząt</p>
             </div>
+            <a href="https://www.facebook.com/profile.php?id=61577219922888" target="_blank" class="widget-link-mobile">
             <div class="fb-widget-wrapper">
               <div class="fb-page"
                 data-href="https://www.facebook.com/profile.php?id=61577219922888"
@@ -1204,6 +1649,7 @@
                 data-show-facepile="true">
               </div>
             </div>
+            </a>
           </div>
           
           <div class="instagram-widget-container">
@@ -1211,19 +1657,21 @@
               <h2>Śledź nas na Instagramie</h2>
               <p>Zobacz najnowsze zdjęcia i historie naszych podopiecznych</p>
             </div>
+            <a href="https://www.instagram.com/z_piekla_do_domu_/" target="_blank" class="widget-link-mobile">
             <div class="insta-widget">
-              <a href="https://www.instagram.com/z_piekla_do_domu_/" target="_blank" class="insta-profile">
+                <div class="insta-profile">
                 <img src="images/logo.svg" 
                      alt="Z Piekła do Domu Logo" class="insta-avatar">
                 <div class="insta-info">
                   <h3>@z_piekla_do_domu_</h3>
                   <p>Profil na Instagramie — zobacz więcej postów!</p>
                 </div>
-              </a>
-              <a href="https://www.instagram.com/z_piekla_do_domu_/" target="_blank" class="insta-btn">
+                </div>
+                <div class="insta-btn">
                 Zobacz na Instagramie
-              </a>
             </div>
+              </div>
+            </a>
           </div>
         </div>
       </div>
@@ -1419,7 +1867,7 @@
           <div class="footer-content">
             <h2 class="footer-title">Z Piekła do Domu - ratujemy psy i koty z Turcji</h2>
             <div class="footer-email">
-              <svg width="16" height="16" style="margin-right: 8px;"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <img src="images/email-icon.svg" alt="Email" style="margin-right: 8px;">
               <a href="mailto:zpiekladodomu@gmail.com">zpiekladodomu@gmail.com</a>
             </div>
           </div>
@@ -1906,6 +2354,35 @@
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         closeVideoModal();
+      }
+    });
+    
+    // Mobile Menu Functions
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      
+      mobileMenu.classList.toggle('active');
+      mobileMenuToggle.classList.toggle('active');
+    }
+    
+    function closeMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      
+      mobileMenu.classList.remove('active');
+      mobileMenuToggle.classList.remove('active');
+    }
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      
+      if (mobileMenu.classList.contains('active') && 
+          !mobileMenu.contains(event.target) && 
+          !mobileMenuToggle.contains(event.target)) {
+        closeMobileMenu();
       }
     });
   </script>

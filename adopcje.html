@@ -60,6 +60,88 @@
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(251,191,36,0.4);
     }
+    
+    /* Mobile Menu Toggle Button */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      gap: 4px;
+    }
+    
+    .hamburger-line {
+      width: 25px;
+      height: 3px;
+      background: #222;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+    
+    /* Mobile Menu Overlay */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu.active {
+      display: flex;
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .mobile-menu a {
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #222;
+      padding: 1rem 2rem;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu a:hover {
+      background: rgba(0,0,0,0.1);
+      transform: scale(1.05);
+    }
+    
+    .mobile-menu a.cta {
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
+      font-weight: 700;
+    }
+    
+    .mobile-menu a.cta:hover {
+      background: linear-gradient(135deg,#fbbf24,#f87171);
+      transform: scale(1.05);
+    }
 
     /* HERO */
     .hero {
@@ -80,8 +162,30 @@
       border-radius: 0.5rem;
       display: inline-block;
       position: absolute;
-      top: 50%;
+      top: 40% !important;
       transform: translateY(-50%);
+    }
+
+    /* MOBILE HERO OVERRIDES */
+    @media (max-width: 900px) {
+      .hero-content {
+        width: 100% !important;
+        margin: 0 !important;
+        text-align: center !important;
+        padding: 2rem 1rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-height: 100vh !important;
+      }
+      .hero {
+        min-height: 100vh !important;
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
     }
     .btn-ghost { background: rgba(255,255,255,.2); color:#fff; border:1px solid rgba(255,255,255,.35); text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
     .btn-outline { 
@@ -208,19 +312,18 @@
       margin: 0 0 1rem 0; 
       font-weight: 600; 
       white-space: nowrap; 
-      transition: all 0.3s ease;
+      width: 100%;
       cursor: pointer;
     }
     .links-column h4:hover {
       font-weight: 700;
       color: #333;
     }
-    .links { display: flex; flex-direction: column; gap: 0.5rem; }
+    .links { display: flex; flex-direction: column; gap: 0.5rem; flex-grow: 1}
     .links a { 
       color: #000; 
       text-decoration: none; 
       font-size: 0.875rem; 
-      transition: all 0.3s ease;
       white-space: nowrap;
       font-weight: 400;
       display: block;
@@ -237,23 +340,526 @@
       display: inline-block; 
       text-decoration: none; 
       transition: all 0.3s ease;
-      width: 48px;
-      height: 48px;
     }
     .socials a:hover {
       transform: scale(1.1);
       opacity: 0.8;
     }
     .footer-social .footer-copyright { text-align: right; }
+    
+    /* FORCE FOOTER STYLES - MAXIMUM SPECIFICITY */
+    body footer { background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%) !important; margin-top: 2.25rem !important; padding: 3rem 0 !important; }
+    body .footer-grid { display:grid !important; grid-template-columns: 2fr 1fr 1fr !important; gap: 2rem !important; align-items: start !important; }
+    body .footer-brand { display:flex !important; align-items:flex-start !important; gap: 1.5rem !important; }
+    body .footer-brand img { width: 10rem !important; height: 10rem !important; }
+    body .footer-content { flex: 1 !important; }
+    body .footer-title { font-family: 'McLaren', cursive !important; font-size: 1.5rem !important; color: #000 !important; margin: 0 0 1rem 0 !important; line-height: 1.3 !important; }
+    body .footer-copyright { color: #000 !important; font-size: 0.875rem !important; line-height: 1.4 !important; }
+    body .footer-links { display: flex !important; gap: 7rem !important; }
+    body .footer-links .links a {
+      position: relative !important;
+      display: inline-block !important;
+      font-weight: 500 !important;
+      transition: font-weight 0.3s ease, color 0.3s ease !important;
+    }
+    body .footer-links .links a::after {
+      content: attr(data-text) !important;
+      visibility: hidden !important;
+      font-weight: 700 !important;
+      height: 0 !important;
+      overflow: hidden !important;
+      pointer-events: none !important;
+      display: block !important;
+    }
+    body .footer-links .links a:hover {
+      font-weight: 700 !important;
+      color: #666 !important;
+    }
+    body .links-column h4 { 
+      color: #000 !important; 
+      font-size: 1rem !important; 
+      margin: 0 0 1rem 0 !important; 
+      font-weight: 600 !important; 
+      white-space: nowrap !important; 
+      width: 100% !important;
+      cursor: pointer !important;
+    }
+    body .links-column h4:hover {
+      font-weight: 700 !important;
+      color: #333 !important;
+    }
+    body .links { display: flex !important; flex-direction: column !important; gap: 0.5rem !important; flex-grow: 1 !important; }
+    body .links a { 
+      color: #000 !important; 
+      text-decoration: none !important; 
+      font-size: 0.875rem !important; 
+      white-space: nowrap !important;
+      font-weight: 400 !important;
+      display: block !important;
+      width: 100% !important;
+      text-align: left !important;
+    }
+    body .links a:hover {
+      color: #666 !important;
+      font-weight: 700 !important;
+    }
+    body .footer-social { display: flex !important; flex-direction: column !important; align-items: flex-end !important; gap: 3.75rem !important; }
+    body .socials { display: flex !important; gap: 0.75rem !important; }
+    body .socials a { 
+      display: inline-block !important; 
+      text-decoration: none !important; 
+      transition: all 0.3s ease !important;
+    }
+    body .socials a:hover {
+      transform: scale(1.1) !important;
+      opacity: 0.8 !important;
+    }
+    body .footer-social .footer-copyright { text-align: right !important; }
+    
+    /* DESKTOP FOOTER EMAIL - FORCE EXACT MATCH */
+    .footer-email { 
+      display: flex !important; 
+      align-items: center !important; 
+      margin-bottom: 1rem !important; 
+      justify-content: flex-start !important;
+    }
+    .footer-email img { 
+      width: 12px !important;
+      height: 12px !important;
+      margin-right: 8px !important;
+    }
+    
+    /* FORCE SMALL EMAIL ICON */
+    img[src="images/email-icon.svg"] {
+      width: 25px !important;
+      height: 25px !important;
+      max-width: 25px !important;
+      max-height: 25px !important;
+      min-width: 25px !important;
+      min-height: 25px !important;
+    }
+    
+    /* ALTERNATIVE APPROACH */
+    .footer-email img {
+      width: 14px !important;
+      height: 14px !important;
+      max-width: 14px !important;
+      max-height: 14px !important;
+    }
+    .footer-email:hover svg { color: #666 !important; }
+    .footer-email a { 
+      color: #000 !important; 
+      text-decoration: none !important; 
+      font-size: 1rem !important; 
+      transition: all 0.3s ease !important;
+    }
+    .footer-email a:hover {
+      color: #666 !important;
+      text-decoration: underline !important;
+      font-weight: 700 !important;
+    }
+    
+
+    /* TOUCH OPTIMIZATIONS */
+    @media (hover: none) and (pointer: coarse) {
+      .card:hover {
+        transform: none;
+        box-shadow: 0 12px 22px rgba(0,0,0,.1);
+      }
+      .btn:hover {
+        transform: none;
+      }
+      .menu a:hover {
+        background: none;
+        color: #222;
+      }
+      .menu a.cta:hover {
+        background: linear-gradient(135deg,#ffedd5,#fecaca);
+        transform: none;
+        box-shadow: none;
+      }
+    }
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
+      .mobile-menu-toggle {
+        display: flex;
+      }
+      .menu {
+        display: none;
+      }
+      
       header { top: .625rem; }
       .navbar { padding: .625rem .75rem; }
-      .menu { gap: .5rem; }
-      .menu a { padding: .375rem .5rem; }
-      .cards-3 { grid-template-columns: 1fr; }
-      .overlap { margin-top: -18vh; }
+      .hero { 
+        min-height: 100vh; 
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hero-content {
+        text-align: left !important;
+        margin-left: 1rem !important;
+        margin-right: auto !important;
+        max-width: 90% !important;
+      }
+      .overlap { 
+        margin-top: -18vh; 
+      }
+      .cards-3 { 
+        grid-template-columns: 1fr 1fr; 
+        gap: 1rem;
+        margin: 0;
+      }
+      .card {
+        height: auto;
+        min-height: 280px;
+        width: 100%;
+      }
+      .dog-card.span-2 {
+        flex-direction: column !important;
+        text-align: center;
+        padding: 1.5rem !important;
+      }
+      .dog-card.span-2 .circle {
+        width: 10rem !important;
+        height: 10rem !important;
+        margin: 0 auto 1rem auto !important;
+      }
+      .dog-card.span-2 .card-body {
+        padding: 0 !important;
+      }
+      .section {
+        padding: 2rem 0;
+      }
+      
+      /* Mobile Footer Styling */
+      .footer-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        padding: 0 1rem !important;
+        text-align: center !important;
+        align-items: center !important;
+      }
+      
+      .footer-main {
+        order: 1 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+      }
+      
+      .footer-brand {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+        max-width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        display: flex !important;
+      }
+      
+      .footer-brand img {
+        width: 9rem !important;
+        height: 9rem !important;
+        flex-shrink: 0 !important;
+      }
+      
+      .footer-content {
+        flex: 1 !important;
+        text-align: left !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        max-width: 40% !important;
+      }
+      
+      .footer-title {
+        font-size: 1.25rem !important;
+        margin-bottom: 1rem !important;
+        line-height: 1.2 !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+        text-align: left !important;
+        width: 100% !important;
+      }
+      
+      .footer-email {
+        justify-content: flex-start !important;
+        margin-bottom: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        width: 100% !important;
+      }
+      
+      .footer-email a {
+        font-size: 1rem !important;
+      }
+      
+      .footer-links {
+        order: 2 !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        align-items: center !important;
+        margin-bottom: 1rem !important;
+        justify-content: center !important;
+        width: 100% !important;
+        display: flex !important;
+      }
+      
+      .links-column {
+        text-align: center !important;
+        width: 100% !important;
+      }
+      
+      .links-column h4 {
+        text-align: center !important;
+        margin-bottom: 0.75rem !important;
+        font-size: 1rem !important;
+      }
+      
+      .links-column .links {
+        align-items: center !important;
+        gap: 0.5rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      
+      .links a {
+        text-align: center !important;
+        font-size: 0.9rem !important;
+      }
+      
+      .footer-social {
+        order: 3 !important;
+        align-items: center !important;
+        gap: 2rem !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      
+      .socials {
+        gap: 1.5rem !important;
+        display: flex !important;
+        justify-content: center !important;
+      }
+      
+      .socials a {
+        width: 56px !important;
+        height: 56px !important;
+      }
+      
+      .footer-social .footer-copyright {
+        text-align: center !important;
+        font-size: 1rem !important;
+        line-height: 1.4 !important;
+        width: 100% !important;
+      }
+      
+      /* FORCE MOBILE FOOTER STYLES - MAXIMUM SPECIFICITY */
+      body .footer-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        padding: 0 1rem !important;
+        text-align: center !important;
+        align-items: center !important;
+      }
+      
+      body .footer-main {
+        order: 1 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+      }
+      
+      body .footer-brand {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+        max-width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        display: flex !important;
+      }
+      
+      body .footer-brand img {
+        width: 9rem !important;
+        height: 9rem !important;
+        flex-shrink: 0 !important;
+      }
+      
+      body .footer-content {
+        flex: 1 !important;
+        text-align: left !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        max-width: 40% !important;
+      }
+      
+      body .footer-title {
+        font-size: 1.25rem !important;
+        margin-bottom: 1rem !important;
+        line-height: 1.2 !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+        text-align: left !important;
+        width: 100% !important;
+      }
+      
+      
+      body .footer-links {
+        order: 2 !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        align-items: center !important;
+        margin-bottom: 1rem !important;
+        justify-content: center !important;
+        width: 100% !important;
+        display: flex !important;
+      }
+      
+      body .links-column {
+        text-align: center !important;
+        width: 100% !important;
+      }
+      
+      body .links-column h4 {
+        text-align: center !important;
+        margin-bottom: 0.75rem !important;
+        font-size: 1rem !important;
+      }
+      
+      body .links-column .links {
+        align-items: center !important;
+        gap: 0.5rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      
+      body .links a {
+        text-align: center !important;
+        font-size: 0.9rem !important;
+      }
+      
+      body .footer-social {
+        order: 3 !important;
+        align-items: center !important;
+        gap: 2rem !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      
+      body .socials {
+        gap: 1.5rem !important;
+        display: flex !important;
+        justify-content: center !important;
+      }
+      
+      body .socials a {
+        width: 56px !important;
+        height: 56px !important;
+      }
+      
+      body .footer-social .footer-copyright {
+        text-align: center !important;
+        font-size: 1rem !important;
+        line-height: 1.4 !important;
+        width: 100% !important;
+      }
+      
+    }
+
+    @media (max-width: 600px) {
+      header {
+        width: calc(100% - 1rem);
+        left: 0.5rem;
+        top: 0.25rem;
+      }
+      .navbar {
+        padding: 0.5rem 0.75rem;
+      }
+      .brand {
+        font-size: 0.8rem;
+        gap: 6px;
+      }
+      .brand img {
+        width: 20px;
+        height: 20px;
+      }
+      .hero {
+        min-height: 100vh;
+      }
+      .hero-content {
+        padding: 1rem 0.5rem;
+      }
+      .cards-3 {
+        --card-h: 350px;
+        gap: 1rem;
+      }
+      .card {
+        height: var(--card-h);
+        margin: 0;
+      }
+      .dog-card .circle {
+        width: 8rem;
+        height: 8rem;
+      }
+      .dog-card.span-2 .circle {
+        width: 8rem !important;
+        height: 8rem !important;
+      }
+      .section {
+        padding: 1.5rem 0;
+      }
+      .overlap {
+        margin-top: -8vh;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        width: calc(100% - 0.5rem);
+        left: 0.25rem;
+      }
+      .navbar {
+        padding: 0.5rem;
+        border-radius: 8px;
+      }
+      .brand {
+        font-size: 0.75rem;
+      }
+      .brand img {
+        width: 18px;
+        height: 18px;
+      }
+      .cards-3 {
+        --card-h: 300px;
+      }
+      .dog-card .circle {
+        width: 7rem;
+        height: 7rem;
+      }
+      .dog-card.span-2 .circle {
+        width: 7rem !important;
+        height: 7rem !important;
+      }
+      .section {
+        padding: 1rem 0;
+      }
     }
   </style>
 </head>
@@ -264,6 +870,11 @@
         <img src="images/logo.svg" alt="Logo" width="200" height="200">
         <span>Z Piekła Do Domu</span>
       </div>
+      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
       <nav class="menu">
         <a href="index.html">Strona główna</a>
         <a href="adopcje.html" style="background: rgba(0,0,0,0.1);">Adopcje</a>
@@ -273,6 +884,15 @@
     </nav>
     </div>
   </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="closeMobileMenu()">Strona główna</a>
+    <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
+    <a href="#bazarek" onclick="closeMobileMenu()">Bazarek</a>
+    <a href="onas.html" onclick="closeMobileMenu()">O nas</a>
+    <a href="wsparcie.html" class="cta" onclick="closeMobileMenu()">Wsparcie</a>
+  </div>
 
   <section id="home" class="hero">
     <div class="hero-content">
@@ -365,7 +985,7 @@
           <div class="footer-content">
             <h2 class="footer-title">Z Piekła do Domu - ratujemy psy i koty z Turcji</h2>
             <div class="footer-email">
-              <svg width="16" height="16" style="margin-right: 8px;"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <img src="images/email-icon.svg" alt="Email" style="margin-right: 8px;">
               <a href="mailto:zpiekladodomu@gmail.com">zpiekladodomu@gmail.com</a>
             </div>
           </div>
@@ -405,28 +1025,97 @@
   </footer>
 
   <script>
-    async function loadDogs() {
-      const container = document.getElementById('dogs-container');
-      const dogsFolder = '/content/dogs/';
-      const dogFiles = ['kokos.json', 'gaja.json', 'beleth.json'];
-
-      for (const file of dogFiles) {
-        const res = await fetch(dogsFolder + file);
-        const dog = await res.json();
-
-        const card = document.createElement('div');
-        card.className = 'dog-card';
-        card.innerHTML = `
-          <img src="${dog.image}" alt="${dog.name}">
-          <h3>${dog.name}</h3>
-          <p>Wiek: ${dog.age} lat</p>
-          <p>${dog.description}</p>
-        `;
-        container.appendChild(card);
+    // Mobile Menu Functions
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const hamburgerLines = document.querySelectorAll('.hamburger-line');
+      
+      mobileMenu.classList.toggle('active');
+      
+      // Animate hamburger lines
+      hamburgerLines.forEach((line, index) => {
+        if (mobileMenu.classList.contains('active')) {
+          if (index === 0) line.style.transform = 'rotate(45deg) translate(5px, 5px)';
+          if (index === 1) line.style.opacity = '0';
+          if (index === 2) line.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+        } else {
+          line.style.transform = '';
+          line.style.opacity = '';
+        }
+      });
+      
+      // Prevent body scroll when menu is open
+      if (mobileMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
       }
     }
 
-    loadDogs();
+    function closeMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const hamburgerLines = document.querySelectorAll('.hamburger-line');
+      
+      mobileMenu.classList.remove('active');
+      
+      // Reset hamburger lines
+      hamburgerLines.forEach(line => {
+        line.style.transform = '';
+        line.style.opacity = '';
+      });
+      
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      
+      if (mobileMenu.classList.contains('active') && 
+          !mobileMenu.contains(event.target) && 
+          !toggle.contains(event.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    // Close mobile menu on escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeMobileMenu();
+      }
+    });
+
+    // Close mobile menu on window resize
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 900) {
+        closeMobileMenu();
+      }
+    });
+
+    // Commented out to prevent CORS errors when opening file directly
+    // async function loadDogs() {
+    //   const container = document.getElementById('dogs-container');
+    //   const dogsFolder = '/content/dogs/';
+    //   const dogFiles = ['kokos.json', 'gaja.json', 'beleth.json'];
+
+    //   for (const file of dogFiles) {
+    //     const res = await fetch(dogsFolder + file);
+    //     const dog = await res.json();
+
+    //     const card = document.createElement('div');
+    //     card.className = 'dog-card';
+    //     card.innerHTML = `
+    //       <img src="${dog.image}" alt="${dog.name}">
+    //       <h3>${dog.name}</h3>
+    //       <p>Wiek: ${dog.age} lat</p>
+    //       <p>${dog.description}</p>
+    //     `;
+    //     container.appendChild(card);
+    //   }
+    // }
+
+    // loadDogs();
   </script>
 
   <!-- Dog Data Loader -->
