@@ -469,7 +469,7 @@
       width: 100%;
       height: 100%;
       min-height: 476px;
-      display: flex;
+      position: relative;
       align-items: center;
       justify-content: center;
     }
@@ -550,7 +550,7 @@
       height: 350px; 
       object-fit: cover; 
     }
-    .gallery-item.video { position: relative; }
+    .gallery-item.video { position: relative;}
     
     /* Additional cards styling */
     .gallery-item.image-card {
@@ -1138,35 +1138,35 @@
       .menu a { padding: .375rem .5rem; }
       
       /* Mobile Menu Toggle Button */
-      .mobile-menu-toggle {
+    .mobile-menu-toggle {
         display: flex;
         flex-direction: column;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 8px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
         gap: 4px;
-      }
+    }
       
       .hamburger-line {
-        width: 25px;
-        height: 3px;
-        background: #222;
-        border-radius: 2px;
+      width: 25px;
+      height: 3px;
+      background: #222;
+      border-radius: 2px;
         transition: all 0.3s ease;
       }
       
       .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
-        transform: rotate(-45deg) translate(-5px, 6px);
-      }
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
       
       .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
-        opacity: 0;
-      }
+      opacity: 0;
+    }
       
       .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
-        transform: rotate(45deg) translate(-5px, -6px);
-      }
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
       
       /* Hide desktop menu on mobile */
       .menu { display: none; }
@@ -1175,53 +1175,53 @@
       .mobile-menu-toggle { display: flex; }
       
       /* Mobile Menu Overlay */
-      .mobile-menu {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
         background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        z-index: 1000;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 2rem;
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
-      }
+    }
       
-      .mobile-menu.active {
-        display: flex;
+    .mobile-menu.active {
+      display: flex;
         opacity: 1;
         visibility: visible;
-      }
+    }
       
-      .mobile-menu a {
-        font-size: 1.5rem;
-        font-weight: 600;
-        text-decoration: none;
-        color: #222;
-        padding: 1rem 2rem;
-        border-radius: 15px;
-        transition: all 0.3s ease;
-      }
+    .mobile-menu a {
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #222;
+      padding: 1rem 2rem;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+    }
       
-      .mobile-menu a:hover {
-        background: rgba(0,0,0,0.1);
+    .mobile-menu a:hover {
+      background: rgba(0,0,0,0.1);
         transform: scale(1.05);
-      }
+    }
       
-      .mobile-menu a.cta {
-        background: linear-gradient(135deg,#ffedd5,#fecaca);
+    .mobile-menu a.cta {
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
         font-weight: 700;
-      }
+    }
       
-      .mobile-menu a.cta:hover {
-        background: linear-gradient(135deg,#fbbf24,#f87171);
+    .mobile-menu a.cta:hover {
+      background: linear-gradient(135deg,#fbbf24,#f87171);
         transform: scale(1.05);
       }
       .big-card { 
@@ -1257,7 +1257,15 @@
       .map-info { max-width: 100%; }
       .map-wrapper { padding-bottom: 50%; /* Slightly taller on mobile */ }
       .map-stats { justify-content: center; }
-      /* Mobile Gallery - Full Width with Desktop Shapes */
+      
+      /* Make gallery section slightly smaller */
+      .gallery-section {
+        padding: 0.5rem 0 !important;
+        transform: scale(0.92) !important;
+        transform-origin: top center !important;
+        margin-bottom: -8% !important;
+      }
+      
       .gallery-grid {
         display: grid !important;
         grid-template-columns: 1fr 1fr 1fr !important;
@@ -1266,7 +1274,6 @@
         margin-top: 1rem !important;
         width: 100% !important;
         max-width: 100% !important;
-        padding: 0 1rem !important;
       }
       
       .gallery-grid-three-cards {
@@ -1277,7 +1284,19 @@
         margin-top: 0 !important;
         width: 100% !important;
         max-width: 100% !important;
-        padding: 0 1rem !important;
+      }
+      
+      /* Mobile positioning for three-card grid (dog-6, dog-7, dog-8) */
+      .gallery-grid-three-cards .gallery-item:nth-child(1) {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+        height: 100% !important;
+      }
+      
+      .gallery-grid-three-cards .gallery-item:nth-child(2) {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+        height: 100% !important;
       }
       
       .gallery-grid-five-cards {
@@ -1285,11 +1304,37 @@
         grid-template-columns: 1fr 1fr 1fr !important;
         grid-template-rows: 200px 200px !important;
         gap: 1rem !important;
-        margin-top: 2rem !important;
+        margin-top: 1rem !important; /* Match other sections */
         width: 100% !important;
         max-width: 100% !important;
-        padding: 0 1rem !important;
+        /* Remove padding to match other sections */
       }
+      
+      /* Make five-card grid match three-card grid width exactly */
+      .gallery-section-no-padding:has(.gallery-grid-five-cards) .gallery-grid-five-cards {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      
+      /* Override desktop width for five-card grid */
+      .gallery-section-no-padding:has(.gallery-grid-five-cards) .gallery-grid-five-cards {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        height: auto !important; /* Remove fixed height */
+      }
+      
+      /* Make container match other sections */
+      .gallery-section-no-padding:has(.gallery-grid-five-cards) .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        /* No padding to match other sections */
+      }
+      
       
       .gallery-item {
         width: 100% !important;
@@ -1304,24 +1349,6 @@
         grid-row: span 2 !important;
       }
       
-      /* Restore desktop positioning for three cards */
-      .gallery-grid-three-cards .gallery-item:nth-child(1) {
-        grid-column: 1 !important;
-        grid-row: 1 !important;
-        height: 100% !important;
-      }
-      
-      .gallery-grid-three-cards .gallery-item:nth-child(2) {
-        grid-column: 1 !important;
-        grid-row: 2 !important;
-        height: 100% !important;
-      }
-      
-      .gallery-grid-three-cards .gallery-item:nth-child(3) {
-        grid-row: 1 / -1 !important;
-        grid-column: 2 / -1 !important;
-        height: 100% !important;
-      }
       
       /* Restore desktop positioning for five cards */
       .gallery-grid-five-cards .gallery-item:nth-child(1) {
@@ -1409,20 +1436,42 @@
         border-radius: 0.5rem !important;
       }
       
-      /* Scale down entire gallery sections */
-      .gallery-section {
-        padding: 1rem 0 !important;
-        transform: scale(0.8) !important;
+      
+      /* Second gallery section (dog-6, dog-7, dog-8) */
+      .gallery-section-no-padding:not(.final-gallery-section) {
+        padding: 0.5rem 0 !important;
+        margin-top: -14rem !important;
+        transform: scale(0.92) !important;
         transform-origin: top center !important;
-        margin-bottom: -15% !important;
+        margin-bottom: -8% !important;
       }
       
-      .gallery-section-no-padding {
-        padding: 0.5rem 0 !important;
-        margin-top: -1rem !important;
-        transform: scale(0.8) !important;
-        transform-origin: top center !important;
-        margin-bottom: -15% !important;
+      
+      /* Fix dog-6 card to maintain desktop shape */
+      .gallery-grid-three-cards .gallery-item:nth-child(3) {
+        grid-row: 1 / -1 !important;
+        grid-column: 2 / -1 !important;
+        height: 100% !important;
+        min-height: 400px !important;
+        max-width: none !important;
+        width: 100% !important;
+        border-radius: 1rem !important;
+        overflow: hidden !important;
+      }
+      
+      .gallery-grid-three-cards .gallery-item:nth-child(3) .gallery-image {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        border-radius: 1rem !important;
+      }
+      
+      .gallery-grid-three-cards .gallery-item:nth-child(3) .image-container {
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 1rem !important;
+        overflow: hidden !important;
       }
       
       .gallery-header {
@@ -1567,6 +1616,36 @@
         line-height: 1.4 !important;
         width: 100% !important;
       }
+      
+      /* Final gallery section - match other sections with highest specificity */
+      body .gallery-section-no-padding.final-gallery-section {
+        padding: 0.5rem 0 !important;
+        margin-top: -4rem !important; /* Smaller negative margin to bring it closer */
+        transform: scale(0.95) !important;
+        transform-origin: top center !important;
+        margin-bottom: -8% !important;
+      }
+      
+      /* Target third gallery section by content - has gallery-grid-five-cards */
+      .gallery-section-no-padding:has(.gallery-grid-five-cards) {
+        margin-top: -14rem !important; /* Match the spacing of other sections */
+        margin-bottom: -8% !important;
+        padding: 0.5rem 0 !important;
+        zoom: 0.92 !important; /* Scale to match previous sections */
+      }
+      
+      /* More specific targeting with body prefix and section */
+      body section.gallery-section-no-padding:has(.gallery-grid-five-cards) {
+        margin-top: -16.3rem !important;
+        background: transparent !important; /* Remove background to prevent overlap */
+      }
+      
+      /* Alternative approach - target by last gallery section */
+      .gallery-section-no-padding:last-of-type {
+        margin-top: -18rem !important;
+        background: transparent !important; /* Remove background to prevent overlap */
+      }
+      
     }
   </style>
 </head>
@@ -1723,18 +1802,13 @@
         <div class="gallery-grid">
           <!-- Left column - Featured video card - spans 2 rows -->
           <div class="gallery-item featured video">
-            <div class="facebook-video-embed">
-              <iframe 
-                src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F61577219922888%2Fvideos%2F1109763807595155%2F&show_text=false&width=267&t=0" 
-                width="267" 
-                height="476" 
-                style="border:none;overflow:hidden" 
-                scrolling="no" 
-                frameborder="0" 
-                allowfullscreen="true" 
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" 
-                allowFullScreen="true">
-              </iframe>
+            <div class="facebook-video-embed left">
+              <div class="fb-video" data-href="https://www.facebook.com/watch/?v=1109763807595155"
+                data-width="400" 
+                data-height="700"
+                data-show-text="false"
+                data-allowfullscreen="false">
+              </div>
             </div>
           </div>
           
@@ -1747,18 +1821,15 @@
           
           <!-- Right column - Second featured video card - spans 2 rows -->
           <div class="gallery-item featured video">
-            <div class="facebook-video-embed">
-              <iframe 
-                src="https://www.facebook.com/plugins/video.php?height=400&href=https%3A%2F%2Fwww.facebook.com%2F61577219922888%2Fvideos%2F1531819384534901%2F&show_text=false&width=300&t=0" 
-                width="300" 
-                height="400" 
-                style="border:none;overflow:hidden" 
-                scrolling="no" 
-                frameborder="0" 
-                allowfullscreen="true" 
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" 
-                allowFullScreen="true">
-              </iframe>
+            <div class="facebook-video-embed right">
+              <div class="fb-video right"
+                data-href="https://www.facebook.com/61577219922888/videos/1531819384534901" 
+                data-width="450" 
+                data-height="600" 
+                data-show-text="false"
+                data-allowfullscreen="false"
+                style="transform: scaleY(1.4) scaleX(1.1) translateY(70px);">
+              </div>
             </div>
           </div>
           
@@ -1800,7 +1871,7 @@
     </section>
 
     <!-- FINAL GALLERY SECTION - 5 CARDS -->
-    <section class="gallery-section-no-padding">
+    <section class="gallery-section-no-padding final-gallery-section">
       <div class="container">
         <div class="gallery-grid-five-cards">
           <!-- Left column - 1 smaller card (first row) -->
@@ -1825,18 +1896,15 @@
           
           <!-- Middle column - 1 longer video card spanning 2 rows -->
           <div class="gallery-item video-card" onclick="openVideoModal('facebook4')">
-            <div class="facebook-video-embed">
-              <iframe 
-                src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Fwatch%2F%3Fv%3D24565340453125411&show_text=false&width=267&t=0" 
-                width="267" 
-                height="476" 
-                style="border:none;overflow:hidden" 
-                scrolling="no" 
-                frameborder="0" 
-                allowfullscreen="true" 
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" 
-                allowFullScreen="true">
-              </iframe>
+            <div class="facebook-video-embed middle">
+              <div class="fb-video" 
+                data-href="https://www.facebook.com/watch/?v=24565340453125411" 
+                data-width="540" 
+                data-height="700"
+                data-show-text="false"
+                data-allowfullscreen="false"
+                style="transform: scaleY(1.25) scaleX(1.05) translateY(50px);">
+              </div>
             </div>
           </div>
           
