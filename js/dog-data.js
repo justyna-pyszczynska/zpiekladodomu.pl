@@ -1,53 +1,89 @@
 // Dog Data System
-// This file contains all dog information and handles dynamic loading
+// This file handles dynamic loading of dog data from .md files
 
-const dogData = {
-  kokos: {
-    name: "Kokos",
-    image: "images/dog-1.jpg",
-    description: "Kokos to wspaniały pies, który szuka swojego wymarzonego domu. Jest bardzo przyjazny, lubi zabawę i jest doskonałym towarzyszem dla całej rodziny. Ma około 3 lata i jest w pełni zaszczepiony. Kocha spacery i jest bardzo posłuszny. Idealny dla rodzin z dziećmi lub osób, które szukają wiernego przyjaciela.",
-    age: "3 lata",
-    gender: "Samiec",
-    size: "Średni",
-    status: "Dostępny",
-    specialFeatures: ["Przyjazny wobec dzieci", "Lubi spacery", "Posłuszny", "Zaszczepiony"],
-    story: "Kokos został uratowany z trudnych warunków w Turcji. Mimo trudnych początków, jest bardzo ufny i kochający. Uwielbia zabawę z piłką i długie spacery. Jest idealnym kandydatem na pierwszego psa dla rodziny.",
-    adoptionRequirements: "Kokos potrzebuje domu z ogrodem lub regularnych spacerów. Idealny dla rodzin z dziećmi powyżej 6 roku życia. Wymaga cierpliwości podczas adaptacji w nowym domu."
-  },
-  dzeki: {
-    name: "Dżeki",
-    image: "images/dog-2.jpg",
-    description: "Dżeki to energiczny i radosny pies, który uwielbia aktywność fizyczną. Jest bardzo inteligentny i szybko się uczy nowych komend.",
-    age: "2 lata",
-    gender: "Samiec",
-    size: "Duży",
-    status: "Dostępny",
-    specialFeatures: ["Bardzo energiczny", "Inteligentny", "Lubi bieganie", "Przyjazny wobec ludzi"],
-    story: "Dżeki został znaleziony jako szczeniak na ulicach Stambułu. Mimo młodego wieku, już pokazuje się jako bardzo mądry i posłuszny pies. Uwielbia zabawy z innymi psami i jest bardzo towarzyski.",
-    adoptionRequirements: "Dżeki potrzebuje aktywnego opiekuna, który zapewni mu dużo ruchu. Idealny dla osób uprawiających sport lub rodzin z dużym ogrodem. Wymaga konsekwentnego szkolenia."
-  },
-  gaja: {
-    name: "Gaja",
-    image: "images/dog-3.jpg",
-    description: "Gaja to spokojna i delikatna suczka, która szuka cichego i kochającego domu. Jest bardzo wrażliwa i potrzebuje cierpliwego opiekuna.",
-    age: "4 lata",
-    gender: "Samica",
-    size: "Mały",
-    status: "Dostępny",
-    specialFeatures: ["Spokojna", "Delikatna", "Dobrze wychowana", "Lubi spokój"],
-    story: "Gaja została uratowana z bardzo trudnej sytuacji. Potrzebowała dużo czasu, aby nauczyć się ufać ludziom. Teraz jest gotowa na nowy dom i nową miłość. Jest bardzo wdzięczna za każdy gest dobroci.",
-    adoptionRequirements: "Gaja potrzebuje spokojnego domu bez małych dzieci. Idealna dla osób starszych lub par bez dzieci. Wymaga cierpliwości i zrozumienia jej przeszłości. Potrzebuje cichego miejsca do odpoczynku."
+const dogData = {};
+
+// Function to parse front matter from markdown
+function parseFrontMatter(text) {
+  const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+  const match = text.match(frontMatterRegex);
+  
+  if (!match) return {};
+  
+  const frontMatterText = match[1];
+  const content = match[2];
+  
+  const data = {};
+  const lines = frontMatterText.split('\n');
+  
+  let currentKey = null;
+  let inList = false;
+  
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (trimmed === '') continue;
+    
+    if (trimmed.startsWith('-') && currentKey) {
+      // This is a list item
+      const listItem = trimmed.substring(1).trim().replace(/"/g, '');
+      if (!Array.isArray(data[currentKey])) {
+        data[currentKey] = [data[currentKey]];
+      }
+      data[currentKey].push(listItem);
+      inList = true;
+    } else {
+      // This is a key-value pair
+      const colonIndex = line.indexOf(':');
+      if (colonIndex > 0) {
+        currentKey = line.substring(0, colonIndex).trim();
+        let value = line.substring(colonIndex + 1).trim();
+        
+        // Remove quotes
+        if (value.startsWith('"') && value.endsWith('"')) {
+          value = value.slice(1, -1);
+        }
+        
+        data[currentKey] = value;
+        inList = false;
+      }
+    }
   }
-};
+  
+  return data;
+}
 
-// Function to get dog data by name
-function getDogData(dogName) {
-  return dogData[dogName] || null;
+// Function to get dog data by name (loads from .md file)
+async function getDogData(dogName) {
+  if (dogData[dogName]) {
+    return dogData[dogName];
+  }
+  
+  try {
+    console.log('Loading dog data for:', dogName);
+    const response = await fetch(`content/dogs/${dogName}.md`);
+    console.log('Fetch response:', response);
+    if (!response.ok) {
+      console.error('Dog file not found:', dogName, 'Status:', response.status);
+      return null;
+    }
+    
+    const text = await response.text();
+    console.log('Loaded text:', text.substring(0, 200));
+    const data = parseFrontMatter(text);
+    console.log('Parsed data:', data);
+    
+    // Store in cache
+    dogData[dogName] = data;
+    return data;
+  } catch (error) {
+    console.error('Error loading dog data:', error);
+    return null;
+  }
 }
 
 // Function to load dog content into the page
-function loadDogContent(dogName) {
-  const dog = getDogData(dogName);
+async function loadDogContent(dogName) {
+  const dog = await getDogData(dogName);
   if (!dog) {
     console.error('Dog not found:', dogName);
     return;
@@ -58,24 +94,28 @@ function loadDogContent(dogName) {
 
   // Update hero section
   const hero = document.querySelector('.hero');
-  if (hero) {
+  if (hero && dog.image) {
     hero.style.backgroundImage = `url('${dog.image}')`;
   }
 
   // Update hero title
   const heroTitle = document.querySelector('.hero h1');
-  if (heroTitle) {
+  if (heroTitle && dog.name) {
     heroTitle.textContent = dog.name;
   }
 
   // Update main card content
   const cardContent = document.querySelector('.big-card .muted');
-  if (cardContent) {
+  if (cardContent && dog.description) {
     cardContent.textContent = dog.description;
   }
 
   // Update dog images array for navigation
-  window.dogImages = [dog.image];
+  if (dog.images && Array.isArray(dog.images)) {
+    window.dogImages = dog.images;
+  } else if (dog.image) {
+    window.dogImages = [dog.image];
+  }
   window.currentDogIndex = 0;
 }
 
@@ -86,10 +126,10 @@ function getUrlParameter(name) {
 }
 
 // Initialize dog content when page loads
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
   const dogName = getUrlParameter('dog');
   if (dogName) {
-    loadDogContent(dogName);
+    await loadDogContent(dogName);
   }
 });
 

@@ -904,73 +904,7 @@
     <!-- DONATION + DOG CARDS GRID (2 rows) -->
     <section class="section overlap" id="donations">
       <div class="cards-3" id="dogs-container">
-        <!-- Row 1: Three different dogs -->
-        <article class="card dog-card">
-          <img src="images/dog-1.jpg" alt="Kokos" class="circle">
-          <div class="card-body">
-            <h3>Kokos</h3>
-            <p class="muted">Przyjazny pies, który szuka swojego wymarzonego domu. Idealny dla rodzin z dziećmi.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=kokos" class="btn btn-primary">Więcej ↗</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card dog-card">
-          <img src="images/dog-2.jpg" alt="Dżeki" class="circle">
-          <div class="card-body">
-            <h3>Dżeki</h3>
-            <p class="muted">Energiczny i radosny pies, który uwielbia aktywność fizyczną. Bardzo inteligentny.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=dzeki" class="btn btn-primary">Więcej ↗</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card dog-card">
-          <img src="images/dog-3.jpg" alt="Gaja" class="circle">
-          <div class="card-body">
-            <h3>Gaja</h3>
-            <p class="muted">Spokojna i delikatna suczka, która szuka cichego i kochającego domu.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=gaja" class="btn btn-primary">Więcej ↗</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Row 2: More dogs or empty space -->
-        <article class="card dog-card">
-          <img src="images/dog-1.jpg" alt="Kokos" class="circle">
-          <div class="card-body">
-            <h3>Kokos</h3>
-            <p class="muted">Przyjazny pies, który szuka swojego wymarzonego domu. Idealny dla rodzin z dziećmi.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=kokos" class="btn btn-primary">Więcej ↗</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card dog-card">
-          <img src="images/dog-2.jpg" alt="Dżeki" class="circle">
-          <div class="card-body">
-            <h3>Dżeki</h3>
-            <p class="muted">Energiczny i radosny pies, który uwielbia aktywność fizyczną. Bardzo inteligentny.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=dzeki" class="btn btn-primary">Więcej ↗</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card dog-card">
-          <img src="images/dog-3.jpg" alt="Gaja" class="circle">
-          <div class="card-body">
-            <h3>Gaja</h3>
-            <p class="muted">Spokojna i delikatna suczka, która szuka cichego i kochającego domu.</p>
-            <div class="card-footer">
-              <a href="dog-page.html?dog=gaja" class="btn btn-primary">Więcej ↗</a>
-            </div>
-          </div>
-        </article>
+        <!-- Dog cards will be dynamically loaded by JavaScript -->
       </div>
       <div class="center" style="margin-top:12px">
       </div>
@@ -1093,29 +1027,100 @@
       }
     });
 
-    // Commented out to prevent CORS errors when opening file directly
-    // async function loadDogs() {
-    //   const container = document.getElementById('dogs-container');
-    //   const dogsFolder = '/content/dogs/';
-    //   const dogFiles = ['kokos.json', 'gaja.json', 'beleth.json'];
-
-    //   for (const file of dogFiles) {
-    //     const res = await fetch(dogsFolder + file);
-    //     const dog = await res.json();
-
-    //     const card = document.createElement('div');
-    //     card.className = 'dog-card';
-    //     card.innerHTML = `
-    //       <img src="${dog.image}" alt="${dog.name}">
-    //       <h3>${dog.name}</h3>
-    //       <p>Wiek: ${dog.age} lat</p>
-    //       <p>${dog.description}</p>
-    //     `;
-    //     container.appendChild(card);
-    //   }
-    // }
-
-    // loadDogs();
+    // Dynamic dog loader from .md files
+    async function loadDogs() {
+      const container = document.getElementById('dogs-container');
+      if (!container) return;
+      
+      // List of dog files to load
+      const dogFiles = ['kokos.md', 'gaja.md', 'dzeki.md', 'dingo.md', 'gryzia.md'];
+      
+      try {
+        for (const file of dogFiles) {
+          const response = await fetch(`content/dogs/${file}`);
+          if (!response.ok) {
+            console.warn(`Dog file not found: ${file}`);
+            continue;
+          }
+          
+          const text = await response.text();
+          const data = parseMarkdownFrontMatter(text);
+          
+          if (!data || !data.name) {
+            console.warn(`Invalid data for file: ${file}`);
+            continue;
+          }
+          
+          // Create card
+          const card = document.createElement('article');
+          card.className = 'card dog-card';
+          
+          // Use span-2 for certain dogs if specified
+          if (data.span === '2') {
+            card.classList.add('span-2');
+          }
+          
+          card.innerHTML = `
+            <img src="${data.image || 'images/placeholder.jpg'}" alt="${data.name}" class="circle">
+            <div class="card-body">
+              <h3>${data.name}</h3>
+              <p class="muted">${data.description || ''}</p>
+              <div class="card-footer">
+                <a href="dog-page.html?dog=${file.replace('.md', '')}" class="btn btn-primary">Więcej ↗</a>
+              </div>
+            </div>
+          `;
+          
+          container.appendChild(card);
+        }
+      } catch (error) {
+        console.error('Error loading dogs:', error);
+      }
+    }
+    
+    // Helper function to parse markdown front matter
+    function parseMarkdownFrontMatter(text) {
+      const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+      const match = text.match(frontMatterRegex);
+      
+      if (!match) return null;
+      
+      const frontMatterText = match[1];
+      const data = {};
+      const lines = frontMatterText.split('\n');
+      
+      let currentKey = null;
+      
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (trimmed === '') continue;
+        
+        if (trimmed.startsWith('-') && currentKey) {
+          const listItem = trimmed.substring(1).trim().replace(/"/g, '');
+          if (!Array.isArray(data[currentKey])) {
+            data[currentKey] = [data[currentKey]];
+          }
+          data[currentKey].push(listItem);
+        } else {
+          const colonIndex = line.indexOf(':');
+          if (colonIndex > 0) {
+            currentKey = line.substring(0, colonIndex).trim();
+            let value = line.substring(colonIndex + 1).trim();
+            
+            if (value.startsWith('"') && value.endsWith('"')) {
+              value = value.slice(1, -1);
+            }
+            
+            data[currentKey] = value;
+          }
+        }
+      }
+      
+      return data;
+    }
+    
+    // Load dogs when page is ready
+    document.addEventListener('DOMContentLoaded', loadDogs);
   </script>
 
   <!-- Dog Data Loader -->
