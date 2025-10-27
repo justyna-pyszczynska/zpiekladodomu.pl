@@ -17,4 +17,5 @@ special_features:
   - "Przyjazny"
 story: ""
 adoption_requirements: "Szuka opiekuna, który okaże mu odrobinę ciepła i uwagi. Odwdzięczy się niesamowitym oddaniem."
+video_url: ""
 ---

@@ -13,6 +13,6 @@ special_features:
   - "Spokojna"
   - "Wycofana"
   - "Potrzebuje czasu"
-story: ""
+story: "Odratowana w fatalnym stanie z drastycznych warunków panujących w lokalnym tureckim "schronisku". Jej złamane serducho odzyskuje z dnia na dzień odrobinę zaufania do świata, ale wymaga cierpliwości po doświadczeniach, które ją tam spotkały."
 adoption_requirements: "Wymagany dla Gryzi jest odpowiedzialny opiekun, który nie zniechęci się po kilku dniach do psiaka potrzebującego czasu, by zaufać na nowo."
 ---

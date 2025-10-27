@@ -146,7 +146,7 @@
     .hero {
       position: relative;
       min-height: 120vh;
-      background: url('images/dog-1.jpg') center/cover no-repeat;
+      background: transparent center/cover no-repeat;
       display: flex; align-items: center;
     }
     .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.02)); }
@@ -273,7 +273,7 @@
     }
     .big-card-image {
       flex: 1;
-      background: url('images/dog-1.jpg') center/cover no-repeat;
+      background: transparent;
       position: relative;
     }
     .big-card-content {
@@ -327,9 +327,204 @@
     }
     .text-content {
       padding: 0;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      text-align: left;
+    }
+    
+    /* Match big-card-container width for all sections */
+    #informacje-section,
+    #gallery-section {
       width: min(1200px, 100%);
       margin: 0 auto;
-      text-align: left;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    
+    #dog-info,
+    /* GALLERY AND VIDEO SECTION CONTAINER */
+    #gallery-video-container {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 1.5rem;
+      width: 100%;
+      margin-top: 2rem;
+    }
+    
+    #dog-gallery {
+      width: 100%;
+      max-width: 100%;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    
+    /* VIDEO SECTION */
+    #video-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .video-embed-container {
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      overflow: hidden;
+      height: fit-content;
+    }
+    
+    .video-embed-container iframe {
+      width: 100%;
+      height: auto;
+      border-radius: 1rem;
+      aspect-ratio: 9 / 16;
+      border: none;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1.5rem;
+      aspect-ratio: 1;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* LIGHTBOX STYLES */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 1rem;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #222;
+      transition: background 0.3s ease;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 1);
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      width: 56px;
+      height: 56px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+      z-index: 10001;
+    }
+
+    .lightbox-nav:hover {
+      transform: translateY(-50%) scale(1.1);
+      opacity: 0.8;
+    }
+
+    .lightbox-nav img {
+      width: 24px;
+      height: 24px;
+      pointer-events: none;
+    }
+
+    .lightbox-prev {
+      left: 20px;
+    }
+
+    .lightbox-next {
+      right: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .lightbox-nav {
+        width: 44px;
+        height: 44px;
+      }
+
+      .lightbox-nav img {
+        width: 20px;
+        height: 20px;
+      }
+
+      .lightbox-prev {
+        left: 10px;
+      }
+
+      .lightbox-next {
+        right: 10px;
+      }
     }
     .text-content p {
       color: #374151;
@@ -345,10 +540,11 @@
     }
     .dog-info-grid {
       display: grid;
-      grid-template-columns: 1fr 1.25fr;
-      gap: 8rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
       margin-bottom: 2rem;
       text-align: left;
+      width: 100%;
     }
     .dog-info-item {
       background: #f9fafb;
@@ -397,6 +593,8 @@
       padding: 1.5rem;
       border-radius: 0.75rem;
       border-left: 4px solid #fde68a;
+      width: 100%;
+      max-width: 100%;
     }
     .story-section .dog-info-label {
       margin-bottom: 1rem;
@@ -767,14 +965,41 @@
     </section>
 
     <!-- NEW SECTION -->
-    <section class="section">
-      <div class="container">
-        <h2 class="section-title">Informacje o psie</h2>
-        <div class="text-content" id="dog-info">
-          <div class="loading">Ładowanie informacji o psie...</div>
+    <section class="section" id="informacje-section">
+      <h2 class="section-title">Informacje o psie</h2>
+      <div class="text-content" id="dog-info">
+        <div class="loading">Ładowanie informacji o psie...</div>
+      </div>
+    </section>
+
+    <!-- GALLERY AND VIDEO SECTION -->
+    <section class="section" id="gallery-section">
+      <h2 class="section-title">Galeria zdjęć</h2>
+      <div id="gallery-video-container">
+        <div class="gallery-grid" id="dog-gallery">
+          <!-- Gallery images will be dynamically loaded -->
+        </div>
+        <div id="video-section" style="display: none;">
+          <div class="video-embed-container" id="video-container">
+            <!-- Facebook or Instagram video embed will be added here -->
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- LIGHTBOX MODAL -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" onclick="closeLightbox()">×</button>
+      <button class="lightbox-nav lightbox-prev" onclick="previousImage()">
+        <img src="images/arrow-left.svg" alt="Previous">
+      </button>
+      <button class="lightbox-nav lightbox-next" onclick="nextImage()">
+        <img src="images/arrow-right.svg" alt="Next">
+      </button>
+      <div class="lightbox-content">
+        <img class="lightbox-img" id="lightbox-img" src="" alt="Gallery image">
+      </div>
+    </div>
   </main>
 
   <footer>
@@ -1237,7 +1462,128 @@
           <div class="dog-info-value">${data.story || 'Brak historii do wyświetlenia.'}</div>
         </div>
       `;
+      
+      // Load gallery
+      loadGallery(data.images || []);
+      
+      // Load video if available
+      loadVideo(data.video_url);
     }
+
+    // Store gallery images for lightbox
+    let currentGalleryImages = [];
+    let currentLightboxIndex = 0;
+
+    // Function to load gallery images
+    function loadGallery(images) {
+      const gallery = document.getElementById('dog-gallery');
+      if (!gallery || !images || images.length === 0) {
+        // Hide gallery section if no images
+        const gallerySection = document.getElementById('gallery');
+        if (gallerySection) {
+          gallerySection.style.display = 'none';
+        }
+        return;
+      }
+
+      // Store images for lightbox
+      currentGalleryImages = images;
+
+      // Show gallery section
+      const gallerySection = document.getElementById('gallery');
+      if (gallerySection) {
+        gallerySection.style.display = 'block';
+      }
+
+      // Clear existing content
+      gallery.innerHTML = '';
+
+      // Create gallery items
+      images.forEach((imageSrc, index) => {
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
+        galleryItem.onclick = () => openLightbox(index);
+        galleryItem.innerHTML = `<img src="${imageSrc}" alt="Gallery image ${index + 1}" loading="lazy">`;
+        gallery.appendChild(galleryItem);
+      });
+    }
+
+    // Function to load video
+    function loadVideo(videoUrl) {
+      const videoSection = document.getElementById('video-section');
+      const videoContainer = document.getElementById('video-container');
+      
+      if (!videoUrl) {
+        // Hide video section if no video URL
+        if (videoSection) {
+          videoSection.style.display = 'none';
+        }
+        return;
+      }
+      
+      // Show video section
+      if (videoSection) {
+        videoSection.style.display = 'flex';
+      }
+      
+      // Create video embed
+      if (videoContainer) {
+        if (videoUrl.includes('facebook.com')) {
+          videoContainer.innerHTML = `<iframe src="${videoUrl}" width="100%" height="auto" style="border:none;overflow:hidden;aspect-ratio:9/16;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
+        } else if (videoUrl.includes('instagram.com')) {
+          videoContainer.innerHTML = `<iframe src="${videoUrl}embed/" width="100%" height="auto" style="border:none;overflow:hidden;aspect-ratio:9/16;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
+        } else {
+          videoContainer.innerHTML = `<iframe src="${videoUrl}" width="100%" height="auto" style="border:none;overflow:hidden;aspect-ratio:9/16;" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>`;
+        }
+      }
+    }
+
+    // Lightbox functions
+    function openLightbox(index) {
+      currentLightboxIndex = index;
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = currentGalleryImages[index];
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    function nextImage() {
+      currentLightboxIndex = (currentLightboxIndex + 1) % currentGalleryImages.length;
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = currentGalleryImages[currentLightboxIndex];
+    }
+
+    function previousImage() {
+      currentLightboxIndex = (currentLightboxIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = currentGalleryImages[currentLightboxIndex];
+    }
+
+    // Close lightbox on click outside image
+    document.addEventListener('click', function(event) {
+      const lightbox = document.getElementById('lightbox');
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    // Close lightbox on Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeLightbox();
+      } else if (event.key === 'ArrowRight') {
+        nextImage();
+      } else if (event.key === 'ArrowLeft') {
+        previousImage();
+      }
+    });
 
     // Update adopt button with dog name parameter
     document.addEventListener('DOMContentLoaded', function() {

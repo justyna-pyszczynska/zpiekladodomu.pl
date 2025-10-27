@@ -214,6 +214,15 @@
     .dog-card { text-align: center;}
     .dog-card .circle { width: 14rem; height: 14rem; border-radius: 50%; object-fit: cover; margin: 1rem auto 0.75rem; }
     .dog-card h3 { font-family: 'McLaren', cursive; font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .dog-card .dog-description {
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-height: 6em;
+      line-height: 1.5;
+    }
     .dog-card .card-footer { justify-content: center; margin-top: 0.75rem; }
     .dog-card.span-2 { 
       display: flex !important; 
@@ -1060,11 +1069,14 @@
             card.classList.add('span-2');
           }
           
+          // Truncate description to 4 lines
+          const description = data.description || '';
+          
           card.innerHTML = `
             <img src="${data.image || 'images/placeholder.jpg'}" alt="${data.name}" class="circle">
             <div class="card-body">
               <h3>${data.name}</h3>
-              <p class="muted">${data.description || ''}</p>
+              <p class="muted dog-description">${description}</p>
               <div class="card-footer">
                 <a href="dog-page.html?dog=${file.replace('.md', '')}" class="btn btn-primary">Więcej ↗</a>
               </div>
