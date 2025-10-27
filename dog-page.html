@@ -1152,6 +1152,18 @@
           currentKey = line.substring(0, colonIndex).trim();
           const value = line.substring(colonIndex + 1).trim();
           
+          // Save previous key-value pair before starting new one
+          if (currentKey && currentKey !== line.substring(0, colonIndex).trim()) {
+            if (inArray) {
+              data[currentKey] = currentValue;
+            } else {
+              data[currentKey] = currentValue.join(' ').replace(/^["']|["']$/g, '');
+            }
+          }
+          
+          // Reset currentKey to the new one
+          currentKey = line.substring(0, colonIndex).trim();
+          
           if (value === '') {
             // Empty value - might be start of array
             currentValue = [];
@@ -1164,14 +1176,14 @@
         } else if (line.startsWith('-')) {
           // Array item
           const item = line.substring(1).trim().replace(/^["']|["']$/g, '');
-          if (inArray) {
-            currentValue.push(item);
-          } else {
-            // Start new array
-            if (currentKey) {
-              data[currentKey] = currentValue.join(' ').replace(/^["']|["']$/g, '');
+          if (inArray && currentKey) {
+            // We're inside an array, add to current value
+            if (!Array.isArray(currentValue)) {
+              currentValue = [currentValue];
             }
-            currentKey = 'images'; // Default key for arrays
+            currentValue.push(item);
+          } else if (currentKey) {
+            // Start new array with the current key
             currentValue = [item];
             inArray = true;
           }
@@ -1294,24 +1306,35 @@
       console.log('Protocol:', window.location.protocol, 'Is localhost:', isLocalhost);
       
       if (isLocalhost) {
-        // Try file loading first (preferred method for web server)
+        // Try using getDogData from dog-data.js first (preferred method for web server)
         try {
-          const dogFileMap = {
-            'kokos': 'kokos.md',
-            'dzeki': 'dzeki.md', 
-            'dżeki': 'dzeki.md',
-            'gaja': 'gaja.md'
-          };
-          
-          const fileName = dogFileMap[dogName.toLowerCase()];
-          console.log('Mapped file name:', fileName);
-          
-          if (!fileName) {
-            throw new Error('No file mapping found for dog: ' + dogName);
+          if (typeof getDogData === 'function') {
+            console.log('Using getDogData function from dog-data.js');
+            const dogData = await getDogData(dogName);
+            console.log('Got dog data from getDogData:', dogData);
+            
+            if (dogData && dogData.name) {
+              console.log('Images array from .md file:', dogData.images);
+              displayDogInfo(dogData);
+              // Add small delay to ensure DOM is ready
+              setTimeout(() => {
+                updateHeroImage(dogData);
+                updateCardImage(dogData);
+              }, 100);
+              return;
+            }
           }
-          
-          const fileUrl = `content/dogs/${fileName}`;
-          console.log('Fetching from URL:', fileUrl);
+        } catch (error) {
+          console.error('Error loading from getDogData:', error);
+          console.log('Error details:', error.message);
+        }
+        
+        // Fallback: Try direct file loading
+        try {
+          // Encode dog name to handle spaces
+          const encodedDogName = encodeURIComponent(dogName);
+          const fileUrl = `content/dogs/${encodedDogName}.md`;
+          console.log('Fetching directly from URL:', fileUrl);
           
           const response = await fetch(fileUrl);
           console.log('Response status:', response.status);

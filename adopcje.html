@@ -1042,48 +1042,55 @@
       if (!container) return;
       
       // List of dog files to load
-      const dogFiles = ['kokos.md', 'gaja.md', 'dzeki.md', 'dingo.md', 'gryzia.md'];
+      const dogFiles = ['dingo.md', 'duo blondi.md', 'gryzia.md', 'tygrysek.md'];
       
       try {
         for (const file of dogFiles) {
-          const response = await fetch(`content/dogs/${file}`);
-          if (!response.ok) {
-            console.warn(`Dog file not found: ${file}`);
-            continue;
-          }
+          let data;
           
-          const text = await response.text();
-          const data = parseMarkdownFrontMatter(text);
-          
-          if (!data || !data.name) {
-            console.warn(`Invalid data for file: ${file}`);
-            continue;
-          }
-          
-          // Create card
-          const card = document.createElement('article');
-          card.className = 'card dog-card';
-          
-          // Use span-2 for certain dogs if specified
-          if (data.span === '2') {
-            card.classList.add('span-2');
-          }
-          
-          // Truncate description to 4 lines
-          const description = data.description || '';
-          
-          card.innerHTML = `
-            <img src="${data.image || 'images/placeholder.jpg'}" alt="${data.name}" class="circle">
-            <div class="card-body">
-              <h3>${data.name}</h3>
-              <p class="muted dog-description">${description}</p>
-              <div class="card-footer">
-                <a href="dog-page.html?dog=${file.replace('.md', '')}" class="btn btn-primary">Więcej ↗</a>
+          try {
+            const response = await fetch(`content/dogs/${file}`);
+            if (!response.ok) {
+              console.warn(`Dog file not found: ${file}`);
+              continue;
+            }
+            
+            const text = await response.text();
+            data = parseMarkdownFrontMatter(text);
+            
+            if (!data || !data.name) {
+              console.warn(`Invalid data for file: ${file}`);
+              continue;
+            }
+            
+            // Create card
+            const card = document.createElement('article');
+            card.className = 'card dog-card';
+            
+            // Use span-2 for certain dogs if specified
+            if (data.span === '2') {
+              card.classList.add('span-2');
+            }
+            
+            // Truncate description to 4 lines
+            const description = data.description || '';
+            
+            card.innerHTML = `
+              <img src="${data.image || 'images/placeholder.jpg'}" alt="${data.name}" class="circle">
+              <div class="card-body">
+                <h3>${data.name}</h3>
+                <p class="muted dog-description">${description}</p>
+                <div class="card-footer">
+                  <a href="dog-page.html?dog=${file.replace('.md', '')}" class="btn btn-primary">Więcej ↗</a>
+                </div>
               </div>
-            </div>
-          `;
-          
-          container.appendChild(card);
+            `;
+            
+            container.appendChild(card);
+          } catch (fetchError) {
+            console.error(`Error fetching ${file}:`, fetchError);
+            continue;
+          }
         }
       } catch (error) {
         console.error('Error loading dogs:', error);

@@ -27,7 +27,14 @@ function parseFrontMatter(text) {
       // This is a list item
       const listItem = trimmed.substring(1).trim().replace(/"/g, '');
       if (!Array.isArray(data[currentKey])) {
-        data[currentKey] = [data[currentKey]];
+        // Convert existing value to array
+        const previousValue = data[currentKey];
+        data[currentKey] = [];
+        if (previousValue && previousValue !== '') {
+          // Split by newline if it was a multiline string
+          const lines = previousValue.split('\n').map(l => l.trim()).filter(l => l);
+          data[currentKey].push(...lines);
+        }
       }
       data[currentKey].push(listItem);
       inList = true;
@@ -43,7 +50,12 @@ function parseFrontMatter(text) {
           value = value.slice(1, -1);
         }
         
-        data[currentKey] = value;
+        // If the value is empty and this is a known list field, initialize as array
+        if (value === '' && (currentKey === 'special_features' || currentKey === 'images')) {
+          data[currentKey] = [];
+        } else {
+          data[currentKey] = value;
+        }
         inList = false;
       }
     }
@@ -60,7 +72,9 @@ async function getDogData(dogName) {
   
   try {
     console.log('Loading dog data for:', dogName);
-    const response = await fetch(`content/dogs/${dogName}.md`);
+    // Encode the dog name to handle spaces in filenames
+    const encodedDogName = encodeURIComponent(dogName);
+    const response = await fetch(`content/dogs/${encodedDogName}.md`);
     console.log('Fetch response:', response);
     if (!response.ok) {
       console.error('Dog file not found:', dogName, 'Status:', response.status);

@@ -452,8 +452,9 @@
         }
 
     /* GALLERY SECTION */
-    .gallery-section { padding: 6rem 0; background: #f8fafc; }
-    .gallery-section-no-padding { padding: 2rem 0; background: #f8fafc; margin-top: -2rem; }
+    .gallery-section { padding: 2.0rem 0; background: #f8fafc; }
+    .gallery-section-no-padding {background: #f8fafc; }
+    .final-gallery-section { margin-top: -2rem; }
     .gallery-header { text-align: center; margin-bottom: 3rem; }
     .gallery-header h3 { font-family: 'McLaren', cursive; font-size: 2rem; color: #1f2937; margin-bottom: 1rem; }
     .gallery-header p { color: #6b7280; font-size: 1.125rem; }
@@ -1050,8 +1051,7 @@
     footer { 
       background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); 
       margin-top: 2.25rem; 
-      padding: 3rem 0 6rem 0; 
-      min-height: 400px;
+      padding: 3rem 0; 
     }
     .footer-grid { display:grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
     .footer-brand { display:flex; align-items:flex-start; gap: 1.5rem; }
@@ -1159,7 +1159,7 @@
     }
     
     /* Mobile email icon overrides */
-    @media (max-width: 900px) {
+    @media (max-width: 1100px) {
       .footer-email img {
         width: clamp(14px, 3.5vw, 20px) !important;
         height: clamp(14px, 3.5vw, 20px) !important;
@@ -1372,7 +1372,7 @@
       overflow: hidden;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
+      height: 250px;
     }
     
     .mobile-video-item:hover {
@@ -1380,70 +1380,40 @@
       box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }
     
-    .video-thumbnail {
-      position: relative;
-      width: 100%;
-      height: 200px;
-      overflow: hidden;
-    }
-    
-    .video-thumbnail img {
+    .mobile-video-item .facebook-video-embed {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-    }
-    
-    .play-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.3);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.3s ease;
+      overflow: hidden;
+      position: relative;
     }
     
-    .mobile-video-item:hover .play-overlay {
-      background: rgba(0,0,0,0.5);
+    .mobile-video-item .facebook-video-embed iframe {
+      width: 100% !important;
+      height: 100% !important;
+      min-height: 250px !important;
+      border: none;
+      border-radius: 1rem;
     }
     
-    .play-button {
-      width: 60px;
-      height: 60px;
-      background: rgba(252,165,165,0.9);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      color: white;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-      transition: all 0.3s ease;
+    .mobile-video-item .facebook-video-embed,
+    .mobile-video-item .facebook-video-embed iframe,
+    .mobile-video-item .fb-video,
+    .mobile-video-item .fb-video span {
+      transform: none !important;
     }
     
-    .mobile-video-item:hover .play-button {
-      background: rgba(248,113,113,0.9);
-      transform: scale(1.1);
+    .mobile-video-item .fb-video {
+      width: 100% !important;
+      height: 100% !important;
     }
     
-    .video-info {
-      padding: 1rem;
-    }
-    
-    .video-info h4 {
-      font-family: 'McLaren', cursive;
-      font-size: 1.1rem;
-      color: #1f2937;
-      margin-bottom: 0.5rem;
-    }
-    
-    .video-info p {
-      color: #6b7280;
-      font-size: 0.9rem;
-      line-height: 1.4;
+    .mobile-video-item .fb-video > span {
+      width: 100% !important;
+      height: 100% !important;
+      display: block !important;
     }
 
     /* GALLERY FOOTER SPACER */
@@ -1464,8 +1434,7 @@
       }
       
       footer {
-        padding: 2rem 0 6rem 0 !important;
-        min-height: 450px !important;
+        padding: 2rem 0 !important;
       }
     }
 
@@ -2069,8 +2038,7 @@
       
       /* Mobile Footer Styling */
       footer {
-        padding: 2rem 0 5rem 0 !important;
-        min-height: 400px !important;
+        padding: 2rem 0 !important;
       }
       
       .footer-grid {
@@ -2531,42 +2499,39 @@
         </div>
         
         <div class="mobile-video-grid">
-          <div class="mobile-video-item" onclick="openVideoModal('facebook1')">
-            <div class="video-thumbnail">
-              <img src="images/dog-4.jpg" alt="Video Thumbnail">
-              <div class="play-overlay">
-                <div class="play-button">▶</div>
+          <div class="mobile-video-item">
+            <div class="facebook-video-embed">
+              <div class="fb-video" 
+                data-href="https://www.facebook.com/watch/?v=1109763807595155"
+                data-width="400" 
+                data-height="300"
+                data-show-text="false"
+                data-allowfullscreen="false">
               </div>
-            </div>
-            <div class="video-info">
-              <h4>Ratowanie psów w Turcji</h4>
-              <p>Zobacz jak pomagamy zwierzętom</p>
             </div>
           </div>
           
-          <div class="mobile-video-item" onclick="openVideoModal('facebook2')">
-            <div class="video-thumbnail">
-              <img src="images/dog-5.jpg" alt="Video Thumbnail">
-              <div class="play-overlay">
-                <div class="play-button">▶</div>
+          <div class="mobile-video-item">
+            <div class="facebook-video-embed">
+              <div class="fb-video" 
+                data-href="https://www.facebook.com/watch/?v=1531819384534901"
+                data-width="400" 
+                data-height="300" 
+                data-show-text="false"
+                data-allowfullscreen="false">
               </div>
-            </div>
-            <div class="video-info">
-              <h4>Codzienna praca</h4>
-              <p>Nasze działania na co dzień</p>
             </div>
           </div>
           
-          <div class="mobile-video-item" onclick="openVideoModal('facebook3')">
-            <div class="video-thumbnail">
-              <img src="images/dog-6.jpg" alt="Video Thumbnail">
-              <div class="play-overlay">
-                <div class="play-button">▶</div>
+          <div class="mobile-video-item">
+            <div class="facebook-video-embed">
+              <div class="fb-video" 
+                data-href="https://www.facebook.com/watch/?v=24565340453125411"
+                data-width="400" 
+                data-height="300"
+                data-show-text="false"
+                data-allowfullscreen="false">
               </div>
-            </div>
-            <div class="video-info">
-              <h4>Historie adopcji</h4>
-              <p>Szczęśliwe zakończenia</p>
             </div>
           </div>
         </div>
@@ -2636,7 +2601,7 @@
                 data-height="700"
                 data-show-text="false"
                 data-allowfullscreen="false"
-                style="transform: scaleY(1.25) scaleX(1.05) translateY(50px);">
+                style="transform: scaleY(1.4) scaleX(1.1) translateY(68px);">
               </div>
             </div>
           </div>
@@ -3243,7 +3208,7 @@
     
     // Initialize carousels on mobile
     function initializeCarousels() {
-      if (window.innerWidth <= 900) {
+      if (window.innerWidth <= 1100) {
         // Show unified carousel and hide all grids
         const unifiedCarousel = document.querySelector('.gallery-carousel');
         if (unifiedCarousel) {
@@ -3255,6 +3220,10 @@
         const mobileVideoSection = document.querySelector('.mobile-video-section');
         if (mobileVideoSection) {
           mobileVideoSection.style.display = 'block';
+          // Re-parse Facebook videos to ensure they render properly
+          if (window.FB && window.FB.XFBML) {
+            window.FB.XFBML.parse(mobileVideoSection);
+          }
         }
         
         // Show gallery footer spacer

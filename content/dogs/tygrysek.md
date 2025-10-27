@@ -1,11 +1,14 @@
 ---
 name: "Tygrysek"
 description: "Przecudny, piękny pies - w człowieka wpatrzony jak w obrazek, nic innego się nie liczy, gdy w zasięgu są ręce do głaskania. Dogada się z suczkami, niestety z innymi samcami mu nie po drodze. "
-image: "images/gryzia1.jpg"
+image: "images/tygrysek2.png"
 images:
-  - "images/gryzia1.jpg"
-  - "images/gryzia2.jpg"
-  - "images/gryzia3.jpg"
+  - "images/tygrysek1.png"
+  - "images/tygrysek2.png"
+  - "images/tygrysek3.png"
+  - "images/tygrysek4.png"
+  - "images/tygrysek5.png"
+  - "images/tygrysek6.png"
 age: "2 lata"
 gender: "Samiec"
 size: "Duży"

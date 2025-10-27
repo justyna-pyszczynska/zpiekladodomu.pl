@@ -904,17 +904,11 @@
   </footer>
 
   <script>
-    // Dynamic dog loading function
+    // Dynamic dog loading function - loads from .md files
     async function loadAvailableDogs() {
       try {
-        // Try to load from index.html first
-        const response = await fetch('index.html');
-        const html = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        
-        // Find all dog cards and extract names
-        const dogCards = doc.querySelectorAll('.dog-card h3');
+        // List of current dog files
+        const dogFiles = ['dingo.md', 'duo blondi.md', 'gryzia.md', 'tygrysek.md'];
         const dropdown = document.getElementById('selectedDog');
         
         // Clear existing options except the first two
@@ -922,18 +916,34 @@
           dropdown.removeChild(dropdown.lastChild);
         }
         
-        // Add each dog as an option
-        dogCards.forEach(card => {
-          const dogName = card.textContent.trim();
-          if (dogName) {
-            const option = document.createElement('option');
-            option.value = dogName.toLowerCase().replace(/[^a-z0-9]/g, '');
-            option.textContent = dogName;
-            dropdown.insertBefore(option, dropdown.children[dropdown.children.length - 1]);
+        // Load each dog from .md files
+        for (const file of dogFiles) {
+          try {
+            const response = await fetch(`content/dogs/${file}`);
+            if (response.ok) {
+              const text = await response.text();
+              
+              // Parse front matter - simple YAML parser
+              const match = text.match(/^---\s*\n([\s\S]*?)\n---/);
+              if (match) {
+                const frontMatter = match[1];
+                const nameMatch = frontMatter.match(/^name:\s*"([^"]+)"/m);
+                
+                if (nameMatch) {
+                  const dogName = nameMatch[1];
+                  const option = document.createElement('option');
+                  option.value = dogName.toLowerCase().replace(/[^a-z0-9]/g, '');
+                  option.textContent = dogName;
+                  dropdown.insertBefore(option, dropdown.children[dropdown.children.length - 1]);
+                }
+              }
+            }
+          } catch (error) {
+            console.warn(`Failed to load ${file}:`, error);
           }
-        });
+        }
         
-        console.log(`Loaded ${dogCards.length} dogs dynamically`);
+        console.log('Loaded dogs dynamically from .md files');
         console.log('Available dogs after loading:', Array.from(dropdown.options).map(opt => opt.textContent));
         
         // Try to pre-select dog after loading
@@ -945,7 +955,7 @@
         console.log('Could not load dogs dynamically, using fallback');
         // Fallback: add some default dogs if dynamic loading fails
         const dropdown = document.getElementById('selectedDog');
-        const fallbackDogs = ['Kokos', 'Dżeki', 'Gaja'];
+        const fallbackDogs = ['Dingo', 'Gryzia', 'Tygrysek', 'Duo Blondi'];
         
         fallbackDogs.forEach(dogName => {
           const option = document.createElement('option');
