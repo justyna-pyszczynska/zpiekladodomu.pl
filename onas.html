@@ -1563,9 +1563,51 @@
     }
     
     /* Extra small phones - map info adjustments */
+    /* Additional breakpoints for map spacing */
+    @media (max-width: 600px) {
+      .map-section .map-info {
+        margin-top: -3rem !important;
+        padding: 0.875rem !important;
+      }
+      
+      .map-section .map-wrapper {
+        margin-bottom: -2.5rem !important;
+      }
+      
+      .map-section .map-wrapper + .map-info,
+      .map-container .map-info {
+        margin-top: -3rem !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .map-section .map-info {
+        margin-top: -3.5rem !important;
+        padding: 0.75rem !important;
+      }
+      
+      .map-section .map-wrapper {
+        margin-bottom: -3rem !important;
+      }
+      
+      .map-section .map-wrapper + .map-info,
+      .map-container .map-info {
+        margin-top: -3.5rem !important;
+      }
+    }
+    
     @media (max-width: 350px) {
       .map-info {
         padding: 1.5rem 1rem !important;
+      }
+      
+      .map-section .map-info {
+        margin-top: -3.5rem !important;
+        padding: 0.75rem !important;
+      }
+      
+      .map-section .map-wrapper {
+        margin-bottom: -3rem !important;
       }
       
       .map-stats {
@@ -1872,16 +1914,30 @@
         padding: 0 1rem;
       }
       
-      .map-info { 
+      /* Mobile Map Spacing Improvements - Smooth transitions */
+      .map-section .map-info {
         max-width: 100%; 
         min-width: 0;
         order: 2;
-        margin-top: 1rem;
+        margin-top: -2.5rem !important;
         text-align: center;
-        padding: 2rem 1.5rem;
+        padding: 1rem !important;
         flex: 0 0 auto;
         width: 100%;
         align-self: center;
+      }
+      
+      .map-section .map-wrapper {
+        order: 1;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        margin-bottom: -2rem !important;
+      }
+      
+      .map-section .map-wrapper + .map-info,
+      .map-container .map-info {
+        margin-top: -2.5rem !important;
       }
       
       .map-info h4 {
@@ -1894,13 +1950,6 @@
         text-align: center;
         font-size: clamp(0.9rem, 3vw, 1rem);
         margin-bottom: 1.5rem;
-      }
-      
-      .map-wrapper { 
-        order: 1;
-        width: 100%;
-        max-width: 100%;
-        padding: 0;
       }
       
       #turkeyMapContainer {
@@ -2021,6 +2070,12 @@
         margin-bottom: 0 !important;
       }
       
+      /* Gallery section spacing after map-info card */
+      .map-section + .gallery-section,
+      .map-section + section.gallery-section {
+        margin-top: 5rem !important;
+        padding: 2.5rem 0 0.25rem 0 !important;
+      }
       
       .gallery-header {
         margin-bottom: 1rem !important;

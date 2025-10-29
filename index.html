@@ -597,6 +597,51 @@
       min-height: 25px !important;
     }
 
+    /* PATRON圣女 SECTION */
+    .patronite-section {
+      padding: 0.5rem 0 3rem 0;
+      background: #fafafa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .patronite-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      gap: 2rem;
+      padding: 0 2rem;
+    }
+    
+    .patronite-header {
+      flex: 1;
+      max-width: 600px;
+    }
+    
+    #patronite-title {
+      text-align: left;
+      margin-bottom: 0;
+      font-family: 'McLaren', cursive;
+      font-size: 2rem;
+      color: #1f2937;
+      margin-top: 0;
+      line-height: 1.3;
+    }
+    
+    .patronite-widget-wrapper {
+      flex-shrink: 0;
+    }
+    
+    .patronite-container iframe {
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      border: none;
+      max-width: 100%;
+    }
+
     /* MAP SECTION */
     .map-section { padding: 2rem 0; }
     #map-title-new { 
@@ -969,6 +1014,36 @@
         font-size: 0.8rem;
       }
       
+      /* Mobile Patronite Widget */
+      .patronite-section {
+        padding: 0.5rem 1rem 2rem 1rem !important;
+      }
+      
+      .patronite-container {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+        padding: 0 1rem !important;
+      }
+      
+      .patronite-header {
+        width: 100% !important;
+        max-width: 100% !important;
+        text-align: center !important;
+      }
+      
+      #patronite-title {
+        text-align: center !important;
+        font-size: clamp(1.3rem, 4vw, 2rem) !important;
+        margin-bottom: 0 !important;
+      }
+      
+      .patronite-container iframe {
+        width: 100% !important;
+        max-width: 380px !important;
+        height: 330px !important;
+      }
+      
       /* Mobile Footer Styling */
       .footer-grid {
         display: flex !important;
@@ -1210,6 +1285,18 @@
       </div>
       <div class="center" style="margin-top:12px">
     </div>
+    </section>
+
+    <!-- PATRON圣女 WIDGET SECTION -->
+    <section class="section patronite-section">
+      <div class="patronite-container">
+        <div class="patronite-header">
+          <h3 id="patronite-title">Dzięki Waszemu wsparciu kolejne życia przyjeżdzają do Polski, rozważ zostanie patronem:</h3>
+        </div>
+        <div class="patronite-widget-wrapper">
+          <iframe src="https://patronite.pl/widget/61577219922888/1084646/small/light/colorful?description=Dzi%C4%99kuj%C4%99%20za%20Twoje%20wsparcie!" width="380" height="330" frameborder="0" scrolling="no"></iframe>
+        </div>
+      </div>
     </section>
 
     <!-- INTERACTIVE MAP -->

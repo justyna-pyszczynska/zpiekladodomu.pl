@@ -346,10 +346,16 @@
     /* GALLERY AND VIDEO SECTION CONTAINER */
     #gallery-video-container {
       display: grid;
-      grid-template-columns: 3fr 1fr;
+      grid-template-columns: 2fr 1fr;
       gap: 1.5rem;
       width: 100%;
       margin-top: 2rem;
+    }
+    
+    @media (max-width: 1200px) {
+      #gallery-video-container {
+        grid-template-columns: 1fr;
+      }
     }
     
     #dog-gallery {
@@ -368,6 +374,8 @@
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+      min-width: 300px;
+      max-width: 100%;
     }
     
     .video-embed-container {
@@ -375,8 +383,12 @@
       border-radius: 1.5rem;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
       padding: 1rem;
-      overflow: hidden;
+      overflow: visible;
       height: fit-content;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
     .video-embed-container iframe {
@@ -385,6 +397,29 @@
       border-radius: 1rem;
       aspect-ratio: 9 / 16;
       border: none;
+    }
+    
+    /* Match video height to exactly 2 gallery items */
+    @media (min-width: 1200px) {
+      #video-section {
+        align-self: start;
+      }
+      
+      .video-embed-container {
+        position: sticky;
+        top: 0;
+      }
+    }
+    
+    @media (max-width: 1200px) {
+      #video-section {
+        width: 100%;
+        min-width: 100%;
+      }
+      
+      .video-embed-container iframe {
+        height: 500px !important;
+      }
     }
 
     .gallery-item {
@@ -1552,11 +1587,14 @@
       // Create video embed
       if (videoContainer) {
         if (videoUrl.includes('facebook.com')) {
-          videoContainer.innerHTML = `<iframe src="${videoUrl}" width="100%" height="auto" style="border:none;overflow:hidden;aspect-ratio:9/16;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
+          // Facebook embed
+          videoContainer.innerHTML = `<iframe src="${videoUrl}" width="100%" height="500" style="border:none;overflow:hidden;border-radius:1rem;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
         } else if (videoUrl.includes('instagram.com')) {
-          videoContainer.innerHTML = `<iframe src="${videoUrl}embed/" width="100%" height="auto" style="border:none;overflow:hidden;aspect-ratio:9/16;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
+          // Instagram embed  
+          videoContainer.innerHTML = `<iframe src="${videoUrl}embed/" width="100%" height="500" style="border:none;overflow:hidden;border-radius:1rem;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
         } else {
-          videoContainer.innerHTML = `<iframe src="${videoUrl}" width="100%" height="auto" style="border:none;overflow:hidden;aspect-ratio:9/16;" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>`;
+          // Generic embed
+          videoContainer.innerHTML = `<iframe src="${videoUrl}" width="100%" height="500" style="border:none;overflow:hidden;border-radius:1rem;" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>`;
         }
       }
     }

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nowa ankieta adopcyjna - Z Piekła do Domu</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Poppins', Arial, sans-serif; background-color: #fafafa; line-height: 1.6; color: #1f2937;">
+  
+  <!-- Main Container -->
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #fafafa; padding: 20px 0;">
+    <tr>
+      <td align="center">
+        <!-- Email Content Container -->
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="max-width: 600px; background-color: #ffffff; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden;">
+          
+          <!-- Header with Logo and Gradient -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #fca5a5, #fde68a); padding: 30px; text-align: center;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                  <td align="center">
+                    <!-- Replace with your actual logo URL -->
+                    <img src="https://zpiekladodomum.pl/images/logo.svg" alt="Z Piekła do Domu" width="120" height="120" style="display: block; margin: 0 auto 15px; max-width: 120px;">
+                    <h1 style="font-family: 'McLaren', Georgia, serif; font-size: 28px; color: #1f2937; margin: 0; font-weight: 600; text-shadow: 1px 1px 2px rgba(255,255,255,0.3);">
+                      Nowa Ankieta Adopcyjna
+                    </h1>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Introduction -->
+          <tr>
+            <td style="padding: 30px 40px 20px;">
+              <p style="font-size: 16px; color: #6b7280; margin: 0 0 25px; text-align: center;">
+                Otrzymano nową ankietę adopcyjną od <strong style="color: #1f2937;">{{from_name}}</strong>
+              </p>
+              <div style="height: 2px; background: linear-gradient(90deg, #fca5a5, #fde68a); border-radius: 2px; margin: 20px 0;"></div>
+            </td>
+          </tr>
+          
+          <!-- Dane osobowe Section -->
+          <tr>
+            <td style="padding: 0 40px 20px;">
+              <h2 style="font-family: 'McLaren', Georgia, serif; font-size: 22px; color: #1f2937; margin: 0 0 15px; padding-bottom: 10px; border-bottom: 2px solid #fde68a;">
+                📋 Dane osobowe
+              </h2>
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                  <td style="padding: 8px 0; font-size: 15px;">
+                    <strong style="color: #1f2937;">Imię i Nazwisko:</strong>
+                  </td>
+                  <td style="padding: 8px 0; font-size: 15px; color: #374151; text-align: right;">
+                    {{from_name}}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-size: 15px;">
+                    <strong style="color: #1f2937;">Email:</strong>
+                  </td>
+                  <td style="padding: 8px 0; font-size: 15px; color: #374151; text-align: right;">
+                    {{from_email}}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-size: 15px;">
+                    <strong style="color: #1f2937;">Telefon:</strong>
+                  </td>
+                  <td style="padding: 8px 0; font-size: 15px; color: #374151; text-align: right;">
+                    {{phone}}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-size: 15px; vertical-align: top;">
+                    <strong style="color: #1f2937;">Adres:</strong>
+                  </td>
+                  <td style="padding: 8px 0; font-size: 15px; color: #374151; text-align: right;">
+                    {{address}}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Wybór psa Section -->
+          <tr>
+            <td style="padding: 0 40px 20px;">
+              <h2 style="font-family: 'McLaren', Georgia, serif; font-size: 22px; color: #1f2937; margin: 0 0 15px; padding-bottom: 10px; border-bottom: 2px solid #fde68a;">
+                🐕 Wybór psa
+              </h2>
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                  <td style="padding: 8px 0; font-size: 15px;">
+                    <strong style="color: #1f2937;">Wybrany pies:</strong>
+                  </td>
+                  <td style="padding: 8px 0; font-size: 15px; color: #374151; text-align: right;">
+                    {{selected_dog}}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Informacje o domu Section -->
+          <tr>
+            <td style="padding: 0 40px 20px;">
+              <h2 style="font-family: 'McLaren', Georgia, serif; font-size: 22px; color: #1f2937; margin: 0 0 15px; padding-bottom: 10px; border-bottom: 2px solid #fde68a;">
+                🏠 Informacje o domu
+              </h2>
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                  <td style="padding: 8px 0; font-size: 15px;">
+                    <strong style="color: #1f2937;">Typ mieszkania:</strong>
+                  </td>
+                  <td style="padding: 8px 0; font-size: 15px; color: #374151; text-align: right;">
+                    {{home_type}}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-size: 15px;">
+                    <strong style="color: #1f2937;">Zgoda domowników na adopcję:</strong>
+                  </td>
+                  <td style="padding: 8px 0; font-size: 15px; color: #374151; text-align: right;">
+                    {{online_meeting_home}}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-size: 15px;">
+                    <strong style="color: #1f2937;">Gdzie pies będzie spał/spędzał czas:</strong>
+                  </td>
+                  <td style="padding: 8px 0; font-size: 15px; color: #374151; text-align: right;">
+                    {{household_agreement}}
+                  </td>
+                </tr>
+                {{#if household_agreement_text}}
+                <tr>
+                  <td colspan="2" style="padding: 12px 0; font-size: 14px; color: #6b7280; font-style: italic; border-top: 1px solid #e5e7eb; margin-top: 10px;">
+                    <strong>Szczegóły:</strong> {{household_agreement_text}}
+                  </td>
+                </tr>
+                {{/if}}
+                <tr>
+                  <td style="padding: 8px 0; font-size: 15px;">
+                    <strong style="color: #1f2937;">Inne zwierzęta:</strong>
+                  </td>
+                  <td style="padding: 8px 0; font-size: 15px; color: #374151; text-align: right;">
+                    {{other_pets}}
+                  </td>
+                </tr>
+                {{#if other_pets_text}}
+                <tr>
+                  <td colspan="2" style="padding: 12px 0; font-size: 14px; color: #6b7280; font-style: italic; border-top: 1px solid #e5e7eb; margin-top: 10px;">
+                    <strong>Opis zwierząt:</strong> {{other_pets_text}}
+                  </td>
+                </tr>
+                {{/if}}
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Dodatkowe informacje Section -->
+          <tr>
+            <td style="padding: 0 40px 20px;">
+              <h2 style="font-family: 'McLaren', Georgia, serif; font-size: 22px; color: #1f2937; margin: 0 0 15px; padding-bottom: 10px; border-bottom: 2px solid #fde68a;">
+                💬 Dodatkowe informacje
+              </h2>
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                  <td style="padding: 8px 0; font-size: 15px;">
+                    <strong style="color: #1f2937;">Możliwość rozmowy online (Messenger/WhatsApp):</strong>
+                  </td>
+                  <td style="padding: 8px 0; font-size: 15px; color: #374151; text-align: right;">
+                    {{online_meeting}}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-size: 15px;">
+                    <strong style="color: #1f2937;">Gotowość na wydatki zdrowotne:</strong>
+                  </td>
+                  <td style="padding: 8px 0; font-size: 15px; color: #374151; text-align: right;">
+                    {{online_meeting3}}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-size: 15px;">
+                    <strong style="color: #1f2937;">Koszt transportu (2100zł):</strong>
+                  </td>
+                  <td style="padding: 8px 0; font-size: 15px; color: #374151; text-align: right;">
+                    {{online_meeting2}}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Zgody Section -->
+          <tr>
+            <td style="padding: 0 40px 20px;">
+              <h2 style="font-family: 'McLaren', Georgia, serif; font-size: 22px; color: #1f2937; margin: 0 0 15px; padding-bottom: 10px; border-bottom: 2px solid #fde68a;">
+                ✔️ Zgody i zobowiązania
+              </h2>
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                  <td style="padding: 8px 0; font-size: 15px;">
+                    <strong style="color: #1f2937;">Umowa adopcyjna i wizyty:</strong>
+                  </td>
+                  <td style="padding: 8px 0; font-size: 15px; color: #374151; text-align: right;">
+                    {{home_visit}}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-size: 15px;">
+                    <strong style="color: #1f2937;">Kontakt telefoniczny:</strong>
+                  </td>
+                  <td style="padding: 8px 0; font-size: 15px; color: #374151; text-align: right;">
+                    {{follow_up}}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-size: 15px;">
+                    <strong style="color: #1f2937;">Zgoda RODO:</strong>
+                  </td>
+                  <td style="padding: 8px 0; font-size: 15px; color: #374151; text-align: right;">
+                    {{privacy}}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Dodatkowe informacje textarea -->
+          {{#if additional_info}}
+          <tr>
+            <td style="padding: 0 40px 20px;">
+              <h2 style="font-family: 'McLaren', Georgia, serif; font-size: 22px; color: #1f2937; margin: 0 0 15px; padding-bottom: 10px; border-bottom: 2px solid #fde68a;">
+                📝 Dodatkowe uwagi
+              </h2>
+              <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; border-left: 4px solid #fca5a5; font-size: 15px; color: #374151; line-height: 1.6;">
+                {{additional_info}}
+              </div>
+            </td>
+          </tr>
+          {{/if}}
+          
+          <!-- Footer -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #fde68a, #fecaca); padding: 25px 40px; text-align: center;">
+              <p style="font-family: 'McLaren', Georgia, serif; font-size: 16px; color: #1f2937; margin: 0 0 10px;">
+                Z Piekła do Domu
+              </p>
+              <p style="font-size: 13px; color: #6b7280; margin: 0;">
+                Ratujemy psy i koty z Turcji
+              </p>
+              <p style="font-size: 12px; color: #9ca3af; margin: 15px 0 0;">
+                To jest automatyczna wiadomość wygenerowana z formularza adopcyjnego
+              </p>
+            </td>
+          </tr>
+          
+        </table>
+      </td>
+    </tr>
+  </table>
+  
+</body>
+</html>
