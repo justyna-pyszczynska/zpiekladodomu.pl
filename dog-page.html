@@ -349,6 +349,7 @@
       grid-template-columns: 2fr 1fr;
       gap: 1.5rem;
       width: 100%;
+
       margin-top: 2rem;
     }
     
@@ -393,7 +394,6 @@
     
     .video-embed-container iframe {
       width: 100%;
-      height: auto;
       border-radius: 1rem;
       aspect-ratio: 9 / 16;
       border: none;
@@ -670,20 +670,34 @@
     }
 
     /* FOOTER */
-    footer { background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); margin-top: 2.25rem; padding: 3rem 0; }
+    footer { 
+      background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); 
+      margin-top: 2.25rem; 
+      padding: 3rem 0; 
+    }
     .footer-grid { display:grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
     .footer-brand { display:flex; align-items:flex-start; gap: 1.5rem; }
     .footer-brand img { width: 10rem; height: 10rem; }
     .footer-content { flex: 1; }
     .footer-title { font-family: 'McLaren', cursive; font-size: 1.5rem; color: #000; margin: 0 0 1rem 0; line-height: 1.3; }
-    .footer-email { display: flex; align-items: center; margin-bottom: 1rem; }
+    .footer-email { 
+      display: flex; 
+      align-items: center; 
+      margin-bottom: 1rem; 
+      flex-wrap: wrap;
+      word-break: break-all;
+      gap: 0.5rem;
+    }
     .footer-email svg { color: #000; transition: color 0.3s ease; }
     .footer-email:hover svg { color: #666; }
     .footer-email a { 
       color: #000; 
       text-decoration: none; 
-      font-size: 1rem; 
+      font-size: 0.9rem; 
       transition: all 0.3s ease;
+      word-break: break-all;
+      max-width: 100%;
+      overflow-wrap: break-word;
     }
     .footer-email a:hover {
       color: #666;
@@ -757,14 +771,26 @@
     }
     .footer-social .footer-copyright { text-align: right; }
     
-    /* EMAIL ICON STYLING */
-    .footer-email img { 
-      width: 25px !important;
-      height: 25px !important;
-      max-width: 25px !important;
-      max-height: 25px !important;
-      min-width: 25px !important;
-      min-height: 25px !important;
+    /* EMAIL ICON STYLING - Desktop only */
+    .footer-email img {
+      width: 25px;
+      height: 25px;
+      max-width: 25px;
+      max-height: 25px;
+      min-width: 25px;
+      min-height: 25px;
+    }
+    
+    /* Mobile email icon overrides */
+    @media (max-width: 1100px) {
+      .footer-email img {
+        width: clamp(14px, 3.5vw, 20px) !important;
+        height: clamp(14px, 3.5vw, 20px) !important;
+        max-width: none !important;
+        max-height: none !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+      }
     }
 
     /* RESPONSIVE */
@@ -805,7 +831,11 @@
         width: 90%;
       }
       
-      /* Mobile Footer */
+      /* Mobile Footer Styling */
+      footer {
+        padding: 2rem 0 !important;
+      }
+      
       .footer-grid {
         display: flex !important;
         flex-direction: column !important;
@@ -813,6 +843,7 @@
         padding: 0 1rem !important;
         text-align: center !important;
         align-items: center !important;
+        width: 100% !important;
       }
       
       .footer-main {
@@ -826,18 +857,20 @@
       .footer-brand {
         flex-direction: row !important;
         align-items: center !important;
-        gap: 1.5rem !important;
+        gap: clamp(1rem, 3vw, 1.5rem) !important;
         max-width: 100% !important;
-        justify-content: center !important;
-        text-align: center !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
         width: 100% !important;
         display: flex !important;
+        padding: 0 0.5rem !important;
       }
       
       .footer-brand img {
-        width: 9rem !important;
-        height: 9rem !important;
+        width: clamp(5rem, 18vw, 9rem) !important;
+        height: clamp(5rem, 18vw, 9rem) !important;
         flex-shrink: 0 !important;
+        object-fit: contain !important;
       }
       
       .footer-content {
@@ -846,13 +879,14 @@
         display: flex !important;
         flex-direction: column !important;
         align-items: flex-start !important;
-        max-width: 40% !important;
+        justify-content: center !important;
+        gap: 0.25rem !important;
       }
       
       .footer-title {
-        font-size: 1.25rem !important;
-        margin-bottom: 1rem !important;
-        line-height: 1.2 !important;
+        font-size: clamp(0.9rem, 3.5vw, 1.25rem) !important;
+        margin-bottom: 0.25rem !important;
+        line-height: 1.3 !important;
         white-space: normal !important;
         word-wrap: break-word !important;
         overflow-wrap: break-word !important;
@@ -864,13 +898,33 @@
       .footer-email {
         justify-content: flex-start !important;
         margin-bottom: 0 !important;
+        margin-top: 0 !important;
         display: flex !important;
         align-items: center !important;
         width: 100% !important;
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+        font-size: clamp(0.75rem, 3vw, 0.9rem) !important;
+        line-height: 1;
+      }
+      
+      .footer-email img {
+        width: clamp(14px, 3.5vw, 20px) !important;
+        height: clamp(14px, 3.5vw, 20px) !important;
+        flex-shrink: 0 !important;
+        margin: 0 !important;
+        display: inline-block !important;
+        vertical-align: middle !important;
       }
       
       .footer-email a {
-        font-size: 1rem !important;
+        font-size: inherit !important;
+        word-break: break-word !important;
+        max-width: 100% !important;
+        overflow-wrap: break-word !important;
+        text-align: left !important;
+        line-height: 1.3 !important;
+        display: inline-block !important;
       }
       
       .footer-links {
@@ -1043,9 +1097,9 @@
         <div class="footer-brand">
           <img src="images/logo.svg" alt="Logo" width="120" height="120">
           <div class="footer-content">
-            <h2 class="footer-title">Z Piekła do Domu -<br>ratujemy psy i koty z Turcji</h2>
+            <h2 class="footer-title">Z Piekła do Domu - ratujemy psy i koty z Turcji</h2>
             <div class="footer-email">
-              <img src="images/email-icon.svg" alt="Email" style="margin-right: 8px;">
+              <img src="images/email-icon.svg" alt="Email">
               <a href="mailto:zpiekladodomu@gmail.com">zpiekladodomu@gmail.com</a>
             </div>
           </div>
@@ -1489,6 +1543,13 @@
         specialFeaturesHtml = data.special_features.map(feature => `<li>${feature}</li>`).join('');
       }
       
+      const storySectionHtml = data.story && data.story.trim() ? `
+        <div class="story-section">
+          <div class="dog-info-label">Historia</div>
+          <div class="dog-info-value">${data.story}</div>
+        </div>
+      ` : '';
+      
       dogInfo.innerHTML = `
         <div class="dog-info-grid">
           <div class="dog-info-item basic-info">
@@ -1515,10 +1576,7 @@
             </div>
           </div>
         </div>
-        <div class="story-section">
-          <div class="dog-info-label">Historia</div>
-          <div class="dog-info-value">${data.story || 'Brak historii do wyświetlenia.'}</div>
-        </div>
+        ${storySectionHtml}
       `;
       
       // Load gallery
@@ -1588,13 +1646,13 @@
       if (videoContainer) {
         if (videoUrl.includes('facebook.com')) {
           // Facebook embed
-          videoContainer.innerHTML = `<iframe src="${videoUrl}" width="100%" height="500" style="border:none;overflow:hidden;border-radius:1rem;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
+          videoContainer.innerHTML = `<iframe src="${videoUrl}" width="100%" height="480" style="border:none;overflow:hidden;border-radius:1rem;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
         } else if (videoUrl.includes('instagram.com')) {
           // Instagram embed  
-          videoContainer.innerHTML = `<iframe src="${videoUrl}embed/" width="100%" height="500" style="border:none;overflow:hidden;border-radius:1rem;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
+          videoContainer.innerHTML = `<iframe src="${videoUrl}embed/" width="100%" height="480" style="border:none;overflow:hidden;border-radius:1rem;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
         } else {
           // Generic embed
-          videoContainer.innerHTML = `<iframe src="${videoUrl}" width="100%" height="500" style="border:none;overflow:hidden;border-radius:1rem;" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>`;
+          videoContainer.innerHTML = `<iframe src="${videoUrl}" width="100%" height="480" style="border:none;overflow:hidden;border-radius:1rem;" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>`;
         }
       }
     }

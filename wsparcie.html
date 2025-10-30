@@ -17,61 +17,34 @@
     /* NAVBAR */
     header {
       position: fixed;
-      top: 8px;
-      left: 4px;
-      right: 4px;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1200px, 92%);
       z-index: 10;
-      width: calc(100% - 8px);
-      max-width: 100%;
-      box-sizing: border-box;
     }
     .navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: clamp(8px, 2vw, 12px) clamp(10px, 3vw, 16px);
-      background: rgba(255,255,255,0.95);
-      border-radius: 12px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-      width: 100%;
-      gap: 8px;
-      min-height: 48px;
-      overflow: visible;
+      padding: 12px 20px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
     }
     .brand {
-      display: flex; 
-      align-items: center; 
-      gap: 6px; 
-      font-weight: 600; 
-      font-family: 'McLaren', cursive;
-      flex-shrink: 0;
-      min-width: 0;
+      display: flex; align-items: center; gap: 10px; font-weight: 600; font-family: 'McLaren', cursive;
     }
-    .brand img { 
-      width: 24px; 
-      height: 24px; 
-      flex-shrink: 0;
-      display: block;
-    }
-    .brand span { 
-      font-size: clamp(11px, 2.5vw, 14px);
-      white-space: nowrap; 
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: inline-block;
-      max-width: calc(100vw - 120px);
-    }
-    .menu { display: flex; align-items: center; gap: 8px; }
+    .brand img { width: 28px; height: 28px; }
+    .menu { display: flex; align-items: center; gap: 14px; }
     .menu a {
       text-decoration: none;
       color: #222; 
       font-weight: 500;
-      padding: 6px 10px; 
-      border-radius: 8px; 
+      padding: 8px 12px; 
+      border-radius: 10px; 
       transition: all 0.3s ease;
-      font-size: 13px;
-      white-space: nowrap;
     }
     .menu a:hover {
       background: rgba(0,0,0,0.05);
@@ -87,7 +60,7 @@
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(251,191,36,0.4);
     }
-
+    
     /* Mobile Menu Toggle Button */
     .mobile-menu-toggle {
       display: none;
@@ -95,12 +68,8 @@
       background: none;
       border: none;
       cursor: pointer;
-      padding: 6px;
+      padding: 8px;
       gap: 4px;
-      flex-shrink: 0;
-      min-width: 30px;
-      justify-content: center;
-      align-items: center;
     }
     
     .hamburger-line {
@@ -130,7 +99,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
+      height: 100vh;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
       z-index: 1000;
@@ -155,7 +124,7 @@
       text-decoration: none;
       color: #222;
       padding: 1rem 2rem;
-      border-radius: 12px;
+      border-radius: 15px;
       transition: all 0.3s ease;
     }
     
@@ -541,20 +510,34 @@
     }
 
     /* FOOTER */
-    footer { background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); margin-top: 2.25rem; padding: 3rem 0; }
+    footer { 
+      background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); 
+      margin-top: 2.25rem; 
+      padding: 3rem 0; 
+    }
     .footer-grid { display:grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
     .footer-brand { display:flex; align-items:flex-start; gap: 1.5rem; }
     .footer-brand img { width: 10rem; height: 10rem; }
     .footer-content { flex: 1; }
     .footer-title { font-family: 'McLaren', cursive; font-size: 1.5rem; color: #000; margin: 0 0 1rem 0; line-height: 1.3; }
-    .footer-email { display: flex; align-items: center; margin-bottom: 1rem; }
+    .footer-email { 
+      display: flex; 
+      align-items: center; 
+      margin-bottom: 1rem; 
+      flex-wrap: wrap;
+      word-break: break-all;
+      gap: 0.5rem;
+    }
     .footer-email svg { color: #000; transition: color 0.3s ease; }
     .footer-email:hover svg { color: #666; }
     .footer-email a { 
       color: #000; 
       text-decoration: none; 
-      font-size: 1rem; 
+      font-size: 0.9rem; 
       transition: all 0.3s ease;
+      word-break: break-all;
+      max-width: 100%;
+      overflow-wrap: break-word;
     }
     .footer-email a:hover {
       color: #666;
@@ -628,57 +611,82 @@
     }
     .footer-social .footer-copyright { text-align: right; }
     
-    /* EMAIL ICON STYLING */
-    .footer-email img { 
-      width: 25px !important;
-      height: 25px !important;
-      max-width: 25px !important;
-      max-height: 25px !important;
-      min-width: 25px !important;
-      min-height: 25px !important;
+    /* EMAIL ICON STYLING - Desktop only */
+    .footer-email img {
+      width: 25px;
+      height: 25px;
+      max-width: 25px;
+      max-height: 25px;
+      min-width: 25px;
+      min-height: 25px;
+    }
+    
+    /* Mobile email icon overrides */
+    @media (max-width: 1100px) {
+      .footer-email img {
+        width: clamp(14px, 3.5vw, 20px) !important;
+        height: clamp(14px, 3.5vw, 20px) !important;
+        max-width: none !important;
+        max-height: none !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+      }
     }
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
       header { 
         top: 8px; 
-        left: 4px; 
-        right: 4px; 
-        width: calc(100% - 8px) !important;
-        max-width: 100%;
+        width: 95%;
+        left: 50%;
+        transform: translateX(-50%);
       }
+      
       .navbar { 
-        padding: clamp(8px, 2vw, 10px) clamp(8px, 2.5vw, 12px); 
+        padding: 6px 12px; 
         width: 100%;
+        min-height: 45px;
+      }
+      
+      .menu { gap: .5rem; }
+      .menu a { padding: .375rem .5rem; }
+      
+      /* Mobile Menu Toggle Button */
+    .mobile-menu-toggle {
+        display: flex;
+        flex-direction: column;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
         gap: 4px;
-        min-height: 44px;
-        box-sizing: border-box;
+    }
+      
+      .hamburger-line {
+      width: 25px;
+      height: 3px;
+      background: #222;
+      border-radius: 2px;
+        transition: all 0.3s ease;
       }
-      .brand {
-        gap: 5px !important;
-        flex: 1;
-        min-width: 0;
-        overflow: hidden;
-      }
-      .brand img { 
-        width: 20px !important; 
-        height: 20px !important; 
-        flex-shrink: 0;
-      }
-      .brand span { 
-        font-size: 11px !important;
-        max-width: 120px !important;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: block;
-      }
+      
+      .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+      
+      .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+      
+      .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+      
+      /* Hide desktop menu on mobile */
       .menu { display: none; }
-      .mobile-menu-toggle { 
-        display: flex !important; 
-        flex-shrink: 0 !important;
-        padding: 4px !important;
-        min-width: 30px !important;
-      }
+      
+      /* Show hamburger menu on mobile */
+      .mobile-menu-toggle { display: flex; }
       
       /* HERO MOBILE OPTIMIZATION */
       .hero {
@@ -756,6 +764,11 @@
       .payment-method {
         min-width: 100%;
       }
+      /* Mobile Footer Styling */
+      footer {
+        padding: 2rem 0 !important;
+      }
+      
       .footer-grid {
         display: flex !important;
         flex-direction: column !important;
@@ -763,6 +776,7 @@
         padding: 0 1rem !important;
         text-align: center !important;
         align-items: center !important;
+        width: 100% !important;
       }
       
       .footer-main {
@@ -776,18 +790,20 @@
       .footer-brand {
         flex-direction: row !important;
         align-items: center !important;
-        gap: 1.5rem !important;
+        gap: clamp(1rem, 3vw, 1.5rem) !important;
         max-width: 100% !important;
-        justify-content: center !important;
-        text-align: center !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
         width: 100% !important;
         display: flex !important;
+        padding: 0 0.5rem !important;
       }
       
       .footer-brand img {
-        width: 9rem !important;
-        height: 9rem !important;
+        width: clamp(5rem, 18vw, 9rem) !important;
+        height: clamp(5rem, 18vw, 9rem) !important;
         flex-shrink: 0 !important;
+        object-fit: contain !important;
       }
       
       .footer-content {
@@ -796,13 +812,14 @@
         display: flex !important;
         flex-direction: column !important;
         align-items: flex-start !important;
-        max-width: 40% !important;
+        justify-content: center !important;
+        gap: 0.25rem !important;
       }
       
       .footer-title {
-        font-size: 1.25rem !important;
-        margin-bottom: 1rem !important;
-        line-height: 1.2 !important;
+        font-size: clamp(0.9rem, 3.5vw, 1.25rem) !important;
+        margin-bottom: 0.25rem !important;
+        line-height: 1.3 !important;
         white-space: normal !important;
         word-wrap: break-word !important;
         overflow-wrap: break-word !important;
@@ -814,13 +831,33 @@
       .footer-email {
         justify-content: flex-start !important;
         margin-bottom: 0 !important;
+        margin-top: 0 !important;
         display: flex !important;
         align-items: center !important;
         width: 100% !important;
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+        font-size: clamp(0.75rem, 3vw, 0.9rem) !important;
+        line-height: 1;
+      }
+      
+      .footer-email img {
+        width: clamp(14px, 3.5vw, 20px) !important;
+        height: clamp(14px, 3.5vw, 20px) !important;
+        flex-shrink: 0 !important;
+        margin: 0 !important;
+        display: inline-block !important;
+        vertical-align: middle !important;
       }
       
       .footer-email a {
-        font-size: 1rem !important;
+        font-size: inherit !important;
+        word-break: break-word !important;
+        max-width: 100% !important;
+        overflow-wrap: break-word !important;
+        text-align: left !important;
+        line-height: 1.3 !important;
+        display: inline-block !important;
       }
       
       .footer-links {
@@ -1127,7 +1164,6 @@
         <img src="images/logo.svg" alt="Logo" width="200" height="200">
         <span>Z Piekła Do Domu</span>
       </div>
-      
       <!-- Hamburger Menu Button -->
       <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
         <span class="hamburger-line"></span>
@@ -1141,18 +1177,18 @@
         <a href="#bazarek">Bazarek</a>
         <a href="onas.html">O nas</a>
         <a href="wsparcie.html" class="cta">Wsparcie</a>
-      </nav>
-    </div>
-    
-    <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="index.html" onclick="closeMobileMenu()">Strona główna</a>
-      <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
-      <a href="#bazarek" onclick="closeMobileMenu()">Bazarek</a>
-      <a href="onas.html" onclick="closeMobileMenu()">O nas</a>
-      <a href="wsparcie.html" class="cta" onclick="closeMobileMenu()">Wsparcie</a>
+    </nav>
     </div>
   </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="closeMobileMenu()">Strona główna</a>
+    <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
+    <a href="#bazarek" onclick="closeMobileMenu()">Bazarek</a>
+    <a href="onas.html" onclick="closeMobileMenu()">O nas</a>
+    <a href="wsparcie.html" class="cta" onclick="closeMobileMenu()">Wsparcie</a>
+  </div>
 
   <section id="home" class="hero">
     <div class="hero-content">
@@ -1238,35 +1274,6 @@
             </div>
           </div>
         </article>
-
-        <article class="support-card">
-          <div class="support-card-content">
-            <h2>Gdzie trafiają Twoje pieniądze?</h2>
-            <p class="muted">Transparentność jest dla nas bardzo ważna. Oto jak wykorzystujemy otrzymane środki:</p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
-              <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 12px;">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏥</div>
-                <strong>40%</strong><br>
-                <small>Leczenie weterynaryjne</small>
-              </div>
-              <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 12px;">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚛</div>
-                <strong>25%</strong><br>
-                <small>Transport z Turcji</small>
-              </div>
-              <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 12px;">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🍽️</div>
-                <strong>20%</strong><br>
-                <small>Karma i opieka</small>
-              </div>
-              <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 12px;">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">📋</div>
-                <strong>15%</strong><br>
-                <small>Administracja</small>
-              </div>
-            </div>
-          </div>
-        </article>
       </div>
     </section>
   </main>
@@ -1277,9 +1284,9 @@
         <div class="footer-brand">
           <img src="images/logo.svg" alt="Logo" width="120" height="120">
           <div class="footer-content">
-            <h2 class="footer-title">Z Piekła do Domu -<br>ratujemy psy i koty z Turcji</h2>
+            <h2 class="footer-title">Z Piekła do Domu - ratujemy psy i koty z Turcji</h2>
             <div class="footer-email">
-              <img src="images/email-icon.svg" alt="Email" style="margin-right: 8px;">
+              <img src="images/email-icon.svg" alt="Email">
               <a href="mailto:zpiekladodomu@gmail.com">zpiekladodomu@gmail.com</a>
             </div>
           </div>
@@ -1333,10 +1340,17 @@
           if (index === 1) line.style.opacity = '0';
           if (index === 2) line.style.transform = 'rotate(-45deg) translate(7px, -6px)';
         } else {
-          line.style.transform = 'none';
-          line.style.opacity = '1';
+          line.style.transform = '';
+          line.style.opacity = '';
         }
       });
+      
+      // Prevent body scroll when menu is open
+      if (mobileMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
+      }
     }
 
     function closeMobileMenu() {
@@ -1347,19 +1361,35 @@
       
       // Reset hamburger lines
       hamburgerLines.forEach(line => {
-        line.style.transform = 'none';
-        line.style.opacity = '1';
+        line.style.transform = '';
+        line.style.opacity = '';
       });
+      
+      document.body.style.overflow = 'auto';
     }
-    
+
     // Close mobile menu when clicking outside
     document.addEventListener('click', function(event) {
       const mobileMenu = document.getElementById('mobileMenu');
-      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      const toggle = document.querySelector('.mobile-menu-toggle');
       
       if (mobileMenu.classList.contains('active') && 
           !mobileMenu.contains(event.target) && 
-          !mobileMenuToggle.contains(event.target)) {
+          !toggle.contains(event.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    // Close mobile menu on escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeMobileMenu();
+      }
+    });
+
+    // Close mobile menu on window resize
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 900) {
         closeMobileMenu();
       }
     });

@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Z Piekła do Domu</title>
   <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { width: 100%; overflow-x: hidden; }
@@ -152,7 +155,7 @@
       display: flex; align-items: center;
     }
     .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.2)); }
-    .hero-content { position: relative; z-index: 1; width: min(500px, 50%); margin-left: 11%; color: #fff; top: -9vh; }
+    .hero-content { position: relative; z-index: 1; width: min(500px, 50%); margin-left: 11%; color: #fff; top: -15vh; }
     .hero h1 { 
       font-family: 'McLaren', cursive; 
       font-size: clamp(32px, 6vw, 42px); 
@@ -163,7 +166,7 @@
       border-radius: 0.5rem;
       display: inline-block;
       position: absolute;
-      top: 40% !important;
+      top: 30% !important;
       transform: translateY(-50%);
     }
     .hero-subtitle {
@@ -178,8 +181,8 @@
       display: inline-block;
       white-space: nowrap;
       position: absolute;
-      top: 75%;
-      left: 12%;
+      top: 70%;
+      left: 11%;
       z-index: 2;
     }
     
@@ -241,7 +244,7 @@
 
     /* DONATION CARDS */
     .section { padding: 3rem 0; }
-    .overlap { margin-top: -39.5vh; position: relative; z-index: 2; }
+    .overlap { margin-top: -39.4vh; position: relative; z-index: 2; }
     .cards-3 { display:grid; grid-template-columns: repeat(3,1fr); gap: 1.125rem; --card-h: 475px; }
     .span-2 { grid-column: span 2; }
     .card { background:#fff; border-radius: 1rem; box-shadow:0 12px 22px rgba(0,0,0,.1); overflow: hidden; height: var(--card-h); display:flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -503,20 +506,34 @@
     }
 
     /* FOOTER */
-    footer { background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); margin-top: 2.25rem; padding: 3rem 0; }
+    footer { 
+      background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); 
+      margin-top: 2.25rem; 
+      padding: 3rem 0; 
+    }
     .footer-grid { display:grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
     .footer-brand { display:flex; align-items:flex-start; gap: 1.5rem; }
     .footer-brand img { width: 10rem; height: 10rem; }
     .footer-content { flex: 1; }
     .footer-title { font-family: 'McLaren', cursive; font-size: 1.5rem; color: #000; margin: 0 0 1rem 0; line-height: 1.3; }
-    .footer-email { display: flex; align-items: center; margin-bottom: 1rem; }
+    .footer-email { 
+      display: flex; 
+      align-items: center; 
+      margin-bottom: 1rem; 
+      flex-wrap: wrap;
+      word-break: break-all;
+      gap: 0.5rem;
+    }
     .footer-email svg { color: #000; transition: color 0.3s ease; }
     .footer-email:hover svg { color: #666; }
     .footer-email a { 
       color: #000; 
       text-decoration: none; 
-      font-size: 1rem; 
+      font-size: 0.9rem; 
       transition: all 0.3s ease;
+      word-break: break-all;
+      max-width: 100%;
+      overflow-wrap: break-word;
     }
     .footer-email a:hover {
       color: #666;
@@ -552,14 +569,14 @@
       margin: 0 0 1rem 0; 
       font-weight: 600; 
       white-space: nowrap; 
-      width: 100%;
+      transition: all 0.3s ease;
       cursor: pointer;
     }
     .links-column h4:hover {
       font-weight: 700;
       color: #333;
     }
-    .links { display: flex; flex-direction: column; gap: 0.5rem; flex-grow: 1}
+    .links { display: flex; flex-direction: column; gap: 0.5rem; }
     .links a { 
       color: #000; 
       text-decoration: none; 
@@ -580,21 +597,35 @@
       display: inline-block; 
       text-decoration: none; 
       transition: all 0.3s ease;
+      width: 48px;
+      height: 48px;
     }
     .socials a:hover {
       transform: scale(1.1);
       opacity: 0.8;
     }
     .footer-social .footer-copyright { text-align: right; }
+
+    /* EMAIL ICON STYLING - Desktop only */
+    .footer-email img {
+      width: 25px;
+      height: 25px;
+      max-width: 25px;
+      max-height: 25px;
+      min-width: 25px;
+      min-height: 25px;
+    }
     
-    /* EMAIL ICON STYLING */
-    .footer-email img { 
-      width: 25px !important;
-      height: 25px !important;
-      max-width: 25px !important;
-      max-height: 25px !important;
-      min-width: 25px !important;
-      min-height: 25px !important;
+    /* Mobile email icon overrides */
+    @media (max-width: 1100px) {
+      .footer-email img {
+        width: clamp(14px, 3.5vw, 20px) !important;
+        height: clamp(14px, 3.5vw, 20px) !important;
+        max-width: none !important;
+        max-height: none !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+      }
     }
 
     /* PATRON圣女 SECTION */
@@ -618,14 +649,15 @@
     
     .patronite-header {
       flex: 1;
-      max-width: 600px;
+      max-width: 700px;
+      margin-left: 5rem;
     }
     
     #patronite-title {
       text-align: left;
       margin-bottom: 0;
-      font-family: 'McLaren', cursive;
-      font-size: 2rem;
+      font-family: "Architects Daughter", cursive;
+      font-size: 1.5rem;
       color: #1f2937;
       margin-top: 0;
       line-height: 1.3;
@@ -633,13 +665,16 @@
     
     .patronite-widget-wrapper {
       flex-shrink: 0;
+      flex: 0 0 320px;
+      max-width: 320px;
     }
     
     .patronite-container iframe {
       border-radius: 12px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       border: none;
-      max-width: 100%;
+      width: 320px;
+      height: 330px;
     }
 
     /* MAP SECTION */
@@ -1045,6 +1080,10 @@
       }
       
       /* Mobile Footer Styling */
+      footer {
+        padding: 2rem 0 !important;
+      }
+      
       .footer-grid {
         display: flex !important;
         flex-direction: column !important;
@@ -1052,6 +1091,7 @@
         padding: 0 1rem !important;
         text-align: center !important;
         align-items: center !important;
+        width: 100% !important;
       }
       
       .footer-main {
@@ -1065,18 +1105,20 @@
       .footer-brand {
         flex-direction: row !important;
         align-items: center !important;
-        gap: 1.5rem !important;
+        gap: clamp(1rem, 3vw, 1.5rem) !important;
         max-width: 100% !important;
-        justify-content: center !important;
-        text-align: center !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
+        padding: 0 0.5rem !important;
         width: 100% !important;
         display: flex !important;
       }
       
       .footer-brand img {
-        width: 9rem !important;
-        height: 9rem !important;
+        width: clamp(5rem, 18vw, 9rem) !important;
+        height: clamp(5rem, 18vw, 9rem) !important;
         flex-shrink: 0 !important;
+        object-fit: contain !important;
       }
       
       .footer-content {
@@ -1085,13 +1127,14 @@
         display: flex !important;
         flex-direction: column !important;
         align-items: flex-start !important;
-        max-width: 40% !important;
+        justify-content: center !important;
+        gap: 0.25rem !important;
       }
       
       .footer-title {
-        font-size: 1.25rem !important;
-        margin-bottom: 1rem !important;
-        line-height: 1.2 !important;
+        font-size: clamp(0.9rem, 3.5vw, 1.25rem) !important;
+        margin-bottom: 0.25rem !important;
+        line-height: 1.3 !important;
         white-space: normal !important;
         word-wrap: break-word !important;
         overflow-wrap: break-word !important;
@@ -1101,21 +1144,35 @@
       }
       
       .footer-email {
-        justify-content: center !important;
-        margin-bottom: 1rem !important;
+        justify-content: flex-start !important;
+        margin-bottom: 0 !important;
+        margin-top: 0 !important;
         display: flex !important;
         align-items: center !important;
         width: 100% !important;
         flex-wrap: wrap !important;
-        word-break: break-all !important;
+        gap: 0.5rem !important;
+        font-size: clamp(0.75rem, 3vw, 0.9rem) !important;
+        line-height: 1;
+      }
+      
+      .footer-email img {
+        width: clamp(14px, 3.5vw, 20px) !important;
+        height: clamp(14px, 3.5vw, 20px) !important;
+        flex-shrink: 0 !important;
+        margin: 0 !important;
+        display: inline-block !important;
+        vertical-align: middle !important;
       }
       
       .footer-email a {
-        font-size: 0.9rem !important;
-        word-break: break-all !important;
+        font-size: inherit !important;
+        word-break: break-word !important;
         max-width: 100% !important;
         overflow-wrap: break-word !important;
-        text-align: center !important;
+        text-align: left !important;
+        line-height: 1.3 !important;
+        display: inline-block !important;
       }
       
       .footer-links {
@@ -1291,10 +1348,10 @@
     <section class="section patronite-section">
       <div class="patronite-container">
         <div class="patronite-header">
-          <h3 id="patronite-title">Dzięki Waszemu wsparciu kolejne życia przyjeżdzają do Polski, rozważ zostanie patronem:</h3>
+          <h3 id="patronite-title">To dzięki Waszemu szczodremu wsparciu <br> kolejne życia wciąż przyjeżdzają do Polski. <img src="images/black-heart.svg" alt="heart" style="display: inline; vertical-align: middle; width: 0.9em; height: 0.9em; margin-left: 0.3em;"> <br> <br> Rozważ patronat nad naszymi działaniami:</h3>
         </div>
         <div class="patronite-widget-wrapper">
-          <iframe src="https://patronite.pl/widget/61577219922888/1084646/small/light/colorful?description=Dzi%C4%99kuj%C4%99%20za%20Twoje%20wsparcie!" width="380" height="330" frameborder="0" scrolling="no"></iframe>
+          <iframe src="https://patronite.pl/widget/61577219922888/1084646/small/light/colorful?description=Dzi%C4%99kuj%C4%99%20za%20Twoje%20wsparcie!" width="320" height="330" frameborder="0" scrolling="no"></iframe>
         </div>
       </div>
     </section>
@@ -1420,7 +1477,7 @@
           <div class="footer-content">
             <h2 class="footer-title">Z Piekła do Domu - ratujemy psy i koty z Turcji</h2>
             <div class="footer-email">
-              <img src="images/email-icon.svg" alt="Email" style="margin-right: 8px;">
+              <img src="images/email-icon.svg" alt="Email">
               <a href="mailto:zpiekladodomu@gmail.com">zpiekladodomu@gmail.com</a>
             </div>
           </div>

@@ -17,7 +17,7 @@
     /* NAVBAR */
     header {
       position: fixed;
-      top: 12px;
+      top: 16px;
       left: 50%;
       transform: translateX(-50%);
       width: min(1200px, 92%);
@@ -27,12 +27,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 8px 16px;
+      padding: 12px 20px;
       background: rgba(255,255,255,0.7);
-      border-radius: 12px;
+      border-radius: 14px;
       backdrop-filter: blur(8px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-      min-height: 50px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
     }
     .brand {
       display: flex; align-items: center; gap: 10px; font-weight: 600; font-family: 'McLaren', cursive;
@@ -60,6 +59,88 @@
       background: linear-gradient(135deg,#fbbf24,#f87171);
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(251,191,36,0.4);
+    }
+    
+    /* Mobile Menu Toggle Button */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      gap: 4px;
+    }
+    
+    .hamburger-line {
+      width: 25px;
+      height: 3px;
+      background: #222;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+    
+    /* Mobile Menu Overlay */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu.active {
+      display: flex;
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .mobile-menu a {
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #222;
+      padding: 1rem 2rem;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu a:hover {
+      background: rgba(0,0,0,0.1);
+      transform: scale(1.05);
+    }
+    
+    .mobile-menu a.cta {
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
+      font-weight: 700;
+    }
+    
+    .mobile-menu a.cta:hover {
+      background: linear-gradient(135deg,#fbbf24,#f87171);
+      transform: scale(1.05);
     }
 
     /* HERO */
@@ -206,10 +287,14 @@
     }
     .big-card-image {
       flex: 1;
-      background: url('images/logo.svg') center center no-repeat;
-      background-size: contain;
+      background: url('images/logo.svg') 60% center no-repeat;
+      background-size: 75%;
       background-color: #ffffff;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 10%;
     }
     .big-card-content {
       flex: 1;
@@ -1064,6 +1149,7 @@
       margin-bottom: 1rem; 
       flex-wrap: wrap;
       word-break: break-all;
+      gap: 0.5rem;
     }
     .footer-email svg { color: #000; transition: color 0.3s ease; }
     .footer-email:hover svg { color: #666; }
@@ -2313,13 +2399,13 @@
     </div>
   </header>
 
-  <!-- Mobile Menu Overlay -->
-  <div id="mobileMenu" class="mobile-menu">
-    <a href="index.html">Strona główna</a>
-    <a href="adopcje.html">Adopcje</a>
-    <a href="#bazarek">Bazarek</a>
-    <a href="onas.html">O nas</a>
-    <a href="wsparcie.html" class="cta">Wsparcie</a>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="closeMobileMenu()">Strona główna</a>
+    <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
+    <a href="#bazarek" onclick="closeMobileMenu()">Bazarek</a>
+    <a href="onas.html" onclick="closeMobileMenu()">O nas</a>
+    <a href="wsparcie.html" class="cta" onclick="closeMobileMenu()">Wsparcie</a>
   </div>
 
   <section id="home" class="hero">
@@ -2337,7 +2423,7 @@
           <div class="big-card-content">
             <h2 id="main-card-title">Bo każde istnienie<br>ma dla nas znaczenie</h2>
             <p class="muted" id="main-card-content">Jesteśmy grupą kobiet - wolontariuszek, które założyły inicjatywę <strong>"Z Piekła do Domu"</strong> w marcu 2025 roku. Naszym celem jest ratowanie psów i kotów z trudnych, często śmiertelnych warunków panujących obecnie w Turcji. Na początku była nas garstka, ale projekt nabrał tempa i nadal rośnie w siłę. Dowiedziałyśmy się z mediów i od naszych tureckich znajomych o <strong>ustawie nr 5911</strong>, która została wdrożona w Turcji w 2024 roku. Ustawa ma na celu <strong>całkowitą eskterminacje psów bezdomnych w kraju</strong>. Nie zgadzamy się na takie okrucieństwo. Uważamy, że zwierzęta mają prawo żyć, i to godnie żyć. Szerzymy świadomość. Karmimy, leczymy psy i koty w Turcji, organizujemy transport do Polski i szukamy dobrych, odpowiedzialnych domów adopcyjnych dla naszych skrzywdzonych podopiecznych.</p>
-            <a href="wsparcie.html" class="btn btn-primary" id="main-card-button" style="text-decoration: none;">Wspomóż nas ↗</a>
+            <a href="wsparcie.html" class="btn btn-primary" id="main-card-button" style="text-decoration: none;" onclick="window.location.href='wsparcie.html'; return true;">Wspomóż nas ↗</a>
           </div>
         </article>
       </div>
@@ -2692,7 +2778,7 @@
           <div class="footer-content">
             <h2 class="footer-title">Z Piekła do Domu - ratujemy psy i koty z Turcji</h2>
             <div class="footer-email">
-              <img src="images/email-icon.svg" alt="Email" style="margin-right: 8px;">
+              <img src="images/email-icon.svg" alt="Email">
               <a href="mailto:zpiekladodomu@gmail.com">zpiekladodomu@gmail.com</a>
             </div>
           </div>
@@ -2743,6 +2829,74 @@
         }
       });
     }
+    
+    // Mobile Menu Functions
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const hamburgerLines = document.querySelectorAll('.hamburger-line');
+      
+      mobileMenu.classList.toggle('active');
+      
+      // Animate hamburger lines
+      hamburgerLines.forEach((line, index) => {
+        if (mobileMenu.classList.contains('active')) {
+          if (index === 0) line.style.transform = 'rotate(45deg) translate(5px, 5px)';
+          if (index === 1) line.style.opacity = '0';
+          if (index === 2) line.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+        } else {
+          line.style.transform = '';
+          line.style.opacity = '';
+        }
+      });
+      
+      // Prevent body scroll when menu is open
+      if (mobileMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    function closeMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const hamburgerLines = document.querySelectorAll('.hamburger-line');
+      
+      mobileMenu.classList.remove('active');
+      
+      // Reset hamburger lines
+      hamburgerLines.forEach(line => {
+        line.style.transform = '';
+        line.style.opacity = '';
+      });
+      
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      
+      if (mobileMenu.classList.contains('active') && 
+          !mobileMenu.contains(event.target) && 
+          !toggle.contains(event.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    // Close mobile menu on escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeMobileMenu();
+      }
+    });
+
+    // Close mobile menu on window resize
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 900) {
+        closeMobileMenu();
+      }
+    });
   </script>
 
   <!-- CMS Content Loader -->

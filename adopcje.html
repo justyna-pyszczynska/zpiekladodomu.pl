@@ -151,7 +151,7 @@
       display: flex; align-items: center;
     }
     .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.2)); }
-    .hero-content { position: relative; z-index: 1; width: min(600px, 60%); margin-left: 12%; color: #fff; }
+    .hero-content { position: relative; z-index: 1; width: min(600px, 60%); margin-left: 11%; color: #fff; top: -11vh; }
     .hero h1 { 
       font-family: 'McLaren', cursive; 
       font-size: clamp(32px, 6vw, 42px); 
@@ -162,7 +162,7 @@
       border-radius: 0.5rem;
       display: inline-block;
       position: absolute;
-      top: 40% !important;
+      top: 30% !important;
       transform: translateY(-50%);
     }
 
@@ -272,20 +272,34 @@
     .center { text-align: center; }
 
     /* FOOTER */
-    footer { background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); margin-top: 2.25rem; padding: 3rem 0; }
+    footer { 
+      background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); 
+      margin-top: 2.25rem; 
+      padding: 3rem 0; 
+    }
     .footer-grid { display:grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
     .footer-brand { display:flex; align-items:flex-start; gap: 1.5rem; }
     .footer-brand img { width: 10rem; height: 10rem; }
     .footer-content { flex: 1; }
     .footer-title { font-family: 'McLaren', cursive; font-size: 1.5rem; color: #000; margin: 0 0 1rem 0; line-height: 1.3; }
-    .footer-email { display: flex; align-items: center; margin-bottom: 1rem; }
+    .footer-email { 
+      display: flex; 
+      align-items: center; 
+      margin-bottom: 1rem; 
+      flex-wrap: wrap;
+      word-break: break-all;
+      gap: 0.5rem;
+    }
     .footer-email svg { color: #000; transition: color 0.3s ease; }
     .footer-email:hover svg { color: #666; }
     .footer-email a { 
       color: #000; 
       text-decoration: none; 
-      font-size: 1rem; 
+      font-size: 0.9rem; 
       transition: all 0.3s ease;
+      word-break: break-all;
+      max-width: 100%;
+      overflow-wrap: break-word;
     }
     .footer-email a:hover {
       color: #666;
@@ -321,14 +335,14 @@
       margin: 0 0 1rem 0; 
       font-weight: 600; 
       white-space: nowrap; 
-      width: 100%;
+      transition: all 0.3s ease;
       cursor: pointer;
     }
     .links-column h4:hover {
       font-weight: 700;
       color: #333;
     }
-    .links { display: flex; flex-direction: column; gap: 0.5rem; flex-grow: 1}
+    .links { display: flex; flex-direction: column; gap: 0.5rem; }
     .links a { 
       color: #000; 
       text-decoration: none; 
@@ -349,123 +363,35 @@
       display: inline-block; 
       text-decoration: none; 
       transition: all 0.3s ease;
+      width: 48px;
+      height: 48px;
     }
     .socials a:hover {
       transform: scale(1.1);
       opacity: 0.8;
     }
     .footer-social .footer-copyright { text-align: right; }
-    
-    /* FORCE FOOTER STYLES - MAXIMUM SPECIFICITY */
-    body footer { background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%) !important; margin-top: 2.25rem !important; padding: 3rem 0 !important; }
-    body .footer-grid { display:grid !important; grid-template-columns: 2fr 1fr 1fr !important; gap: 2rem !important; align-items: start !important; }
-    body .footer-brand { display:flex !important; align-items:flex-start !important; gap: 1.5rem !important; }
-    body .footer-brand img { width: 10rem !important; height: 10rem !important; }
-    body .footer-content { flex: 1 !important; }
-    body .footer-title { font-family: 'McLaren', cursive !important; font-size: 1.5rem !important; color: #000 !important; margin: 0 0 1rem 0 !important; line-height: 1.3 !important; }
-    body .footer-copyright { color: #000 !important; font-size: 0.875rem !important; line-height: 1.4 !important; }
-    body .footer-links { display: flex !important; gap: 7rem !important; }
-    body .footer-links .links a {
-      position: relative !important;
-      display: inline-block !important;
-      font-weight: 500 !important;
-      transition: font-weight 0.3s ease, color 0.3s ease !important;
-    }
-    body .footer-links .links a::after {
-      content: attr(data-text) !important;
-      visibility: hidden !important;
-      font-weight: 700 !important;
-      height: 0 !important;
-      overflow: hidden !important;
-      pointer-events: none !important;
-      display: block !important;
-    }
-    body .footer-links .links a:hover {
-      font-weight: 700 !important;
-      color: #666 !important;
-    }
-    body .links-column h4 { 
-      color: #000 !important; 
-      font-size: 1rem !important; 
-      margin: 0 0 1rem 0 !important; 
-      font-weight: 600 !important; 
-      white-space: nowrap !important; 
-      width: 100% !important;
-      cursor: pointer !important;
-    }
-    body .links-column h4:hover {
-      font-weight: 700 !important;
-      color: #333 !important;
-    }
-    body .links { display: flex !important; flex-direction: column !important; gap: 0.5rem !important; flex-grow: 1 !important; }
-    body .links a { 
-      color: #000 !important; 
-      text-decoration: none !important; 
-      font-size: 0.875rem !important; 
-      white-space: nowrap !important;
-      font-weight: 400 !important;
-      display: block !important;
-      width: 100% !important;
-      text-align: left !important;
-    }
-    body .links a:hover {
-      color: #666 !important;
-      font-weight: 700 !important;
-    }
-    body .footer-social { display: flex !important; flex-direction: column !important; align-items: flex-end !important; gap: 3.75rem !important; }
-    body .socials { display: flex !important; gap: 0.75rem !important; }
-    body .socials a { 
-      display: inline-block !important; 
-      text-decoration: none !important; 
-      transition: all 0.3s ease !important;
-    }
-    body .socials a:hover {
-      transform: scale(1.1) !important;
-      opacity: 0.8 !important;
-    }
-    body .footer-social .footer-copyright { text-align: right !important; }
-    
-    /* DESKTOP FOOTER EMAIL - FORCE EXACT MATCH */
-    .footer-email { 
-      display: flex !important; 
-      align-items: center !important; 
-      margin-bottom: 1rem !important; 
-      justify-content: flex-start !important;
-    }
-    .footer-email img { 
-      width: 12px !important;
-      height: 12px !important;
-      margin-right: 8px !important;
-    }
-    
-    /* FORCE SMALL EMAIL ICON */
-    img[src="images/email-icon.svg"] {
-      width: 25px !important;
-      height: 25px !important;
-      max-width: 25px !important;
-      max-height: 25px !important;
-      min-width: 25px !important;
-      min-height: 25px !important;
-    }
-    
-    /* ALTERNATIVE APPROACH */
+
+    /* EMAIL ICON STYLING - Desktop only */
     .footer-email img {
-      width: 14px !important;
-      height: 14px !important;
-      max-width: 14px !important;
-      max-height: 14px !important;
+      width: 25px;
+      height: 25px;
+      max-width: 25px;
+      max-height: 25px;
+      min-width: 25px;
+      min-height: 25px;
     }
-    .footer-email:hover svg { color: #666 !important; }
-    .footer-email a { 
-      color: #000 !important; 
-      text-decoration: none !important; 
-      font-size: 1rem !important; 
-      transition: all 0.3s ease !important;
-    }
-    .footer-email a:hover {
-      color: #666 !important;
-      text-decoration: underline !important;
-      font-weight: 700 !important;
+    
+    /* Mobile email icon overrides */
+    @media (max-width: 1100px) {
+      .footer-email img {
+        width: clamp(14px, 3.5vw, 20px) !important;
+        height: clamp(14px, 3.5vw, 20px) !important;
+        max-width: none !important;
+        max-height: none !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+      }
     }
     
 
@@ -544,6 +470,10 @@
       }
       
       /* Mobile Footer Styling */
+      footer {
+        padding: 2rem 0 !important;
+      }
+      
       .footer-grid {
         display: flex !important;
         flex-direction: column !important;
@@ -551,6 +481,7 @@
         padding: 0 1rem !important;
         text-align: center !important;
         align-items: center !important;
+        width: 100% !important;
       }
       
       .footer-main {
@@ -564,18 +495,20 @@
       .footer-brand {
         flex-direction: row !important;
         align-items: center !important;
-        gap: 1.5rem !important;
+        gap: clamp(1rem, 3vw, 1.5rem) !important;
         max-width: 100% !important;
-        justify-content: center !important;
-        text-align: center !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
         width: 100% !important;
         display: flex !important;
+        padding: 0 0.5rem !important;
       }
       
       .footer-brand img {
-        width: 9rem !important;
-        height: 9rem !important;
+        width: clamp(5rem, 18vw, 9rem) !important;
+        height: clamp(5rem, 18vw, 9rem) !important;
         flex-shrink: 0 !important;
+        object-fit: contain !important;
       }
       
       .footer-content {
@@ -584,13 +517,14 @@
         display: flex !important;
         flex-direction: column !important;
         align-items: flex-start !important;
-        max-width: 40% !important;
+        justify-content: center !important;
+        gap: 0.25rem !important;
       }
       
       .footer-title {
-        font-size: 1.25rem !important;
-        margin-bottom: 1rem !important;
-        line-height: 1.2 !important;
+        font-size: clamp(0.9rem, 3.5vw, 1.25rem) !important;
+        margin-bottom: 0.25rem !important;
+        line-height: 1.3 !important;
         white-space: normal !important;
         word-wrap: break-word !important;
         overflow-wrap: break-word !important;
@@ -602,13 +536,33 @@
       .footer-email {
         justify-content: flex-start !important;
         margin-bottom: 0 !important;
+        margin-top: 0 !important;
         display: flex !important;
         align-items: center !important;
         width: 100% !important;
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+        font-size: clamp(0.75rem, 3vw, 0.9rem) !important;
+        line-height: 1;
+      }
+      
+      .footer-email img {
+        width: clamp(14px, 3.5vw, 20px) !important;
+        height: clamp(14px, 3.5vw, 20px) !important;
+        flex-shrink: 0 !important;
+        margin: 0 !important;
+        display: inline-block !important;
+        vertical-align: middle !important;
       }
       
       .footer-email a {
-        font-size: 1rem !important;
+        font-size: inherit !important;
+        word-break: break-word !important;
+        max-width: 100% !important;
+        overflow-wrap: break-word !important;
+        text-align: left !important;
+        line-height: 1.3 !important;
+        display: inline-block !important;
       }
       
       .footer-links {
@@ -672,123 +626,6 @@
         width: 100% !important;
       }
       
-      /* FORCE MOBILE FOOTER STYLES - MAXIMUM SPECIFICITY */
-      body .footer-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 2rem !important;
-        padding: 0 1rem !important;
-        text-align: center !important;
-        align-items: center !important;
-      }
-      
-      body .footer-main {
-        order: 1 !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        width: 100% !important;
-      }
-      
-      body .footer-brand {
-        flex-direction: row !important;
-        align-items: center !important;
-        gap: 1.5rem !important;
-        max-width: 100% !important;
-        justify-content: center !important;
-        text-align: center !important;
-        width: 100% !important;
-        display: flex !important;
-      }
-      
-      body .footer-brand img {
-        width: 9rem !important;
-        height: 9rem !important;
-        flex-shrink: 0 !important;
-      }
-      
-      body .footer-content {
-        flex: 1 !important;
-        text-align: left !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        max-width: 40% !important;
-      }
-      
-      body .footer-title {
-        font-size: 1.25rem !important;
-        margin-bottom: 1rem !important;
-        line-height: 1.2 !important;
-        white-space: normal !important;
-        word-wrap: break-word !important;
-        overflow-wrap: break-word !important;
-        hyphens: auto !important;
-        text-align: left !important;
-        width: 100% !important;
-      }
-      
-      
-      body .footer-links {
-        order: 2 !important;
-        flex-direction: column !important;
-        gap: 2rem !important;
-        align-items: center !important;
-        margin-bottom: 1rem !important;
-        justify-content: center !important;
-        width: 100% !important;
-        display: flex !important;
-      }
-      
-      body .links-column {
-        text-align: center !important;
-        width: 100% !important;
-      }
-      
-      body .links-column h4 {
-        text-align: center !important;
-        margin-bottom: 0.75rem !important;
-        font-size: 1rem !important;
-      }
-      
-      body .links-column .links {
-        align-items: center !important;
-        gap: 0.5rem !important;
-        display: flex !important;
-        flex-direction: column !important;
-      }
-      
-      body .links a {
-        text-align: center !important;
-        font-size: 0.9rem !important;
-      }
-      
-      body .footer-social {
-        order: 3 !important;
-        align-items: center !important;
-        gap: 2rem !important;
-        width: 100% !important;
-        display: flex !important;
-        flex-direction: column !important;
-      }
-      
-      body .socials {
-        gap: 1.5rem !important;
-        display: flex !important;
-        justify-content: center !important;
-      }
-      
-      body .socials a {
-        width: 56px !important;
-        height: 56px !important;
-      }
-      
-      body .footer-social .footer-copyright {
-        text-align: center !important;
-        font-size: 1rem !important;
-        line-height: 1.4 !important;
-        width: 100% !important;
-      }
       
     }
 
@@ -928,7 +765,7 @@
           <div class="footer-content">
             <h2 class="footer-title">Z Piekła do Domu - ratujemy psy i koty z Turcji</h2>
             <div class="footer-email">
-              <img src="images/email-icon.svg" alt="Email" style="margin-right: 8px;">
+              <img src="images/email-icon.svg" alt="Email">
               <a href="mailto:zpiekladodomu@gmail.com">zpiekladodomu@gmail.com</a>
             </div>
           </div>
