@@ -313,8 +313,8 @@
     }
     .big-card .muted {
       color: #6b7280;
-      font-size: 1.125rem;
-      line-height: 1.6;
+      font-size: 1rem;
+      line-height: 1.5;
       margin: 0;
     }
     .big-card .btn {
@@ -360,14 +360,14 @@
       width: 100%;
       padding: 0 2rem;
     }
-    .map-wrapper { 
+   .map-wrapper { 
       background: none; 
       padding: 0; 
       position: relative;
       flex: 1;
       max-width: 700px;
       margin: 0 auto;
-      overflow: hidden;
+     overflow: visible;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -491,14 +491,17 @@
           border-radius: 5px;
           box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
           padding: 6px 10px;
-          font-size: 11px;
+          font-size: 9.5px;
           z-index: 1000;
           pointer-events: none;
           opacity: 0;
           transform: translateY(6px);
           transition: all 0.3s ease;
-          min-width: 120px;
-          max-width: 160px;
+          min-width: 200px;
+          max-width: 280px;
+          white-space: normal;
+          overflow-wrap: anywhere;
+          hyphens: auto;
         }
     
     .pin-tooltip.show {
@@ -523,7 +526,7 @@
     
         .pin-tooltip-header {
           font-family: 'McLaren', cursive;
-          font-size: 13px;
+          font-size: 12px;
           font-weight: 600;
           color: #000;
           margin: 0 0 3px 0;
@@ -532,7 +535,7 @@
         .pin-tooltip-description {
           color: #6b7280;
           font-size: 10px;
-          line-height: 1.2;
+          line-height: 1.35;
           margin: 0;
         }
 
@@ -881,6 +884,12 @@
       line-height: 1.3;
     }
 
+    /* Remove underlines from any links inside the Instagram widget (desktop) */
+    .instagram-widget-container a,
+    .insta-widget a {
+      text-decoration: none !important;
+    }
+
     .insta-btn {
       background: linear-gradient(135deg, #fca5a5, #fde68a);
       color: white;
@@ -933,6 +942,9 @@
         flex-direction: column;
         align-items: center;
       }
+      /* Remove underlines from any links inside the Instagram widget (mobile) */
+      .instagram-widget-container a,
+      .insta-widget a { text-decoration: none !important; }
       
       .fb-widget-wrapper,
       .insta-widget {
@@ -1010,6 +1022,21 @@
       margin-right: auto;
       height: 600px;
     }
+
+    /* LIGHTBOX (gallery modal) */
+    .lightbox-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.9); display: none; align-items: center; justify-content: center; z-index: 10000; opacity: 0; transition: opacity .3s ease; }
+    .lightbox-overlay.show { display: flex; opacity: 1; }
+    .lightbox-content { max-width: 95vw; max-height: 95vh; position: relative; display:flex; align-items:center; justify-content:center; }
+    .lightbox-content.video-active { max-width: 95vw; max-height: 95vh; }
+    .lightbox-content img { max-width: 95vw; max-height: 95vh; width: auto; height: auto; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+    .lightbox-content iframe { width: 100%; height: 100%; border: none; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+    .lightbox-close { position: absolute; top: 24px; right: 24px; background: rgba(255,255,255,.95); color:#222; border:none; width:40px; height:40px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:24px; box-shadow:0 4px 12px rgba(0,0,0,.25); }
+    .lightbox-nav { position:absolute; top:50%; transform: translateY(-50%); background: transparent; border:none; width:56px; height:56px; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:10001; transition: transform .3s ease; }
+    .lightbox-nav:hover { transform: translateY(-50%) scale(1.1); opacity:.85; }
+    .lightbox-nav img { width:24px; height:24px; pointer-events:none; }
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+    @media (max-width: 900px) { .lightbox-nav { width:44px; height:44px; } .lightbox-nav img { width:20px; height:20px; } .lightbox-prev { left: 10px; } .lightbox-next { right:10px; } }
     
     /* Card 1 - top left, single column */
     .gallery-grid-three-cards .gallery-item:nth-child(1) {
@@ -1139,10 +1166,10 @@
       padding: 3rem 0; 
     }
     .footer-grid { display:grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
-    .footer-brand { display:flex; align-items:flex-start; gap: 1.5rem; }
+    .footer-brand { display:flex; align-items:center; gap: 1.5rem; }
     .footer-brand img { width: 10rem; height: 10rem; }
-    .footer-content { flex: 1; }
-    .footer-title { font-family: 'McLaren', cursive; font-size: 1.5rem; color: #000; margin: 0 0 1rem 0; line-height: 1.3; }
+    .footer-content { flex: 1; margin-top: 0.25rem; }
+    .footer-title { font-family: 'McLaren', cursive; font-size: 1.3rem; color: #000; margin: 0 0 1rem 0; line-height: 1.3; }
     .footer-email { 
       display: flex; 
       align-items: center; 
@@ -2379,8 +2406,10 @@
   <header>
     <div class="navbar">
       <div class="brand">
-        <img src="images/logo.svg" alt="Logo" width="200" height="200">
-        <span>Z Piekła Do Domu</span>
+        <a href="index.html" style="display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit;">
+          <img src="images/logo.svg" alt="Logo" width="200" height="200">
+          <span>Z Piekła Do Domu</span>
+        </a>
       </div>
       <!-- Hamburger Menu Button -->
       <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
@@ -2548,12 +2577,11 @@
           <div class="gallery-item featured video">
             <div class="facebook-video-embed right">
               <div class="fb-video right"
-                data-href="https://www.facebook.com/61577219922888/videos/1531819384534901" 
-                data-width="450" 
-                data-height="600" 
+                data-href="https://www.facebook.com/zpiekladoddomu/videos/1356925742532079" 
+                data-width="400" 
+                data-height="700" 
                 data-show-text="false"
-                data-allowfullscreen="false"
-                style="transform: scaleY(1.4) scaleX(1.1) translateY(70px);">
+                data-allowfullscreen="false">
               </div>
             </div>
           </div>
@@ -2655,7 +2683,7 @@
           <div class="mobile-video-item">
             <div class="facebook-video-embed">
               <div class="fb-video" 
-                data-href="https://www.facebook.com/watch/?v=1531819384534901"
+                data-href="https://www.facebook.com/zpiekladoddomu/videos/1356925742532079"
                 data-width="400" 
                 data-height="300" 
                 data-show-text="false"
@@ -2667,7 +2695,7 @@
           <div class="mobile-video-item">
             <div class="facebook-video-embed">
               <div class="fb-video" 
-                data-href="https://www.facebook.com/watch/?v=24565340453125411"
+                data-href="https://www.facebook.com/zpiekladoddomu/videos/1193461922687928"
                 data-width="400" 
                 data-height="300"
                 data-show-text="false"
@@ -2737,12 +2765,11 @@
           <div class="gallery-item video-card" onclick="openVideoModal('facebook4')">
             <div class="facebook-video-embed middle">
               <div class="fb-video" 
-                data-href="https://www.facebook.com/watch/?v=24565340453125411" 
-                data-width="540" 
+                data-href="https://www.facebook.com/zpiekladoddomu/videos/1193461922687928" 
+                data-width="400" 
                 data-height="700"
                 data-show-text="false"
-                data-allowfullscreen="false"
-                style="transform: scaleY(1.4) scaleX(1.1) translateY(68px);">
+                data-allowfullscreen="false">
               </div>
             </div>
           </div>
@@ -2767,6 +2794,18 @@
 
     <!-- SPACER BETWEEN GALLERY AND FOOTER -->
     <div class="gallery-footer-spacer" style="display: none;"></div>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightbox" class="lightbox-overlay" aria-hidden="true">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Zamknij">×</button>
+      <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Poprzedni">
+        <img src="images/arrow-left.svg" alt="Previous">
+      </button>
+      <div class="lightbox-content" id="lightboxContent"></div>
+      <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Następny">
+        <img src="images/arrow-right.svg" alt="Next">
+      </button>
+    </div>
 
   </main>
 
@@ -2899,6 +2938,127 @@
     });
   </script>
 
+  <!-- Lightbox JS for onas gallery -->
+  <script>
+    (function() {
+      const overlay = document.getElementById('lightbox');
+      const content = document.getElementById('lightboxContent');
+      const btnPrev = document.getElementById('lightboxPrev');
+      const btnNext = document.getElementById('lightboxNext');
+      const btnClose = document.getElementById('lightboxClose');
+
+      if (!overlay || !content) return;
+
+      // Build items from both gallery grids
+      const items = [];
+      const imageCards = document.querySelectorAll('.gallery-item.image-card .image-container, .facebook-photo-container');
+      imageCards.forEach(el => {
+        // Prefer background-image
+        let bg = (el.style && el.style.backgroundImage) || '';
+        let src = '';
+        if (bg && bg !== 'none') {
+          const m = bg.match(/url\("?(.*?)"?\)/);
+          if (m && m[1]) src = m[1];
+        }
+        if (!src) {
+          const img = el.querySelector('img');
+          if (img && img.getAttribute('src')) src = img.getAttribute('src');
+        }
+        if (src) items.push({ type: 'image', src });
+      });
+
+      const videoCards = document.querySelectorAll('.facebook-video-embed .fb-video');
+      videoCards.forEach(el => {
+        const href = el.getAttribute('data-href');
+        if (href) items.push({ type: 'video', src: href });
+      });
+
+      if (!items.length) return;
+
+      function fbEmbedUrl(href, w, h) {
+        const enc = encodeURIComponent(href);
+        return `https://www.facebook.com/plugins/video.php?href=${enc}&show_text=false&width=${w}&height=${h}`;
+      }
+
+      let index = 0;
+      function render() {
+        const it = items[index];
+        content.innerHTML = '';
+        if (!it) return;
+        if (it.type === 'image') {
+          content.classList.remove('video-active');
+          const img = document.createElement('img');
+          img.src = it.src;
+          img.alt = 'Podgląd';
+          content.appendChild(img);
+        } else {
+          content.classList.add('video-active');
+          const w = Math.floor(Math.min(window.innerWidth * 0.9, 1100));
+          const h = Math.floor(Math.min(window.innerHeight * 0.9, 800));
+          content.style.width = w + 'px';
+          content.style.height = h + 'px';
+          const iframe = document.createElement('iframe');
+          iframe.src = fbEmbedUrl(it.src, w, h);
+          iframe.setAttribute('allowfullscreen', 'true');
+          iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share');
+          content.appendChild(iframe);
+        }
+      }
+
+      function openAt(i) {
+        index = (i + items.length) % items.length;
+        overlay.classList.add('show');
+        overlay.setAttribute('aria-hidden', 'false');
+        render();
+      }
+
+      function close() {
+        overlay.classList.remove('show');
+        overlay.setAttribute('aria-hidden', 'true');
+        content.innerHTML = '';
+      }
+
+      btnPrev.addEventListener('click', () => { index = (index - 1 + items.length) % items.length; render(); });
+      btnNext.addEventListener('click', () => { index = (index + 1) % items.length; render(); });
+      btnClose.addEventListener('click', close);
+      overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+      document.addEventListener('keydown', (e) => {
+        if (!overlay.classList.contains('show')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') { index = (index - 1 + items.length) % items.length; render(); }
+        if (e.key === 'ArrowRight') { index = (index + 1) % items.length; render(); }
+      });
+
+      // Attach click handlers to open
+      const clickable = document.querySelectorAll('.gallery-item.image-card .image-container, .facebook-photo-container, .facebook-video-embed');
+      clickable.forEach(node => {
+        node.style.cursor = 'zoom-in';
+        node.addEventListener('click', () => {
+          // Find index from source
+          let src = '';
+          if (node.classList.contains('facebook-video-embed')) {
+            const v = node.querySelector('.fb-video');
+            src = v ? v.getAttribute('data-href') : '';
+            const i = items.findIndex(it => it.type === 'video' && it.src === src);
+            openAt(i >= 0 ? i : 0);
+          } else {
+            let bg = (node.style && node.style.backgroundImage) || '';
+            if (bg && bg !== 'none') {
+              const m = bg.match(/url\("?(.*?)"?\)/);
+              if (m && m[1]) src = m[1];
+            }
+            if (!src) {
+              const img = node.querySelector('img');
+              if (img && img.getAttribute('src')) src = img.getAttribute('src');
+            }
+            const i = items.findIndex(it => it.type === 'image' && it.src === src);
+            openAt(i >= 0 ? i : 0);
+          }
+        });
+      });
+    })();
+  </script>
+
   <!-- CMS Content Loader -->
   <script src="js/cms-content.js"></script>
 
@@ -2962,7 +3122,7 @@
           istanbulTooltip.className = 'pin-tooltip istanbul-tooltip';
           istanbulTooltip.innerHTML = `
             <div class="pin-tooltip-header">Istanbul</div>
-            <div class="pin-tooltip-description">Główne centrum naszych działań ratunkowych w Turcji. Miasto łączące Europę i Azję.</div>
+            <div class="pin-tooltip-description">To tutaj, na pograniczu Europy i Azji, pomagamy w działaniu prywatnego azylu we współpracy z jego właścicielem - <b>Ümitem.</b> W okolicy mieszka nasza wolontariuszka <b>Eliza</b>, która niezależnie od pogody i prywatnych wyzwań konsekwentnie pracuje w azylu pomagając zapewnić opiekę ok. 500 psiakom każdego dnia.</div>
           `;
           mapContainer.appendChild(istanbulTooltip);
 
@@ -3006,10 +3166,10 @@
           
           // Create tooltip for Ankara pin and add to map container
           const ankaraTooltip = document.createElement('div');
-          ankaraTooltip.className = 'pin-tooltip';
+          ankaraTooltip.className = 'pin-tooltip istanbul-tooltip';
           ankaraTooltip.innerHTML = `
             <div class="pin-tooltip-header">Ankara</div>
-            <div class="pin-tooltip-description">Stolica Turcji i ważny ośrodek naszych działań ratunkowych w regionie centralnym.</div>
+            <div class="pin-tooltip-description">W stolicy Turcji leczymy psy w skrajnie drastycznych stanach. Obecnie przebywa tam 4 psiaki z ponosówkowymi zaburzeniami neurologicznymi, sunia po napaści na tle se*sualnym... Ważny ośrodek naszych działań, które koordynujemy z lokalną organizacją prozwierzęcą - <b>HayvanlarıKorumaKurtarmaHareketi.</b></div>
           `;
           mapContainer.appendChild(ankaraTooltip);
           console.log('Ankara tooltip created');
@@ -3026,9 +3186,9 @@
             const pinX = svgRect.left + (svgRect.width * 0.36);
             const pinY = svgRect.top + (svgRect.height * 0.32);
             
-            // Position tooltip above the pin
+            // Position tooltip below the pin (match index)
             ankaraTooltip.style.left = (pinX - mapRect.left - (ankaraTooltip.offsetWidth / 2)) + 'px';
-            ankaraTooltip.style.top = (pinY - mapRect.top - ankaraTooltip.offsetHeight - 15) + 'px';
+            ankaraTooltip.style.top = (pinY - mapRect.top + 40) + 'px';
             ankaraTooltip.style.position = 'absolute';
             ankaraTooltip.classList.add('show');
           });
@@ -3056,8 +3216,8 @@
           const elazigTooltip = document.createElement('div');
           elazigTooltip.className = 'pin-tooltip';
           elazigTooltip.innerHTML = `
-            <div class="pin-tooltip-header">Elazig</div>
-            <div class="pin-tooltip-description">Ważny ośrodek naszych działań ratunkowych we wschodniej Turcji. Region o strategicznym znaczeniu.</div>
+            <div class="pin-tooltip-header">Elazığ</div>
+            <div class="pin-tooltip-description">Wschód Turcji to miejsce, w którym nadzieja dla zwierząt zanika przytłoczona drastycznymi widokami setek ich tragedii. To tutaj, w Elazığ pomogliśmy w budowie azylu - <b>Wioska Burçak</b>, tzw. wyspy życia na morzu śmierci... <b>Burçak</b> to młoda studentka weterynarii tureckiego pochodzenia, która nie była obojętna na cierpienie zwierząt w jej rodzimym kraju.</div>
           `;
           mapContainer.appendChild(elazigTooltip);
 
@@ -3103,7 +3263,7 @@
           mersinTooltip.className = 'pin-tooltip';
           mersinTooltip.innerHTML = `
             <div class="pin-tooltip-header">Mersin</div>
-            <div class="pin-tooltip-description">Ważny port na południowym wybrzeżu Turcji. Centrum naszych działań ratunkowych w regionie śródziemnomorskim.</div>
+            <div class="pin-tooltip-description">Tu pomagamy starszej kobiecie - <b>Adalet</b> w modernizacji i utrzymaniu jej mini azylu. Obecnie azyl mieści ok. 30 psiaków, koty i Adalet dba o nie na co dzień w pojedynkę. Przesyłamy karmę, budy, zbudowaliśmy jej nowe zadaszenie.<br> Mieszka tam również nasza wolontariuszka Sylwia z mężem, którzy odławiają, karmią i leczą zwierzęta w tym rejonie oraz pomagają w budowie infrastruktury takiej jak prywatne azyle. </div>
           `;
           mapContainer.appendChild(mersinTooltip);
 
@@ -3251,7 +3411,7 @@
       if (videoSrc === 'facebook2') {
         // For second Facebook video, we'll open it in a new tab
         try {
-          const facebookUrl = 'https://www.facebook.com/61577219922888/videos/1531819384534901/';
+          const facebookUrl = 'https://www.facebook.com/zpiekladoddomu/videos/1356925742532079/';
           const newWindow = window.open(facebookUrl, '_blank');
           if (!newWindow) {
             // If popup was blocked, try alternative approach
@@ -3260,7 +3420,7 @@
         } catch (error) {
           console.error('Error opening Facebook video:', error);
           // Fallback: try to open the video in the same window
-          window.location.href = 'https://www.facebook.com/61577219922888/videos/1531819384534901/';
+          window.location.href = 'https://www.facebook.com/zpiekladoddomu/videos/1356925742532079/';
         }
         return;
       }

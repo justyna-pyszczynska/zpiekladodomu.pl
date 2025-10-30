@@ -210,6 +210,7 @@
       flex-direction: column;
       gap: 1.5rem;
     }
+    
     .support-card-content h2 {
       text-align: left;
       max-width: 892px; /* 430px (widget 1) + 32px (gap) + 430px (widget 2) */
@@ -221,6 +222,18 @@
       max-width: 892px; /* 430px (widget 1) + 32px (gap) + 430px (widget 2) */
       padding-left: 6.5rem;
       margin: 0;
+    }
+    /* Align heading/paragraph with widget cards in the first support card */
+    .support-container > .support-card:first-child .support-card-content h2,
+    .support-container > .support-card:first-child .support-card-content p {
+      padding-left: 0;
+      max-width: none;
+    }
+    /* Align heading/paragraph with content in the second support card */
+    .support-container > .support-card:nth-of-type(2) .support-card-content h2,
+    .support-container > .support-card:nth-of-type(2) .support-card-content p {
+      padding-left: 0;
+      max-width: none;
     }
     .fundraising-widgets {
       display: flex;
@@ -270,23 +283,40 @@
     .center { text-align: center; }
 
     /* FUNDRAISING WIDGETS */
-    .fundraising-widgets {
+    /* INDEX-LIKE WIDGET CARDS */
+    .cards-3 { display:grid; grid-template-columns: repeat(3,1fr); gap: 1.125rem; --card-h: 475px; }
+    .card { background:#fff; border-radius: 1rem; box-shadow:0 12px 22px rgba(0,0,0,.1); overflow: hidden; display:flex; flex-direction: column; height: var(--card-h); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card-placeholder { background: transparent; box-shadow: none; }
+    /* Make widget block identical to index: no extra card chrome or padding */
+    .support-card.widgets-block { background: transparent; box-shadow: none; border-radius: 0; }
+    .support-card.widgets-block .support-card-content { padding: 0; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,.15); }
+    .pomagam iframe { scale: 0.95; text-align: center; margin-left: -21px; margin-top: -18px; border: 0; width: 430px; height: 500px; }
+    .widget-fade { opacity: 1; transition: opacity .35s ease-in-out; will-change: opacity; }
+    .widget-fade.is-fading { opacity: 0; }
+    .support-fade { opacity: 1; transition: opacity .35s ease-in-out; will-change: opacity; }
+    .support-fade.is-fading { opacity: 0; }
+
+    /* Desktop - Hide mobile card links (match index) */
+    .card-link-mobile { display: contents; }
+
+    /* Ensure no extra padding around widget grid inside support-card */
+    .support-card-content .cards-3 { margin: 0; padding: 0; }
+
+    /* PLACEHOLDER FOR WIDGETS */
+    .fundraising-placeholder { display: flex; gap: 2rem; justify-content: flex-start; align-items: flex-start; margin-top: 2rem; }
+    .placeholder-box {
+      width: 430px;
+      height: 500px;
+      border: 2px dashed #e5e7eb;
+      background: #f9fafb;
+      border-radius: 1rem;
       display: flex;
-      gap: 2rem;
+      align-items: center;
       justify-content: center;
-      align-items: flex-start;
-      margin-top: 2rem;
-    }
-    .fundraising-widget {
-      flex: 1;
-      max-width: 430px;
-    }
-    .fundraising-widget iframe {
-      width: 100%;
-      height: 470px;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      color: #6b7280;
+      font-family: 'McLaren', cursive;
+      font-size: 1.25rem;
     }
 
     /* FACEBOOK GROUP WIDGET */
@@ -297,8 +327,8 @@
       border: 1px solid #e5e7eb;
       border-radius: 12px;
       padding: 0;
-      width: 350px;
-      height: 400px;
+      width: 340px;
+      height: 380px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       overflow: hidden;
@@ -309,7 +339,7 @@
     }
     .group-cover {
       width: 100%;
-      height: 150px;
+      height: 140px;
       object-fit: cover;
       border-radius: 0;
     }
@@ -318,29 +348,29 @@
     }
     .group-header {
       position: relative;
-      margin-bottom: 0.75rem;
-      height: 100px;
+      margin-bottom: 0.5rem;
+      height: 88px;
     }
     .group-icon {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       object-fit: cover;
       flex-shrink: 0;
       position: relative;
-      top: 0px;
-      left: -10px;
+      top: 4px;
+      left: -6px;
     }
     .group-text-box {
       position: absolute;
-      left: 100px;
+      left: 90px;
       top: 50%;
-      transform: translateY(-60%);
+      transform: translateY(-55%);
       display: flex;
       flex-direction: column;
-      gap: 0.25rem;
+      gap: 0.2rem;
       align-items: flex-start;
-      max-width: 200px;
+      max-width: calc(100% - 100px);
     }
     .group-text-box * {
       margin: 0;
@@ -348,18 +378,18 @@
       box-sizing: border-box;
     }
     .group-header .group-description {
-      font-size: 0.875rem;
+      font-size: 0.8rem;
       color: #6b7280;
       margin: 0;
       padding: 0;
-      line-height: 1.3;
+      line-height: 1.2;
       white-space: nowrap;
       text-align: left;
       width: 100%;
     }
     .group-title {
       font-family: 'McLaren', cursive;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: #1f2937;
       margin: 0;
@@ -516,10 +546,10 @@
       padding: 3rem 0; 
     }
     .footer-grid { display:grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
-    .footer-brand { display:flex; align-items:flex-start; gap: 1.5rem; }
+    .footer-brand { display:flex; align-items:center; gap: 1.5rem; }
     .footer-brand img { width: 10rem; height: 10rem; }
-    .footer-content { flex: 1; }
-    .footer-title { font-family: 'McLaren', cursive; font-size: 1.5rem; color: #000; margin: 0 0 1rem 0; line-height: 1.3; }
+    .footer-content { flex: 1; margin-top: 0.25rem; }
+    .footer-title { font-family: 'McLaren', cursive; font-size: 1.3rem; color: #000; margin: 0 0 1rem 0; line-height: 1.3; }
     .footer-email { 
       display: flex; 
       align-items: center; 
@@ -635,6 +665,22 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
+      /* Mobile Fundraising Widget - Better Size (match index) */
+      .pomagam iframe {
+        zoom: 0.7 !important;
+        width: 100% !important;
+        height: 100% !important;
+        margin-left: 0 !important;
+        transform: none !important;
+      }
+      /* Mobile Fundraising Card Links (match index) */
+      .card-link-mobile {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+      }
+      .card-link-mobile .card { pointer-events: none; }
+      .card-link-mobile .card iframe { pointer-events: none; }
       header { 
         top: 8px; 
         width: 95%;
@@ -1161,8 +1207,10 @@
   <header>
     <div class="navbar">
       <div class="brand">
-        <img src="images/logo.svg" alt="Logo" width="200" height="200">
-        <span>Z Piekła Do Domu</span>
+        <a href="index.html" style="display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit;">
+          <img src="images/logo.svg" alt="Logo" width="200" height="200">
+          <span>Z Piekła Do Domu</span>
+        </a>
       </div>
       <!-- Hamburger Menu Button -->
       <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
@@ -1203,15 +1251,23 @@
         <article class="support-card">
           <div class="support-card-content">
             <h2>Jak możesz pomóc?</h2>
-            <p class="muted">Każda złotówka pomaga ratować życie zwierząt z Turcji. Wybierz jedną z naszych zbiórek i dołącz do grona osób, które już pomagają.</p>
-            
-            <div class="fundraising-widgets">
-              <div class="fundraising-widget">
-                <iframe frameborder="0" width="430" height="470" scrolling="no" src="https://pomagam.pl/zpiekladodomu/widget/large"></iframe>
-              </div>
-              <div class="fundraising-widget">
-                <iframe frameborder="0" width="430" height="470" scrolling="no" src="https://pomagam.pl/aph8gm/widget/large"></iframe>
-              </div>
+            <p class="muted">Każda wpłata – mała czy duża – realnie ratuje życie zwierząt. Dołącz do osób, które już wspierają nasze działania i pomagają nam organizować transporty, leczenie oraz opiekę.</p>
+            <div class="cards-3">
+              <a id="widget-link-1" href="https://pomagam.pl/zpiekladodomu" target="_blank" class="card-link-mobile widget-fade">
+                <article class="card pomagam">
+                  <iframe id="widget-iframe-1" frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/zpiekladodomu/widget/large"></iframe>
+                </article>
+              </a>
+              <a id="widget-link-2" href="https://pomagam.pl/aph8gm" target="_blank" class="card-link-mobile widget-fade">
+                <article class="card pomagam">
+                  <iframe id="widget-iframe-2" frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/aph8gm/widget/large"></iframe>
+                </article>
+              </a>
+              <a id="widget-link-3" href="https://pomagam.pl/hk4tmk" target="_blank" class="card-link-mobile widget-fade">
+                <article class="card pomagam">
+                  <iframe id="widget-iframe-3" frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/hk4tmk/widget/large"></iframe>
+                </article>
+              </a>
             </div>
           </div>
         </article>
@@ -1223,8 +1279,9 @@
             
             <!-- Widgets Container -->
             <div class="widgets-container">
-              <!-- Facebook Group Widget -->
-              <div class="facebook-group-widget">
+              <!-- Facebook Group Widget (Slot 1) -->
+              <div id="support-slot-1" class="support-fade">
+                <div class="facebook-group-widget">
                 <img src="images/facebook-cover.jpg" 
                      alt="Facebook Group Cover" 
                      class="group-cover">
@@ -1243,10 +1300,12 @@
                      Dołącz do grupy
                   </a>
                 </div>
+                </div>
               </div>
 
-              <!-- Dog Thinking Widget -->
-              <div class="facebook-group-widget">
+              <!-- Dog Thinking Widget (Slot 2) -->
+              <div id="support-slot-2" class="support-fade">
+                <div class="facebook-group-widget">
                 <h4 class="dog-widget-title">Zostań opiekunem stałym lub tymczasowym</h4>
                 <img src="images/dog-thinking.svg" alt="Dog Thinking" class="dog-thinking-image">
                 <div class="group-content">
@@ -1256,10 +1315,12 @@
                      Ankieta adopcyjna
                   </a>
                 </div>
+                </div>
               </div>
 
-              <!-- Dog Thinking Widget (Copy for editing) -->
-              <div class="facebook-group-widget">
+              <!-- Partner Widget (Slot 3) -->
+              <div id="support-slot-3" class="support-fade">
+                <div class="facebook-group-widget">
                 <h4 class="dog-widget-title">Zostań oficjalnym partnerem naszych działań</h4>
                 <img src="images/hand-paw.svg" alt="Hand Paw" class="dog-thinking-image">
                 <div class="group-content">
@@ -1269,6 +1330,7 @@
                      <img src="images/heart.svg" alt="Heart" class="button-icon">
                      Współpraca
                   </a>
+                </div>
                 </div>
               </div>
             </div>
@@ -1407,6 +1469,111 @@
         }
       });
     }
+  </script>
+
+  <!-- Widgets Carousel (rotating Pomagam widgets) -->
+  <script>
+    (function() {
+      const widgetSets = [
+        [
+          { href: 'https://pomagam.pl/zpiekladodomu', src: 'https://pomagam.pl/zpiekladodomu/widget/large' },
+          { href: 'https://pomagam.pl/aph8gm', src: 'https://pomagam.pl/aph8gm/widget/large' },
+          { href: 'https://pomagam.pl/hk4tmk', src: 'https://pomagam.pl/hk4tmk/widget/large' }
+        ],
+        [
+          { href: 'https://pomagam.pl/km6bbg', src: 'https://pomagam.pl/km6bbg/widget/large' },
+          { href: 'https://pomagam.pl/zpiekladodomu', src: 'https://pomagam.pl/zpiekladodomu/widget/large' },
+          { href: 'https://pomagam.pl/aph8gm', src: 'https://pomagam.pl/aph8gm/widget/large' }
+        ],
+        // Add more sets of up to 3 widgets here as needed
+        // Example:
+        // [
+        //   { href: 'https://pomagam.pl/ABC1', src: 'https://pomagam.pl/ABC1/widget/large' },
+        //   { href: 'https://pomagam.pl/ABC2', src: 'https://pomagam.pl/ABC2/widget/large' },
+        //   { href: 'https://pomagam.pl/ABC3', src: 'https://pomagam.pl/ABC3/widget/large' }
+        // ]
+      ];
+
+      if (!widgetSets.length) return;
+
+      let current = 0;
+      const links = [
+        document.getElementById('widget-link-1'),
+        document.getElementById('widget-link-2'),
+        document.getElementById('widget-link-3')
+      ];
+      const iframes = [
+        document.getElementById('widget-iframe-1'),
+        document.getElementById('widget-iframe-2'),
+        document.getElementById('widget-iframe-3')
+      ];
+
+      function applySet(index) {
+        const set = widgetSets[index % widgetSets.length];
+        for (let i = 0; i < 3; i++) {
+          const w = set[i];
+          if (!w) continue;
+          links[i].href = w.href;
+          // Fade out → swap → fade in
+          links[i].classList.add('is-fading');
+          // Small timeout to allow CSS transition to start
+          setTimeout(() => {
+            iframes[i].src = w.src;
+            links[i].classList.remove('is-fading');
+          }, 200);
+        }
+      }
+
+      // Auto-rotate every 6 seconds
+      setInterval(() => {
+        current = (current + 1) % widgetSets.length;
+        applySet(current);
+      }, 6000);
+
+      // Initial ensure current set is applied (in case HTML changed)
+      applySet(0);
+    })();
+  </script>
+
+  <!-- Support Widgets Carousel (rotating support forms) -->
+  <script>
+    (function() {
+      const slots = [
+        document.getElementById('support-slot-1'),
+        document.getElementById('support-slot-2'),
+        document.getElementById('support-slot-3')
+      ];
+      if (slots.some(s => !s)) return;
+
+      // Capture initial HTML for each slot as the first set
+      const setA = slots.map(s => s.innerHTML);
+      // Example of another set (can be edited later): reuse setA for now
+      const supportSets = [ setA ];
+
+      // If you add more support widgets later, push another array of 3 HTML strings into supportSets
+      // supportSets.push([html1, html2, html3]);
+
+      let current = 0;
+
+      function applySupportSet(index) {
+        const set = supportSets[index % supportSets.length];
+        for (let i = 0; i < 3; i++) {
+          slots[i].classList.add('is-fading');
+          setTimeout(() => {
+            slots[i].innerHTML = set[i] || '';
+            slots[i].classList.remove('is-fading');
+          }, 200);
+        }
+      }
+
+      // Rotate only if more than one set is defined
+      if (supportSets.length > 1) {
+        setInterval(() => {
+          current = (current + 1) % supportSets.length;
+          applySupportSet(current);
+        }, 6000);
+      }
+    })();
   </script>
 </body>
 </html>

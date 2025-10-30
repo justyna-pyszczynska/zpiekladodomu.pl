@@ -18,6 +18,26 @@
     /* CONTAINERS */
     .container { width: min(1200px, 92%); margin: 0 auto; }
 
+    /* SHOP COMING SOON OVERLAY */
+    .shop-section { position: relative; }
+    .shop-section .coming-soon-overlay {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.73);
+      color: #fff;
+      font-family: 'McLaren', cursive;
+      font-size: clamp(1.25rem, 3vw, 2.5rem);
+      padding: 0.8rem 1.5rem;
+      width: 50%;
+      border-radius: 14px;
+      z-index: 2;
+      text-align: center;
+      pointer-events: none;
+      white-space: normal;
+    }
+
     /* NAVBAR */
     header {
       position: fixed;
@@ -251,9 +271,21 @@
     .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,.15); }
     .card-body { padding: .875rem 1rem 1rem; display:flex; flex-direction: column; gap: .5rem; flex: 1; }
     .pomagam iframe {scale: 0.95; text-align: center; margin-left: -21px; transform: scaleX(1.1rem); transform: scaleY(1.08);}
-    .dog-card { text-align: center;}
+    .dog-card { text-align: center; min-height: 30rem; }
     .dog-card .circle { width: 14rem; height: 14rem; border-radius: 50%; object-fit: cover; margin: 1rem auto 0.75rem; }
+    .dog-card.is-loading { opacity: 0; pointer-events: none; }
+    .dog-card { transition: opacity 0.25s ease; }
     .dog-card h3 { font-family: 'McLaren', cursive; font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .dog-card h3 { overflow-wrap: anywhere; }
+    .dog-card .dog-description {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #6b7280;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
     .dog-card .card-footer { justify-content: center; margin-top: 0.75rem; }
     .dog-card.span-2 { 
       display: flex !important; 
@@ -512,10 +544,10 @@
       padding: 3rem 0; 
     }
     .footer-grid { display:grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
-    .footer-brand { display:flex; align-items:flex-start; gap: 1.5rem; }
+    .footer-brand { display:flex; align-items:center; gap: 1.5rem; }
     .footer-brand img { width: 10rem; height: 10rem; }
-    .footer-content { flex: 1; }
-    .footer-title { font-family: 'McLaren', cursive; font-size: 1.5rem; color: #000; margin: 0 0 1rem 0; line-height: 1.3; }
+    .footer-content { flex: 1; margin-top: 0.25rem; }
+    .footer-title { font-family: 'McLaren', cursive; font-size: 1.3rem; color: #000; margin: 0 0 1rem 0; line-height: 1.3; }
     .footer-email { 
       display: flex; 
       align-items: center; 
@@ -707,7 +739,7 @@
       flex: 1;
       max-width: 700px;
       margin: 0 auto;
-      overflow: hidden;
+      overflow: visible; /* allow tooltips to overflow */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -780,14 +812,17 @@
       border-radius: 5px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       padding: 6px 10px;
-      font-size: 11px;
+      font-size: 9.5px;
       z-index: 1000;
       pointer-events: none;
       opacity: 0;
       transform: translateY(6px);
       transition: all 0.3s ease;
-      min-width: 120px;
-      max-width: 160px;
+      min-width: 200px;
+      max-width: 280px;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      hyphens: auto;
     }
 
     .pin-tooltip.show {
@@ -812,7 +847,7 @@
     
     .pin-tooltip-header {
       font-family: 'McLaren', cursive;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       color: #000;
       margin: 0 0 3px 0;
@@ -821,7 +856,7 @@
     .pin-tooltip-description {
       color: #6b7280;
       font-size: 10px;
-      line-height: 1.2;
+      line-height: 1.35;
       margin: 0;
     }
 
@@ -1236,6 +1271,11 @@
         width: 100% !important;
       }
     }
+
+    .split-text {
+      max-width: 500px;
+      padding-left: 20px;
+    }
   </style>
   
   
@@ -1250,8 +1290,10 @@
   <header>
     <div class="navbar">
       <div class="brand">
-        <img src="images/logo.svg" alt="Logo" width="200" height="200">
-        <span>Z Piekła Do Domu</span>
+        <a href="index.html" style="display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit;">
+          <img src="images/logo.svg" alt="Logo" width="200" height="200">
+          <span>Z Piekła Do Domu</span>
+        </a>
       </div>
       
       <!-- Hamburger Menu Button -->
@@ -1300,7 +1342,7 @@
         </article>
         </a>
 
-        <article class="card dog-card">
+        <article class="card dog-card is-loading" id="home-dog-1">
           <img src="images/dog-1.jpg" alt="Kokos" class="circle">
           <div class="card-body">
             <h3>Kokos</h3>
@@ -1311,7 +1353,7 @@
           </div>
         </article>
 
-        <article class="card dog-card">
+        <article class="card dog-card is-loading" id="home-dog-2">
           <img src="images/dog-2.jpg" alt="Dżeki" class="circle">
           <div class="card-body">
             <h3>Dżeki</h3>
@@ -1329,7 +1371,7 @@
         </article>
         </a>
 
-        <article class="card dog-card span-2">
+        <article class="card dog-card span-2 is-loading" id="home-dog-3">
           <img src="images/dog-3.jpg" alt="Gaja" class="circle">
           <div class="card-body">
             <h3>Gaja</h3>
@@ -1343,6 +1385,69 @@
       <div class="center" style="margin-top:12px">
     </div>
     </section>
+
+  <script>
+    // Populate the three existing dog cards without altering the grid layout
+    document.addEventListener('DOMContentLoaded', async function loadHomeDogs() {
+      const slots = [
+        document.getElementById('home-dog-1'),
+        document.getElementById('home-dog-2'),
+        document.getElementById('home-dog-3')
+      ];
+      if (slots.some(s => !s)) return;
+
+      const allDogFiles = ['dingo.md', 'duo blondi.md', 'gryzia.md', 'tygrysek.md'];
+      const shuffled = allDogFiles
+        .map(v => ({ v, r: Math.random() }))
+        .sort((a, b) => a.r - b.r)
+        .map(o => o.v)
+        .slice(0, 3);
+
+      async function fetchDog(file) {
+        try {
+          const res = await fetch(`content/dogs/${file}`);
+          if (!res.ok) return null;
+          const text = await res.text();
+          const m = text.match(/^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/);
+          if (!m) return null;
+          const fm = m[1].split('\n');
+          const data = {};
+          for (const line of fm) {
+            const i = line.indexOf(':');
+            if (i > 0) {
+              const k = line.substring(0, i).trim();
+              let v = line.substring(i + 1).trim();
+              if (v.startsWith('"') && v.endsWith('"')) v = v.slice(1, -1);
+              data[k] = v;
+            }
+          }
+          data.slug = file.replace('.md','');
+          return data;
+        } catch { return null; }
+      }
+
+      const dogs = await Promise.all(shuffled.map(fetchDog));
+      const valid = dogs.filter(Boolean);
+      valid.forEach((dog, idx) => {
+        const slot = slots[idx];
+        if (!slot) return;
+        const name = dog.name || 'Pies do adopcji';
+        const img = dog.image || 'images/placeholder.jpg';
+        const desc = (dog.description || '').slice(0, 180);
+        const link = `dog-page.html?dog=${dog.slug}`;
+        slot.innerHTML = `
+          <img src="${img}" alt="${name}" class="circle">
+          <div class="card-body">
+            <h3>${name}</h3>
+            <p class="muted dog-description">${desc}</p>
+            <div class="card-footer">
+              <a href="${link}" class="btn btn-primary">Więcej ↗</a>
+            </div>
+          </div>`;
+        slot.classList.remove('is-loading');
+      });
+    });
+  </script>
 
     <!-- PATRON圣女 WIDGET SECTION -->
     <section class="section patronite-section">
@@ -1418,12 +1523,13 @@
     </section>
 
     <!-- SHOP PRODUCTS -->
-    <section class="section">
+    <section class="section shop-section">
       <div class="shop-header">
         <h3>Gadżety dla wspierających</h3>
         <p class="shop-disclaimer">100% zysków finansuje nasze działania na rzecz zwierząt</p>
       </div>
       <div class="shop-grid">
+        <div class="coming-soon-overlay">Już wkrótce...</div>
         <div class="shop-card">
           <img class="circle" src="images/product-1.jpg" alt="Kubek wspieracza">
           <h4>Kubek wspieracza</h4>
@@ -1567,7 +1673,7 @@
           istanbulTooltip.className = 'pin-tooltip istanbul-tooltip';
           istanbulTooltip.innerHTML = `
             <div class="pin-tooltip-header">Istanbul</div>
-            <div class="pin-tooltip-description">Główne centrum naszych działań ratunkowych w Turcji. Miasto łączące Europę i Azję.</div>
+            <div class="pin-tooltip-description">To tutaj, na pograniczu Europy i Azji, pomagamy w działaniu prywatnego azylu we współpracy z jego właścicielem - <b>Ümitem.</b> W okolicy mieszka nasza wolontariuszka <b>Eliza</b>, która niezależnie od pogody i prywatnych wyzwań konsekwentnie pracuje w azylu pomagając zapewnić opiekę ok. 500 psiakom każdego dnia.</div>
           `;
           mapContainer.appendChild(istanbulTooltip);
 
@@ -1611,10 +1717,10 @@
           
           // Create tooltip for Ankara pin and add to map container
           const ankaraTooltip = document.createElement('div');
-          ankaraTooltip.className = 'pin-tooltip';
+          ankaraTooltip.className = 'pin-tooltip istanbul-tooltip';
           ankaraTooltip.innerHTML = `
             <div class="pin-tooltip-header">Ankara</div>
-            <div class="pin-tooltip-description">Stolica Turcji i ważny ośrodek naszych działań ratunkowych w regionie centralnym.</div>
+            <div class="pin-tooltip-description">W stolicy Turcji leczymy psy w skrajnie drastycznych stanach. Obecnie przebywa tam 4 psiaki z ponosówkowymi zaburzeniami neurologicznymi, sunia po napaści na tle se*sualnym... Ważny ośrodek naszych działań, które koordynujemy z lokalną organizacją prozwierzęcą - <b>HayvanlarıKorumaKurtarmaHareketi.</b></div>
           `;
           mapContainer.appendChild(ankaraTooltip);
           console.log('Ankara tooltip created');
@@ -1631,9 +1737,9 @@
             const pinX = svgRect.left + (svgRect.width * 0.36);
             const pinY = svgRect.top + (svgRect.height * 0.32);
             
-            // Position tooltip above the pin
+            // Position tooltip below the pin (same approach as Istanbul)
             ankaraTooltip.style.left = (pinX - mapRect.left - (ankaraTooltip.offsetWidth / 2)) + 'px';
-            ankaraTooltip.style.top = (pinY - mapRect.top - ankaraTooltip.offsetHeight - 15) + 'px';
+            ankaraTooltip.style.top = (pinY - mapRect.top + 40) + 'px';
             ankaraTooltip.style.position = 'absolute';
             ankaraTooltip.classList.add('show');
           });
@@ -1661,8 +1767,8 @@
           const elazigTooltip = document.createElement('div');
           elazigTooltip.className = 'pin-tooltip';
           elazigTooltip.innerHTML = `
-            <div class="pin-tooltip-header">Elazig</div>
-            <div class="pin-tooltip-description">Ważny ośrodek naszych działań ratunkowych we wschodniej Turcji. Region o strategicznym znaczeniu.</div>
+            <div class="pin-tooltip-header">Elazığ</div>
+            <div class="pin-tooltip-description">Wschód Turcji to miejsce, w którym nadzieja dla zwierząt zanika przytłoczona drastycznymi widokami setek ich tragedii. To tutaj, w Elazığ pomogliśmy w budowie azylu - <b>Wioska Burçak</b>, tzw. wyspy życia na morzu śmierci... <b>Burçak</b> to młoda studentka weterynarii tureckiego pochodzenia, która nie była obojętna na cierpienie zwierząt w jej rodzimym kraju.</div>
           `;
           mapContainer.appendChild(elazigTooltip);
 
@@ -1708,7 +1814,7 @@
           mersinTooltip.className = 'pin-tooltip';
           mersinTooltip.innerHTML = `
             <div class="pin-tooltip-header">Mersin</div>
-            <div class="pin-tooltip-description">Ważny port na południowym wybrzeżu Turcji. Centrum naszych działań ratunkowych w regionie śródziemnomorskim.</div>
+            <div class="pin-tooltip-description">Tu pomagamy starszej kobiecie - <b>Adalet</b> w modernizacji i utrzymaniu jej mini azylu. Obecnie azyl mieści ok. 30 psiaków, koty i Adalet dba o nie na co dzień w pojedynkę. Przesyłamy karmę, budy, zbudowaliśmy jej nowe zadaszenie.<br> Mieszka tam również nasza wolontariuszka Sylwia z mężem, którzy odławiają, karmią i leczą zwierzęta w tym rejonie oraz pomagają w budowie infrastruktury takiej jak prywatne azyle. </div>
           `;
           mapContainer.appendChild(mersinTooltip);
 
@@ -1856,12 +1962,19 @@
           if (index === 1) line.style.opacity = '0';
           if (index === 2) line.style.transform = 'rotate(-45deg) translate(7px, -6px)';
         } else {
-          line.style.transform = 'none';
-          line.style.opacity = '1';
+          line.style.transform = '';
+          line.style.opacity = '';
         }
       });
+      
+      // Prevent body scroll when menu is open
+      if (mobileMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
+      }
     }
-    
+
     function closeMobileMenu() {
       const mobileMenu = document.getElementById('mobileMenu');
       const hamburgerLines = document.querySelectorAll('.hamburger-line');
@@ -1870,19 +1983,35 @@
       
       // Reset hamburger lines
       hamburgerLines.forEach(line => {
-        line.style.transform = 'none';
-        line.style.opacity = '1';
+        line.style.transform = '';
+        line.style.opacity = '';
       });
+      
+      document.body.style.overflow = 'auto';
     }
-    
+
     // Close mobile menu when clicking outside
     document.addEventListener('click', function(event) {
       const mobileMenu = document.getElementById('mobileMenu');
-      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      const toggle = document.querySelector('.mobile-menu-toggle');
       
       if (mobileMenu.classList.contains('active') && 
           !mobileMenu.contains(event.target) && 
-          !mobileMenuToggle.contains(event.target)) {
+          !toggle.contains(event.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    // Close mobile menu on escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeMobileMenu();
+      }
+    });
+
+    // Close mobile menu on window resize
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 900) {
         closeMobileMenu();
       }
     });
