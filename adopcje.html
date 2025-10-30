@@ -60,7 +60,50 @@
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(251,191,36,0.4);
     }
+
+    /* Dropdown Menu */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
     
+    .dropdown-toggle {
+      cursor: pointer;
+    }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      min-width: 150px;
+      padding: 8px 0;
+      margin-top: 8px;
+      z-index: 1000;
+    }
+    
+    .dropdown-menu a {
+      display: block;
+      padding: 8px 16px;
+      color: #222;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border-radius: 0;
+    }
+    
+    .dropdown-menu a:hover {
+      background: rgba(0,0,0,0.05);
+      color: #374151;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
     /* Mobile Menu Toggle Button */
     .mobile-menu-toggle {
       display: none;
@@ -726,7 +769,14 @@
       <nav class="menu">
         <a href="index.html">Strona główna</a>
         <a href="adopcje.html" style="background: rgba(0,0,0,0.1);">Adopcje</a>
-        <a href="#bazarek">Bazarek</a>
+        <div class="dropdown">
+          <a href="#" class="dropdown-toggle">Teksty</a>
+          <div class="dropdown-menu">
+            <a href="#">X</a>
+            <a href="#">Y</a>
+            <a href="#">Z</a>
+          </div>
+        </div>
         <a href="onas.html">O nas</a>
         <a href="wsparcie.html" class="cta">Wsparcie</a>
     </nav>
@@ -737,7 +787,10 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html" onclick="closeMobileMenu()">Strona główna</a>
     <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
-    <a href="#bazarek" onclick="closeMobileMenu()">Bazarek</a>
+    <a href="#" onclick="closeMobileMenu()">Teksty</a>
+    <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">X</a>
+    <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Y</a>
+    <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Z</a>
     <a href="onas.html" onclick="closeMobileMenu()">O nas</a>
     <a href="wsparcie.html" class="cta" onclick="closeMobileMenu()">Wsparcie</a>
   </div>
@@ -789,7 +842,7 @@
             <a href="#" data-text="Wioska Burçak">Wioska Burçak</a>
             <a href="#" data-text="Pani Adalet">Pani Adalet</a>
             <a href="articles.html" data-text="Artykuły">Artykuły</a>
-            <a href="#" data-text="Zostań sponsorem">Zostań sponsorem</a>
+            <a href="https://patronite.pl/zpiekladodomu" target="_blank" rel="noopener noreferrer" data-text="Zostań sponsorem">Zostań sponsorem</a>
           </div>
         </div>
       </div>
