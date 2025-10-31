@@ -104,10 +104,19 @@
       backdrop-filter: blur(8px);
       border-radius: 10px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      min-width: 150px;
+      min-width: 180px;
       padding: 8px 0;
       margin-top: 8px;
       z-index: 1000;
+    }
+    
+    .dropdown:hover .dropdown-toggle {
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      display: block;
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
     }
     
     .dropdown-menu a {
@@ -117,14 +126,38 @@
       text-decoration: none;
       transition: all 0.3s ease;
       border-radius: 0;
+      position: relative;
+    }
+    
+    .dropdown-menu a:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 16px;
+      right: 16px;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.1);
     }
     
     .dropdown-menu a:hover {
-      background: rgba(0,0,0,0.05);
-      color: #374151;
+      background: rgba(255,255,255,0.3);
+      color: #1f2937;
+      font-weight: 600;
     }
     
-    .dropdown:hover .dropdown-menu {
+    .dropdown-menu a.ustawa-link {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      line-height: 1.4;
+    }
+    
+    .dropdown-menu a.ustawa-link img {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: -2px;
       display: block;
     }
 
@@ -214,7 +247,7 @@
     .hero {
       position: relative;
       min-height: 120vh;
-      background: url('images/landing.png') center/cover no-repeat;
+      background: url('images/landing.webp') center/cover no-repeat;
       display: flex; align-items: center;
     }
     .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.2)); }
@@ -310,10 +343,10 @@
     .overlap { margin-top: -39.4vh; position: relative; z-index: 2; }
     .cards-3 { display:grid; grid-template-columns: repeat(3,1fr); gap: 1.125rem; --card-h: 475px; }
     .span-2 { grid-column: span 2; }
-    .card { background:#fff; border-radius: 1rem; box-shadow:0 12px 22px rgba(0,0,0,.1); overflow: hidden; height: var(--card-h); display:flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card { background:#fff; border-radius: 1rem; box-shadow:0 12px 22px rgba(0,0,0,.1); overflow: hidden; ; display:flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
     .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,.15); }
     .card-body { padding: .875rem 1rem 1rem; display:flex; flex-direction: column; gap: .5rem; flex: 1; }
-    .pomagam iframe {scale: 0.95; text-align: center; margin-left: -21px; transform: scaleX(1.1rem); transform: scaleY(1.08);}
+    .pomagam iframe {scale: 0.95; text-align: center; margin-left: -21px; transform: scaleX(1.1rem); transform: scaleY(1.13) translateY(11px);}
     .dog-card { text-align: center; min-height: 30rem; }
     .dog-card .circle { width: 14rem; height: 14rem; border-radius: 50%; object-fit: cover; margin: 1rem auto 0.75rem; }
     .dog-card.is-loading { opacity: 0; pointer-events: none; }
@@ -400,11 +433,11 @@
     }
 
     /* SHOP */
-    .shop-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .shop-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; opacity: 0.6; }
     .shop-header h3 { font-family: 'McLaren', cursive; margin: 0; }
     .shop-disclaimer { color: #6b7280; font-size: 0.875rem; margin: 0; }
     .shop-grid { display:grid; grid-template-columns: repeat(3,1fr); gap: 1.125rem; }
-    .shop-card { background:#fff; border-radius: 1rem; box-shadow:0 10px 18px rgba(0,0,0,.08); padding: 1.5rem; text-align:center; height: 25rem; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .shop-card { background:#fff; border-radius: 1rem; box-shadow:0 10px 18px rgba(0,0,0,.08); padding: 1.5rem; text-align:center; height: 25rem; transition: transform 0.3s ease, box-shadow 0.3s ease; opacity: 0.6; }
     .shop-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,.15); }
     .shop-card h4 { font-family: 'McLaren', cursive; margin: 1rem 0; font-size: 1.125rem; }
     .circle { width: 12rem; height: 12rem; border-radius: 50%; object-fit: cover; margin: 1rem auto 1.5rem; }
@@ -413,6 +446,7 @@
       padding: 0.875rem 2rem; 
       font-size: 1.125rem; 
       font-weight: 600;
+      opacity: 0.6;
     }
 
     /* PARTNERS */
@@ -1352,9 +1386,12 @@
         <div class="dropdown">
           <a href="#" class="dropdown-toggle">Teksty</a>
           <div class="dropdown-menu">
-            <a href="#">X</a>
-            <a href="#">Y</a>
-            <a href="#">Z</a>
+            <a href="#" class="ustawa-link">
+              Ustawa nr 5911
+              <img src="images/exclamation-mark.svg" alt="!" width="18" height="18">
+            </a>
+            <a href="articles.html">Artykuły</a>
+            <a href="inicjatywy.html">Inicjatywy</a>
           </div>
         </div>
         <a href="onas.html">O nas</a>
@@ -1367,9 +1404,9 @@
     <a href="index.html" onclick="closeMobileMenu()">Strona główna</a>
     <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
     <a href="#" onclick="closeMobileMenu()">Teksty</a>
-    <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">X</a>
-    <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Y</a>
-    <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Z</a>
+    <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Ustawa nr 5911</a>
+    <a href="articles.html" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Artykuły</a>
+    <a href="inicjatywy.html" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Inicjatywy</a>
     <a href="onas.html" onclick="closeMobileMenu()">O nas</a>
     <a href="wsparcie.html" class="cta" onclick="closeMobileMenu()">Wsparcie</a>
   </div>
@@ -1449,7 +1486,24 @@
       ];
       if (slots.some(s => !s)) return;
 
-      const allDogFiles = ['dingo.md', 'duo blondi.md', 'gryzia.md', 'tygrysek.md'];
+      // Load dog list from manifest.json
+      let allDogFiles = [];
+      try {
+        const manifestResponse = await fetch('content/dogs/manifest.json');
+        if (manifestResponse.ok) {
+          const manifest = await manifestResponse.json();
+          allDogFiles = manifest.dogs || [];
+        } else {
+          console.warn('Could not load manifest.json, using fallback list');
+          // Fallback to hardcoded list if manifest fails
+          allDogFiles = ['dingo.md', 'duo blondi.md', 'gryzia.md', 'tygrysek.md', 'ami.md', 'olo.md', 'sanja.md'];
+        }
+      } catch (error) {
+        console.error('Error loading manifest.json:', error);
+        // Fallback to hardcoded list if manifest fails
+        allDogFiles = ['dingo.md', 'duo blondi.md', 'gryzia.md', 'tygrysek.md', 'ami.md', 'olo.md', 'sanja.md'];
+      }
+
       const shuffled = allDogFiles
         .map(v => ({ v, r: Math.random() }))
         .sort((a, b) => a.r - b.r)
@@ -1537,11 +1591,11 @@
             <p id="map-panel-description">Od początku naszej działalności udało nam się uratować setki zwierząt i znaleźć im nowe, kochające domy.</p>
             <div class="map-stats">
               <div class="stat-item">
-                <span class="stat-number" id="stat1-number">500+</span>
-                <span class="stat-label" id="stat1-label">Uratowanych zwierząt</span>
+                <span class="stat-number" id="stat1-number">600+</span>
+                <span class="stat-label" id="stat1-label">Zabezpieczonych zwierząt</span>
               </div>
               <div class="stat-item">
-                <span class="stat-number" id="stat2-number">50+</span>
+                <span class="stat-number" id="stat2-number">120+</span>
                 <span class="stat-label" id="stat2-label">Szczęśliwych adopcji</span>
               </div>
             </div>

@@ -83,10 +83,19 @@
       backdrop-filter: blur(8px);
       border-radius: 10px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      min-width: 150px;
+      min-width: 180px;
       padding: 8px 0;
       margin-top: 8px;
       z-index: 1000;
+    }
+    
+    .dropdown:hover .dropdown-toggle {
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      display: block;
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
     }
     
     .dropdown-menu a {
@@ -99,12 +108,9 @@
     }
     
     .dropdown-menu a:hover {
-      background: rgba(0,0,0,0.05);
-      color: #374151;
-    }
-    
-    .dropdown:hover .dropdown-menu {
-      display: block;
+      background: rgba(255,255,255,0.3);
+      color: #1f2937;
+      font-weight: 600;
     }
 
     /* MOBILE NAVIGATION */
@@ -192,7 +198,7 @@
     .hero {
       position: relative;
       min-height: 120vh;
-      background: url('images/adopcje-main.jpg') center/cover no-repeat;
+      background: url('images/szczeniaczki7.jpg') center/cover no-repeat;
       display: flex; align-items: center;
     }
     .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.2)); }
@@ -269,8 +275,16 @@
       grid-template-columns: 1fr;
       gap: 2rem;
       margin-top: -6rem;
+      align-items: stretch;
     }
 
+    .article-card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      height: 100%;
+    }
+    
     .article-card {
       background: #fff;
       border-radius: 1rem;
@@ -279,9 +293,11 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       display: flex;
       flex-direction: column;
+      cursor: pointer;
+      height: 100%;
     }
 
-    .article-card:hover {
+    .article-card-link:hover .article-card {
       transform: translateY(-8px);
       box-shadow: 0 20px 40px rgba(0,0,0,.15);
     }
@@ -308,7 +324,7 @@
 
     .article-image {
       position: relative;
-      height: 200px;
+      height: 340px;
       overflow: hidden;
     }
 
@@ -323,7 +339,7 @@
       transition: transform 0.3s ease;
     }
 
-    .article-card:hover .article-img {
+    .article-card-link:hover .article-img {
       transform: scale(1.05);
     }
 
@@ -341,7 +357,8 @@
     }
 
     .article-content {
-      padding: 1.5rem;
+      padding: 1.25rem;
+      padding-top: 1.75rem;
       display: flex;
       flex-direction: column;
       flex: 1;
@@ -350,8 +367,8 @@
     .article-meta {
       display: flex;
       gap: 1rem;
-      margin-bottom: 1rem;
-      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.75rem;
       color: #6b7280;
     }
 
@@ -365,9 +382,9 @@
 
     .article-title {
       font-family: 'McLaren', cursive;
-      font-size: 1.5rem;
+      font-size: 1.125rem;
       color: #1f2937;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
       line-height: 1.3;
     }
 
@@ -377,34 +394,12 @@
 
     .article-excerpt {
       color: #6b7280;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
       flex: 1;
+      font-size: 0.875rem;
     }
 
-    .article-link {
-      color: #fca5a5;
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: all 0.3s ease;
-      align-self: flex-start;
-    }
-
-    .article-link:hover {
-      color: #f87171;
-      transform: translateX(4px);
-    }
-
-    .arrow {
-      transition: transform 0.3s ease;
-    }
-
-    .article-link:hover .arrow {
-      transform: translateX(4px);
-    }
 
     .loading, .no-articles, .error {
       text-align: center;
@@ -817,9 +812,9 @@
         <div class="dropdown">
           <a href="#" class="dropdown-toggle">Teksty</a>
           <div class="dropdown-menu">
-            <a href="#">X</a>
-            <a href="#">Y</a>
-            <a href="#">Z</a>
+            <a href="#">Ustawa nr 5911</a>
+            <a href="articles.html">Artykuły</a>
+            <a href="inicjatywy.html">Inicjatywy</a>
           </div>
         </div>
         <a href="onas.html">O nas</a>
@@ -832,9 +827,9 @@
       <a href="index.html" onclick="closeMobileMenu()">Strona główna</a>
       <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
       <a href="#" onclick="closeMobileMenu()">Teksty</a>
-      <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">X</a>
-      <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Y</a>
-      <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Z</a>
+      <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Ustawa nr 5911</a>
+      <a href="articles.html" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Artykuły</a>
+      <a href="inicjatywy.html" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Inicjatywy</a>
       <a href="onas.html" onclick="closeMobileMenu()">O nas</a>
       <a href="wsparcie.html" class="cta" onclick="closeMobileMenu()">Wsparcie</a>
     </div>
@@ -957,27 +952,30 @@
       
       // Check if this is a Facebook post
       if (article.type === 'facebook_post' && article.facebook_url) {
+        // For Facebook posts, use the Facebook URL as the link
         return `
-          <article class="${cardClass} facebook-post-card">
-            <div class="facebook-post-header">
-              <div class="facebook-icon">📘</div>
-              <div class="facebook-meta">
-                <span class="facebook-source">Facebook Post</span>
-                <span class="article-date">${formatDate(article.date)}</span>
+          <a href="${article.facebook_url}" target="_blank" rel="noopener noreferrer" class="article-card-link">
+            <article class="${cardClass} facebook-post-card">
+              <div class="facebook-post-header">
+                <div class="facebook-icon">📘</div>
+                <div class="facebook-meta">
+                  <span class="facebook-source">Facebook Post</span>
+                  <span class="article-date">${formatDate(article.date)}</span>
+                </div>
               </div>
-            </div>
-            <div class="facebook-embed-container">
-              <div class="fb-post" data-href="${article.facebook_url}" data-width="500" data-show-text="true">
-                <blockquote cite="${article.facebook_url}" class="fb-xfbml-parse-ignore">
-                  <a href="${article.facebook_url}">Facebook Post</a>
-                </blockquote>
+              <div class="facebook-embed-container">
+                <div class="fb-post" data-href="${article.facebook_url}" data-width="500" data-show-text="true">
+                  <blockquote cite="${article.facebook_url}" class="fb-xfbml-parse-ignore">
+                    <a href="${article.facebook_url}">Facebook Post</a>
+                  </blockquote>
+                </div>
               </div>
-            </div>
-            <div class="article-content">
-              <${titleTag} class="article-title">${article.title}</${titleTag}>
-              <p class="article-excerpt">${article.excerpt}</p>
-            </div>
-          </article>
+              <div class="article-content">
+                <${titleTag} class="article-title">${article.title}</${titleTag}>
+                <p class="article-excerpt">${article.excerpt}</p>
+              </div>
+            </article>
+          </a>
         `;
       }
       
@@ -997,21 +995,22 @@
         .trim();
       
       return `
-        <article class="${cardClass}">
-          <div class="article-image">
-            <img src="${article.image}" alt="${article.title}" class="article-img">
-            <div class="article-category">${article.category}</div>
-          </div>
-          <div class="article-content">
-            <div class="article-meta">
-              <span class="article-date">${formatDate(article.date)}</span>
-              <span class="article-read-time">${article.read_time}</span>
+        <a href="article.html?article=${slug}" class="article-card-link">
+          <article class="${cardClass}">
+            <div class="article-image">
+              <img src="${article.image}" alt="${article.title}" class="article-img">
+              <div class="article-category">${article.category}</div>
             </div>
-            <${titleTag} class="article-title">${article.title}</${titleTag}>
-            <p class="article-excerpt">${article.excerpt}</p>
-            <a href="article.html?article=${slug}" class="article-link">Czytaj więcej <span class="arrow">→</span></a>
-          </div>
-        </article>
+            <div class="article-content">
+              <div class="article-meta">
+                <span class="article-date">${formatDate(article.date)}</span>
+                <span class="article-read-time">${article.read_time}</span>
+              </div>
+              <${titleTag} class="article-title">${article.title}</${titleTag}>
+              <p class="article-excerpt">${article.excerpt}</p>
+            </div>
+          </article>
+        </a>
       `;
     }
 

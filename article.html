@@ -80,10 +80,19 @@
       backdrop-filter: blur(8px);
       border-radius: 10px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      min-width: 150px;
+      min-width: 180px;
       padding: 8px 0;
       margin-top: 8px;
       z-index: 1000;
+    }
+    
+    .dropdown:hover .dropdown-toggle {
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      display: block;
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
     }
     
     .dropdown-menu a {
@@ -96,12 +105,9 @@
     }
     
     .dropdown-menu a:hover {
-      background: rgba(0,0,0,0.05);
-      color: #374151;
-    }
-    
-    .dropdown:hover .dropdown-menu {
-      display: block;
+      background: rgba(255,255,255,0.3);
+      color: #1f2937;
+      font-weight: 600;
     }
 
     /* MOBILE NAVIGATION */
@@ -611,9 +617,9 @@
         <div class="dropdown">
           <a href="#" class="dropdown-toggle">Teksty</a>
           <div class="dropdown-menu">
-            <a href="#">X</a>
-            <a href="#">Y</a>
-            <a href="#">Z</a>
+            <a href="#">Ustawa nr 5911</a>
+            <a href="articles.html">Artykuły</a>
+            <a href="inicjatywy.html">Inicjatywy</a>
           </div>
         </div>
         <a href="onas.html">O nas</a>
@@ -626,9 +632,9 @@
       <a href="index.html" onclick="closeMobileMenu()">Strona główna</a>
       <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
       <a href="#" onclick="closeMobileMenu()">Teksty</a>
-      <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">X</a>
-      <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Y</a>
-      <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Z</a>
+      <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Ustawa nr 5911</a>
+      <a href="articles.html" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Artykuły</a>
+      <a href="inicjatywy.html" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Inicjatywy</a>
       <a href="onas.html" onclick="closeMobileMenu()">O nas</a>
       <a href="wsparcie.html" class="cta" onclick="closeMobileMenu()">Wsparcie</a>
     </div>
