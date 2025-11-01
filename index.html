@@ -4,6 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Z Piekła do Domu</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Ratujemy psy i koty z Turcji. Pomagamy zwierzętom znaleźć kochające domy w Polsce. Wspieraj nasze działania na rzecz bezdomnych zwierząt.">
+  <meta name="keywords" content="adopcja psów, ratowanie zwierząt, psy z Turcji, koty z Turcji, adopcja, azyl dla zwierząt">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zpiekladodomu.pl/">
+  <meta property="og:title" content="Z Piekła do Domu - Ratujemy psy i koty z Turcji">
+  <meta property="og:description" content="Ratujemy psy i koty z Turcji i pomagamy im znaleźć kochające domy w Polsce. Wspieraj nasze działania na rzecz bezdomnych zwierząt.">
+  <meta property="og:image" content="https://zpiekladodomu.pl/images/landing.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="pl_PL">
+  <meta property="og:site_name" content="Z Piekła do Domu">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://zpiekladodomu.pl/">
+  <meta name="twitter:title" content="Z Piekła do Domu - Ratujemy psy i koty z Turcji">
+  <meta name="twitter:description" content="Ratujemy psy i koty z Turcji i pomagamy im znaleźć kochające domy w Polsce. Wspieraj nasze działania na rzecz bezdomnych zwierząt.">
+  <meta name="twitter:image" content="https://zpiekladodomu.pl/images/landing.png">
+  
   <link rel="icon" type="image/svg+xml" href="images/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -391,17 +414,20 @@
     .dog-card.span-2 h3 { 
       font-family: 'McLaren', cursive; 
       font-size: 1.5rem; 
-      margin-bottom: 1rem; 
+      margin-bottom: 0.75rem; 
     }
     .dog-card.span-2 p { 
       font-size: 0.9rem; 
       line-height: 1.5; 
-      margin-bottom: 1.5rem; 
+      margin-bottom: 0.5rem;
       color: #6b7280; 
+      height: auto;
+      min-height: auto;
     }
     .dog-card.span-2 .card-footer { 
       justify-content: flex-start; 
-      padding-top: 0; 
+      padding-top: 0;
+      margin-top: 0.75rem; 
     }
     .chip { font-size: .75rem; padding: .375rem .625rem; background:#f4f4f5; border-radius: 9999px; display:inline-block; margin-top: .5rem; }
     .progress { height: .5rem; background:#eee; border-radius: 9999px; overflow:hidden; margin: .625rem 0 .5rem; }
@@ -419,7 +445,15 @@
     .dark-card img { border-radius: .75rem; }
 
     /* SPLIT SECTION */
-    .split { display:grid; grid-template-columns: 1fr 1fr; gap: 1.625rem; align-items: center; }
+    .split { 
+      display:grid; 
+      grid-template-columns: 1fr 320px; 
+      gap: 3rem; 
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4.2rem 0 3rem;
+    }
     .split-text h3 { font-family: 'McLaren', cursive; }
     .split-text p { 
       display: -webkit-box;
@@ -427,7 +461,7 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-    .split img { border-radius: 0.75rem; box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+    .split img { border-radius: 0.75rem; box-shadow: 0 8px 16px rgba(0,0,0,0.1); width: 100%; }
     .muted { color: #6b7280; font-size: 0.875rem; line-height: 1.5; }
     
     /* Desktop - Hide mobile card links */
@@ -453,6 +487,10 @@
     }
 
     /* PARTNERS */
+    .partners-header { 
+      font-family: 'McLaren', cursive; 
+      margin: 0 0 3rem 0; 
+    }
     .logos { display:grid; grid-template-columns: repeat(4,1fr); gap: 1.125rem; align-items:center; }
     .logos img { 
       filter: grayscale(100%); 
@@ -467,6 +505,14 @@
     .logos .insta-avatar {
       filter: grayscale(0%) !important;
       opacity: 1 !important;
+    }
+    .partner-fade { 
+      opacity: 1; 
+      transition: opacity .35s ease-in-out; 
+      will-change: opacity; 
+    }
+    .partner-fade.is-fading { 
+      opacity: 0; 
     }
 
     /* Instagram Widget */
@@ -1544,7 +1590,7 @@
         if (!slot) return;
         const name = dog.name || 'Pies do adopcji';
         const img = dog.image || 'images/placeholder.jpg';
-        const desc = (dog.description || '').slice(0, 180);
+        const desc = dog.description || '';
         const link = `dog-page.html?dog=${dog.slug}`;
         slot.innerHTML = `
           <img src="${img}" alt="${name}" class="circle">
@@ -1662,26 +1708,28 @@
 
     <!-- PARTNERS LOGOS -->
     <section class="section">
-      <h3>Wsparli nas już:</h3>
+      <h3 class="partners-header">Wsparli nas już:</h3>
       <div class="logos" style="margin-top:10px">
-        <a href="https://www.instagram.com/aligator_bjj/" target="_blank" class="widget-link-mobile">
-          <div class="insta-widget">
-            <div class="insta-profile">
-              <img src="images/aligator_bjj.svg" 
-                   alt="Aligator BJJ Logo" class="insta-avatar">
-              <div class="insta-info">
-                <h3></h3>
-                <p>Dawid Drobina - Trener | Sporty Walki Wrocław Opole</p>
+        <div id="partner-slot-1" class="partner-fade">
+          <a href="https://www.instagram.com/aligator_bjj/" target="_blank" class="widget-link-mobile">
+            <div class="insta-widget">
+              <div class="insta-profile">
+                <img src="images/aligator_bjj.svg" 
+                     alt="Aligator BJJ Logo" class="insta-avatar">
+                <div class="insta-info">
+                  <h3></h3>
+                  <p>Dawid Drobina - Trener | Sporty Walki Wrocław Opole</p>
+                </div>
+              </div>
+              <div class="insta-btn">
+                aligator_bjj
               </div>
             </div>
-            <div class="insta-btn">
-              aligator_bjj
-            </div>
-          </div>
-        </a>
-        <img src="images/partner2.svg" alt="Partner 2">
-        <img src="images/partner3.svg" alt="Partner 3">
-        <img src="images/partner4.svg" alt="Partner 4">
+          </a>
+        </div>
+        <div id="partner-slot-2" class="partner-fade"></div>
+        <div id="partner-slot-3" class="partner-fade"></div>
+        <div id="partner-slot-4" class="partner-fade"></div>
       </div>
     </section>
   </main>
@@ -2126,6 +2174,134 @@
         closeMobileMenu();
       }
     });
+  </script>
+
+  <!-- Partners Carousel Script -->
+  <script>
+    (function() {
+      // Define all partners here
+      const allPartners = [
+        {
+          type: 'instagram',
+          href: 'https://www.instagram.com/aligator_bjj/',
+          image: 'images/aligator_bjj.svg',
+          alt: 'Aligator BJJ Logo',
+          description: 'Dawid Drobina - Trener | Sporty Walki Wrocław Opole',
+          username: 'aligator_bjj'
+        }
+        // Fake partners commented out - add real partners here
+        // {
+        //   type: 'image',
+        //   image: 'images/partner2.svg',
+        //   alt: 'Partner 2'
+        // },
+        // {
+        //   type: 'image',
+        //   image: 'images/partner3.svg',
+        //   alt: 'Partner 3'
+        // },
+        // {
+        //   type: 'image',
+        //   image: 'images/partner4.svg',
+        //   alt: 'Partner 4'
+        // }
+        // Add more partners here as needed
+        // Example:
+        // {
+        //   type: 'image',
+        //   image: 'images/partner5.svg',
+        //   alt: 'Partner 5'
+        // }
+      ];
+
+      // Shuffle array function
+      function shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+      }
+
+      // Create sets of 4 partners from shuffled list
+      function createPartnerSets() {
+        const shuffled = shuffleArray(allPartners);
+        const sets = [];
+        for (let i = 0; i < shuffled.length; i += 4) {
+          sets.push(shuffled.slice(i, i + 4));
+        }
+        // If we have more than 4 partners, create rotating sets
+        if (shuffled.length > 4) {
+          // Add one more set with different combination
+          const set2 = shuffleArray(allPartners).slice(0, 4);
+          sets.push(set2);
+        }
+        return sets;
+      }
+
+      // Generate HTML for a partner
+      function generatePartnerHTML(partner) {
+        if (!partner) return '<div></div>';
+        
+        if (partner.type === 'instagram') {
+          return `
+            <a href="${partner.href}" target="_blank" class="widget-link-mobile">
+              <div class="insta-widget">
+                <div class="insta-profile">
+                  <img src="${partner.image}" alt="${partner.alt}" class="insta-avatar">
+                  <div class="insta-info">
+                    <h3></h3>
+                    <p>${partner.description}</p>
+                  </div>
+                </div>
+                <div class="insta-btn">
+                  ${partner.username}
+                </div>
+              </div>
+            </a>
+          `;
+        } else {
+          return `<img src="${partner.image}" alt="${partner.alt}">`;
+        }
+      }
+
+      const slots = [
+        document.getElementById('partner-slot-1'),
+        document.getElementById('partner-slot-2'),
+        document.getElementById('partner-slot-3'),
+        document.getElementById('partner-slot-4')
+      ];
+
+      if (slots.some(s => !s)) return;
+
+      const partnerSets = createPartnerSets();
+      if (partnerSets.length === 0) return;
+
+      let current = 0;
+
+      function applyPartnerSet(index) {
+        const set = partnerSets[index % partnerSets.length];
+        for (let i = 0; i < 4; i++) {
+          slots[i].classList.add('is-fading');
+          setTimeout(() => {
+            slots[i].innerHTML = generatePartnerHTML(set[i]);
+            slots[i].classList.remove('is-fading');
+          }, 350);
+        }
+      }
+
+      // Initial display
+      applyPartnerSet(0);
+
+      // Auto-rotate every 8 seconds only if we have multiple sets
+      if (partnerSets.length > 1) {
+        setInterval(() => {
+          current = (current + 1) % partnerSets.length;
+          applyPartnerSet(current);
+        }, 8000);
+      }
+    })();
   </script>
 </body>
 </html>
