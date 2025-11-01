@@ -340,7 +340,7 @@
 
     /* DONATION CARDS */
     .section { padding: 3rem 0; }
-    .overlap { margin-top: -39.4vh; position: relative; z-index: 2; }
+    .overlap { margin-top: -40.85vh; position: relative; z-index: 2; }
     .cards-3 { display:grid; grid-template-columns: repeat(3,1fr); gap: 1.125rem; --card-h: 475px; }
     .span-2 { grid-column: span 2; }
     .card { background:#fff; border-radius: 1rem; box-shadow:0 12px 22px rgba(0,0,0,.1); overflow: hidden; ; display:flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -358,9 +358,10 @@
       -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      text-overflow: ellipsis;
-      max-height: 6em;
+      height: 6em;
+      min-height: 6em;
       line-height: 1.5;
+      word-break: break-word;
     }
     .dog-card .card-footer { justify-content: center; margin-top: 0.75rem; }
     .dog-card.span-2 { 
@@ -369,13 +370,15 @@
       text-align: left;
       padding: 2rem; 
       flex-direction: row !important;
+      justify-content: flex-start;
+      gap: 2rem;
     }
     .dog-card.span-2 .circle { 
       width: 15rem !important; 
       height: 15rem !important; 
       border-radius: 50% !important; 
       object-fit: cover !important; 
-      margin: 0 2rem 0 0 !important; 
+      margin: 0 0 0 6.8% !important; 
       flex-shrink: 0;
     }
     .dog-card.span-2 .card-body { 
@@ -753,13 +756,13 @@
       width: 100%;
       max-width: 1200px;
       gap: 2rem;
-      padding: 0 2rem;
+      padding: 0 2rem 0 3rem;
     }
     
     .patronite-header {
       flex: 1;
       max-width: 700px;
-      margin-left: 5rem;
+      margin-left: 1rem;
     }
     
     #patronite-title {
@@ -776,6 +779,7 @@
       flex-shrink: 0;
       flex: 0 0 320px;
       max-width: 320px;
+      margin-right: 3.2rem;
     }
     
     .patronite-container iframe {
@@ -807,7 +811,7 @@
       margin: 1rem auto; 
       max-width: 1200px;
       width: 100%;
-      padding: 0 2rem;
+      padding: 0 2rem 0 3rem;
     }
     .map-wrapper { 
       background: none; 
@@ -815,7 +819,7 @@
       position: relative;
       flex: 1;
       max-width: 700px;
-      margin: 0 auto;
+      margin: 0;
       overflow: visible; /* allow tooltips to overflow */
       display: flex;
       flex-direction: column;
