@@ -520,13 +520,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       background: transparent;
       border-radius: 12px;
       box-shadow: none;
       padding: 15px 20px;
       width: 100%;
-      height: 200px;
+      min-height: 320px;
       max-width: 100%;
       margin: 0 auto;
       text-align: center;
@@ -545,17 +545,50 @@
       text-decoration: none;
       color: inherit;
       margin-bottom: 8px;
+      min-height: 260px;
+      justify-content: flex-start;
     }
 
     .insta-avatar {
       width: 240px;
       height: 240px;
-      border-radius: 0;
+      border-radius: 50%;
       margin-bottom: 10px;
-      object-fit: contain;
+      margin-top: 0;
+      object-fit: cover;
       border: none;
       box-shadow: none;
       filter: none;
+    }
+    
+    .insta-avatar[alt="Aligator BJJ Logo"] {
+      border-radius: 0;
+      object-fit: contain;
+    }
+    
+    .insta-avatar[alt="Karoskiba"] {
+      object-position: center 30%;
+      width: 200px;
+      height: 200px;
+      margin: 27px auto 23px auto;
+      position: relative;
+      top: 10px;
+    }
+    
+    .insta-avatar[alt="Skibabigcyc"] {
+      object-position: center 30%;
+      width: 200px;
+      height: 200px;
+      margin: 27px auto 23px auto;
+      position: relative;
+      top: 10px;
+    }
+    
+    .insta-info {
+      min-height: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .insta-info h3 {
@@ -589,6 +622,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      margin-top: auto;
     }
 
     .insta-btn:hover {
@@ -1476,9 +1510,9 @@
     <section class="section overlap" id="donations">
       <div class="cards-3">
         <!-- Row 1: Fundraising widget + two dog cards -->
-        <a href="https://pomagam.pl/zpiekladodomu" target="_blank" class="card-link-mobile">
+        <a id="fundraiser-1-link" href="https://pomagam.pl/zpiekladodomu" target="_blank" class="card-link-mobile">
         <article class="card pomagam">
-          <iframe frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/zpiekladodomu/widget/large"></iframe>
+          <iframe id="fundraiser-1-iframe" frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/zpiekladodomu/widget/large"></iframe>
         </article>
         </a>
 
@@ -1505,9 +1539,9 @@
         </article>
 
         <!-- Row 2: Second fundraising widget + wide dog card spanning two columns -->
-        <a href="https://pomagam.pl/aph8gm" target="_blank" class="card-link-mobile">
+        <a id="fundraiser-2-link" href="https://pomagam.pl/aph8gm" target="_blank" class="card-link-mobile">
         <article class="card pomagam">
-          <iframe frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/aph8gm/widget/large"></iframe>
+          <iframe id="fundraiser-2-iframe" frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/aph8gm/widget/large"></iframe>
         </article>
         </a>
 
@@ -1604,6 +1638,47 @@
         slot.classList.remove('is-loading');
       });
     });
+  </script>
+
+  <!-- Random Fundraiser Selection Script -->
+  <script>
+    (function() {
+      // Complete pool of all fundraisers (same as wsparcie.html carousel)
+      const allFundraisers = [
+        { href: 'https://pomagam.pl/zpiekladodomu', src: 'https://pomagam.pl/zpiekladodomu/widget/large' },
+        { href: 'https://pomagam.pl/aph8gm', src: 'https://pomagam.pl/aph8gm/widget/large' },
+        { href: 'https://pomagam.pl/hk4tmk', src: 'https://pomagam.pl/hk4tmk/widget/large' },
+        { href: 'https://pomagam.pl/km6bbg', src: 'https://pomagam.pl/km6bbg/widget/large' }
+        // Add more fundraisers here as needed
+      ];
+
+      // Shuffle array and pick first 2 unique fundraisers
+      function getRandomFundraisers() {
+        const shuffled = [...allFundraisers]
+          .map(value => ({ value, sort: Math.random() }))
+          .sort((a, b) => a.sort - b.sort)
+          .map(({ value }) => value);
+        return shuffled.slice(0, 2);
+      }
+
+      const selected = getRandomFundraisers();
+      
+      // Update first fundraiser widget
+      const link1 = document.getElementById('fundraiser-1-link');
+      const iframe1 = document.getElementById('fundraiser-1-iframe');
+      if (link1 && iframe1 && selected[0]) {
+        link1.href = selected[0].href;
+        iframe1.src = selected[0].src;
+      }
+
+      // Update second fundraiser widget
+      const link2 = document.getElementById('fundraiser-2-link');
+      const iframe2 = document.getElementById('fundraiser-2-iframe');
+      if (link2 && iframe2 && selected[1]) {
+        link2.href = selected[1].href;
+        iframe2.src = selected[1].src;
+      }
+    })();
   </script>
 
     <!-- PATRON圣女 WIDGET SECTION -->
@@ -2188,18 +2263,24 @@
           alt: 'Aligator BJJ Logo',
           description: 'Dawid Drobina - Trener | Sporty Walki Wrocław Opole',
           username: 'aligator_bjj'
+        },
+        {
+          type: 'instagram',
+          href: 'https://www.instagram.com/karoskiba/',
+          image: 'images/karoskiba.jpg',
+          alt: 'Karoskiba',
+          description: 'Karolina Skiba - Aktywistka na rzecz zwierząt',
+          username: 'karoskiba'
+        },
+        {
+          type: 'instagram',
+          href: 'https://www.instagram.com/skibabigcyc/',
+          image: 'images/skibabigcyc.jpeg',
+          alt: 'Skibabigcyc',
+          description: 'Krzysztof Skiba - wokalista, tekściarz, felietonista, YouTuber',
+          username: 'skibabigcyc'
         }
         // Fake partners commented out - add real partners here
-        // {
-        //   type: 'image',
-        //   image: 'images/partner2.svg',
-        //   alt: 'Partner 2'
-        // },
-        // {
-        //   type: 'image',
-        //   image: 'images/partner3.svg',
-        //   alt: 'Partner 3'
-        // },
         // {
         //   type: 'image',
         //   image: 'images/partner4.svg',
