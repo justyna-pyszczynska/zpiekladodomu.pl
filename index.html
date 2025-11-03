@@ -229,10 +229,11 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 2rem;
+      gap: 1.5rem;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s ease;
+      padding: 0 1rem;
     }
     
     .mobile-menu.active {
@@ -242,18 +243,21 @@
     }
     
     .mobile-menu a {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       font-weight: 600;
       text-decoration: none;
       color: #222;
-      padding: 1rem 2rem;
+      padding: 0.75rem 1.5rem;
       border-radius: 15px;
       transition: all 0.3s ease;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
     }
     
     .mobile-menu a:hover {
       background: rgba(0,0,0,0.1);
-      transform: scale(1.05);
+      transform: scale(1.02);
     }
     
     .mobile-menu a.cta {
@@ -263,7 +267,66 @@
     
     .mobile-menu a.cta:hover {
       background: linear-gradient(135deg,#fbbf24,#f87171);
-      transform: scale(1.05);
+      transform: scale(1.02);
+    }
+    
+    /* Mobile Teksty Dropdown - Horizontal layout */
+    .mobile-teksty-dropdown {
+      display: flex;
+      flex-direction: row;
+      gap: 0.35rem;
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
+      border-radius: 15px;
+      padding: 0.6rem 0.5rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      width: 100%;
+      max-width: 400px;
+    }
+    
+    .mobile-dropdown-item {
+      font-size: 0.75rem !important;
+      font-weight: 600;
+      text-decoration: none;
+      color: #222;
+      padding: 0.4rem 0.5rem !important;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      flex: 1;
+      text-align: center;
+    }
+    
+    .mobile-dropdown-item:hover {
+      background: rgba(255,255,255,0.4);
+      transform: scale(1.02);
+    }
+    
+    /* Mobile Menu Close Button */
+    .mobile-menu-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 3rem;
+      line-height: 1;
+      color: #222;
+      cursor: pointer;
+      padding: 0;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-close:hover {
+      background: rgba(0,0,0,0.1);
+      transform: rotate(90deg);
     }
 
     /* HERO */
@@ -1055,12 +1118,194 @@
       /* Show hamburger menu on mobile */
       .mobile-menu-toggle { display: flex; }
       .shop-grid { grid-template-columns: 1fr; }
-      .logos { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
-      .logos img { max-width: 100%; max-height: 200px; width: 100%; height: auto; }
-      .dark-card { grid-template-columns: 1fr; }
-      .split { grid-template-columns: 0.8fr 0.9fr; gap: 2rem; }
-      .split-text h3 { font-size: 1rem; }
-      .split-text p { font-size: 0.8rem; }
+      
+      /* Mobile Partners Section */
+      .partners-header {
+        font-size: 1.25rem !important;
+        margin-bottom: 1.5rem !important;
+        text-align: center !important;
+      }
+      
+      .logos { 
+        grid-template-columns: 1fr 1fr !important;
+        gap: 1rem !important;
+        max-width: 100% !important;
+        align-items: start !important;
+      }
+      
+      .logos .partner-fade {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      
+      .logos .insta-widget {
+        min-height: auto !important;
+        padding: 0.75rem 0.5rem 1rem 0.5rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+      }
+      
+      .logos .insta-profile {
+        margin-bottom: 0.25rem !important;
+        width: 100% !important;
+      }
+      
+      .logos .insta-avatar {
+        width: 120px !important;
+        height: 120px !important;
+        margin: 0 auto 0.4rem !important;
+        border-radius: 50% !important;
+        object-fit: cover !important;
+      }
+      
+      .logos .insta-avatar[alt="Aligator BJJ Logo"] {
+        width: 140px !important;
+        height: 140px !important;
+        border-radius: 0 !important;
+        object-fit: contain !important;
+        margin: 0 auto 0.4rem !important;
+      }
+      
+      .logos .insta-avatar[alt="Karoskiba"] {
+        object-position: center 35% !important;
+      }
+      
+      .logos .insta-avatar[alt="Skibabigcyc"] {
+        object-position: center center !important;
+      }
+      
+      .logos .insta-info {
+        min-height: 50px !important;
+        margin-bottom: 0.35rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      
+      .logos .insta-info p {
+        font-size: 0.7rem !important;
+        line-height: 1.2 !important;
+        margin: 0 !important;
+        padding: 0 0.25rem !important;
+        text-align: center !important;
+      }
+      
+      .logos .insta-btn {
+        font-size: 0.72rem !important;
+        margin-top: 0 !important;
+      }
+      
+      .logos img:not(.insta-avatar) { 
+        max-width: 100%; 
+        max-height: 150px; 
+        width: auto; 
+        height: auto; 
+        margin: 0 auto;
+      }
+      /* Mobile Initiatives Dark Card */
+      .dark-card { 
+        grid-template-columns: 1fr !important; 
+        padding: 1rem !important;
+        gap: 1rem !important;
+      }
+      
+      .dark-card h3 { 
+        font-size: 1.25rem !important;
+        margin-bottom: 0.5rem !important;
+        text-align: left !important;
+      }
+      
+      .dark-card p { 
+        font-size: 0.75rem !important;
+        line-height: 1.3 !important;
+        max-width: 100% !important;
+        text-align: left !important;
+      }
+      
+      .dark-card > div {
+        padding-left: 0 !important;
+        text-align: left !important;
+      }
+      
+      .dark-card img {
+        max-height: 200px !important;
+        object-fit: cover !important;
+        width: 100% !important;
+      }
+      
+      .dark-card .btn,
+      .dark-card-button-wrapper {
+        display: none !important;
+      }
+      
+      .dark-card-link {
+        display: block !important;
+        cursor: pointer !important;
+      }
+      
+      .dark-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+      }
+      
+      .dark-card-link:active .dark-card {
+        transform: scale(0.98) !important;
+      }
+      
+      /* Mobile Wioska Burçak Section */
+      .split { 
+        grid-template-columns: 0.45fr 0.55fr !important;
+        gap: 1rem !important;
+        padding: 0 1rem !important;
+        align-items: center !important;
+      }
+      
+      .split img {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        height: 280px !important;
+        object-fit: cover !important;
+      }
+      
+      .split-text {
+        padding-left: 0 !important;
+        max-width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+      }
+      
+      .split-text h3 { 
+        font-size: 1rem !important;
+        margin-bottom: 0.5rem !important;
+        text-align: left !important;
+      }
+      
+      .split-text p { 
+        font-size: 0.7rem !important;
+        line-height: 1.3 !important;
+        display: -webkit-box !important;
+        -webkit-box-orient: vertical !important;
+        -webkit-line-clamp: 10 !important;
+        overflow: hidden !important;
+        text-align: left !important;
+        margin-top: 0.5rem !important;
+      }
+      
+      .split-text .read-more-link {
+        display: none !important;
+      }
+      
+      #burcak-section {
+        cursor: pointer !important;
+        transition: opacity 0.2s ease, transform 0.2s ease !important;
+      }
+      
+      #burcak-section:active {
+        opacity: 0.9 !important;
+        transform: scale(0.99) !important;
+      }
       
       /* Mobile Fundraising Card Links */
       .card-link-mobile {
@@ -1083,115 +1328,248 @@
       }
       
       .hero-content {
-        width: 90%;
-        margin-left: 5%;
-        text-align: center;
+        width: 70%;
+        max-width: 300px;
+        margin-left: 1% !important;
+        text-align: left;
+        padding-top: 8rem;
       }
       
       .hero h1 {
-        position: static;
-        transform: none;
-        padding-top: 8rem;
-        font-size: clamp(32px, 6vw, 48px);
-        text-align: center;
+        position: static !important;
+        transform: none !important;
+        padding-top: 0 !important;
+        font-size: clamp(22px, 4.5vw, 28px) !important;
+        text-align: left !important;
         width: 100%;
-        margin-bottom: 1rem;
+        margin-bottom: 1rem !important;
+        line-height: 1.2 !important;
       }
       
       .hero-subtitle {
-        position: static;
-        font-size: clamp(16px, 4vw, 20px);
-        text-align: center;
-        white-space: normal;
-        margin-bottom: 2rem;
+        position: absolute !important;
+        font-size: clamp(13px, 3.2vw, 15px) !important;
+        text-align: left !important;
+        white-space: normal !important;
+        left: 1% !important;
+        top: auto !important;
+        bottom: 15% !important;
+        margin: 0 !important;
+        line-height: 1.3 !important;
+        max-width: 70% !important;
+        z-index: 3 !important;
       }
       
       .hero-button-left,
       .hero-button {
-        position: static;
-        margin: 0 auto;
-        display: block;
-        width: 200px;
+        position: absolute !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 130px !important;
+        right: 5% !important;
+        left: auto !important;
+        font-size: 0.7rem !important;
+        padding: 0.5rem 0.5rem !important;
+        text-align: center !important;
+      }
+      
+      .hero-button-left {
+        bottom: 28% !important;
+        top: auto !important;
+      }
+      
+      .hero-button {
+        bottom: 18% !important;
+        top: auto !important;
+        font-size: 0.625rem !important;
+        white-space: nowrap !important;
+        gap: 0.25rem !important;
+      }
+      
+      .hero-button img {
+        width: 12px !important;
+        height: 12px !important;
       }
       
       .overlap { margin-top: -18vh; }
       
-      /* Mobile Cards Layout - First Row Side by Side */
+      /* Mobile Cards Layout */
       .cards-3 {
-        grid-template-columns: 1fr 1fr 1fr !important;
-        gap: 0.125rem !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.75rem !important;
         max-width: 100% !important;
         padding: 0 !important;
       }
       
-      /* Mobile Card Styling - Equal Size */
+      /* Mobile Card Link Wrapper for fundraisers */
+      .card-link-mobile {
+        display: block !important;
+        grid-column: span 1 !important;
+        order: -1 !important;
+      }
+      
+      /* Mobile Card Styling */
       .card {
         width: 100% !important;
         max-width: none !important;
         margin: 0 !important;
-        height: 320px !important;
-        overflow: visible !important;
-        padding: 0.5rem !important;
+        overflow: hidden !important;
       }
       
-      /* Mobile Fundraising Widget - Better Size */
+      /* Fundraising widgets - first row, side by side */
+      .card.pomagam {
+        height: 450px !important;
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      
+      /* Dog cards - full width, stacked */
+      .card.dog-card {
+        grid-column: span 2 !important;
+        height: auto !important;
+        padding: 1.5rem 1rem !important;
+        order: 1 !important;
+      }
+      
+      /* Mobile Fundraising Widget */
       .pomagam iframe {
-        zoom: 0.7 !important;
         width: 100% !important;
-        height: 100% !important;
-        margin-left: 0 !important;
-        transform: none !important;
+        height: 500px !important;
+        transform: scale(1) !important;
+        margin: 0 !important;
+        display: block !important;
       }
       
-      /* Mobile Dog Cards */
+      /* Mobile Dog Cards - Horizontal layout like mockup */
+      .dog-card {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        padding: 1rem !important;
+        min-height: auto !important;
+        cursor: pointer !important;
+        transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+      }
+      
+      .dog-card:active {
+        transform: scale(0.98) !important;
+      }
+      
       .dog-card .circle {
-        width: 7rem !important;
-        height: 7rem !important;
-      }
-      
-      .dog-card h3 {
-        font-size: 0.875rem !important;
-        margin-bottom: 0.25rem !important;
+        width: 7.5rem !important;
+        height: 7.5rem !important;
+        margin: 0 0.875rem 0 0 !important;
+        flex-shrink: 0 !important;
       }
       
       .dog-card .card-body {
-        padding: 0.5rem !important;
-        gap: 0.25rem !important;
+        flex: 1 !important;
+        padding: 0 !important;
+        gap: 0.35rem !important;
+        text-align: left !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      
+      .dog-card h3 {
+        font-size: 1.05rem !important;
+        margin-bottom: 0.35rem !important;
+        text-align: left !important;
       }
       
       .dog-card .card-body p {
-        font-size: 0.625rem !important;
-        line-height: 1.2 !important;
+        font-size: 0.7rem !important;
+        line-height: 1.3 !important;
         margin-bottom: 0.5rem !important;
+        text-align: left !important;
+      }
+      
+      .dog-card .dog-description {
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        -webkit-line-clamp: 3 !important;
       }
       
       .dog-card .btn {
         font-size: 0.75rem !important;
-        padding: 0.375rem 0.75rem !important;
+        padding: 0.45rem 0.875rem !important;
       }
       
-      /* Mobile Large Card Layout Adjustments */
+      .dog-card .card-footer {
+        justify-content: flex-start !important;
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
+      
+      /* Mobile Large Dog Card - MUST match regular cards exactly */
       .dog-card.span-2 {
+        grid-column: span 2 !important;
+        display: flex !important;
+        flex-direction: row !important;
         align-items: center !important;
-        justify-content: center !important;
         padding: 1rem !important;
-      }
-      
-      .dog-card.span-2 .card-body {
-        flex: 0.6 !important;
-        max-width: 60% !important;
-        padding: 0 !important;
+        min-height: auto !important;
+        text-align: left !important;
+        justify-content: flex-start !important;
+        gap: 0 !important;
       }
       
       .dog-card.span-2 .circle {
-        width: 10rem !important;
-        height: 10rem !important;
+        width: 7.5rem !important;
+        height: 7.5rem !important;
+        margin: 0 0.875rem 0 0 !important;
+        flex-shrink: 0 !important;
         border-radius: 50% !important;
         object-fit: cover !important;
-        flex-shrink: 0 !important;
-        flex-grow: 0 !important;
-        flex-basis: auto !important;
-        margin: 0 1.5rem 0 0 !important;
+      }
+      
+      .dog-card.span-2 .card-body {
+        flex: 1 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+        text-align: left !important;
+        gap: 0.35rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+      }
+      
+      .dog-card.span-2 h3 {
+        text-align: left !important;
+        font-size: 1.05rem !important;
+        margin-bottom: 0.35rem !important;
+        font-family: 'McLaren', cursive !important;
+      }
+      
+      .dog-card.span-2 p,
+      .dog-card.span-2 .dog-description {
+        text-align: left !important;
+        font-size: 0.7rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0.5rem !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        -webkit-line-clamp: 3 !important;
+        color: #6b7280 !important;
+      }
+      
+      .dog-card.span-2 .btn {
+        font-size: 0.75rem !important;
+        padding: 0.45rem 0.875rem !important;
+      }
+      
+      .dog-card.span-2 .card-footer {
+        justify-content: flex-start !important;
+        margin-top: 0 !important;
+        padding-top: 0 !important;
       }
       
       /* Mobile Section Padding */
@@ -1200,80 +1578,139 @@
       }
       
       /* Mobile Map Section */
+      #map-title-new {
+        font-size: 1.25rem !important;
+        margin-bottom: 0.5rem !important;
+        text-align: center !important;
+      }
+      
+      .map-section {
+        padding: 1rem 0 0.5rem 0 !important;
+      }
+      
       .map-container { 
         flex-direction: column; 
-        gap: 2rem; 
-        padding: 0 1rem;
+        gap: 0.5rem !important; 
+        padding: 0 !important;
+        margin: 0 !important;
       }
       
       .map-info { 
         max-width: 100%; 
         order: 2;
-        margin-top: 1rem;
+        margin-top: 0 !important;
+        padding: 0.875rem 1rem 0.5rem 1rem !important;
+        flex: none !important;
+        height: auto !important;
+      }
+      
+      .map-info h4 {
+        font-size: 1rem !important;
+        text-align: center !important;
+        margin-bottom: 0.25rem !important;
+      }
+      
+      .map-info p {
+        font-size: 0.75rem !important;
+        text-align: center !important;
+        margin-bottom: 0.35rem !important;
+        line-height: 1.3 !important;
       }
       
       .map-wrapper { 
         order: 1;
         width: 100%;
         max-width: 100%;
-        padding: 0;
+        padding: 0 !important;
+        margin: 0 !important;
       }
       
       #turkeyMapContainer {
-        min-height: 300px;
-        padding: 10px;
+        min-height: 400px !important;
+        padding: 5px 0 !important;
+      }
+      
+      #turkeyMapContainer svg {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 350px !important;
+        display: block !important;
       }
       
       .turkey-map {
-        max-height: 300px;
+        max-height: 400px !important;
+        width: 100% !important;
       }
       
       .map-stats { 
         justify-content: center; 
-        gap: 1rem;
+        gap: 1.5rem;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
       }
       
       .stat-item {
         flex: 1;
         min-width: 0;
+        text-align: center !important;
       }
       
       .stat-number {
-        font-size: 1.5rem;
+        font-size: 1.125rem !important;
+        margin-bottom: 0.2rem !important;
       }
       
       .stat-label {
-        font-size: 0.8rem;
+        font-size: 0.7rem !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        line-height: 1.2 !important;
       }
       
       /* Mobile Patronite Widget */
       .patronite-section {
-        padding: 0.5rem 1rem 2rem 1rem !important;
+        padding: 0.5rem 0 2rem 0 !important;
       }
       
       .patronite-container {
         flex-direction: column !important;
         align-items: center !important;
         gap: 1.5rem !important;
-        padding: 0 1rem !important;
+        padding: 0 !important;
+        max-width: 90% !important;
+        margin: 0 auto !important;
       }
       
       .patronite-header {
         width: 100% !important;
         max-width: 100% !important;
-        text-align: center !important;
+        text-align: left !important;
       }
       
       #patronite-title {
-        text-align: center !important;
-        font-size: clamp(1.3rem, 4vw, 2rem) !important;
+        text-align: left !important;
+        font-size: 0.85rem !important;
         margin-bottom: 0 !important;
+        line-height: 1.4 !important;
+      }
+      
+      .patronite-widget-wrapper {
+        width: 100% !important;
+        max-width: 320px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        margin: 0 auto !important;
+        min-height: 300px !important;
       }
       
       .patronite-container iframe {
-        width: 100% !important;
-        max-width: 380px !important;
+        width: 320px !important;
         height: 330px !important;
+        display: block !important;
+        margin: 0 auto !important;
+        transform: scale(0.85) !important;
+        transform-origin: center center !important;
       }
       
       /* Mobile Footer Styling */
@@ -1428,8 +1865,8 @@
       
       .footer-social .footer-copyright {
         text-align: center !important;
-        font-size: 1rem !important;
-        line-height: 1.4 !important;
+        font-size: 0.75rem !important;
+        line-height: 1.3 !important;
         width: 100% !important;
       }
     }
@@ -1486,12 +1923,15 @@
 
     <!-- Mobile Menu Overlay -->
   <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close menu">×</button>
     <a href="index.html" onclick="closeMobileMenu()">Strona główna</a>
     <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
     <a href="#" onclick="closeMobileMenu()">Teksty</a>
-    <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Ustawa nr 5911</a>
-    <a href="articles.html" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Artykuły</a>
-    <a href="inicjatywy.html" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Inicjatywy</a>
+    <div class="mobile-teksty-dropdown">
+      <a href="#" onclick="closeMobileMenu()" class="mobile-dropdown-item">Ustawa nr 5911</a>
+      <a href="articles.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Artykuły</a>
+      <a href="inicjatywy.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Inicjatywy</a>
+    </div>
     <a href="onas.html" onclick="closeMobileMenu()">O nas</a>
     <a href="wsparcie.html" class="cta" onclick="closeMobileMenu()">Wsparcie</a>
   </div>
@@ -1639,6 +2079,48 @@
         slot.classList.remove('is-loading');
       });
     });
+    
+    // Make dog cards clickable on mobile (only)
+    function makeDogCardsClickable() {
+      if (window.innerWidth <= 900) {
+        document.querySelectorAll('.dog-card').forEach(card => {
+          // Add pointer cursor on mobile
+          card.style.cursor = 'pointer';
+          
+          // Add click handler
+          card.addEventListener('click', function(e) {
+            // Find the button link inside the card
+            const link = this.querySelector('.card-footer a');
+            if (link && !e.target.closest('.btn')) {
+              // If user didn't click the button directly, navigate to dog page
+              window.location.href = link.href;
+            }
+          });
+        });
+      }
+    }
+    
+    // Run after dogs are loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(makeDogCardsClickable, 500);
+    });
+    
+    // Re-apply on window resize
+    window.addEventListener('resize', function() {
+      if (window.innerWidth <= 900) {
+        makeDogCardsClickable();
+      }
+    });
+    
+    // Make Burçak section clickable on mobile
+    document.addEventListener('DOMContentLoaded', function() {
+      const burcakSection = document.getElementById('burcak-section');
+      if (burcakSection && window.innerWidth <= 900) {
+        burcakSection.addEventListener('click', function() {
+          window.location.href = 'inicjatywa.html';
+        });
+      }
+    });
   </script>
 
   <!-- Random Fundraiser Selection Script -->
@@ -1732,19 +2214,21 @@
 
     <!-- INITIATIVES DARK CARD -->
     <section class="section initiatives">
-      <div class="dark-card">
-        <img src="images/inicjatywy.jpg" alt="Inicjatywy">
-        <div>
-          <h3>Nasze inicjatywy</h3>
-          <p>Nie tylko leczymy, karmimy oraz znajdujemy nowe domy. Nasza działalność opiera się także na edukowaniu społeczeństwa, protestach, udziale w wydarzeniach medialnych. Udzielamy wywiadów, odkłamujemy mity, odwiedzamy audcyje radiowe i telewizję. Szerzenie świadomości to pierwszy krok do zmiany.</p>
-          <div style="margin-top:12px"><button class="btn btn-outline">Zobacz więcej ↗</button></div>
+      <a href="inicjatywy.html" class="dark-card-link" style="text-decoration: none; color: inherit;">
+        <div class="dark-card">
+          <img src="images/inicjatywy.jpg" alt="Inicjatywy">
+          <div>
+            <h3>Nasze inicjatywy</h3>
+            <p>Nie tylko leczymy, karmimy oraz znajdujemy nowe domy. Nasza działalność opiera się także na edukowaniu społeczeństwa, protestach, udziale w wydarzeniach medialnych. Udzielamy wywiadów, odkłamujemy mity, odwiedzamy audcyje radiowe i telewizję. Szerzenie świadomości to pierwszy krok do zmiany.</p>
+            <div style="margin-top:12px" class="dark-card-button-wrapper"><button class="btn btn-outline dark-card-btn">Zobacz więcej ↗</button></div>
+          </div>
         </div>
-      </div>
+      </a>
     </section>
 
     <!-- WIOSKA BURÇAK -->
     <section class="section">
-      <div class="split">
+      <div class="split" id="burcak-section">
         <div class="split-text">
           <h3>Wioska Burçak</h3>
           <p class="muted" style="margin-top:8px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
