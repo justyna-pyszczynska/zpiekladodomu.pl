@@ -32,9 +32,10 @@
       border-radius: 14px;
       backdrop-filter: blur(8px);
       box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      min-height: 52px;
     }
     .brand {
-      display: flex; align-items: center; gap: 10px; font-weight: 600; font-family: 'McLaren', cursive;
+      display: flex; align-items: center; gap: 10px; font-weight: 600; font-family: 'McLaren', cursive; font-size: 1rem;
     }
     .brand img { width: 28px; height: 28px; }
     .menu { display: flex; align-items: center; gap: 14px; }
@@ -102,12 +103,39 @@
       text-decoration: none;
       transition: all 0.3s ease;
       border-radius: 0;
+      position: relative;
+    }
+    
+    .dropdown-menu a:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 16px;
+      right: 16px;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.1);
     }
     
     .dropdown-menu a:hover {
       background: rgba(255,255,255,0.3);
       color: #1f2937;
       font-weight: 600;
+    }
+    
+    .dropdown-menu a.ustawa-link {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      line-height: 1.4;
+    }
+    
+    .dropdown-menu a.ustawa-link img {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: -2px;
+      display: block;
     }
 
     /* MOBILE NAVIGATION */
@@ -155,10 +183,11 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 2rem;
+      gap: 1.5rem;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s ease;
+      padding: 0 1rem;
     }
     
     .mobile-menu.active {
@@ -168,18 +197,21 @@
     }
     
     .mobile-menu a {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       font-weight: 600;
       text-decoration: none;
       color: #222;
-      padding: 1rem 2rem;
+      padding: 0.75rem 1.5rem;
       border-radius: 15px;
       transition: all 0.3s ease;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
     }
     
     .mobile-menu a:hover {
       background: rgba(0,0,0,0.1);
-      transform: scale(1.05);
+      transform: scale(1.02);
     }
     
     .mobile-menu a.cta {
@@ -189,7 +221,66 @@
     
     .mobile-menu a.cta:hover {
       background: linear-gradient(135deg,#fbbf24,#f87171);
-      transform: scale(1.05);
+      transform: scale(1.02);
+    }
+    
+    /* Mobile Teksty Dropdown - Horizontal layout */
+    .mobile-teksty-dropdown {
+      display: flex;
+      flex-direction: row;
+      gap: 0.35rem;
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
+      border-radius: 15px;
+      padding: 0.6rem 0.5rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      width: 100%;
+      max-width: 400px;
+    }
+    
+    .mobile-dropdown-item {
+      font-size: 0.75rem !important;
+      font-weight: 600;
+      text-decoration: none;
+      color: #222;
+      padding: 0.4rem 0.5rem !important;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      flex: 1;
+      text-align: center;
+    }
+    
+    .mobile-dropdown-item:hover {
+      background: rgba(255,255,255,0.4);
+      transform: scale(1.02);
+    }
+    
+    /* Mobile Menu Close Button */
+    .mobile-menu-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 3rem;
+      line-height: 1;
+      color: #222;
+      cursor: pointer;
+      padding: 0;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-close:hover {
+      background: rgba(0,0,0,0.1);
+      transform: rotate(90deg);
     }
 
     /* HERO */
@@ -845,26 +936,110 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
-      header { top: .625rem; }
-      .navbar { padding: .625rem .75rem; }
+      /* Prevent horizontal scrolling */
+      html, body {
+        width: 100%;
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
+      
+      .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 1rem !important;
+      }
+      
+      header { 
+        top: .625rem;
+        width: 95% !important;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .navbar { 
+        padding: .625rem .75rem;
+        width: 100%;
+      }
       .menu { display: none; }
       .mobile-menu-toggle { display: flex; }
+      
+      .big-card-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+      
       .big-card { 
         flex-direction: column; 
         height: auto; 
-        max-width: 90%;
+        max-width: 100% !important;
+        width: 100% !important;
       }
       .big-card-image { 
         height: 300px; 
-        flex: none; 
+        flex: none;
+        width: 100%;
       }
       .big-card-content { 
-        padding: 2rem; 
+        padding: 1.5rem !important;
+        width: 100%;
       }
       .big-card h2 { 
-        font-size: 2rem; 
+        font-size: 1.5rem !important;
       }
+      .big-card .muted {
+        font-size: 0.875rem !important;
+      }
+      .big-card .btn {
+        font-size: 0.875rem !important;
+        padding: 0.75rem 1.25rem !important;
+      }
+      
       .overlap { margin-top: -18vh; }
+      
+      /* Fix gallery grid for mobile */
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.75rem !important;
+      }
+      
+      #informacje-section,
+      #gallery-section {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+      
+      .section-title {
+        font-size: 1.25rem !important;
+        margin-bottom: 1rem !important;
+        padding: 0 !important;
+      }
+      
+      .dog-info-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+        width: 100% !important;
+        margin-bottom: 0 !important;
+      }
+      
+      .dog-info-item {
+        padding: 1rem !important;
+        width: 100% !important;
+      }
+      
+      .story-section {
+        padding: 1rem !important;
+        width: 100% !important;
+        display: block !important;
+        grid-column: 1 / -1 !important;
+        margin-top: 0 !important;
+        margin-bottom: 2rem !important;
+      }
+      
+      .story-section .dog-info-value {
+        font-size: 0.875rem !important;
+        line-height: 1.5 !important;
+      }
       
       /* Mobile Hero Styling */
       .hero-content {
@@ -1033,8 +1208,8 @@
       
       .footer-social .footer-copyright {
         text-align: center !important;
-        font-size: 1rem !important;
-        line-height: 1.4 !important;
+        font-size: 0.75rem !important;
+        line-height: 1.3 !important;
         width: 100% !important;
       }
     }
@@ -1063,7 +1238,10 @@
         <div class="dropdown">
           <a href="#" class="dropdown-toggle">Teksty</a>
           <div class="dropdown-menu">
-            <a href="#">Ustawa nr 5911</a>
+            <a href="#" class="ustawa-link">
+              Ustawa nr 5911
+              <img src="images/exclamation-mark.svg" alt="!" width="18" height="18">
+            </a>
             <a href="articles.html">Artykuły</a>
             <a href="inicjatywy.html">Inicjatywy</a>
           </div>
@@ -1075,12 +1253,15 @@
     
     <!-- Mobile Menu Overlay -->
     <div class="mobile-menu" id="mobileMenu">
+      <button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close menu">×</button>
       <a href="index.html" onclick="closeMobileMenu()">Strona główna</a>
       <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
       <a href="#" onclick="closeMobileMenu()">Teksty</a>
-      <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Ustawa nr 5911</a>
-      <a href="articles.html" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Artykuły</a>
-      <a href="inicjatywy.html" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Inicjatywy</a>
+      <div class="mobile-teksty-dropdown">
+        <a href="#" onclick="closeMobileMenu()" class="mobile-dropdown-item">Ustawa nr 5911</a>
+        <a href="articles.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Artykuły</a>
+        <a href="inicjatywy.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Inicjatywy</a>
+      </div>
       <a href="onas.html" onclick="closeMobileMenu()">O nas</a>
       <a href="wsparcie.html" class="cta" onclick="closeMobileMenu()">Wsparcie</a>
     </div>

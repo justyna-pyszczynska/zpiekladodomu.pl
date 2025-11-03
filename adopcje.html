@@ -32,9 +32,10 @@
       border-radius: 14px;
       backdrop-filter: blur(8px);
       box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      min-height: 52px;
     }
     .brand {
-      display: flex; align-items: center; gap: 10px; font-weight: 600; font-family: 'McLaren', cursive;
+      display: flex; align-items: center; gap: 10px; font-weight: 600; font-family: 'McLaren', cursive; font-size: 1rem;
     }
     .brand img { width: 28px; height: 28px; }
     .menu { display: flex; align-items: center; gap: 14px; }
@@ -102,12 +103,39 @@
       text-decoration: none;
       transition: all 0.3s ease;
       border-radius: 0;
+      position: relative;
+    }
+    
+    .dropdown-menu a:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 16px;
+      right: 16px;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.1);
     }
     
     .dropdown-menu a:hover {
       background: rgba(255,255,255,0.3);
       color: #1f2937;
       font-weight: 600;
+    }
+    
+    .dropdown-menu a.ustawa-link {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      line-height: 1.4;
+    }
+    
+    .dropdown-menu a.ustawa-link img {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: -2px;
+      display: block;
     }
 
     /* Mobile Menu Toggle Button */
@@ -155,10 +183,11 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 2rem;
+      gap: 1.5rem;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s ease;
+      padding: 0 1rem;
     }
     
     .mobile-menu.active {
@@ -168,18 +197,21 @@
     }
     
     .mobile-menu a {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       font-weight: 600;
       text-decoration: none;
       color: #222;
-      padding: 1rem 2rem;
+      padding: 0.75rem 1.5rem;
       border-radius: 15px;
       transition: all 0.3s ease;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
     }
     
     .mobile-menu a:hover {
       background: rgba(0,0,0,0.1);
-      transform: scale(1.05);
+      transform: scale(1.02);
     }
     
     .mobile-menu a.cta {
@@ -189,7 +221,66 @@
     
     .mobile-menu a.cta:hover {
       background: linear-gradient(135deg,#fbbf24,#f87171);
-      transform: scale(1.05);
+      transform: scale(1.02);
+    }
+    
+    /* Mobile Teksty Dropdown - Horizontal layout */
+    .mobile-teksty-dropdown {
+      display: flex;
+      flex-direction: row;
+      gap: 0.35rem;
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
+      border-radius: 15px;
+      padding: 0.6rem 0.5rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      width: 100%;
+      max-width: 400px;
+    }
+    
+    .mobile-dropdown-item {
+      font-size: 0.75rem !important;
+      font-weight: 600;
+      text-decoration: none;
+      color: #222;
+      padding: 0.4rem 0.5rem !important;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      flex: 1;
+      text-align: center;
+    }
+    
+    .mobile-dropdown-item:hover {
+      background: rgba(255,255,255,0.4);
+      transform: scale(1.02);
+    }
+    
+    /* Mobile Menu Close Button */
+    .mobile-menu-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 3rem;
+      line-height: 1;
+      color: #222;
+      cursor: pointer;
+      padding: 0;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-close:hover {
+      background: rgba(0,0,0,0.1);
+      transform: rotate(90deg);
     }
 
     /* HERO */
@@ -215,27 +306,6 @@
       transform: translateY(-50%);
     }
 
-    /* MOBILE HERO OVERRIDES */
-    @media (max-width: 900px) {
-      .hero-content {
-        width: 100% !important;
-        margin: 0 !important;
-        text-align: center !important;
-        padding: 2rem 1rem !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        min-height: 100vh !important;
-      }
-      .hero {
-        min-height: 100vh !important;
-        padding: 0 !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-      }
-    }
     .btn-ghost { background: rgba(255,255,255,.2); color:#fff; border:1px solid rgba(255,255,255,.35); text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
     .btn-outline { 
       background: transparent; 
@@ -466,6 +536,19 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
+      /* Prevent horizontal scrolling */
+      html, body {
+        width: 100%;
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
+      
+      .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 1rem !important;
+      }
+      
       .mobile-menu-toggle {
         display: flex;
       }
@@ -473,46 +556,168 @@
         display: none;
       }
       
-      header { top: .625rem; }
-      .navbar { padding: .625rem .75rem; }
-      .hero { 
-        min-height: 100vh; 
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      header { 
+        top: .625rem;
+        width: 95% !important;
+        left: 50%;
+        transform: translateX(-50%);
       }
-      .hero-content {
-        text-align: left !important;
-        margin-left: 1rem !important;
-        margin-right: auto !important;
-        max-width: 90% !important;
-      }
-      .overlap { 
-        margin-top: -18vh; 
-      }
-      .cards-3 { 
-        grid-template-columns: 1fr 1fr; 
-        gap: 1rem;
-        margin: 0;
-      }
-      .card {
-        height: auto;
-        min-height: 280px;
+      .navbar { 
+        padding: .625rem .75rem;
         width: 100%;
       }
-      .dog-card.span-2 {
-        flex-direction: column !important;
-        text-align: center;
-        padding: 1.5rem !important;
+      .hero { 
+        min-height: 100vh;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
       }
-      .dog-card.span-2 .circle {
-        width: 10rem !important;
-        height: 10rem !important;
-        margin: 0 auto 1rem auto !important;
+      .hero-content {
+        width: 70%;
+        max-width: 300px;
+        margin-left: 1% !important;
+        text-align: left;
+        padding-top: 8rem;
       }
-      .dog-card.span-2 .card-body {
+      .hero h1 {
+        position: static !important;
+        transform: none !important;
+        padding-top: 0 !important;
+        font-size: clamp(22px, 4.5vw, 28px) !important;
+        text-align: left !important;
+        width: 100%;
+        margin-bottom: 1rem !important;
+        line-height: 1.2 !important;
+        padding: 1rem !important;
+      }
+      .overlap { 
+        margin-top: -35vh; 
+      }
+      .cards-3 { 
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.75rem !important;
+        margin: 0 !important;
+        width: 100% !important;
+      }
+      .card {
+        height: auto !important;
+        min-height: auto !important;
+        width: 100% !important;
+      }
+      
+      /* Mobile Dog Cards - Horizontal layout */
+      .dog-card {
+        grid-column: span 2 !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        padding: 1rem !important;
+        min-height: auto !important;
+        cursor: pointer !important;
+        transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+      }
+      
+      .dog-card:active {
+        transform: scale(0.98) !important;
+      }
+      
+      .dog-card .circle {
+        width: 7.5rem !important;
+        height: 7.5rem !important;
+        margin: 0 0.875rem 0 0 !important;
+        flex-shrink: 0 !important;
+      }
+      
+      .dog-card .card-body {
+        flex: 1 !important;
         padding: 0 !important;
+        gap: 0.35rem !important;
+        text-align: left !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      
+      .dog-card h3 {
+        font-size: 1.05rem !important;
+        margin-bottom: 0.35rem !important;
+        text-align: left !important;
+      }
+      
+      .dog-card .card-body p {
+        font-size: 0.7rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0.5rem !important;
+        text-align: left !important;
+      }
+      
+      .dog-card .dog-description {
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        -webkit-line-clamp: 3 !important;
+      }
+      
+      .dog-card .btn {
+        font-size: 0.75rem !important;
+        padding: 0.45rem 0.875rem !important;
+      }
+      
+      .dog-card .card-footer {
+        justify-content: flex-start !important;
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
+      
+      /* Mobile span-2 dog cards */
+      .dog-card.span-2 {
+        grid-column: span 2 !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        padding: 1rem !important;
+        text-align: left !important;
+        justify-content: flex-start !important;
+        gap: 0 !important;
+      }
+      
+      .dog-card.span-2 .circle {
+        width: 7.5rem !important;
+        height: 7.5rem !important;
+        margin: 0 0.875rem 0 0 !important;
+      }
+      
+      .dog-card.span-2 .card-body {
+        gap: 0.35rem !important;
+        text-align: left !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+      }
+      
+      .dog-card.span-2 h3 {
+        font-size: 1.05rem !important;
+        margin-bottom: 0.35rem !important;
+        text-align: left !important;
+      }
+      
+      .dog-card.span-2 p {
+        font-size: 0.7rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0.5rem !important;
+        height: auto !important;
+        min-height: auto !important;
+      }
+      
+      .dog-card.span-2 .card-footer {
+        justify-content: flex-start !important;
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
+      
+      .dog-card.span-2 .dog-description {
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        -webkit-line-clamp: 3 !important;
       }
       .section {
         padding: 2rem 0;
@@ -670,90 +875,9 @@
       
       .footer-social .footer-copyright {
         text-align: center !important;
-        font-size: 1rem !important;
-        line-height: 1.4 !important;
+        font-size: 0.75rem !important;
+        line-height: 1.3 !important;
         width: 100% !important;
-      }
-      
-      
-    }
-
-    @media (max-width: 600px) {
-      header {
-        width: calc(100% - 1rem);
-        left: 0.5rem;
-        top: 0.25rem;
-      }
-      .navbar {
-        padding: 0.5rem 0.75rem;
-      }
-      .brand {
-        font-size: 0.8rem;
-        gap: 6px;
-      }
-      .brand img {
-        width: 20px;
-        height: 20px;
-      }
-      .hero {
-        min-height: 100vh;
-      }
-      .hero-content {
-        padding: 1rem 0.5rem;
-      }
-      .cards-3 {
-        --card-h: 350px;
-        gap: 1rem;
-      }
-      .card {
-        height: var(--card-h);
-        margin: 0;
-      }
-      .dog-card .circle {
-        width: 8rem;
-        height: 8rem;
-      }
-      .dog-card.span-2 .circle {
-        width: 8rem !important;
-        height: 8rem !important;
-      }
-      .section {
-        padding: 1.5rem 0;
-      }
-      .overlap {
-        margin-top: -8vh;
-      }
-    }
-
-    @media (max-width: 480px) {
-      header {
-        width: calc(100% - 0.5rem);
-        left: 0.25rem;
-      }
-      .navbar {
-        padding: 0.5rem;
-        border-radius: 8px;
-      }
-      .brand {
-        font-size: 0.75rem;
-      }
-      .brand img {
-        width: 18px;
-        height: 18px;
-      }
-      .cards-3 {
-        --card-h: 300px;
-      }
-      .dog-card .circle {
-        width: 7rem;
-        height: 7rem;
-      }
-      .dog-card.span-2 .circle {
-        width: 7rem !important;
-        height: 7rem !important;
-      }
-      .section {
-        padding: 1rem 0;
       }
     }
   </style>
@@ -778,7 +902,10 @@
         <div class="dropdown">
           <a href="#" class="dropdown-toggle">Teksty</a>
           <div class="dropdown-menu">
-            <a href="#">Ustawa nr 5911</a>
+            <a href="#" class="ustawa-link">
+              Ustawa nr 5911
+              <img src="images/exclamation-mark.svg" alt="!" width="18" height="18">
+            </a>
             <a href="articles.html">Artykuły</a>
             <a href="inicjatywy.html">Inicjatywy</a>
           </div>
@@ -791,12 +918,15 @@
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close menu">×</button>
     <a href="index.html" onclick="closeMobileMenu()">Strona główna</a>
     <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
     <a href="#" onclick="closeMobileMenu()">Teksty</a>
-    <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Ustawa nr 5911</a>
-    <a href="articles.html" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Artykuły</a>
-    <a href="inicjatywy.html" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Inicjatywy</a>
+    <div class="mobile-teksty-dropdown">
+      <a href="#" onclick="closeMobileMenu()" class="mobile-dropdown-item">Ustawa nr 5911</a>
+      <a href="articles.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Artykuły</a>
+      <a href="inicjatywy.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Inicjatywy</a>
+    </div>
     <a href="onas.html" onclick="closeMobileMenu()">O nas</a>
     <a href="wsparcie.html" class="cta" onclick="closeMobileMenu()">Wsparcie</a>
   </div>
@@ -1058,7 +1188,29 @@
     }
     
     // Load dogs when page is ready
-    document.addEventListener('DOMContentLoaded', loadDogs);
+    document.addEventListener('DOMContentLoaded', function() {
+      loadDogs();
+      
+      // Make dog cards clickable on mobile
+      if (window.innerWidth <= 900) {
+        setTimeout(function() {
+          document.querySelectorAll('.dog-card').forEach(card => {
+            // Add pointer cursor on mobile
+            card.style.cursor = 'pointer';
+            
+            // Add click handler
+            card.addEventListener('click', function(e) {
+              // Find the button link inside the card
+              const link = this.querySelector('.card-footer a');
+              if (link && !e.target.closest('.btn')) {
+                // If user didn't click the button directly, navigate to dog page
+                window.location.href = link.href;
+              }
+            });
+          });
+        }, 500); // Small delay to ensure cards are loaded
+      }
+    });
   </script>
 
   <!-- Dog Data Loader -->

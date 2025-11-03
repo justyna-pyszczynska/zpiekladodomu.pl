@@ -79,9 +79,10 @@
       border-radius: 14px;
       backdrop-filter: blur(8px);
       box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      min-height: 52px;
     }
     .brand {
-      display: flex; align-items: center; gap: 10px; font-weight: 600; font-family: 'McLaren', cursive;
+      display: flex; align-items: center; gap: 10px; font-weight: 600; font-family: 'McLaren', cursive; font-size: 1rem;
     }
     .brand img { width: 28px; height: 28px; }
     .menu { display: flex; align-items: center; gap: 14px; }
@@ -1100,16 +1101,14 @@
       }
       
       header { 
-        top: 8px; 
-        width: 95%;
+        top: .625rem;
+        width: 95% !important;
         left: 50%;
         transform: translateX(-50%);
       }
-      
       .navbar { 
-        padding: 6px 12px; 
+        padding: .625rem .75rem;
         width: 100%;
-        min-height: 45px;
       }
       
       /* Hide desktop menu on mobile */
