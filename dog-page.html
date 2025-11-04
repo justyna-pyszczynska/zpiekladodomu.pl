@@ -524,19 +524,21 @@
       background: #fff;
       border-radius: 1.5rem;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-      padding: 1rem;
-      overflow: visible;
-      height: fit-content;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
+      min-height: 500px;
     }
     
     .video-embed-container iframe {
-      width: 100%;
-      border-radius: 1rem;
-      aspect-ratio: 9 / 16;
+      width: 100% !important;
+      height: 100% !important;
+      min-height: 500px !important;
+      border-radius: 1.5rem;
       border: none;
     }
     
@@ -962,6 +964,22 @@
       .menu { display: none; }
       .mobile-menu-toggle { display: flex; }
       
+      /* Mobile Hero h1 - Responsive title */
+      .hero-content {
+        width: 85% !important;
+        max-width: 90% !important;
+        margin-left: 5% !important;
+      }
+      
+      .hero h1 {
+        font-size: clamp(28px, 7vw, 42px) !important;
+        line-height: 1.15 !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+        overflow-wrap: break-word !important;
+        max-width: 100% !important;
+      }
+      
       .big-card-container {
         width: 100% !important;
         max-width: 100% !important;
@@ -1013,6 +1031,15 @@
         font-size: 1.25rem !important;
         margin-bottom: 1rem !important;
         padding: 0 !important;
+      }
+      
+      /* Add space before gallery section */
+      #gallery-section {
+        margin-top: 3rem !important;
+      }
+      
+      #gallery-section .section-title {
+        margin-top: 0 !important;
       }
       
       .dog-info-grid {
@@ -1269,7 +1296,7 @@
 
   <section id="home" class="hero">
     <div class="hero-content">
-      <h1>Kokos</h1>
+      <h1></h1>
     </div>
     <button class="hero-arrow hero-arrow-left" onclick="switchDog('left')">
       <img src="images/arrow-left.svg" alt="Previous">
@@ -1286,7 +1313,7 @@
         <article class="big-card">
           <div class="big-card-image"></div>
           <div class="big-card-content">
-            <p class="muted">Kokos to wspaniały pies, który szuka swojego wymarzonego domu. Jest bardzo przyjazny, lubi zabawę i jest doskonałym towarzyszem dla całej rodziny. Ma około 3 lata i jest w pełni zaszczepiony. Kocha spacery i jest bardzo posłuszny. Idealny dla rodzin z dziećmi lub osób, które szukają wiernego przyjaciela.</p>
+            <p class="muted"></p>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
               <a href="ankieta-adopcyjna.html" class="btn btn-primary" id="adoptButton">Adoptuj ↗</a>
               <a href="adopcje.html" class="btn btn-outline" style="color: #000; border-color: #6b7280;">← Wróć do adopcji</a>
@@ -1888,8 +1915,10 @@
       // Create video embed
       if (videoContainer) {
         if (videoUrl.includes('facebook.com')) {
-          // Facebook embed
-          videoContainer.innerHTML = `<iframe src="${videoUrl}" width="100%" height="480" style="border:none;overflow:hidden;border-radius:1rem;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
+          // Facebook embed - use plugin format to avoid X-Frame-Options error
+          const encodedUrl = encodeURIComponent(videoUrl);
+          const pluginUrl = `https://www.facebook.com/plugins/video.php?height=600&href=${encodedUrl}&show_text=false&width=560`;
+          videoContainer.innerHTML = `<iframe src="${pluginUrl}" width="560" height="600" style="border:none;overflow:hidden;width:100%;height:100%;border-radius:1.5rem;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>`;
         } else if (videoUrl.includes('instagram.com')) {
           // Instagram embed  
           videoContainer.innerHTML = `<iframe src="${videoUrl}embed/" width="100%" height="480" style="border:none;overflow:hidden;border-radius:1rem;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;

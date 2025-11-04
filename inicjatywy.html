@@ -694,8 +694,16 @@
         display: none !important;
       }
       
+      .initiative-image {
+        height: 200px !important;
+      }
+      
       .featured-initiative {
         flex-direction: column !important;
+      }
+      
+      .featured-initiative .initiative-image {
+        height: 200px !important;
       }
       
       .initiative-content {
@@ -1014,32 +1022,79 @@
   <script>
     // Function to parse markdown front matter
     function parseMarkdownFrontMatter(content) {
-      const lines = content.split('\n');
-      const frontMatter = {};
-      let inFrontMatter = false;
-      let contentStart = 0;
-
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i].trim();
+      const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---/;
+      const match = content.match(frontMatterRegex);
+      
+      if (match) {
+        const frontMatter = match[1];
         
-        if (line === '---') {
-          if (!inFrontMatter) {
-            inFrontMatter = true;
-            continue;
-          } else {
-            contentStart = i + 1;
-            break;
+        // YAML parser that handles multi-line strings
+        const data = {};
+        const lines = frontMatter.split('\n');
+        let currentKey = null;
+        let currentValue = [];
+        let inMultiline = false;
+        
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          
+          // In multi-line mode, ONLY exit when we hit a non-indented line with a valid YAML key
+          if (inMultiline) {
+            // Check if this line is indented (part of multi-line content)
+            if (line.startsWith('  ') || line.startsWith('\t') || line.trim() === '') {
+              // Still in multi-line content
+              const trimmedLine = line.replace(/^  /, ''); // Remove 2-space indentation
+              currentValue.push(trimmedLine);
+            } else {
+              // Non-indented line - check if it's a valid YAML key
+              const colonIndex = line.indexOf(':');
+              if (colonIndex > 0) {
+                // This is a new key, save current multi-line content
+                data[currentKey] = currentValue.join('\n');
+                currentKey = null;
+                currentValue = [];
+                inMultiline = false;
+                // Process this line as a new key (fall through to key processing below)
+              } else {
+                // Not a valid key, treat as content continuation
+                currentValue.push(line);
+                continue;
+              }
+            }
+          }
+          
+          // Process new keys (only when not in multi-line mode)
+          if (!inMultiline && line.includes(':') && !line.startsWith(' ') && !line.startsWith('\t')) {
+            const colonIndex = line.indexOf(':');
+            const key = line.substring(0, colonIndex).trim();
+            let value = line.substring(colonIndex + 1).trim();
+            
+            // Check if this is a multi-line value (indicated by | or >)
+            if (value === '|' || value === '>') {
+              currentKey = key;
+              currentValue = [];
+              inMultiline = true;
+            } else {
+              // Single line value
+              // Remove quotes if present
+              if ((value.startsWith('"') && value.endsWith('"')) || 
+                  (value.startsWith("'") && value.endsWith("'"))) {
+                value = value.slice(1, -1);
+              }
+              data[key] = value;
+            }
           }
         }
         
-        if (inFrontMatter && line.includes(':')) {
-          const [key, ...valueParts] = line.split(':');
-          const value = valueParts.join(':').trim().replace(/^["']|["']$/g, '');
-          frontMatter[key.trim()] = value;
+        // Save last key if we were building one
+        if (currentKey && inMultiline) {
+          data[currentKey] = currentValue.join('\n');
         }
+        
+        return data;
       }
-
-      return frontMatter;
+      
+      return null;
     }
 
     // Function to format date
@@ -1057,8 +1112,9 @@
       const cardClass = isFeatured ? 'initiative-card featured-initiative' : 'initiative-card';
       const titleTag = isFeatured ? 'h2' : 'h3';
       
-      // Create slug from title for URL
-      const slug = initiative.title.toLowerCase()
+      // Use slug from initiative data (filename without .md)
+      // If not present, generate from title as fallback
+      const slug = initiative.slug || initiative.title.toLowerCase()
         .replace(/[ąćęłńóśźż]/g, function(match) {
           const map = {
             'ą': 'a', 'ć': 'c', 'ę': 'e', 'ł': 'l', 'ń': 'n',
@@ -1070,6 +1126,8 @@
         .replace(/\s+/g, '-')
         .replace(/-+/g, '-')
         .trim();
+      
+      console.log('Creating card for:', initiative.title, 'with slug:', slug);
       
       return `
         <article class="${cardClass}">
@@ -1096,7 +1154,17 @@
         status: "Aktywna",
         date: "2025-01-19",
         image: "images/burcak.jpg",
-        featured: "true"
+        featured: "true",
+        slug: "wioska-burcak"
+      },
+      {
+        title: "Z Piekła do... telewizji!",
+        description: "Dowiedz się, jak nasza historia trafiła do mediów i telewizji.",
+        status: "Aktywna",
+        date: "2025-10-14",
+        image: "images/tvn.jpeg",
+        featured: "false",
+        slug: "z-piekla-do-telewizji"
       }
     ];
 
@@ -1111,10 +1179,24 @@
       
       if (isLocalhost) {
         try {
-          // Try to fetch initiatives list from a directory listing or predefined list
-          const initiativeFiles = [
-            'wioska-burcak.md'
-          ];
+          // Load initiative list from manifest.json
+          let initiativeFiles = [];
+          try {
+            const manifestResponse = await fetch('content/initiatives/manifest.json');
+            if (manifestResponse.ok) {
+              const manifest = await manifestResponse.json();
+              initiativeFiles = manifest.initiatives || [];
+              console.log('Loaded initiatives from manifest.json:', initiativeFiles);
+            } else {
+              console.warn('Could not load manifest.json, using fallback list');
+              // Fallback to hardcoded list if manifest fails
+              initiativeFiles = ['wioska-burcak.md', 'z-piekla-do-telewizji.md'];
+            }
+          } catch (error) {
+            console.error('Error loading manifest.json:', error);
+            // Fallback to hardcoded list if manifest fails
+            initiativeFiles = ['wioska-burcak.md', 'z-piekla-do-telewizji.md'];
+          }
 
           const initiatives = [];
           const featuredInitiatives = [];
@@ -1132,6 +1214,9 @@
               console.log(`Loaded ${file}, content length:`, content.length);
               const initiativeData = parseMarkdownFrontMatter(content);
               console.log('Parsed initiative data:', initiativeData);
+              
+              // Add slug from filename (without .md extension)
+              initiativeData.slug = file.replace('.md', '');
               
               if (initiativeData.featured === 'true') {
                 featuredInitiatives.push(initiativeData);
@@ -1175,6 +1260,22 @@
       const featuredInitiatives = [];
 
       embeddedInitiatives.forEach(initiative => {
+        // Generate slug from title if not present
+        if (!initiative.slug) {
+          initiative.slug = initiative.title.toLowerCase()
+            .replace(/[ąćęłńóśźż]/g, function(match) {
+              const map = {
+                'ą': 'a', 'ć': 'c', 'ę': 'e', 'ł': 'l', 'ń': 'n',
+                'ó': 'o', 'ś': 's', 'ź': 'z', 'ż': 'z'
+              };
+              return map[match] || match;
+            })
+            .replace(/[^a-z0-9\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-')
+            .trim();
+        }
+        
         if (initiative.featured === 'true') {
           featuredInitiatives.push(initiative);
         } else {

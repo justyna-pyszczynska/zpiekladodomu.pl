@@ -18,6 +18,6 @@ special_features:
   - "Łagodna"
   - "Gotowa do transportu"
 story: ""
-video_url: "https://www.facebook.com/100004758072304/videos/pcb.1526641785455563/854127293616208"
+video_url: ""
 adoption_requirements: ""
 ---

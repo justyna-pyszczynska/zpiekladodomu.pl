@@ -32,9 +32,10 @@
       border-radius: 14px;
       backdrop-filter: blur(8px);
       box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      min-height: 52px;
     }
     .brand {
-      display: flex; align-items: center; gap: 10px; font-weight: 600; font-family: 'McLaren', cursive;
+      display: flex; align-items: center; gap: 10px; font-weight: 600; font-family: 'McLaren', cursive; font-size: 1rem;
     }
     .brand img { width: 28px; height: 28px; }
     .menu { display: flex; align-items: center; gap: 14px; }
@@ -102,10 +103,39 @@
       text-decoration: none;
       transition: all 0.3s ease;
       border-radius: 0;
+      position: relative;
+    }
+    
+    .dropdown-menu a:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 16px;
+      right: 16px;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.1);
     }
     
     .dropdown-menu a:hover {
       background: rgba(255,255,255,0.3);
+      color: #1f2937;
+      font-weight: 600;
+    }
+    
+    .dropdown-menu a.ustawa-link {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      line-height: 1.4;
+    }
+    
+    .dropdown-menu a.ustawa-link img {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: -2px;
+      display: block;
       color: #1f2937;
       font-weight: 600;
     }
@@ -155,10 +185,11 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 2rem;
+      gap: 1.5rem;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s ease;
+      padding: 0 1rem;
     }
     
     .mobile-menu.active {
@@ -168,18 +199,21 @@
     }
     
     .mobile-menu a {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       font-weight: 600;
       text-decoration: none;
       color: #222;
-      padding: 1rem 2rem;
+      padding: 0.75rem 1.5rem;
       border-radius: 15px;
       transition: all 0.3s ease;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
     }
     
     .mobile-menu a:hover {
       background: rgba(0,0,0,0.1);
-      transform: scale(1.05);
+      transform: scale(1.02);
     }
     
     .mobile-menu a.cta {
@@ -189,7 +223,66 @@
     
     .mobile-menu a.cta:hover {
       background: linear-gradient(135deg,#fbbf24,#f87171);
-      transform: scale(1.05);
+      transform: scale(1.02);
+    }
+    
+    /* Mobile Teksty Dropdown - Horizontal layout */
+    .mobile-teksty-dropdown {
+      display: flex;
+      flex-direction: row;
+      gap: 0.35rem;
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
+      border-radius: 15px;
+      padding: 0.6rem 0.5rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      width: 100%;
+      max-width: 400px;
+    }
+    
+    .mobile-dropdown-item {
+      font-size: 0.75rem !important;
+      font-weight: 600;
+      text-decoration: none;
+      color: #222;
+      padding: 0.4rem 0.5rem !important;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      flex: 1;
+      text-align: center;
+    }
+    
+    .mobile-dropdown-item:hover {
+      background: rgba(255,255,255,0.4);
+      transform: scale(1.02);
+    }
+    
+    /* Mobile Menu Close Button */
+    .mobile-menu-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 3rem;
+      line-height: 1;
+      color: #222;
+      cursor: pointer;
+      padding: 0;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-close:hover {
+      background: rgba(0,0,0,0.1);
+      transform: rotate(90deg);
     }
 
     /* HERO */
@@ -730,21 +823,44 @@
       }
       .card-link-mobile .card { pointer-events: none; }
       .card-link-mobile .card iframe { pointer-events: none; }
-      header { 
-        top: 8px; 
-        width: 95%;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-      
-      .navbar { 
-        padding: 6px 12px; 
+      /* Global mobile styles */
+      body {
         width: 100%;
-        min-height: 45px;
+        overflow-x: hidden;
       }
       
-      .menu { gap: .5rem; }
-      .menu a { padding: .375rem .5rem; }
+      .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 1rem;
+      }
+      
+      /* Mobile Navigation */
+      header { 
+        top: .625rem !important;
+        width: 95% !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        position: fixed !important;
+        z-index: 10 !important;
+      }
+      .navbar { 
+        padding: .625rem .75rem !important;
+        width: 100% !important;
+        min-height: 52px !important;
+      }
+      
+      .brand {
+        font-size: 1rem !important;
+      }
+      
+      .brand img {
+        width: 28px !important;
+        height: 28px !important;
+      }
+      
+      /* Hide desktop menu on mobile */
+      .menu { display: none; }
       
       /* Mobile Menu Toggle Button */
     .mobile-menu-toggle {
@@ -787,32 +903,39 @@
       .hero {
         min-height: 100vh;
         background-position: center center;
+        width: 100%;
       }
+      
       .hero-content {
-        text-align: left !important;
-        margin-left: 1rem !important;
-        margin-right: auto !important;
-        max-width: 90% !important;
+        width: 70%;
+        max-width: 300px;
+        margin-left: 1% !important;
+        text-align: left;
+        padding-top: 8rem;
       }
-      .hero h1 { 
-        font-size: clamp(28px, 6vw, 42px); 
-        left: 1rem !important;
-        right: 1rem !important;
-        transform: translateY(-50%) !important;
-        margin-left: 0;
+      
+      .hero h1 {
+        position: static !important;
+        transform: none !important;
+        padding-top: 0 !important;
+        font-size: clamp(22px, 4.5vw, 28px) !important;
         text-align: left !important;
-        width: calc(100% - 2rem);
-        white-space: normal;
-        line-height: 1.2;
-        top: 40%;
+        width: 100%;
+        margin-bottom: 1rem !important;
+        line-height: 1.2 !important;
+        padding: 1rem !important;
       }
       
       /* SUPPORT CARDS MOBILE */
+      .overlap { 
+        margin-top: -35vh !important; 
+      }
+      
       .support-card-content { 
         padding: 1.5rem; 
       }
       .support-card h2 { 
-        font-size: 1.75rem; 
+        font-size: 1.5rem !important; 
         text-align: center;
         padding-left: 0;
         margin-bottom: 1rem;
@@ -821,8 +944,8 @@
         text-align: center;
         padding-left: 0;
         margin-bottom: 1.5rem;
+        font-size: 0.9rem !important;
       }
-      .overlap { margin-top: -25vh; }
       
       /* FUNDRAISING WIDGETS MOBILE */
       .fundraising-widgets {
@@ -830,13 +953,26 @@
         align-items: center;
         gap: 1.5rem;
         margin-top: 1rem;
+        padding: 0 !important;
       }
       .fundraising-widget {
-        max-width: 100%;
-        width: 100%;
+        max-width: 100% !important;
+        width: 100% !important;
       }
       .fundraising-widget iframe {
-        height: 400px;
+        height: auto !important;
+        min-height: 350px !important;
+      }
+      
+      .cards-3 {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+        padding: 0 !important;
+      }
+      
+      .card {
+        width: 100% !important;
+        max-width: 100% !important;
       }
       
       /* WIDGETS CONTAINER MOBILE */
@@ -855,9 +991,13 @@
       .payment-methods {
         flex-direction: column;
         gap: 1rem;
+        padding: 0 !important;
+        width: 100% !important;
       }
       .payment-method {
         min-width: 100%;
+        width: 100% !important;
+        font-size: 0.9rem !important;
       }
       /* Mobile Footer Styling */
       footer {
@@ -1011,243 +1151,9 @@
       
       .footer-social .footer-copyright {
         text-align: center !important;
-        font-size: 1rem !important;
-        line-height: 1.4 !important;
+        font-size: 0.75rem !important;
+        line-height: 1.3 !important;
         width: 100% !important;
-      }
-    }
-
-    @media (max-width: 600px) {
-      /* NAVBAR MOBILE SMALL */
-      header {
-        top: 6px !important;
-        left: 3px !important;
-        right: 3px !important;
-        width: calc(100% - 6px) !important;
-      }
-      .navbar {
-        flex-direction: row;
-        gap: 3px !important;
-        padding: clamp(6px, 1.5vw, 8px) clamp(6px, 2vw, 10px) !important;
-        min-height: 42px;
-        box-sizing: border-box;
-      }
-      .brand {
-        gap: 4px !important;
-        flex: 1;
-        min-width: 0;
-        overflow: hidden;
-      }
-      .brand span {
-        font-size: 10px !important;
-        max-width: 100px !important;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: block;
-      }
-      .brand img {
-        width: 18px !important;
-        height: 18px !important;
-        flex-shrink: 0;
-      }
-      .mobile-menu-toggle {
-        padding: 3px !important;
-        flex-shrink: 0 !important;
-        min-width: 28px !important;
-      }
-      .hamburger-line {
-        width: 22px !important;
-        height: 3px !important;
-      }
-      
-      /* HERO MOBILE SMALL */
-      .hero h1 {
-        font-size: clamp(24px, 6vw, 32px);
-        top: 40%;
-        line-height: 1.2;
-      }
-      
-      /* SUPPORT CARDS MOBILE SMALL */
-      .support-card-content {
-        padding: 1rem;
-      }
-      .support-card h2 {
-        font-size: 1.5rem;
-        margin-bottom: 0.75rem;
-      }
-      .support-card .muted {
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-      }
-      
-      /* FUNDRAISING WIDGETS MOBILE SMALL */
-      .fundraising-widget iframe {
-        height: 350px;
-      }
-      
-      /* WIDGETS MOBILE SMALL */
-      .facebook-group-widget {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-      }
-      .group-cover {
-        height: 120px;
-      }
-      .group-content {
-        padding: 1rem;
-      }
-      .group-header {
-        height: 80px;
-        margin-bottom: 0.5rem;
-      }
-      .group-icon {
-        width: 80px;
-        height: 80px;
-        left: -5px;
-      }
-      .group-text-box {
-        left: 80px;
-        max-width: calc(100% - 80px);
-      }
-      .group-title {
-        font-size: 0.85rem;
-      }
-      .group-description {
-        font-size: 0.75rem;
-      }
-      .group-button {
-        margin-top: 1.5rem;
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
-      }
-      .dog-widget-title {
-        font-size: 0.9rem;
-        padding: 1rem 0.75rem 0.25rem 0.75rem;
-      }
-      .dog-thinking-image {
-        height: 140px;
-        padding: 1rem 0.5rem 0.25rem 0.5rem;
-      }
-      
-      /* STATISTICS GRID MOBILE */
-      .support-card div[style*="grid-template-columns"] {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 0.75rem !important;
-      }
-      .support-card div[style*="grid-template-columns"] > div {
-        padding: 0.75rem !important;
-        font-size: 0.8rem !important;
-      }
-      .support-card div[style*="grid-template-columns"] > div div[style*="font-size: 2rem"] {
-        font-size: 1.5rem !important;
-        margin-bottom: 0.25rem !important;
-      }
-    }
-
-    /* EXTRA SMALL MOBILE OPTIMIZATIONS */
-    @media (max-width: 400px) {
-      header {
-        top: 4px !important;
-        left: 2px !important;
-        right: 2px !important;
-        width: calc(100% - 4px) !important;
-      }
-      .navbar {
-        padding: 6px 8px !important;
-        min-height: 40px;
-        gap: 2px !important;
-        box-sizing: border-box;
-      }
-      .brand {
-        gap: 3px !important;
-        flex: 1;
-        overflow: hidden;
-      }
-      .brand img {
-        width: 16px !important;
-        height: 16px !important;
-        flex-shrink: 0;
-      }
-      .brand span {
-        font-size: 9px !important;
-        max-width: 80px !important;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: block;
-      }
-      .mobile-menu-toggle {
-        padding: 2px !important;
-        flex-shrink: 0 !important;
-        min-width: 26px !important;
-      }
-      .mobile-menu-toggle .hamburger-line {
-        width: 20px !important;
-        height: 2px !important;
-      }
-      
-      .container {
-        width: 95%;
-      }
-      
-      .hero h1 {
-        font-size: clamp(20px, 6vw, 28px);
-        top: 40%;
-      }
-      
-      .support-card-content {
-        padding: 0.75rem;
-      }
-      .support-card h2 {
-        font-size: 1.25rem;
-      }
-      
-      .fundraising-widget iframe {
-        height: 300px;
-      }
-      
-      .facebook-group-widget {
-        height: auto;
-      }
-      .group-cover {
-        height: 100px;
-      }
-      .group-header {
-        height: 70px;
-      }
-      .group-icon {
-        width: 70px;
-        height: 70px;
-        left: 0;
-      }
-      .group-text-box {
-        left: 70px;
-        max-width: calc(100% - 70px);
-      }
-      .group-title {
-        font-size: 0.8rem;
-      }
-      .group-description {
-        font-size: 0.7rem;
-      }
-      .group-button {
-        margin-top: 1rem;
-        padding: 0.4rem 0.8rem;
-        font-size: 0.75rem;
-      }
-      
-      .dog-widget-title {
-        font-size: 0.8rem;
-        padding: 0.75rem 0.5rem 0.25rem 0.5rem;
-      }
-      .dog-thinking-image {
-        height: 120px;
-        padding: 0.75rem 0.25rem 0.25rem 0.25rem;
-      }
-      
-      .support-card div[style*="grid-template-columns"] {
-        grid-template-columns: 1fr !important;
-        gap: 0.5rem !important;
       }
     }
   </style>
@@ -1257,7 +1163,7 @@
     <div class="navbar">
       <div class="brand">
         <a href="index.html" style="display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit;">
-          <img src="images/logo.svg" alt="Logo" width="200" height="200">
+          <img src="images/logo.svg" alt="Logo">
           <span>Z Piekła Do Domu</span>
         </a>
       </div>
@@ -1274,7 +1180,10 @@
         <div class="dropdown">
           <a href="#" class="dropdown-toggle">Teksty</a>
           <div class="dropdown-menu">
-            <a href="#">Ustawa nr 5911</a>
+            <a href="#" class="ustawa-link">
+              Ustawa nr 5911
+              <img src="images/exclamation-mark.svg" alt="!" width="18" height="18">
+            </a>
             <a href="articles.html">Artykuły</a>
             <a href="inicjatywy.html">Inicjatywy</a>
           </div>
@@ -1287,12 +1196,15 @@
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close menu">×</button>
     <a href="index.html" onclick="closeMobileMenu()">Strona główna</a>
     <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
     <a href="#" onclick="closeMobileMenu()">Teksty</a>
-    <a href="#" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Ustawa nr 5911</a>
-    <a href="articles.html" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Artykuły</a>
-    <a href="inicjatywy.html" onclick="closeMobileMenu()" style="padding-left: 2rem; font-size: 1.2rem;">Inicjatywy</a>
+    <div class="mobile-teksty-dropdown">
+      <a href="#" onclick="closeMobileMenu()" class="mobile-dropdown-item">Ustawa nr 5911</a>
+      <a href="articles.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Artykuły</a>
+      <a href="inicjatywy.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Inicjatywy</a>
+    </div>
     <a href="onas.html" onclick="closeMobileMenu()">O nas</a>
     <a href="wsparcie.html" class="cta" onclick="closeMobileMenu()">Wsparcie</a>
   </div>
@@ -1544,13 +1456,11 @@
           { href: 'https://pomagam.pl/zpiekladodomu', src: 'https://pomagam.pl/zpiekladodomu/widget/large' },
           { href: 'https://pomagam.pl/aph8gm', src: 'https://pomagam.pl/aph8gm/widget/large' }
         ],
-        // Add more sets of up to 3 widgets here as needed
-        // Example:
-        // [
-        //   { href: 'https://pomagam.pl/ABC1', src: 'https://pomagam.pl/ABC1/widget/large' },
-        //   { href: 'https://pomagam.pl/ABC2', src: 'https://pomagam.pl/ABC2/widget/large' },
-        //   { href: 'https://pomagam.pl/ABC3', src: 'https://pomagam.pl/ABC3/widget/large' }
-        // ]
+        [
+          { href: 'https://pomagam.pl/f9effw', src: 'https://pomagam.pl/f9effw/widget/large' },
+          { href: 'https://pomagam.pl/hk4tmk', src: 'https://pomagam.pl/hk4tmk/widget/large' },
+          { href: 'https://pomagam.pl/km6bbg', src: 'https://pomagam.pl/km6bbg/widget/large' }
+        ]
       ];
 
       if (!widgetSets.length) return;
