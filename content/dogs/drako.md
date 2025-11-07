@@ -1,0 +1,27 @@
+---
+name: "Drako"
+description: "Niesamowity, kontaktowy i zawadiacki psiak o bystrej iskrze w oku. Docenia zabawę, ale też tulaski. Energiczne, pozytywne psie dziecko, które pośród naszej gromady podrostków wyróżnia się nieco dłuższą sierścią nadająca mu niecodziennego, charakterystycznego wyglądu w połączeniu z podpalanym pysiem."
+image: "images/drako5.jpeg"
+images:
+  - "images/drako5.jpeg"
+  - "images/drako1.jpeg"
+  - "images/drako2.jpeg"
+  - "images/drako3.jpeg"
+  - "images/drako4.jpeg"
+  - "images/drako6.jpeg"
+  - "images/drako7.jpeg"
+  - "images/drako8.jpeg"
+  - "images/drako9.jpeg"
+age: "~ 9 miesięcy"
+gender: "Samiec"
+size: "Spory"
+special_features:
+  - "Dogaduje się z psami"
+  - "Lgnie do ludzi"
+  - "Energiczny"
+  - "Przyjazny"
+  - "Ciekawy świata"
+story: ""
+adoption_requirements: ""
+video_url: ""
+---

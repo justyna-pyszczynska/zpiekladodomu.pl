@@ -4,6 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adopcje - Z Piekła do Domu</title>
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zpiekladodomu.pl/adopcje.html">
+  <meta property="og:title" content="Adopcje - Z Piekła do Domu">
+  <meta property="og:description" content="Poznaj psy i koty czekające na adopcję. Każdy zasługuje na kochający dom!">
+  <meta property="og:image" content="https://zpiekladodomu.pl/images/adopcje-main.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="pl_PL">
+  <meta property="og:site_name" content="Z Piekła do Domu">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://zpiekladodomu.pl/adopcje.html">
+  <meta name="twitter:title" content="Adopcje - Z Piekła do Domu">
+  <meta name="twitter:description" content="Poznaj psy i koty czekające na adopcję. Każdy zasługuje na kochający dom!">
+  <meta name="twitter:image" content="https://zpiekladodomu.pl/images/adopcje-main.jpg">
+  
   <link rel="icon" type="image/svg+xml" href="images/logo.svg">
   <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -340,6 +359,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       max-height: 6em;
+      min-height: 6em;
       line-height: 1.5;
     }
     .dog-card .card-footer { justify-content: center; margin-top: 0.75rem; }
@@ -376,12 +396,13 @@
       margin-top: 1rem !important; 
     }
     .muted { color: #6b7280; font-size: 0.875rem; line-height: 1.5; }
-    .btn { display:inline-flex; align-items:center; gap:.5rem; padding: .6875rem 1.125rem; border:none; border-radius: 9999px; cursor:pointer; font-weight: 700; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding: .6875rem 1.125rem; border:none; border-radius: 9999px; cursor:pointer; font-weight: 700; text-decoration: none; }
     .btn-primary { 
       background: linear-gradient(135deg,#fca5a5,#fde68a); 
       color:#fff; 
       text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
       transition: all 0.3s ease;
+      text-decoration: none;
     }
     .btn-primary:hover {
       background: linear-gradient(135deg,#f87171,#fbbf24);
@@ -902,7 +923,7 @@
         <div class="dropdown">
           <a href="#" class="dropdown-toggle">Teksty</a>
           <div class="dropdown-menu">
-            <a href="#" class="ustawa-link">
+            <a href="ustawa-nr-5911.html" class="ustawa-link">
               Ustawa nr 5911
               <img src="images/exclamation-mark.svg" alt="!" width="18" height="18">
             </a>
@@ -923,7 +944,7 @@
     <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
     <a href="#" onclick="closeMobileMenu()">Teksty</a>
     <div class="mobile-teksty-dropdown">
-      <a href="#" onclick="closeMobileMenu()" class="mobile-dropdown-item">Ustawa nr 5911</a>
+      <a href="ustawa-nr-5911.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Ustawa nr 5911</a>
       <a href="articles.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Artykuły</a>
       <a href="inicjatywy.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Inicjatywy</a>
     </div>

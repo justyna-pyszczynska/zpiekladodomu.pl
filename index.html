@@ -397,12 +397,13 @@
         width: 180px;
         height: 44px;
       }
-    .btn { display:inline-flex; align-items:center; gap:.5rem; padding: .6875rem 1.125rem; border:none; border-radius: 9999px; cursor:pointer; font-weight: 700; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding: .6875rem 1.125rem; border:none; border-radius: 9999px; cursor:pointer; font-weight: 700; text-decoration: none; }
     .btn-primary { 
       background: linear-gradient(135deg,#fca5a5,#fde68a); 
       color:#fff; 
       text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
       transition: all 0.3s ease;
+      text-decoration: none;
     }
     .btn-primary:hover {
       background: linear-gradient(135deg,#f87171,#fbbf24);
@@ -532,6 +533,11 @@
     /* Desktop - Hide mobile card links */
     .card-link-mobile {
       display: contents;
+      transition: opacity 0.3s ease-in-out;
+      will-change: opacity;
+    }
+    .card-link-mobile.is-fading {
+      opacity: 0;
     }
 
     /* SHOP */
@@ -1907,7 +1913,7 @@
         <div class="dropdown">
           <a href="#" class="dropdown-toggle">Teksty</a>
           <div class="dropdown-menu">
-            <a href="#" class="ustawa-link">
+            <a href="ustawa-nr-5911.html" class="ustawa-link">
               Ustawa nr 5911
               <img src="images/exclamation-mark.svg" alt="!" width="18" height="18">
             </a>
@@ -1927,7 +1933,7 @@
     <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
     <a href="#" onclick="closeMobileMenu()">Teksty</a>
     <div class="mobile-teksty-dropdown">
-      <a href="#" onclick="closeMobileMenu()" class="mobile-dropdown-item">Ustawa nr 5911</a>
+      <a href="ustawa-nr-5911.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Ustawa nr 5911</a>
       <a href="articles.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Artykuły</a>
       <a href="inicjatywy.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Inicjatywy</a>
     </div>
@@ -2001,7 +2007,7 @@
     </section>
 
   <script>
-    // Populate the three existing dog cards without altering the grid layout
+    // Dog Cards Carousel - Populate and rotate the three dog cards
     document.addEventListener('DOMContentLoaded', async function loadHomeDogs() {
       const slots = [
         document.getElementById('home-dog-1'),
@@ -2019,20 +2025,18 @@
           allDogFiles = manifest.dogs || [];
         } else {
           console.warn('Could not load manifest.json, using fallback list');
-          // Fallback to hardcoded list if manifest fails
           allDogFiles = ['dingo.md', 'duo blondi.md', 'gryzia.md', 'tygrysek.md', 'ami.md', 'olo.md', 'sanja.md'];
         }
       } catch (error) {
         console.error('Error loading manifest.json:', error);
-        // Fallback to hardcoded list if manifest fails
         allDogFiles = ['dingo.md', 'duo blondi.md', 'gryzia.md', 'tygrysek.md', 'ami.md', 'olo.md', 'sanja.md'];
       }
 
-      const shuffled = allDogFiles
+      // Shuffle dogs initially for variety
+      const shuffledDogs = allDogFiles
         .map(v => ({ v, r: Math.random() }))
         .sort((a, b) => a.r - b.r)
-        .map(o => o.v)
-        .slice(0, 3);
+        .map(o => o.v);
 
       async function fetchDog(file) {
         try {
@@ -2057,26 +2061,65 @@
         } catch { return null; }
       }
 
-      const dogs = await Promise.all(shuffled.map(fetchDog));
-      const valid = dogs.filter(Boolean);
-      valid.forEach((dog, idx) => {
-        const slot = slots[idx];
-        if (!slot) return;
+      function renderDog(dog, slot) {
+        if (!dog || !slot) return;
         const name = dog.name || 'Pies do adopcji';
         const img = dog.image || 'images/placeholder.jpg';
         const desc = dog.description || '';
         const link = `dog-page.html?dog=${dog.slug}`;
-        slot.innerHTML = `
-          <img src="${img}" alt="${name}" class="circle">
-          <div class="card-body">
-            <h3>${name}</h3>
-            <p class="muted dog-description">${desc}</p>
-            <div class="card-footer">
-              <a href="${link}" class="btn btn-primary">Więcej ↗</a>
-            </div>
-          </div>`;
-        slot.classList.remove('is-loading');
-      });
+        
+        // Add fade effect before update
+        slot.style.opacity = '0';
+        slot.style.transition = 'opacity 0.4s ease-in-out';
+        
+        setTimeout(() => {
+          slot.innerHTML = `
+            <img src="${img}" alt="${name}" class="circle">
+            <div class="card-body">
+              <h3>${name}</h3>
+              <p class="muted dog-description">${desc}</p>
+              <div class="card-footer">
+                <a href="${link}" class="btn btn-primary">Więcej ↗</a>
+              </div>
+            </div>`;
+          slot.classList.remove('is-loading');
+          slot.style.opacity = '1';
+          
+          // Re-attach mobile click handlers after rendering
+          if (window.innerWidth <= 900) {
+            slot.style.cursor = 'pointer';
+            slot.onclick = function(e) {
+              const linkEl = this.querySelector('.card-footer a');
+              if (linkEl && !e.target.closest('.btn')) {
+                window.location.href = linkEl.href;
+              }
+            };
+          }
+        }, 400);
+      }
+
+      // Fetch all dogs
+      const allDogsData = await Promise.all(shuffledDogs.map(fetchDog));
+      const validDogs = allDogsData.filter(Boolean);
+
+      if (validDogs.length === 0) return;
+
+      let currentIndex = 0;
+
+      // Initial display - show first 3 dogs
+      for (let i = 0; i < 3 && i < validDogs.length; i++) {
+        renderDog(validDogs[i], slots[i]);
+      }
+      currentIndex = 3;
+
+      // Auto-rotate every 12 seconds
+      setInterval(() => {
+        for (let i = 0; i < 3; i++) {
+          const dogIndex = (currentIndex + i) % validDogs.length;
+          renderDog(validDogs[dogIndex], slots[i]);
+        }
+        currentIndex = (currentIndex + 3) % validDogs.length;
+      }, 12000);
     });
     
     // Make dog cards clickable on mobile (only)
@@ -2122,45 +2165,64 @@
     });
   </script>
 
-  <!-- Random Fundraiser Selection Script -->
+  <!-- Fundraiser Carousel Script -->
   <script>
     (function() {
-      // Complete pool of all fundraisers (same as wsparcie.html carousel)
+      // Complete pool of all fundraisers
       const allFundraisers = [
         { href: 'https://pomagam.pl/zpiekladodomu', src: 'https://pomagam.pl/zpiekladodomu/widget/large' },
         { href: 'https://pomagam.pl/aph8gm', src: 'https://pomagam.pl/aph8gm/widget/large' },
         { href: 'https://pomagam.pl/hk4tmk', src: 'https://pomagam.pl/hk4tmk/widget/large' },
         { href: 'https://pomagam.pl/km6bbg', src: 'https://pomagam.pl/km6bbg/widget/large' },
         { href: 'https://pomagam.pl/f9effw', src: 'https://pomagam.pl/f9effw/widget/large' },
-        { href: 'https://pomagam.pl/rfbkf6', src: 'https://pomagam.pl/rfbkf6/widget/large' }
+        { href: 'https://pomagam.pl/rfbkf6', src: 'https://pomagam.pl/rfbkf6/widget/large' },
+        { href: 'https://pomagam.pl/3ywn9d', src: 'https://pomagam.pl/3ywn9d/widget/large' }
       ];
 
-      // Shuffle array and pick first 2 unique fundraisers
-      function getRandomFundraisers() {
-        const shuffled = [...allFundraisers]
-          .map(value => ({ value, sort: Math.random() }))
-          .sort((a, b) => a.sort - b.sort)
-          .map(({ value }) => value);
-        return shuffled.slice(0, 2);
-      }
+      // Shuffle the fundraisers initially for variety
+      const shuffledFundraisers = [...allFundraisers]
+        .map(value => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value);
 
-      const selected = getRandomFundraisers();
-      
-      // Update first fundraiser widget
+      let currentIndex = 0;
+
       const link1 = document.getElementById('fundraiser-1-link');
       const iframe1 = document.getElementById('fundraiser-1-iframe');
-      if (link1 && iframe1 && selected[0]) {
-        link1.href = selected[0].href;
-        iframe1.src = selected[0].src;
-      }
-
-      // Update second fundraiser widget
       const link2 = document.getElementById('fundraiser-2-link');
       const iframe2 = document.getElementById('fundraiser-2-iframe');
-      if (link2 && iframe2 && selected[1]) {
-        link2.href = selected[1].href;
-        iframe2.src = selected[1].src;
+
+      if (!link1 || !iframe1 || !link2 || !iframe2) return;
+
+      function updateFundraisers() {
+        // Get two consecutive fundraisers from the shuffled list
+        const first = shuffledFundraisers[currentIndex % shuffledFundraisers.length];
+        const second = shuffledFundraisers[(currentIndex + 1) % shuffledFundraisers.length];
+
+        // Add fade effect
+        link1.classList.add('is-fading');
+        link2.classList.add('is-fading');
+
+        setTimeout(() => {
+          link1.href = first.href;
+          iframe1.src = first.src;
+          link2.href = second.href;
+          iframe2.src = second.src;
+          
+          link1.classList.remove('is-fading');
+          link2.classList.remove('is-fading');
+        }, 300);
+
+        // Move to next pair
+        currentIndex = (currentIndex + 2) % shuffledFundraisers.length;
       }
+
+      // Initial load
+      updateFundraisers();
+      currentIndex = 2; // Start from index 2 for next rotation
+
+      // Auto-rotate every 8 seconds
+      setInterval(updateFundraisers, 8000);
     })();
   </script>
 

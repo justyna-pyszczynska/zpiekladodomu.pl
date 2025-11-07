@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wsparcie - Z Piekła do Domu</title>
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zpiekladodomu.pl/wsparcie.html">
+  <meta property="og:title" content="Wspieraj nasze działania - Z Piekła do Domu">
+  <meta property="og:description" content="Każda złotówka ratuje życie! Dowiedz się, jak możesz wesprzeć nasze działania na rzecz zwierząt z Turcji.">
+  <meta property="og:image" content="https://zpiekladodomu.pl/images/landing.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="pl_PL">
+  <meta property="og:site_name" content="Z Piekła do Domu">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://zpiekladodomu.pl/wsparcie.html">
+  <meta name="twitter:title" content="Wspieraj nasze działania - Z Piekła do Domu">
+  <meta name="twitter:description" content="Każda złotówka ratuje życie! Dowiedz się, jak możesz wesprzeć nasze działania na rzecz zwierząt z Turcji.">
+  <meta name="twitter:image" content="https://zpiekladodomu.pl/images/landing.jpg">
+  
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+  <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fafafa; color: #222; }
+    img { display: block; max-width: 100%; }
+
+    /* CONTAINERS */
+    .container { width: min(1200px, 92%); margin: 0 auto; }
+
+    /* NAVBAR */
+    header {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1200px, 92%);
+      z-index: 10;
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      min-height: 52px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px; font-weight: 600; font-family: 'McLaren', cursive; font-size: 1rem;
+    }
+    .brand img { width: 28px; height: 28px; }
+    .menu { display: flex; align-items: center; gap: 14px; }
+    .menu a {
+      text-decoration: none;
+      color: #222; 
+      font-weight: 500;
+      padding: 8px 12px; 
+      border-radius: 10px; 
+      transition: all 0.3s ease;
+    }
+    .menu a:hover {
+      background: rgba(0,0,0,0.05);
+      color: #374151;
+    }
+    .menu a.cta { 
+      background: linear-gradient(135deg,#ffedd5,#fecaca); 
+      font-weight: 700; 
+      transition: all 0.3s ease;
+    }
+    .menu a.cta:hover {
+      background: linear-gradient(135deg,#fbbf24,#f87171);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(251,191,36,0.4);
+    }
+
+    /* Dropdown Menu */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-toggle {
+      cursor: pointer;
+    }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      min-width: 180px;
+      padding: 8px 0;
+      margin-top: 8px;
+      z-index: 1000;
+    }
+    
+    .dropdown:hover .dropdown-toggle {
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      display: block;
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
+    }
+    
+    .dropdown-menu a {
+      display: block;
+      padding: 8px 16px;
+      color: #222;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border-radius: 0;
+      position: relative;
+    }
+    
+    .dropdown-menu a:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 16px;
+      right: 16px;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.1);
+    }
+    
+    .dropdown-menu a:hover {
+      background: rgba(255,255,255,0.3);
+      color: #1f2937;
+      font-weight: 600;
+    }
+    
+    .dropdown-menu a.ustawa-link {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      line-height: 1.4;
+    }
+    
+    .dropdown-menu a.ustawa-link img {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: -2px;
+      display: block;
+      color: #1f2937;
+      font-weight: 600;
+    }
+
+    /* Mobile Menu Toggle Button */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      gap: 4px;
+    }
+    
+    .hamburger-line {
+      width: 25px;
+      height: 3px;
+      background: #222;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+    
+    /* Mobile Menu Overlay */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      padding: 0 1rem;
+    }
+    
+    .mobile-menu.active {
+      display: flex;
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .mobile-menu a {
+      font-size: 1.25rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #222;
+      padding: 0.75rem 1.5rem;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    
+    .mobile-menu a:hover {
+      background: rgba(0,0,0,0.1);
+      transform: scale(1.02);
+    }
+    
+    .mobile-menu a.cta {
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
+      font-weight: 700;
+    }
+    
+    .mobile-menu a.cta:hover {
+      background: linear-gradient(135deg,#fbbf24,#f87171);
+      transform: scale(1.02);
+    }
+    
+    /* Mobile Teksty Dropdown - Horizontal layout */
+    .mobile-teksty-dropdown {
+      display: flex;
+      flex-direction: row;
+      gap: 0.35rem;
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
+      border-radius: 15px;
+      padding: 0.6rem 0.5rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      width: 100%;
+      max-width: 400px;
+    }
+    
+    .mobile-dropdown-item {
+      font-size: 0.75rem !important;
+      font-weight: 600;
+      text-decoration: none;
+      color: #222;
+      padding: 0.4rem 0.5rem !important;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      flex: 1;
+      text-align: center;
+    }
+    
+    .mobile-dropdown-item:hover {
+      background: rgba(255,255,255,0.4);
+      transform: scale(1.02);
+    }
+    
+    /* Mobile Menu Close Button */
+    .mobile-menu-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 3rem;
+      line-height: 1;
+      color: #222;
+      cursor: pointer;
+      padding: 0;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-close:hover {
+      background: rgba(0,0,0,0.1);
+      transform: rotate(90deg);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 120vh;
+      background: url('images/dog-13.jpg') center/cover no-repeat;
+      display: flex; align-items: center;
+    }
+    .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.2)); }
+    .hero-content { position: relative; z-index: 1; width: min(500px, 50%); margin-left: 12%; color: #fff; }
+    .hero h1 { 
+      font-family: 'McLaren', cursive; 
+      font-size: clamp(32px, 6vw, 42px); 
+      line-height: 1.2; 
+      font-weight: 450;
+      text-shadow: 2px 3px 12px rgba(0,0,0,.7);
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      display: inline-block;
+      position: absolute;
+      top: 40% !important;
+      transform: translateY(-50%);
+    }
+    .btn-ghost { background: rgba(255,255,255,.2); color:#fff; border:1px solid rgba(255,255,255,.35); text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+    .btn-outline { 
+      background: transparent; 
+      color: #fff; 
+      border: 2px solid #fff; 
+      font-family: 'McLaren', cursive;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: #fca5a5;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* SUPPORT SECTIONS */
+    .section { padding: 3rem 0; }
+    .overlap { margin-top: -45vh; position: relative; z-index: 2; }
+    .support-container { 
+      display: flex; 
+      flex-direction: column;
+      align-items: center;
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      gap: 2rem;
+    }
+    .support-card { 
+      background: #fff; 
+      border-radius: 1.5rem; 
+      box-shadow: 0 20px 40px rgba(0,0,0,.15); 
+      overflow: hidden; 
+      width: 100%;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .support-card:hover { 
+      transform: translateY(-8px); 
+      box-shadow: 0 30px 60px rgba(0,0,0,.2); 
+    }
+    .support-card-content {
+      padding: 4.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .support-card-content h2 {
+      text-align: left;
+      max-width: 892px; /* 430px (widget 1) + 32px (gap) + 430px (widget 2) */
+      padding-left: 6.5rem;
+      margin: 0;
+    }
+    .support-card-content p {
+      text-align: left;
+      max-width: 892px; /* 430px (widget 1) + 32px (gap) + 430px (widget 2) */
+      padding-left: 6.5rem;
+      margin: 0;
+    }
+    /* Align heading/paragraph with widget cards in the first support card */
+    .support-container > .support-card:first-child .support-card-content h2,
+    .support-container > .support-card:first-child .support-card-content p {
+      padding-left: 0;
+      max-width: none;
+    }
+    /* Align heading/paragraph with content in the second support card */
+    .support-container > .support-card:nth-of-type(2) .support-card-content h2,
+    .support-container > .support-card:nth-of-type(2) .support-card-content p {
+      padding-left: 0;
+      max-width: none;
+    }
+    .fundraising-widgets {
+      display: flex;
+      gap: 2rem;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin-top: 2rem;
+      margin-left: 0;
+      margin-bottom: -1.5rem;
+    }
+    .fundraising-widget {
+      flex: 1;
+      max-width: 430px;
+      margin-left: 0;
+    }
+    .support-card h2 {
+      font-family: 'McLaren', cursive;
+      font-size: 2.5rem;
+      color: #1f2937;
+      margin: 0;
+      line-height: 1.2;
+    }
+    .support-card .muted {
+      color: #6b7280;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .support-card .btn {
+      align-self: flex-start;
+      padding: 1rem 2rem;
+      font-size: 1.125rem;
+    }
+    .muted { color: #6b7280; font-size: 0.875rem; line-height: 1.5; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding: .6875rem 1.125rem; border:none; border-radius: 9999px; cursor:pointer; font-weight: 700; }
+    .btn-primary { 
+      background: linear-gradient(135deg,#fca5a5,#fde68a); 
+      color:#fff; 
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg,#f87171,#fbbf24);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(252,165,165,0.4);
+    }
+    .center { text-align: center; }
+
+    /* FUNDRAISING WIDGETS */
+    /* INDEX-LIKE WIDGET CARDS */
+    .cards-3 { display:grid; grid-template-columns: repeat(3,365px); gap: 1.2rem; --card-h: 475px; transform: translateX(-40px);}
+    .card { background:#fff; border-radius: 1rem; box-shadow:0 12px 22px rgba(0,0,0,.1); overflow: hidden; display:flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card-placeholder { background: transparent; box-shadow: none; }
+    /* Make widget block identical to index: no extra card chrome or padding */
+    .support-card.widgets-block { background: transparent; box-shadow: none; border-radius: 0; }
+    .support-card.widgets-block .support-card-content { padding: 0; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,.15); }
+    .pomagam iframe {text-align: center; transform: scaleX(0.90) scaleY(1.1) translateX(-38px) translateY(10px);}
+    .widget-fade { opacity: 1; transition: opacity .35s ease-in-out; will-change: opacity; }
+    .widget-fade.is-fading { opacity: 0; }
+    .support-fade { opacity: 1; transition: opacity .35s ease-in-out; will-change: opacity; }
+    .support-fade.is-fading { opacity: 0; }
+
+    /* Desktop - Hide mobile card links (match index) */
+    .card-link-mobile { display: contents; }
+
+    /* Ensure no extra padding around widget grid inside support-card */
+    .support-card-content .cards-3 { margin: 0; padding: 0; }
+
+    /* PLACEHOLDER FOR WIDGETS */
+    .fundraising-placeholder { display: flex; gap: 2rem; justify-content: flex-start; align-items: flex-start; margin-top: 2rem; }
+    .placeholder-box {
+      width: 430px;
+      height: 500px;
+      border: 2px dashed #e5e7eb;
+      background: #f9fafb;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6b7280;
+      font-family: 'McLaren', cursive;
+      font-size: 1.25rem;
+    }
+
+    /* FACEBOOK GROUP WIDGET */
+    .facebook-group-widget {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 0;
+      width: 340px;
+      height: 380px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+    }
+    .facebook-group-widget:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    .group-cover {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 0;
+    }
+    .group-content {
+      padding: 1.5rem;
+    }
+    .group-header {
+      position: relative;
+      margin-bottom: 0.5rem;
+      height: 88px;
+    }
+    .group-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      position: relative;
+      top: 4px;
+      left: -6px;
+    }
+    .group-text-box {
+      position: absolute;
+      left: 90px;
+      top: 50%;
+      transform: translateY(-55%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      align-items: flex-start;
+      max-width: calc(100% - 100px);
+    }
+    .group-text-box * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .group-header .group-description {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin: 0;
+      padding: 0;
+      line-height: 1.2;
+      white-space: nowrap;
+      text-align: left;
+      width: 100%;
+    }
+    .group-title {
+      font-family: 'McLaren', cursive;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin: 0;
+      padding: 0;
+      white-space: nowrap;
+      text-align: left;
+      width: 100%;
+    }
+    .group-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.25rem;
+      background: linear-gradient(135deg, #1877f2, #42a5f5);
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.8125rem;
+      transition: all 0.3s ease;
+      margin: 2.5rem auto 0;
+      width: fit-content;
+    }
+    .button-icon {
+      width: 16px;
+      height: 16px;
+      filter: brightness(0) invert(1);
+    }
+    .group-button:hover {
+      background: linear-gradient(135deg, #166fe5, #1976d2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+    }
+    .group-button.heart-button {
+      background: linear-gradient(135deg, #fca5a5, #fde68a);
+    }
+    .group-button.heart-button:hover {
+      background: linear-gradient(135deg, #f87171, #fbbf24);
+      box-shadow: 0 4px 12px rgba(252, 165, 165, 0.4);
+    }
+    .group-button.heart-button .button-icon {
+      width: 16px;
+      height: 16px;
+      filter: brightness(0) invert(1) drop-shadow(1px 1px 2px rgba(0,0,0,0.8));
+    }
+    .group-button.heart-button {
+      background: linear-gradient(135deg, #fca5a5, #fde68a);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
+
+    /* WIDGETS CONTAINER */
+    .widgets-container {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin-top: 2rem;
+    }
+
+    /* DOG WIDGET TITLE */
+    .dog-widget-title {
+      font-family: 'McLaren', cursive;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin: 0;
+      padding: 1.5rem 1rem 0.5rem 1rem;
+      text-align: center;
+      line-height: 1.3;
+    }
+    /* DOG THINKING IMAGE */
+    .dog-thinking-image {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      padding: 2rem 1rem 0.5rem 1rem;
+    }
+
+    /* PLACEHOLDER STYLES FOR EMPTY CARD */
+    .group-cover-placeholder {
+      width: 100%;
+      height: 150px;
+      background: #f3f4f6;
+      border-radius: 0;
+    }
+    .group-icon-placeholder {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #e5e7eb;
+      position: relative;
+      top: 0px;
+      left: -10px;
+    }
+    .group-description-placeholder {
+      width: 120px;
+      height: 16px;
+      background: #e5e7eb;
+      border-radius: 4px;
+    }
+    .group-title-placeholder {
+      width: 160px;
+      height: 20px;
+      background: #d1d5db;
+      border-radius: 4px;
+      margin-top: 0.25rem;
+    }
+    .group-button-placeholder {
+      width: 140px;
+      height: 36px;
+      background: #e5e7eb;
+      border-radius: 6px;
+      margin: 2.5rem auto 0;
+    }
+
+    /* PAYMENT METHODS */
+    .payment-methods {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .payment-method {
+      background: #f8f9fa;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      flex: 1;
+      min-width: 200px;
+      transition: all 0.3s ease;
+    }
+    .payment-method:hover {
+      border-color: #fca5a5;
+      background: #fff;
+      transform: translateY(-2px);
+    }
+    .payment-method h4 {
+      font-size: 1.125rem;
+      margin-bottom: 0.5rem;
+      color: #1f2937;
+    }
+    .payment-method p {
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin: 0;
+    }
+
+    /* FOOTER */
+    footer { 
+      background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); 
+      margin-top: 2.25rem; 
+      padding: 3rem 0; 
+    }
+    .footer-grid { display:grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
+    .footer-brand { display:flex; align-items:center; gap: 1.5rem; }
+    .footer-brand img { width: 10rem; height: 10rem; }
+    .footer-content { flex: 1; margin-top: 0.25rem; }
+    .footer-title { font-family: 'McLaren', cursive; font-size: 1.3rem; color: #000; margin: 0 0 1rem 0; line-height: 1.3; }
+    .footer-email { 
+      display: flex; 
+      align-items: center; 
+      margin-bottom: 1rem; 
+      flex-wrap: wrap;
+      word-break: break-all;
+      gap: 0.5rem;
+    }
+    .footer-email svg { color: #000; transition: color 0.3s ease; }
+    .footer-email:hover svg { color: #666; }
+    .footer-email a { 
+      color: #000; 
+      text-decoration: none; 
+      font-size: 0.9rem; 
+      transition: all 0.3s ease;
+      word-break: break-all;
+      max-width: 100%;
+      overflow-wrap: break-word;
+    }
+    .footer-email a:hover {
+      color: #666;
+      text-decoration: underline;
+      font-weight: 700;
+    }
+    .footer-copyright { color: #000; font-size: 0.875rem; line-height: 1.4; }
+    .footer-links { display: flex; gap: 7rem; }
+    .footer-links .links a {
+      position: relative;
+      display: inline-block;
+      font-weight: 500;
+      transition: font-weight 0.3s ease, color 0.3s ease;
+    }
+
+    .footer-links .links a::after {
+      content: attr(data-text);
+      visibility: hidden;
+      font-weight: 700;
+      height: 0;
+      overflow: hidden;
+      pointer-events: none;
+      display: block;
+    }
+
+    .footer-links .links a:hover {
+      font-weight: 700;
+      color: #666;
+    }
+    .links-column h4 { 
+      color: #000; 
+      font-size: 1rem; 
+      margin: 0 0 1rem 0; 
+      font-weight: 600; 
+      white-space: nowrap; 
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .links-column h4:hover {
+      font-weight: 700;
+      color: #333;
+    }
+    .links { display: flex; flex-direction: column; gap: 0.5rem; }
+    .links a { 
+      color: #000; 
+      text-decoration: none; 
+      font-size: 0.875rem; 
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      font-weight: 400;
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+    .links a:hover {
+      color: #666;
+      font-weight: 700;
+    }
+    .footer-social { display: flex; flex-direction: column; align-items: flex-end; gap: 3.75rem; }
+    .socials { display: flex; gap: 0.75rem; }
+    .socials a { 
+      display: inline-block; 
+      text-decoration: none; 
+      transition: all 0.3s ease;
+      width: 48px;
+      height: 48px;
+    }
+    .socials a:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+    .footer-social .footer-copyright { text-align: right; }
+    
+    /* EMAIL ICON STYLING - Desktop only */
+    .footer-email img {
+      width: 25px;
+      height: 25px;
+      max-width: 25px;
+      max-height: 25px;
+      min-width: 25px;
+      min-height: 25px;
+    }
+    
+    /* Mobile email icon overrides */
+    @media (max-width: 1100px) {
+      .footer-email img {
+        width: clamp(14px, 3.5vw, 20px) !important;
+        height: clamp(14px, 3.5vw, 20px) !important;
+        max-width: none !important;
+        max-height: none !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+      }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      /* Mobile Fundraising Widget - fill entire card */
+      .pomagam iframe {
+        width: 100% !important;
+        height: 500px !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+        transform: none !important;
+        border: none !important;
+      }
+      /* Mobile Fundraising Card Links (match index) */
+      .card-link-mobile {
+        display: block !important;
+        text-decoration: none !important;
+        color: inherit !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .card-link-mobile .card { pointer-events: none; }
+      .card-link-mobile .card iframe { pointer-events: none; }
+      /* Global mobile styles */
+      body {
+        width: 100%;
+        overflow-x: hidden;
+      }
+      
+      .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 1rem;
+      }
+      
+      /* Mobile Navigation */
+      header { 
+        top: .625rem !important;
+        width: 95% !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        position: fixed !important;
+        z-index: 10 !important;
+      }
+      .navbar { 
+        padding: .625rem .75rem !important;
+        width: 100% !important;
+        min-height: 52px !important;
+      }
+      
+      .brand {
+        font-size: 1rem !important;
+      }
+      
+      .brand img {
+        width: 28px !important;
+        height: 28px !important;
+      }
+      
+      /* Hide desktop menu on mobile */
+      .menu { display: none; }
+      
+      /* Mobile Menu Toggle Button */
+    .mobile-menu-toggle {
+        display: flex;
+        flex-direction: column;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+        gap: 4px;
+    }
+      
+      .hamburger-line {
+      width: 25px;
+      height: 3px;
+      background: #222;
+      border-radius: 2px;
+        transition: all 0.3s ease;
+      }
+      
+      .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+      
+      .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+      
+      .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+      
+      /* Hide desktop menu on mobile */
+      .menu { display: none; }
+      
+      /* Show hamburger menu on mobile */
+      .mobile-menu-toggle { display: flex; }
+      
+      /* HERO MOBILE OPTIMIZATION */
+      .hero {
+        min-height: 100vh;
+        background-position: center center;
+        width: 100%;
+      }
+      
+      .hero-content {
+        width: 70%;
+        max-width: 300px;
+        margin-left: 1% !important;
+        text-align: left;
+        padding-top: 8rem;
+      }
+      
+      .hero h1 {
+        position: static !important;
+        transform: none !important;
+        padding-top: 0 !important;
+        font-size: clamp(22px, 4.5vw, 28px) !important;
+        text-align: left !important;
+        width: 100%;
+        margin-bottom: 1rem !important;
+        line-height: 1.2 !important;
+        padding: 1rem !important;
+      }
+      
+      /* SUPPORT CARDS MOBILE */
+      .overlap { 
+        margin-top: -35vh !important; 
+      }
+      
+      .support-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 1rem !important;
+        margin: 0 auto !important;
+      }
+      
+      .support-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        border-radius: 1rem !important;
+      }
+      
+      .support-card-content { 
+        padding: 1.5rem; 
+      }
+      /* Remove padding when cards-3 is inside for full-width cards */
+      .support-card-content:has(.cards-3) {
+        padding: 1.5rem 1rem !important;
+      }
+      /* Text sections inside support-card-content with cards-3 */
+      .support-card-content:has(.cards-3) h2,
+      .support-card-content:has(.cards-3) p {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+      .support-card h2 { 
+        font-size: 1.5rem !important; 
+        text-align: center;
+        padding-left: 0;
+        margin-bottom: 1rem;
+      }
+      .support-card .muted {
+        text-align: center;
+        padding-left: 0;
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem !important;
+      }
+      
+      /* FUNDRAISING WIDGETS MOBILE */
+      .fundraising-widgets {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        margin-top: 1rem;
+        padding: 0 !important;
+      }
+      .fundraising-widget {
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .fundraising-widget iframe {
+        height: auto !important;
+        min-height: 350px !important;
+      }
+      
+      .cards-3 {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        transform: none !important;
+        justify-content: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      
+      .card {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      
+      /* Pomagam cards mobile - fill width and stack vertically */
+      .card.pomagam {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        height: auto !important;
+        min-height: 500px !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        border-radius: 1rem !important;
+      }
+      
+      
+      /* WIDGETS CONTAINER MOBILE */
+      .widgets-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+      .facebook-group-widget {
+        width: 100%;
+        max-width: 350px;
+      }
+      
+      /* PAYMENT METHODS MOBILE */
+      .payment-methods {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0 !important;
+        width: 100% !important;
+      }
+      .payment-method {
+        min-width: 100%;
+        width: 100% !important;
+        font-size: 0.9rem !important;
+      }
+      /* Mobile Footer Styling */
+      footer {
+        padding: 2rem 0 !important;
+      }
+      
+      .footer-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        padding: 0 1rem !important;
+        text-align: center !important;
+        align-items: center !important;
+        width: 100% !important;
+      }
+      
+      .footer-main {
+        order: 1 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+      }
+      
+      .footer-brand {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: clamp(1rem, 3vw, 1.5rem) !important;
+        max-width: 100% !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
+        width: 100% !important;
+        display: flex !important;
+        padding: 0 0.5rem !important;
+      }
+      
+      .footer-brand img {
+        width: clamp(5rem, 18vw, 9rem) !important;
+        height: clamp(5rem, 18vw, 9rem) !important;
+        flex-shrink: 0 !important;
+        object-fit: contain !important;
+      }
+      
+      .footer-content {
+        flex: 1 !important;
+        text-align: left !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
+        gap: 0.25rem !important;
+      }
+      
+      .footer-title {
+        font-size: clamp(0.9rem, 3.5vw, 1.25rem) !important;
+        margin-bottom: 0.25rem !important;
+        line-height: 1.3 !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+        text-align: left !important;
+        width: 100% !important;
+      }
+      
+      .footer-email {
+        justify-content: flex-start !important;
+        margin-bottom: 0 !important;
+        margin-top: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        width: 100% !important;
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+        font-size: clamp(0.75rem, 3vw, 0.9rem) !important;
+        line-height: 1;
+      }
+      
+      .footer-email img {
+        width: clamp(14px, 3.5vw, 20px) !important;
+        height: clamp(14px, 3.5vw, 20px) !important;
+        flex-shrink: 0 !important;
+        margin: 0 !important;
+        display: inline-block !important;
+        vertical-align: middle !important;
+      }
+      
+      .footer-email a {
+        font-size: inherit !important;
+        word-break: break-word !important;
+        max-width: 100% !important;
+        overflow-wrap: break-word !important;
+        text-align: left !important;
+        line-height: 1.3 !important;
+        display: inline-block !important;
+      }
+      
+      .footer-links {
+        order: 2 !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        align-items: center !important;
+        margin-bottom: 1rem !important;
+        justify-content: center !important;
+        width: 100% !important;
+        display: flex !important;
+      }
+      
+      .links-column {
+        text-align: center !important;
+        width: 100% !important;
+      }
+      
+      .links-column h4 {
+        text-align: center !important;
+        margin-bottom: 0.75rem !important;
+        font-size: 1rem !important;
+      }
+      
+      .links-column .links {
+        align-items: center !important;
+        gap: 0.5rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      
+      .links a {
+        text-align: center !important;
+        font-size: 0.9rem !important;
+      }
+      
+      .footer-social {
+        order: 3 !important;
+        align-items: center !important;
+        gap: 2rem !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      
+      .socials {
+        gap: 1.5rem !important;
+        display: flex !important;
+        justify-content: center !important;
+      }
+      
+      .socials a {
+        width: 56px !important;
+        height: 56px !important;
+      }
+      
+      .footer-social .footer-copyright {
+        text-align: center !important;
+        font-size: 0.75rem !important;
+        line-height: 1.3 !important;
+        width: 100% !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="brand">
+        <a href="index.html" style="display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit;">
+          <img src="images/logo.svg" alt="Logo">
+          <span>Z Piekła Do Domu</span>
+        </a>
+      </div>
+      <!-- Hamburger Menu Button -->
+      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      
+      <nav class="menu">
+        <a href="index.html">Strona główna</a>
+        <a href="adopcje.html">Adopcje</a>
+        <div class="dropdown">
+          <a href="#" class="dropdown-toggle">Teksty</a>
+          <div class="dropdown-menu">
+            <a href="ustawa-nr-5911.html" class="ustawa-link">
+              Ustawa nr 5911
+              <img src="images/exclamation-mark.svg" alt="!" width="18" height="18">
+            </a>
+            <a href="articles.html">Artykuły</a>
+            <a href="inicjatywy.html">Inicjatywy</a>
+          </div>
+        </div>
+        <a href="onas.html">O nas</a>
+        <a href="wsparcie.html" class="cta">Wsparcie</a>
+    </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close menu">×</button>
+    <a href="index.html" onclick="closeMobileMenu()">Strona główna</a>
+    <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
+    <a href="#" onclick="closeMobileMenu()">Teksty</a>
+    <div class="mobile-teksty-dropdown">
+      <a href="ustawa-nr-5911.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Ustawa nr 5911</a>
+      <a href="articles.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Artykuły</a>
+      <a href="inicjatywy.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Inicjatywy</a>
+    </div>
+    <a href="onas.html" onclick="closeMobileMenu()">O nas</a>
+    <a href="wsparcie.html" class="cta" onclick="closeMobileMenu()">Wsparcie</a>
+  </div>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Wesprzyj naszą misję</h1>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- SUPPORT SECTION -->
+    <section class="section overlap" id="donate">
+      <div class="support-container">
+        <article class="support-card">
+          <div class="support-card-content">
+            <h2>Jak możesz pomóc?</h2>
+            <p class="muted">Każda wpłata – mała czy duża – realnie ratuje życie zwierząt. Dołącz do osób, które już wspierają nasze działania i pomagają nam organizować transporty, leczenie oraz opiekę.</p>
+            <div class="cards-3">
+              <a id="widget-link-1" href="https://pomagam.pl/zpiekladodomu" target="_blank" class="card-link-mobile widget-fade">
+               <article class="card pomagam">
+                   <iframe id="widget-iframe-1" frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/zpiekladodomu/widget/large"></iframe>
+                </article>
+              </a>
+              <a id="widget-link-2" href="https://pomagam.pl/aph8gm" target="_blank" class="card-link-mobile widget-fade">
+                <article class="card pomagam">
+                  <iframe id="widget-iframe-2" frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/aph8gm/widget/large"></iframe>
+                </article>
+              </a>
+              <a id="widget-link-3" href="https://pomagam.pl/hk4tmk" target="_blank" class="card-link-mobile widget-fade">
+                <article class="card pomagam">
+                  <iframe id="widget-iframe-3" frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/hk4tmk/widget/large"></iframe>
+                </article>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="support-card">
+          <div class="support-card-content">
+            <h2>Inne formy wsparcia</h2>
+            <p class="muted">Wsparcie to nie tylko zbiórki. Możesz pomóc na wiele innych sposobów:</p>
+            
+            <!-- Widgets Container -->
+            <div class="widgets-container">
+              <!-- Facebook Group Widget (Slot 1) -->
+              <div id="support-slot-1" class="support-fade">
+                <div class="facebook-group-widget">
+                <img src="images/facebook-cover.jpg" 
+                     alt="Facebook Group Cover" 
+                     class="group-cover">
+                <div class="group-content">
+                  <div class="group-header">
+                    <img src="images/logo.svg" alt="Logo" class="group-icon">
+                    <div class="group-text-box">
+                      <p class="group-description">Dołącz do grupy</p>
+                      <h4 class="group-title">Adopcje - Z Piekła do Domu</h4>
+                    </div>
+                  </div>
+                  <a href="https://www.facebook.com/groups/1483167953136280" 
+                     target="_blank" 
+                     class="group-button">
+                     <img src="images/facebook-icon.svg" alt="Facebook" class="button-icon">
+                     Dołącz do grupy
+                  </a>
+                </div>
+                </div>
+              </div>
+
+              <!-- Dog Thinking Widget (Slot 2) -->
+              <div id="support-slot-2" class="support-fade">
+                <div class="facebook-group-widget">
+                <h4 class="dog-widget-title">Zostań opiekunem stałym lub tymczasowym</h4>
+                <img src="images/dog-thinking.svg" alt="Dog Thinking" class="dog-thinking-image">
+                <div class="group-content">
+                  <a href="ankieta-adopcyjna.html" 
+                     class="group-button heart-button">
+                     <img src="images/heart.svg" alt="Heart" class="button-icon">
+                     Ankieta adopcyjna
+                  </a>
+                </div>
+                </div>
+              </div>
+
+              <!-- Partner Widget (Slot 3) -->
+              <div id="support-slot-3" class="support-fade">
+                <div class="facebook-group-widget">
+                <h4 class="dog-widget-title">Zostań oficjalnym partnerem naszych działań</h4>
+                <img src="images/hand-paw.svg" alt="Hand Paw" class="dog-thinking-image">
+                <div class="group-content">
+                  <a href="https://www.facebook.com/groups/1483167953136280" 
+                     target="_blank" 
+                     class="group-button heart-button">
+                     <img src="images/heart.svg" alt="Heart" class="button-icon">
+                     Współpraca
+                  </a>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <img src="images/logo.svg" alt="Logo" width="120" height="120">
+          <div class="footer-content">
+            <h2 class="footer-title">Z Piekła do Domu - ratujemy psy i koty z Turcji</h2>
+            <div class="footer-email">
+              <img src="images/email-icon.svg" alt="Email">
+              <a href="mailto:zpiekladodomu@gmail.com">zpiekladodomu@gmail.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="links-column">
+          <h4>Linki</h4>
+          <div class="links">
+            <a href="https://www.facebook.com/profile.php?id=61577219922888" data-text="Fanpage">Fanpage</a>
+            <a href="inicjatywy.html" data-text="Nasze inicjatywy">Nasze inicjatywy</a>
+            <a href="https://www.facebook.com/groups/1483167953136280" data-text="Dołącz do grupy">Dołącz do grupy</a>
+            <a href="#" data-text="Współpraca">Współpraca</a>
+          </div>
+        </div>
+        <div class="links-column">
+          <h4>Zobacz też</h4>
+          <div class="links">
+            <a href="#" data-text="Wioska Burçak">Wioska Burçak</a>
+            <a href="#" data-text="Pani Adalet">Pani Adalet</a>
+            <a href="articles.html" data-text="Artykuły">Artykuły</a>
+            <a href="https://patronite.pl/zpiekladodomu" target="_blank" rel="noopener noreferrer" data-text="Zostań sponsorem">Zostań sponsorem</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-social">
+        <div class="socials">
+          <a href="https://www.instagram.com/z_piekla_do_domu_/" aria-label="Instagram" target="_blank"><img src="images/instagram.svg" alt="Instagram" width="48" height="48"></a>
+          <a href="https://www.facebook.com/profile.php?id=61577219922888" aria-label="Facebook" target="_blank"><img src="images/facebook.svg" alt="Facebook" width="48" height="48"></a>
+        </div>
+        <div class="footer-copyright">
+          <div>Z Piekła do domu 2025 ©</div>
+          <div>Wszelkie prawa zastrzeżone</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Menu JavaScript -->
+  <script>
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const hamburgerLines = document.querySelectorAll('.hamburger-line');
+      
+      mobileMenu.classList.toggle('active');
+      
+      // Animate hamburger lines
+      hamburgerLines.forEach((line, index) => {
+        if (mobileMenu.classList.contains('active')) {
+          if (index === 0) line.style.transform = 'rotate(45deg) translate(5px, 5px)';
+          if (index === 1) line.style.opacity = '0';
+          if (index === 2) line.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+        } else {
+          line.style.transform = '';
+          line.style.opacity = '';
+        }
+      });
+      
+      // Prevent body scroll when menu is open
+      if (mobileMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    function closeMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const hamburgerLines = document.querySelectorAll('.hamburger-line');
+      
+      mobileMenu.classList.remove('active');
+      
+      // Reset hamburger lines
+      hamburgerLines.forEach(line => {
+        line.style.transform = '';
+        line.style.opacity = '';
+      });
+      
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      
+      if (mobileMenu.classList.contains('active') && 
+          !mobileMenu.contains(event.target) && 
+          !toggle.contains(event.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    // Close mobile menu on escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeMobileMenu();
+      }
+    });
+
+    // Close mobile menu on window resize
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 900) {
+        closeMobileMenu();
+      }
+    });
+  </script>
+
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+
+  <!-- Widgets Carousel (rotating Pomagam widgets) -->
+  <script>
+    (function() {
+      const widgetSets = [
+        [
+          { href: 'https://pomagam.pl/zpiekladodomu', src: 'https://pomagam.pl/zpiekladodomu/widget/large' },
+          { href: 'https://pomagam.pl/aph8gm', src: 'https://pomagam.pl/aph8gm/widget/large' },
+          { href: 'https://pomagam.pl/hk4tmk', src: 'https://pomagam.pl/hk4tmk/widget/large' }
+        ],
+        [
+          { href: 'https://pomagam.pl/km6bbg', src: 'https://pomagam.pl/km6bbg/widget/large' },
+          { href: 'https://pomagam.pl/zpiekladodomu', src: 'https://pomagam.pl/zpiekladodomu/widget/large' },
+          { href: 'https://pomagam.pl/aph8gm', src: 'https://pomagam.pl/aph8gm/widget/large' }
+        ],
+        [
+          { href: 'https://pomagam.pl/f9effw', src: 'https://pomagam.pl/f9effw/widget/large' },
+          { href: 'https://pomagam.pl/hk4tmk', src: 'https://pomagam.pl/hk4tmk/widget/large' },
+          { href: 'https://pomagam.pl/km6bbg', src: 'https://pomagam.pl/km6bbg/widget/large' }
+        ]
+      ];
+
+      if (!widgetSets.length) return;
+
+      let current = 0;
+      const links = [
+        document.getElementById('widget-link-1'),
+        document.getElementById('widget-link-2'),
+        document.getElementById('widget-link-3')
+      ];
+      const iframes = [
+        document.getElementById('widget-iframe-1'),
+        document.getElementById('widget-iframe-2'),
+        document.getElementById('widget-iframe-3')
+      ];
+
+      function applySet(index) {
+        const set = widgetSets[index % widgetSets.length];
+        for (let i = 0; i < 3; i++) {
+          const w = set[i];
+          if (!w) continue;
+          links[i].href = w.href;
+          // Fade out → swap → fade in
+          links[i].classList.add('is-fading');
+          // Small timeout to allow CSS transition to start
+          setTimeout(() => {
+            iframes[i].src = w.src;
+            links[i].classList.remove('is-fading');
+          }, 200);
+        }
+      }
+
+      // Auto-rotate every 6 seconds
+      setInterval(() => {
+        current = (current + 1) % widgetSets.length;
+        applySet(current);
+      }, 6000);
+
+      // Initial ensure current set is applied (in case HTML changed)
+      applySet(0);
+    })();
+  </script>
+
+  <!-- Support Widgets Carousel (rotating support forms) -->
+  <script>
+    (function() {
+      const slots = [
+        document.getElementById('support-slot-1'),
+        document.getElementById('support-slot-2'),
+        document.getElementById('support-slot-3')
+      ];
+      if (slots.some(s => !s)) return;
+
+      // Capture initial HTML for each slot as the first set
+      const setA = slots.map(s => s.innerHTML);
+      // Example of another set (can be edited later): reuse setA for now
+      const supportSets = [ setA ];
+
+      // If you add more support widgets later, push another array of 3 HTML strings into supportSets
+      // supportSets.push([html1, html2, html3]);
+
+      let current = 0;
+
+      function applySupportSet(index) {
+        const set = supportSets[index % supportSets.length];
+        for (let i = 0; i < 3; i++) {
+          slots[i].classList.add('is-fading');
+          setTimeout(() => {
+            slots[i].innerHTML = set[i] || '';
+            slots[i].classList.remove('is-fading');
+          }, 200);
+        }
+      }
+
+      // Rotate only if more than one set is defined
+      if (supportSets.length > 1) {
+        setInterval(() => {
+          current = (current + 1) % supportSets.length;
+          applySupportSet(current);
+        }, 6000);
+      }
+    })();
+  </script>
+</body>
+</html>
+
+
+

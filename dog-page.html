@@ -4,6 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Psy do adopcji - Z Piekła do Domu</title>
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zpiekladodomu.pl/dog-page.html" id="og-url">
+  <meta property="og:title" content="Psy do adopcji - Z Piekła do Domu" id="og-title">
+  <meta property="og:description" content="Poznaj naszych podopiecznych i pomóż im znaleźć kochający dom." id="og-description">
+  <meta property="og:image" content="https://zpiekladodomu.pl/images/adopcje-main.jpg" id="og-image">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="pl_PL">
+  <meta property="og:site_name" content="Z Piekła do Domu">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://zpiekladodomu.pl/dog-page.html" id="twitter-url">
+  <meta name="twitter:title" content="Psy do adopcji - Z Piekła do Domu" id="twitter-title">
+  <meta name="twitter:description" content="Poznaj naszych podopiecznych i pomóż im znaleźć kochający dom." id="twitter-description">
+  <meta name="twitter:image" content="https://zpiekladodomu.pl/images/adopcje-main.jpg" id="twitter-image">
+  
   <link rel="icon" type="image/svg+xml" href="images/logo.svg">
   <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -1265,7 +1284,7 @@
         <div class="dropdown">
           <a href="#" class="dropdown-toggle">Teksty</a>
           <div class="dropdown-menu">
-            <a href="#" class="ustawa-link">
+            <a href="ustawa-nr-5911.html" class="ustawa-link">
               Ustawa nr 5911
               <img src="images/exclamation-mark.svg" alt="!" width="18" height="18">
             </a>
@@ -1285,7 +1304,7 @@
       <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
       <a href="#" onclick="closeMobileMenu()">Teksty</a>
       <div class="mobile-teksty-dropdown">
-        <a href="#" onclick="closeMobileMenu()" class="mobile-dropdown-item">Ustawa nr 5911</a>
+        <a href="ustawa-nr-5911.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Ustawa nr 5911</a>
         <a href="articles.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Artykuły</a>
         <a href="inicjatywy.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Inicjatywy</a>
       </div>
@@ -1804,9 +1823,42 @@
       }
     }
 
+    // Function to update Open Graph meta tags for social media sharing
+    function updateSocialMetaTags(data) {
+      const dogUrl = `https://zpiekladodomu.pl/dog-page.html?dog=${encodeURIComponent(data.name)}`;
+      const dogImage = data.image ? `https://zpiekladodomu.pl/${data.image}` : 'https://zpiekladodomu.pl/images/adopcje-main.jpg';
+      const dogTitle = `${data.name} - Pies do adopcji`;
+      const dogDescription = data.description || `Poznaj ${data.name} i pomóż mu/jej znaleźć kochający dom.`;
+      
+      // Update page title
+      document.title = dogTitle;
+      
+      // Update hero h1 and description
+      const heroH1 = document.querySelector('.hero-content h1');
+      if (heroH1) heroH1.textContent = data.name;
+      
+      const heroDes = document.querySelector('.big-card-content .muted');
+      if (heroDes) heroDes.textContent = data.description || '';
+      
+      // Update Open Graph tags
+      document.getElementById('og-url').setAttribute('content', dogUrl);
+      document.getElementById('og-title').setAttribute('content', dogTitle);
+      document.getElementById('og-description').setAttribute('content', dogDescription);
+      document.getElementById('og-image').setAttribute('content', dogImage);
+      
+      // Update Twitter Card tags
+      document.getElementById('twitter-url').setAttribute('content', dogUrl);
+      document.getElementById('twitter-title').setAttribute('content', dogTitle);
+      document.getElementById('twitter-description').setAttribute('content', dogDescription);
+      document.getElementById('twitter-image').setAttribute('content', dogImage);
+    }
+    
     // Function to display dog information
     function displayDogInfo(data) {
       const dogInfo = document.getElementById('dog-info');
+      
+      // Update social media meta tags
+      updateSocialMetaTags(data);
       
       let specialFeaturesHtml = '';
       if (data.special_features && Array.isArray(data.special_features)) {
