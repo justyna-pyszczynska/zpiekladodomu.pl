@@ -3,6 +3,11 @@ import { NextResponse } from 'next/server';
 export async function middleware(request) {
   const url = new URL(request.url);
   
+  // Skip middleware for internal requests to avoid infinite loops
+  if (request.headers.get('x-middleware-prefetch')) {
+    return NextResponse.next();
+  }
+  
   // Handle dog-page.html requests
   if (url.pathname === '/dog-page.html') {
     const dogName = url.searchParams.get('dog');
@@ -25,10 +30,11 @@ export async function middleware(request) {
           const dogDisplayName = nameMatch ? nameMatch[1] : dogName;
           const dogDesc = descMatch ? descMatch[1] : `Poznaj ${dogDisplayName} i pomóż mu/jej znaleźć kochający dom.`;
           
-          // Fetch the original HTML
-          const htmlResponse = await fetch(`${url.origin}/dog-page.html`, {
+          // Create a new URL without query params to fetch the base HTML
+          const baseUrl = new URL(url.origin + '/dog-page.html');
+          const htmlResponse = await fetch(baseUrl, {
             headers: {
-              'User-Agent': 'Vercel-Edge-Middleware'
+              'x-middleware-prefetch': '1'
             }
           });
           let html = await htmlResponse.text();
