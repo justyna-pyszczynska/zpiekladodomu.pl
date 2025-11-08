@@ -6,8 +6,8 @@ export async function middleware(request) {
     return;
   }
   
-  // Handle dog-page.html requests
-  if (url.pathname === '/dog-page.html') {
+  // Handle dog-page.html requests (with or without .html extension)
+  if (url.pathname === '/dog-page.html' || url.pathname === '/dog-page') {
     const dogName = url.searchParams.get('dog');
     
     if (dogName) {
@@ -92,8 +92,8 @@ export async function middleware(request) {
     }
   }
   
-  // Handle inicjatywa.html requests (for initiatives)
-  if (url.pathname === '/inicjatywa.html') {
+  // Handle inicjatywa.html requests (for initiatives) (with or without .html extension)
+  if (url.pathname === '/inicjatywa.html' || url.pathname === '/inicjatywa') {
     const initiativeSlug = url.searchParams.get('initiative');
     
     if (initiativeSlug) {
@@ -164,6 +164,6 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/dog-page.html', '/inicjatywa.html'],
+  matcher: ['/dog-page.html', '/dog-page', '/inicjatywa.html', '/inicjatywa'],
 };
 
