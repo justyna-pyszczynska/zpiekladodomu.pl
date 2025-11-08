@@ -2,6 +2,48 @@
   "buildCommand": null,
   "outputDirectory": ".",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/dog-page.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "dog"
+        }
+      ],
+      "destination": "/api/dog-og"
+    },
+    {
+      "source": "/dog-page",
+      "has": [
+        {
+          "type": "query",
+          "key": "dog"
+        }
+      ],
+      "destination": "/api/dog-og"
+    },
+    {
+      "source": "/inicjatywa.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "initiative"
+        }
+      ],
+      "destination": "/api/initiative-og"
+    },
+    {
+      "source": "/inicjatywa",
+      "has": [
+        {
+          "type": "query",
+          "key": "initiative"
+        }
+      ],
+      "destination": "/api/initiative-og"
+    }
+  ]
 }
 
