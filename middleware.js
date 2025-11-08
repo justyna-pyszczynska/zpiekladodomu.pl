@@ -1,11 +1,9 @@
-import { NextResponse } from 'next/server';
-
 export async function middleware(request) {
   const url = new URL(request.url);
   
   // Skip middleware for internal requests to avoid infinite loops
   if (request.headers.get('x-middleware-prefetch')) {
-    return NextResponse.next();
+    return;
   }
   
   // Handle dog-page.html requests
@@ -82,7 +80,7 @@ export async function middleware(request) {
           );
           
           // Return modified HTML
-          return new NextResponse(html, {
+          return new Response(html, {
             headers: {
               'Content-Type': 'text/html; charset=utf-8',
             },
@@ -152,7 +150,7 @@ export async function middleware(request) {
             `<meta name="twitter:description" content="${initDesc}" id="twitter-description">`
           );
           
-          return new NextResponse(html, {
+          return new Response(html, {
             headers: {
               'Content-Type': 'text/html; charset=utf-8',
             },
@@ -163,8 +161,6 @@ export async function middleware(request) {
       }
     }
   }
-  
-  return NextResponse.next();
 }
 
 export const config = {
