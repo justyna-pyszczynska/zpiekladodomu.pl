@@ -18,9 +18,32 @@ function parseFrontMatter(text) {
   
   let currentKey = null;
   let inList = false;
+  let inMultilineString = false;
+  let multilineValue = [];
   
-  for (const line of lines) {
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
     const trimmed = line.trim();
+    
+    // If we're in a multiline string (pipe syntax), read indented lines
+    if (inMultilineString) {
+      if (line.startsWith('  ') || line.startsWith('\t')) {
+        // Indented line - part of multiline string
+        multilineValue.push(trimmed);
+        continue;
+      } else if (trimmed === '') {
+        // Empty line in multiline - preserve as paragraph break
+        multilineValue.push('');
+        continue;
+      } else {
+        // Non-indented line - end of multiline string
+        data[currentKey] = multilineValue.join('\n').trim();
+        multilineValue = [];
+        inMultilineString = false;
+        // Don't skip this line, process it below
+      }
+    }
+    
     if (trimmed === '') continue;
     
     if (trimmed.startsWith('-') && currentKey) {
@@ -45,13 +68,21 @@ function parseFrontMatter(text) {
         currentKey = line.substring(0, colonIndex).trim();
         let value = line.substring(colonIndex + 1).trim();
         
+        // Check if value is pipe (multiline string)
+        if (value === '|') {
+          inMultilineString = true;
+          multilineValue = [];
+          inList = false;
+          continue;
+        }
+        
         // Remove quotes
         if (value.startsWith('"') && value.endsWith('"')) {
           value = value.slice(1, -1);
         }
         
         // If the value is empty and this is a known list field, initialize as array
-        if (value === '' && (currentKey === 'special_features' || currentKey === 'images')) {
+        if (value === '' && (currentKey === 'special_features' || currentKey === 'images' || currentKey === 'video_urls')) {
           data[currentKey] = [];
         } else {
           data[currentKey] = value;
@@ -59,6 +90,11 @@ function parseFrontMatter(text) {
         inList = false;
       }
     }
+  }
+  
+  // Save any remaining multiline string
+  if (inMultilineString && currentKey && multilineValue.length > 0) {
+    data[currentKey] = multilineValue.join('\n').trim();
   }
   
   return data;

@@ -502,19 +502,34 @@
       padding-right: 0;
     }
     
-    #dog-info,
+    #dog-info {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+      width: 100%;
+      margin-top: 2rem;
+    }
+    
     /* GALLERY AND VIDEO SECTION CONTAINER */
     #gallery-video-container {
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 1.5rem;
       width: 100%;
-
       margin-top: 2rem;
+    }
+    
+    /* Multi-video layout - gallery narrower, videos wider */
+    #gallery-video-container.has-multiple-videos {
+      grid-template-columns: 0.8fr 2fr;
     }
     
     @media (max-width: 1200px) {
       #gallery-video-container {
+        grid-template-columns: 1fr;
+      }
+      
+      #gallery-video-container.has-multiple-videos {
         grid-template-columns: 1fr;
       }
     }
@@ -528,6 +543,12 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
+    }
+    
+    /* Gallery grid for multi-video pages - single column */
+    #gallery-video-container.has-multiple-videos .gallery-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
     }
     
     /* VIDEO SECTION */
@@ -545,18 +566,54 @@
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
       padding: 0;
       overflow: hidden;
-      height: 100%;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 500px;
+    }
+    
+    /* Multi-video container styling */
+    .video-embed-container.multi-video {
+      background: transparent;
+      box-shadow: none;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      overflow: visible;
+      align-items: start;
+    }
+    
+    .video-embed-container.multi-video > div {
+      width: 100%;
     }
     
     .video-embed-container iframe {
-      width: 100% !important;
-      height: 100% !important;
-      min-height: 500px !important;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 9 / 16;
+      min-height: 600px;
+      max-height: 800px;
+      border-radius: 1.5rem;
+      border: none;
+    }
+    
+    /* Individual video wrapper in multi-video layout */
+    .video-embed-container.multi-video > div {
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .video-embed-container.multi-video > div iframe {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 9 / 16;
+      min-height: 600px;
+      max-height: 800px;
       border-radius: 1.5rem;
       border: none;
     }
@@ -580,7 +637,8 @@
       }
       
       .video-embed-container iframe {
-        height: 500px !important;
+        min-height: 500px;
+        max-height: 600px;
       }
     }
 
@@ -739,9 +797,15 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
-      margin-bottom: 2rem;
+      margin-bottom: 0;
       text-align: left;
       width: 100%;
+    }
+    
+    #dog-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
     .dog-info-item {
       background: #f9fafb;
@@ -792,6 +856,8 @@
       border-left: 4px solid #fde68a;
       width: 100%;
       max-width: 100%;
+      margin-top: 2rem;
+      grid-column: 1 / -1;
     }
     .story-section .dog-info-label {
       margin-bottom: 1rem;
@@ -799,6 +865,7 @@
     .story-section .dog-info-value {
       font-size: 1.125rem;
       line-height: 1.7;
+      white-space: pre-wrap;
     }
     .basic-info-content {
       display: flex;
@@ -1059,6 +1126,34 @@
       
       #gallery-section .section-title {
         margin-top: 0 !important;
+      }
+      
+      /* Mobile Multi-Video Support */
+      #video-section {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      
+      .video-embed-container.multi-video {
+        flex-direction: column !important;
+        gap: 1.5rem !important;
+      }
+      
+      .video-embed-container.multi-video > div {
+        max-width: 100% !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        flex: none !important;
+      }
+      
+      .video-embed-container.multi-video > div iframe {
+        min-height: 500px !important;
+        max-height: 600px !important;
+      }
+      
+      .video-embed-container iframe {
+        min-height: 500px !important;
+        max-height: 600px !important;
       }
       
       .dog-info-grid {
@@ -1510,72 +1605,90 @@
       let currentKey = null;
       let currentValue = [];
       let inArray = false;
+      let inMultilineString = false;
       
-      for (let line of lines) {
-        line = line.trim();
-        if (!line) continue;
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const trimmedLine = line.trim();
         
-        if (line.includes(':') && !line.startsWith('-')) {
+        // If we're in a multiline string, check if line is indented
+        if (inMultilineString) {
+          if (line.startsWith('  ') || line.startsWith('\t')) {
+            // Indented line - part of pipe multiline string
+            if (trimmedLine === '') {
+              currentValue.push(''); // Preserve empty lines as paragraph breaks
+            } else {
+              currentValue.push(trimmedLine);
+            }
+            continue; // Continue to next line
+          } else if (trimmedLine === '') {
+            // Empty line at beginning level - might be paragraph break
+            currentValue.push('');
+            continue;
+          } else {
+            // Non-indented line found - end of multiline string
+            inMultilineString = false;
+            // Don't skip this line, process it as a new key below
+          }
+        }
+        
+        // Check if this is a new key (has colon and not in array)
+        if (trimmedLine.includes(':') && !trimmedLine.startsWith('-')) {
           // Save previous key-value pair
           if (currentKey) {
             if (inArray) {
               data[currentKey] = currentValue;
             } else {
-              data[currentKey] = currentValue.join(' ').replace(/^["']|["']$/g, '');
+              // Join with newlines to preserve paragraphs
+              data[currentKey] = currentValue.join('\n').replace(/^["']|["']$/g, '').trim();
             }
           }
           
           // Start new key-value pair
-          const colonIndex = line.indexOf(':');
-          currentKey = line.substring(0, colonIndex).trim();
-          const value = line.substring(colonIndex + 1).trim();
+          const colonIndex = trimmedLine.indexOf(':');
+          currentKey = trimmedLine.substring(0, colonIndex).trim();
+          let value = trimmedLine.substring(colonIndex + 1).trim();
           
-          // Save previous key-value pair before starting new one
-          if (currentKey && currentKey !== line.substring(0, colonIndex).trim()) {
-            if (inArray) {
-              data[currentKey] = currentValue;
-            } else {
-              data[currentKey] = currentValue.join(' ').replace(/^["']|["']$/g, '');
-            }
-          }
-          
-          // Reset currentKey to the new one
-          currentKey = line.substring(0, colonIndex).trim();
-          
-          if (value === '') {
+          // Check if value is pipe (multiline string indicator)
+          if (value === '|') {
+            // YAML multiline string with pipe
+            inMultilineString = true;
+            currentValue = [];
+            inArray = false;
+          } else if (value.startsWith('"') && !value.endsWith('"')) {
+            // Start of multiline quoted string
+            inMultilineString = true;
+            currentValue = [value.substring(1)]; // Remove opening quote
+            inArray = false;
+          } else if (value === '') {
             // Empty value - might be start of array
             currentValue = [];
             inArray = true;
+            inMultilineString = false;
           } else {
             // Simple value
             currentValue = [value.replace(/^["']|["']$/g, '')];
             inArray = false;
+            inMultilineString = false;
           }
-        } else if (line.startsWith('-')) {
+        } else if (trimmedLine.startsWith('-') && currentKey && inArray) {
           // Array item
-          const item = line.substring(1).trim().replace(/^["']|["']$/g, '');
-          if (inArray && currentKey) {
-            // We're inside an array, add to current value
-            if (!Array.isArray(currentValue)) {
-              currentValue = [currentValue];
-            }
-            currentValue.push(item);
-          } else if (currentKey) {
-            // Start new array with the current key
-            currentValue = [item];
-            inArray = true;
-          }
+          const item = trimmedLine.substring(1).trim().replace(/^["']|["']$/g, '');
+          currentValue.push(item);
         }
       }
       
       // Save last key-value pair
       if (currentKey) {
-        if (inArray) {
+        if (inArray && currentValue.length > 0 && !inMultilineString) {
           data[currentKey] = currentValue;
         } else {
-          data[currentKey] = currentValue.join(' ').replace(/^["']|["']$/g, '');
+          data[currentKey] = currentValue.join('\n').replace(/^["']|["']$/g, '').trim();
         }
       }
+      
+      console.log('Parsed YAML data:', data);
+      console.log('Story field:', data.story);
       
       return data;
     }
@@ -1868,7 +1981,7 @@
       const storySectionHtml = data.story && data.story.trim() ? `
         <div class="story-section">
           <div class="dog-info-label">Historia</div>
-          <div class="dog-info-value">${data.story}</div>
+          <div class="dog-info-value">${data.story.replace(/\n/g, '<br>')}</div>
         </div>
       ` : '';
       
@@ -1897,15 +2010,20 @@
               <ul class="special-features">${specialFeaturesHtml}</ul>
             </div>
           </div>
+          ${storySectionHtml}
         </div>
-        ${storySectionHtml}
       `;
       
       // Load gallery
       loadGallery(data.images || []);
       
-      // Load video if available
-      loadVideo(data.video_url);
+      // Load video(s) if available
+      // Support both single video_url and multiple video_urls
+      if (data.video_urls && Array.isArray(data.video_urls) && data.video_urls.length > 0) {
+        loadMultipleVideos(data.video_urls);
+      } else if (data.video_url) {
+        loadVideo(data.video_url);
+      }
     }
 
     // Store gallery images for lightbox
@@ -1969,8 +2087,8 @@
         if (videoUrl.includes('facebook.com')) {
           // Facebook embed - use plugin format to avoid X-Frame-Options error
           const encodedUrl = encodeURIComponent(videoUrl);
-          const pluginUrl = `https://www.facebook.com/plugins/video.php?height=600&href=${encodedUrl}&show_text=false&width=560`;
-          videoContainer.innerHTML = `<iframe src="${pluginUrl}" width="560" height="600" style="border:none;overflow:hidden;width:100%;height:100%;border-radius:1.5rem;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>`;
+          const pluginUrl = `https://www.facebook.com/plugins/video.php?height=800&href=${encodedUrl}&show_text=false&width=450`;
+          videoContainer.innerHTML = `<iframe src="${pluginUrl}" width="450" height="800" style="border:none;overflow:hidden;border-radius:1.5rem;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>`;
         } else if (videoUrl.includes('instagram.com')) {
           // Instagram embed  
           videoContainer.innerHTML = `<iframe src="${videoUrl}embed/" width="100%" height="480" style="border:none;overflow:hidden;border-radius:1rem;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
@@ -1978,6 +2096,59 @@
           // Generic embed
           videoContainer.innerHTML = `<iframe src="${videoUrl}" width="100%" height="480" style="border:none;overflow:hidden;border-radius:1rem;" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>`;
         }
+      }
+    }
+    
+    // Function to load multiple videos
+    function loadMultipleVideos(videoUrls) {
+      const videoSection = document.getElementById('video-section');
+      const videoContainer = document.getElementById('video-container');
+      const galleryVideoContainer = document.getElementById('gallery-video-container');
+      
+      // Filter out empty URLs
+      const validUrls = videoUrls.filter(url => url && url.trim() !== '');
+      
+      if (validUrls.length === 0) {
+        // Hide video section if no valid URLs
+        if (videoSection) {
+          videoSection.style.display = 'none';
+        }
+        return;
+      }
+      
+      // Show video section
+      if (videoSection) {
+        videoSection.style.display = 'flex';
+      }
+      
+      // Add class to parent container for multi-video layout
+      if (galleryVideoContainer && validUrls.length > 1) {
+        galleryVideoContainer.classList.add('has-multiple-videos');
+      }
+      
+      // Add multi-video class to container
+      if (videoContainer) {
+        videoContainer.classList.add('multi-video');
+        videoContainer.innerHTML = '';
+        
+        validUrls.forEach((videoUrl, index) => {
+          const videoWrapper = document.createElement('div');
+          
+          if (videoUrl.includes('facebook.com')) {
+            // Facebook embed
+            const encodedUrl = encodeURIComponent(videoUrl);
+            const pluginUrl = `https://www.facebook.com/plugins/video.php?height=800&href=${encodedUrl}&show_text=false&width=450`;
+            videoWrapper.innerHTML = `<iframe src="${pluginUrl}" width="450" height="800" style="border:none;overflow:hidden;border-radius:1.5rem;width:100%;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>`;
+          } else if (videoUrl.includes('instagram.com')) {
+            // Instagram embed
+            videoWrapper.innerHTML = `<iframe src="${videoUrl}embed/" width="100%" height="600" style="border:none;overflow:hidden;border-radius:1.5rem;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
+          } else {
+            // Generic embed
+            videoWrapper.innerHTML = `<iframe src="${videoUrl}" width="100%" height="600" style="border:none;overflow:hidden;border-radius:1.5rem;" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>`;
+          }
+          
+          videoContainer.appendChild(videoWrapper);
+        });
       }
     }
 

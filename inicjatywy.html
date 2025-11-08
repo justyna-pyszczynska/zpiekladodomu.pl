@@ -348,6 +348,13 @@
       margin-top: -6rem;
     }
 
+    .initiative-card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      height: 100%;
+    }
+    
     .initiative-card {
       background: #fff;
       border-radius: 1rem;
@@ -356,9 +363,11 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       display: flex;
       flex-direction: column;
+      cursor: pointer;
+      height: 100%;
     }
 
-    .initiative-card:hover {
+    .initiative-card-link:hover .initiative-card {
       transform: translateY(-8px);
       box-shadow: 0 20px 40px rgba(0,0,0,.15);
     }
@@ -400,7 +409,7 @@
       transition: transform 0.3s ease;
     }
 
-    .initiative-card:hover .initiative-img {
+    .initiative-card-link:hover .initiative-img {
       transform: scale(1.05);
     }
 
@@ -442,11 +451,16 @@
       line-height: 1.6;
       margin-bottom: 1.5rem;
       flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-height: 6.4em;
     }
 
     .initiative-link {
       color: #fca5a5;
-      text-decoration: none;
       font-weight: 600;
       display: inline-flex;
       align-items: center;
@@ -455,7 +469,7 @@
       align-self: flex-start;
     }
 
-    .initiative-link:hover {
+    .initiative-card-link:hover .initiative-link {
       color: #f87171;
       transform: translateX(4px);
     }
@@ -464,7 +478,7 @@
       transition: transform 0.3s ease;
     }
 
-    .initiative-link:hover .arrow {
+    .initiative-card-link:hover .arrow {
       transform: translateX(4px);
     }
 
@@ -701,11 +715,10 @@
       
       /* Mobile Initiative Cards */
       .initiative-card {
-        cursor: pointer !important;
         transition: transform 0.2s ease, box-shadow 0.2s ease !important;
       }
       
-      .initiative-card:active {
+      .initiative-card-link:active .initiative-card {
         transform: scale(0.98) !important;
       }
       
@@ -1149,19 +1162,21 @@
       console.log('Creating card for:', initiative.title, 'with slug:', slug);
       
       return `
-        <article class="${cardClass}">
-          <div class="initiative-image">
-            <img src="${initiative.image}" alt="${initiative.title}" class="initiative-img">
-          </div>
-          <div class="initiative-content">
-            <div class="initiative-meta">
-              <span class="initiative-date">${formatDate(initiative.date)}</span>
+        <a href="inicjatywa.html?initiative=${slug}" class="initiative-card-link">
+          <article class="${cardClass}">
+            <div class="initiative-image">
+              <img src="${initiative.image}" alt="${initiative.title}" class="initiative-img">
             </div>
-            <${titleTag} class="initiative-title">${initiative.title}</${titleTag}>
-            <p class="initiative-description">${initiative.description}</p>
-            <a href="inicjatywa.html?initiative=${slug}" class="initiative-link">Dowiedz się więcej <span class="arrow">→</span></a>
-          </div>
-        </article>
+            <div class="initiative-content">
+              <div class="initiative-meta">
+                <span class="initiative-date">${formatDate(initiative.date)}</span>
+              </div>
+              <${titleTag} class="initiative-title">${initiative.title}</${titleTag}>
+              <p class="initiative-description">${initiative.description}</p>
+              <span class="initiative-link">Dowiedz się więcej <span class="arrow">→</span></span>
+            </div>
+          </article>
+        </a>
       `;
     }
 
@@ -1314,23 +1329,6 @@
     // Load initiatives when page loads
     document.addEventListener('DOMContentLoaded', function() {
       loadInitiatives();
-      
-      // Make initiative cards clickable on mobile
-      if (window.innerWidth <= 900) {
-        setTimeout(function() {
-          document.querySelectorAll('.initiative-card').forEach(card => {
-            // Add click handler
-            card.addEventListener('click', function(e) {
-              // Find the link inside the card
-              const link = this.querySelector('.initiative-link');
-              if (link && !e.target.closest('.initiative-link')) {
-                // If user didn't click the link directly, navigate to initiative page
-                window.location.href = link.href;
-              }
-            });
-          });
-        }, 500); // Small delay to ensure cards are loaded
-      }
     });
   </script>
 
