@@ -2066,7 +2066,7 @@
         const name = dog.name || 'Pies do adopcji';
         const img = dog.image || 'images/placeholder.jpg';
         const desc = dog.description || '';
-        const link = `dogs/${dog.slug}.html`;
+        const link = `dog-page.html?dog=${dog.slug}`;
         
         // Add fade effect before update
         slot.style.opacity = '0';

@@ -1,5 +1,5 @@
 {
-  "buildCommand": "node generate-dog-pages.js",
+  "buildCommand": null,
   "outputDirectory": ".",
   "cleanUrls": true,
   "trailingSlash": false
