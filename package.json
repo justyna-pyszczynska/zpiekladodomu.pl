@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "Z Piekła do Domu - Rescue dogs and cats from Turkey",
   "scripts": {
-    "generate": "node generate-dog-pages.js",
-    "build": "node generate-dog-pages.js",
+    "build": "echo 'Static site - no build needed'",
     "dev": "vercel dev"
   }
 }
