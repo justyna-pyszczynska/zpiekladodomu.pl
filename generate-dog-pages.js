@@ -1,16 +1,29 @@
-import fs from 'fs';
-import path from 'path';
+const fs = require('fs');
+const path = require('path');
 
-export default async function handler(req, res) {
-  const { dog } = req.query;
-  
-  if (!dog) {
-    return res.redirect(302, '/dog-page.html');
-  }
-  
+console.log('🐕 Generating individual dog pages...');
+
+// Read manifest
+const manifestPath = './content/dogs/manifest.json';
+const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+const dogFiles = manifest.dogs;
+
+// Read template
+const templatePath = './dog-page.html';
+const template = fs.readFileSync(templatePath, 'utf-8');
+
+// Create dogs directory if it doesn't exist
+if (!fs.existsSync('./dogs')) {
+  fs.mkdirSync('./dogs');
+}
+
+let successCount = 0;
+let errorCount = 0;
+
+dogFiles.forEach(dogFile => {
   try {
-    // Read the dog's .md file
-    const mdPath = path.join(process.cwd(), 'content', 'dogs', `${dog}.md`);
+    const dogName = dogFile.replace('.md', '');
+    const mdPath = `./content/dogs/${dogFile}`;
     const mdContent = fs.readFileSync(mdPath, 'utf-8');
     
     // Parse front matter
@@ -19,14 +32,13 @@ export default async function handler(req, res) {
     const descMatch = mdContent.match(/description:\s*["']?([^"'\n]+)["']?/);
     
     const dogImage = imageMatch ? imageMatch[1] : 'images/adopcje-main.jpg';
-    const dogDisplayName = nameMatch ? nameMatch[1] : dog;
-    const dogDesc = descMatch ? descMatch[1] : `Poznaj ${dogDisplayName} i pomóż mu/jej znaleźć kochający dom.`;
+    const dogDisplayName = nameMatch ? nameMatch[1] : dogName;
+    const dogDesc = (descMatch ? descMatch[1] : `Poznaj ${dogDisplayName} i pomóż mu/jej znaleźć kochający dom.`).replace(/"/g, '&quot;');
     
-    // Read the base dog-page.html template
-    const templatePath = path.join(process.cwd(), 'dog-page.html');
-    let html = fs.readFileSync(templatePath, 'utf-8');
+    // Replace meta tags in template
+    let html = template;
     
-    // Replace Open Graph meta tags
+    // Replace OG tags
     html = html.replace(
       /<meta property="og:image" content="[^"]*" id="og-image">/,
       `<meta property="og:image" content="https://zpiekladodomu.pl/${dogImage}" id="og-image">`
@@ -41,10 +53,10 @@ export default async function handler(req, res) {
     );
     html = html.replace(
       /<meta property="og:url" content="[^"]*" id="og-url">/,
-      `<meta property="og:url" content="https://zpiekladodomu.pl/dog-page?dog=${encodeURIComponent(dog)}" id="og-url">`
+      `<meta property="og:url" content="https://zpiekladodomu.pl/dogs/${dogName}.html" id="og-url">`
     );
     
-    // Replace Twitter Card meta tags
+    // Replace Twitter tags
     html = html.replace(
       /<meta name="twitter:image" content="[^"]*" id="twitter-image">/,
       `<meta name="twitter:image" content="https://zpiekladodomu.pl/${dogImage}" id="twitter-image">`
@@ -59,23 +71,36 @@ export default async function handler(req, res) {
     );
     html = html.replace(
       /<meta name="twitter:url" content="[^"]*" id="twitter-url">/,
-      `<meta name="twitter:url" content="https://zpiekladodomu.pl/dog-page?dog=${encodeURIComponent(dog)}" id="twitter-url">`
+      `<meta name="twitter:url" content="https://zpiekladodomu.pl/dogs/${dogName}.html" id="twitter-url">`
     );
     
-    // Update page title
+    // Replace title
     html = html.replace(
       /<title>[^<]*<\/title>/,
       `<title>${dogDisplayName} - Pies do adopcji - Z Piekła do Domu</title>`
     );
     
-    // Return modified HTML
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.status(200).send(html);
+    // Add a query parameter to the script to load the correct dog
+    html = html.replace(
+      /const urlParams = new URLSearchParams\(window\.location\.search\);/,
+      `const urlParams = new URLSearchParams('?dog=${dogName}');`
+    );
+    
+    // Write the file
+    const outputPath = `./dogs/${dogName}.html`;
+    fs.writeFileSync(outputPath, html);
+    successCount++;
     
   } catch (error) {
-    console.error('Error:', error);
-    // Fallback to regular page
-    res.redirect(302, `/dog-page.html?dog=${dog}`);
+    console.error(`❌ Error processing ${dogFile}:`, error.message);
+    errorCount++;
   }
+});
+
+console.log(`\n✅ Successfully generated ${successCount} dog pages!`);
+if (errorCount > 0) {
+  console.log(`❌ Failed to generate ${errorCount} pages.`);
 }
+console.log(`📁 Pages created in ./dogs/ directory`);
+console.log(`\n🔗 Example URL: https://zpiekladodomu.pl/dogs/patka.html`);
 
