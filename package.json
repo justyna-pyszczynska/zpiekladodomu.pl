@@ -1,0 +1,11 @@
+{
+  "name": "zpiekladodomu",
+  "version": "1.0.0",
+  "description": "Z Piekła do Domu - Rescue dogs and cats from Turkey",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "type": "module"
+}
+
