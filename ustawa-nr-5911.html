@@ -273,6 +273,21 @@
       text-align: center;
     }
     
+    .mobile-dropdown-item.mobile-ustawa-link {
+      font-weight: 700 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+    }
+    
+    .mobile-dropdown-item.mobile-ustawa-link img {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      display: inline-block;
+    }
+    
     .mobile-dropdown-item:hover {
       background: rgba(255,255,255,0.4);
       transform: scale(1.02);
@@ -344,6 +359,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: 2;
+      filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3)) drop-shadow(0 20px 60px rgba(0,0,0,0.2));
     }
     .btn-ghost { background: rgba(255,255,255,.2); color:#fff; border:1px solid rgba(255,255,255,.35); text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
     .btn-outline { 
@@ -429,6 +445,12 @@
       max-width: 430px;
       margin-left: 0;
     }
+    .facebook-embed-lower {
+      flex: 1;
+      max-width: 267px;
+      height: 476px;
+      max-height: 476px;
+    }
     .article-meta {
       display: flex;
       align-items: center;
@@ -470,6 +492,15 @@
       color: #1f2937;
       margin: 2rem 0 0 0;
       line-height: 1.2;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .title-icon {
+      width: 2rem;
+      height: 2rem;
+      vertical-align: middle;
+      transform: translateY(-2px);
     }
     .support-card .muted {
       color: #6b7280;
@@ -519,8 +550,8 @@
       flex: 2;
       max-width: 40%;
       width: 100%;
-      height: 650px;
-      max-height: 650px;
+      height: 710px;
+      max-height: 710px;
       border-radius: 1rem;
       overflow: hidden;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -649,6 +680,32 @@
       vertical-align: middle;
       display: inline-block;
     }
+    .tweets-container {
+      display: flex;
+      gap: 2rem;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin: 2rem 0;
+      max-width: 100%;
+      padding: 0;
+      width: 100%;
+    }
+    .twitter-embed-wrapper {
+      flex: 1;
+      max-width: none;
+      min-width: 0;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .twitter-embed-wrapper .twitter-tweet {
+      max-width: 100% !important;
+      width: 100% !important;
+      margin: 0 !important;
+    }
+    .twitter-embed-wrapper iframe {
+      max-width: 100% !important;
+      width: 100% !important;
+    }
     .twitter-section {
       display: inline-block;
       margin: 0;
@@ -662,6 +719,250 @@
       margin: 0 !important;
       border-radius: 1.5rem !important;
       overflow: hidden !important;
+    }
+    .custom-tweet {
+      width: 100%;
+      background: #fff;
+      border: 1px solid rgb(207, 217, 222);
+      border-radius: 12px;
+      padding: 12px 16px 16px 16px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .tweet-platform-logo {
+      display: none;
+    }
+    .x-logo {
+      width: 24px;
+      height: 24px;
+    }
+    .tweet-x-logo {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+    .x-logo-small {
+      width: 20px;
+      height: 20px;
+    }
+    .tweet-header {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      gap: 12px;
+    }
+    .tweet-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .tweet-author {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 0;
+    }
+    .tweet-author-top {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+    .tweet-name {
+      font-weight: 700;
+      font-size: 17px;
+      color: rgb(15, 20, 25);
+      line-height: 20px;
+    }
+    .tweet-follow {
+      font-size: 14px;
+      font-weight: 400;
+      color: rgb(29, 155, 240);
+      line-height: 20px;
+      cursor: pointer;
+      padding-left: 4px;
+    }
+    .tweet-follow:hover {
+      text-decoration: underline;
+    }
+    .tweet-handle {
+      font-size: 14px;
+      font-weight: 400;
+      color: rgb(83, 100, 113);
+      line-height: 20px;
+      margin-top: 0;
+    }
+    .tweet-content {
+      color: rgb(15, 20, 25);
+      font-size: 19px;
+      line-height: 23px;
+      margin-bottom: 12px;
+      margin-top: 0;
+      font-weight: 400;
+      cursor: text;
+      position: relative;
+      overflow-wrap: break-word;
+      min-width: 0px;
+      border: 0px solid black;
+    }
+    .tweet-content p {
+      margin: 0 0 12px 0;
+      font-size: 19px;
+      line-height: 23px;
+      overflow-wrap: break-word;
+      min-width: 0px;
+    }
+    .tweet-content p:last-child {
+      margin-bottom: 0;
+    }
+    .tweet-hashtags {
+      margin-top: 4px;
+      font-size: 19px;
+      line-height: 23px;
+    }
+    .tweet-content a {
+      color: rgb(29, 155, 240);
+      text-decoration: none;
+      font-size: 19px;
+      line-height: 23px;
+    }
+    .tweet-content a:hover {
+      text-decoration: underline;
+    }
+    .tweet-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 12px;
+      margin-bottom: 12px;
+      border-radius: 16px;
+      overflow: hidden;
+      max-width: 100%;
+      border: 1px solid rgb(207, 217, 222);
+    }
+    .tweet-image {
+      width: 100%;
+      height: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      display: block;
+    }
+    .tweet-footer {
+      color: rgb(83, 100, 113);
+      font-size: 14px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      border-top: 1px solid rgb(239, 243, 244);
+      margin-top: 12px;
+    }
+    .tweet-date {
+      color: rgb(83, 100, 113);
+    }
+    .tweet-engagement {
+      display: flex;
+      gap: 20px;
+      padding: 12px 0;
+      border-top: 1px solid rgb(239, 243, 244);
+    }
+    .tweet-engagement-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: rgb(83, 100, 113);
+      font-size: 14px;
+    }
+    .tweet-heart {
+      font-size: 18px;
+    }
+    .tweet-icon {
+      font-size: 18px;
+    }
+    .tweet-count {
+      font-weight: 700;
+      color: rgb(15, 20, 25);
+    }
+    .tweet-read-more {
+      display: block;
+      text-align: center;
+      margin-top: 12px;
+      padding: 8px 16px;
+      border: 1px solid rgb(207, 217, 222);
+      border-radius: 9999px;
+      color: rgb(15, 20, 25);
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      transition: background 0.2s;
+      background: transparent;
+    }
+    .tweet-read-more:hover {
+      background: rgb(247, 249, 249);
+    }
+    .tweets-left-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      min-width: 0;
+    }
+    .tweet-below-paragraph {
+      color: rgb(15, 20, 25);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      font-weight: 400;
+      text-align: left;
+    }
+    .tweet-continuation-paragraph {
+      color: rgb(15, 20, 25);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 1rem 0 0 0;
+      padding: 0;
+      font-weight: 400;
+      text-align: left;
+      width: 100%;
+    }
+    .tweet-continuation-paragraph + .tweet-continuation-paragraph {
+      margin-top: 1rem;
+    }
+    .text-with-video-container {
+      display: flex;
+      gap: 7rem;
+      align-items: flex-start;
+      margin-top: 1.5rem;
+      width: 100%;
+    }
+    .text-with-video-left {
+      flex: 1;
+      min-width: 0;
+      max-width: 55%;
+    }
+    .text-with-video-right {
+      flex: 0 0 300px;
+      max-width: 300px;
+      min-width: 0;
+      margin-left: 0;
+    }
+    .facebook-video-embed {
+      width: 100%;
+      height: 530px;
+      max-height: 540px;
+      overflow: hidden;
+      position: relative;
+      background: #000;
+      display: block;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .facebook-video-embed iframe {
+      width: 100%;
+      height: 640px;
+      display: block;
+      border: none;
     }
     .twitter-embed {
       display: flex;
@@ -1313,6 +1614,7 @@
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
         z-index: 2 !important;
+        filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3)) drop-shadow(0 15px 40px rgba(0,0,0,0.2)) !important;
       }
       
       /* SUPPORT CARDS MOBILE */
@@ -1321,24 +1623,26 @@
       }
       
       .support-card-content { 
-        padding: 1.5rem; 
+        padding: 1rem 1.5rem; 
       }
       .article-meta {
         flex-direction: column;
         align-items: flex-start;
-        gap: 0.5rem;
-        margin-bottom: 1rem;
+        gap: 0.35rem;
+        margin-bottom: 0.75rem;
       }
       
       .publication-date {
         font-size: 0.75rem;
         margin: 0;
+        text-align: left !important;
       }
       
       .content-warning {
         font-size: 0.8rem;
         gap: 0.4rem;
         margin: 0;
+        text-align: left !important;
       }
       
       .warning-icon {
@@ -1348,62 +1652,140 @@
       
       .support-card h1 { 
         font-size: 1.1rem !important; 
-        text-align: center;
+        text-align: left !important;
         padding-left: 0;
-        margin: 0 !important;
+        margin: 0 0 0.75rem 0 !important;
       }
       .support-card h2 { 
         font-size: 0.9rem !important; 
-        text-align: center;
+        text-align: left !important;
         padding-left: 0;
-        margin: 1.5rem 0 1rem 0 !important;
+        margin: 1.25rem 0 0.75rem 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.4rem !important;
+      }
+      .title-icon {
+        width: 1.5rem !important;
+        height: 1.5rem !important;
+        transform: translateY(-1px) !important;
       }
       .support-card .muted {
-        text-align: center;
+        text-align: left !important;
         padding-left: 0;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
         font-size: 0.75rem !important;
         font-style: italic !important;
       }
       
       .text-image-container {
-        flex-direction: column;
-        gap: 1.5rem;
+        flex-direction: column !important;
+        gap: 1rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      
+      .support-card-content > div[style*="gap: 4rem"] {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        width: 100% !important;
+      }
+      
+      /* Reverse container (video section) - text first, video below on mobile */
+      .text-image-container.reverse {
+        flex-direction: column !important;
+        gap: 1.5rem !important;
+        align-items: stretch !important;
+        contain: layout !important;
+      }
+      
+      .text-image-container.reverse .text-column {
+        order: 1 !important;
+        flex: 1 !important;
+        max-width: 100% !important;
+      }
+      
+      .text-image-container.reverse .video-embed-wrapper {
+        order: 2 !important;
+        flex: 0 0 650px !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+        width: 100% !important;
+        height: 650px !important;
+        max-height: 650px !important;
+        min-height: 650px !important;
+        overflow: hidden !important;
+        position: relative !important;
+        background: #000 !important;
+        display: block !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+        contain: strict !important;
+        isolation: isolate !important;
+      }
+      
+      .text-image-container.reverse .video-embed-wrapper iframe {
+        width: 100% !important;
+        height: 750px !important;
+        display: block !important;
+        border: none !important;
+        pointer-events: auto !important;
+        transform: translateZ(0) !important;
+        will-change: auto !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
       }
       
       .text-column {
-        max-width: 100%;
-        gap: 1.5rem;
+        max-width: 100% !important;
+        width: 100% !important;
+        gap: 1rem;
       }
       
       .text-with-image {
-        font-size: 0.9rem;
-        text-align: center;
+        font-size: 0.85rem !important;
+        text-align: left !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
       }
       
       .ustawa-image {
-        max-width: 100%;
+        max-width: 100% !important;
+        width: 100% !important;
         border-radius: 0.75rem;
+        margin: 1rem 0 !important;
       }
       
       .additional-content {
-        font-size: 0.9rem;
-        text-align: center;
+        font-size: 0.85rem !important;
+        text-align: left !important;
+        margin: 1rem 0 0 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      
+      .support-card p {
+        font-size: 0.85rem !important;
+        line-height: 1.5 !important;
+        text-align: left !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      
+      .support-card-content h2,
+      .support-card-content p {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        max-width: 100% !important;
       }
       
       .video-embed-wrapper {
         max-width: 100%;
-        height: 450px;
-        max-height: 450px;
         border-radius: 0.75rem;
-      }
-      
-      .video-embed-wrapper iframe {
-        height: 600px;
-      }
-      
-      .text-image-container.reverse {
-        flex-direction: column;
+        overflow: hidden !important;
+        background: #000 !important;
+        display: block !important;
       }
       
       .text-image-container.reverse .text-with-image {
@@ -1411,18 +1793,25 @@
       }
       
       .new-section-content {
-        font-size: 0.9rem;
-        text-align: center;
-        margin-top: 1.5rem;
+        font-size: 0.85rem !important;
+        text-align: left !important;
+        margin-top: 1rem !important;
+        max-width: 100% !important;
+        width: 100% !important;
       }
       
       .new-section-content.full-width {
-        width: 100%;
-        max-width: 100%;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 1rem 0 !important;
+        text-align: left !important;
       }
       
       .text-image-container .new-section-content {
-        max-width: 100%;
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 1rem 0 !important;
+        text-align: left !important;
       }
       
       .twitter-embed {
@@ -1431,14 +1820,22 @@
       }
       
       .side-paragraph {
-        max-width: 100%;
-        font-size: 0.9rem;
-        text-align: left;
-        margin-top: 0;
+        max-width: 100% !important;
+        width: 100% !important;
+        font-size: 0.85rem !important;
+        text-align: left !important;
+        margin-top: 1rem !important;
+        margin-bottom: 1rem !important;
       }
       
       .text-image-container .side-paragraph {
-        max-width: 100%;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      
+      .support-card-content > div[style*="display: flex"] {
+        flex-direction: column !important;
+        width: 100% !important;
       }
       
       .twitter-section {
@@ -1446,11 +1843,184 @@
         padding: 0;
         border-radius: 1rem;
         overflow: hidden;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      
+      .tweets-container {
+        flex-direction: column !important;
+        gap: 1.5rem !important;
+        padding: 0 1rem !important;
+      }
+      
+      .tweets-left-column {
+        flex: none !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+      }
+      
+      .twitter-embed-wrapper {
+        flex: none !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      
+      .twitter-embed-wrapper .twitter-tweet {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+      }
+      
+      .custom-tweet {
+        width: 100% !important;
+        padding: 12px !important;
+        box-sizing: border-box !important;
+      }
+      
+      .tweets-left-column .tweet-below-paragraph {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
+        margin: 0 !important;
+        padding: 1rem 0 0 0 !important;
+        text-align: left !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        color: rgb(15, 20, 25) !important;
+      }
+      
+      .text-with-video-left .tweet-below-paragraph {
+        display: block !important;
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
+        margin: 0 !important;
+      }
+      
+      .tweet-continuation-paragraph {
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
+        margin: 0.75rem 0 0 0 !important;
+        text-align: left !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        display: block !important;
+        visibility: visible !important;
+      }
+      
+      .tweet-continuation-paragraph + .tweet-continuation-paragraph {
+        margin-top: 0.75rem !important;
+      }
+      
+      .text-with-video-container {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        margin-top: 1rem !important;
+        width: 100% !important;
+      }
+      
+      .text-with-video-left {
+        flex: none !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      
+      .text-with-video-right {
+        flex: none !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      
+      .facebook-video-embed {
+        height: 500px !important;
+        max-height: 500px !important;
+      }
+      
+      .facebook-video-embed iframe {
+        height: 600px !important;
+      }
+      
+      .tweet-avatar {
+        width: 44px !important;
+        height: 44px !important;
+      }
+      
+      .tweet-name {
+        font-size: 16px !important;
+      }
+      
+      .tweet-follow {
+        font-size: 13px !important;
+      }
+      
+      .tweet-handle {
+        font-size: 14px !important;
+      }
+      
+      .x-logo-small {
+        width: 18px !important;
+        height: 18px !important;
+      }
+      
+      .tweet-content {
+        font-size: 17px !important;
+        line-height: 21px !important;
+        cursor: text !important;
+        overflow-wrap: break-word !important;
+      }
+      
+      .tweet-content p {
+        margin: 0 0 8px 0 !important;
+      }
+      
+      .tweet-footer {
+        font-size: 13px !important;
+      }
+      
+      .tweet-engagement-item {
+        font-size: 13px !important;
+      }
+      
+      .tweet-images {
+        grid-template-columns: 1fr !important;
+        gap: 4px !important;
+      }
+      
+      .tweet-engagement {
+        gap: 16px !important;
+      }
+      
+      .tweet-read-more {
+        font-size: 13px !important;
       }
       
       .twitter-section .twitter-tweet {
         border-radius: 1rem !important;
         overflow: hidden !important;
+        width: 100% !important;
+        min-width: 100% !important;
+      }
+      
+      /* Twitter embed container - stack vertically with embed first */
+      .support-card-content > div[style*="display: flex"] {
+        flex-direction: column !important;
+        gap: 1.5rem !important;
+      }
+      
+      .support-card-content > div[style*="display: flex"] > div[style*="flex-shrink: 0"] {
+        order: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        flex-shrink: 1 !important;
+      }
+      
+      .support-card-content > div[style*="display: flex"] > .side-paragraph {
+        order: 2 !important;
+        width: 100% !important;
+        max-width: 100% !important;
       }
       
       .custom-list {
@@ -1465,7 +2035,7 @@
       }
       
       .list-text {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         text-align: left;
       }
       
@@ -1717,6 +2287,7 @@
       .related-title {
         font-size: 1.2rem;
         margin-bottom: 1.5rem;
+        text-align: left !important;
       }
       .articles-grid {
         grid-template-columns: 1fr !important;
@@ -1730,22 +2301,90 @@
       }
       .article-title {
         font-size: 1rem;
+        text-align: left !important;
       }
       .article-excerpt {
         font-size: 0.8rem;
+        text-align: left !important;
+      }
+      
+      .source-text {
+        text-align: left !important;
+      }
+      
+      /* Source citations below images - make more condensed */
+      .support-card-content > p[style*="font-size: 0.75rem"] {
+        font-size: 0.6rem !important;
+        line-height: 1.3 !important;
+        margin-top: 0.25rem !important;
+        margin-bottom: 0.5rem !important;
+      }
+      
+      .support-card-content > p[style*="font-size: 0.75rem"] a {
+        font-size: 0.6rem !important;
+        line-height: 1.3 !important;
+        word-break: break-word !important;
       }
       
       /* FACEBOOK EMBEDS MOBILE */
       .facebook-embeds-row {
         flex-direction: column !important;
         gap: 1rem !important;
+        margin-top: 1rem !important;
+        contain: layout !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
       }
       .facebook-embeds-row > div {
         max-width: 100% !important;
         width: 100% !important;
       }
+      .facebook-embed-lower {
+        height: 600px !important;
+        max-height: 600px !important;
+        min-height: 600px !important;
+        overflow: hidden !important;
+        position: relative !important;
+        background: #000 !important;
+        display: block !important;
+        border-radius: 0.75rem !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+        contain: strict !important;
+        isolation: isolate !important;
+        flex-shrink: 0 !important;
+        flex-grow: 0 !important;
+      }
       .facebook-embeds-row iframe {
-        height: 400px !important;
+        height: 700px !important;
+        width: 100% !important;
+        display: block !important;
+        border: none !important;
+        pointer-events: auto !important;
+        transform: translateZ(0) !important;
+        will-change: auto !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+      }
+      
+      /* Reduce inline style margins on mobile */
+      .support-card img[style*="margin-top: 2rem"],
+      .support-card img[style*="margin-top: 1.5rem"] {
+        margin-top: 1rem !important;
+      }
+      
+      .support-card div[style*="margin-top: 2rem"] {
+        margin-top: 1rem !important;
+      }
+      
+      .support-card p[style*="margin-top: 2rem"] {
+        margin-top: 1rem !important;
+      }
+      
+      /* Override inline text-align styles on mobile */
+      .support-card p[style*="text-align"],
+      .support-card div[style*="text-align"] {
+        text-align: left !important;
       }
     }
   </style>
@@ -1793,7 +2432,10 @@
     <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
     <a href="#" onclick="closeMobileMenu()">Teksty</a>
     <div class="mobile-teksty-dropdown">
-      <a href="ustawa-nr-5911.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Ustawa nr 5911</a>
+      <a href="ustawa-nr-5911.html" onclick="closeMobileMenu()" class="mobile-dropdown-item mobile-ustawa-link">
+        Ustawa nr 5911
+        <img src="images/exclamation-mark.svg" alt="!" width="14" height="14">
+      </a>
       <a href="articles.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Artykuły</a>
       <a href="inicjatywy.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Inicjatywy</a>
     </div>
@@ -1842,8 +2484,7 @@
                   scrolling="no" 
                   frameborder="0" 
                   allowfullscreen="true" 
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" 
-                  allowFullScreen="true">
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
                 </iframe>
               </div>
               <div class="text-column">
@@ -1858,7 +2499,7 @@
             
             <div style="display: flex; gap: 4rem; align-items: flex-start; margin-top: 2rem;">
               <p class="side-paragraph">Poruszające były wyznania osób obecnych na miejscu: <b>nie tylko psy zostały brutalnie zamordowane wbrew pisemnym założeniom ustawy, ale również administracja leków nie była przeprowadzona prawidłowo. Konały długo, w cierpieniu, a część z nich w workach odkryto jeszcze żywych.</b> Gmina oczywiście wstrzymała sie od komentarza - zaskoczona sytuacją zaistniałą na ich terenie. Czy naprawdę można być zaskoczonym patologiami tego systemu pracując w lokalnym zarządzie tym terenem? Znając dokładne kwoty finansowania vs. realne zapotrzebowanie na utrzymanie tylu zwierząt? <br> <br>
-              Kolejnym zapalnikiem patologicznych działań jest narastająca presja administracyjna. Wystosowane przez ministerstwa dyrektywy jasno sygnalizują, że opóźnienia w odławianiu nie będą tolerowane. Gminy pod presją budżetową wolą szybkie „rozwiązania” niż inwestowanie w opiekę i adopcję. Liczy się masowe „oczyszczenie” ulic. Rezultatem tych działań są rozmaite nagrania uchwycone
+              Kolejnym zapalnikiem patologicznych działań jest narastająca presja administracyjna. Wystosowane przez ministerstwa dyrektywy jasno sygnalizują, że opóźnienia w odławianiu nie będą tolerowane. Gminy pod presją budżetową wolą szybkie „rozwiązania” niż 
           </p>
               <div style="flex-shrink: 0; align-self: flex-start;">
                 <div class="twitter-section">
@@ -1869,7 +2510,7 @@
             
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             
-            <p class="new-section-content full-width">przez zszokowanych turystów i obywateli. Nagrania ukazują brutalne akcje odławiania psów, nawet w centrum ruchliwych miejskich ulic - <b>bez zachowania jakiejkolwiek ostrożności, dbałości o zwierzęta czy ich stan. Często są ranione, ciągnięte po ziemi na chwytaku jak przedmioty,</b> a to wszystko na masową skalę. Takich akcji w ciągu dnia należy przeprowadzić jak najwięcej, <b>nie ma więc czasu na pochylenie się nad zwierzęciem jako czującą istotą, tym bardziej, że i tak tam gdzie obecnie zmierza czeka go śmierć.</b></p>
+            <p class="new-section-content full-width">inwestowanie w opiekę i adopcję. Liczy się masowe „oczyszczenie” ulic. Rezultatem tych działań są rozmaite nagrania uchwycone przez zszokowanych turystów i obywateli. Nagrania ukazują brutalne akcje odławiania psów, nawet w centrum ruchliwych miejskich ulic - <b>bez zachowania jakiejkolwiek ostrożności, dbałości o zwierzęta czy ich stan. Często są ranione, ciągnięte po ziemi na chwytaku jak przedmioty,</b> a to wszystko na masową skalę. Takich akcji w ciągu dnia należy przeprowadzić jak najwięcej, <b>nie ma więc czasu na pochylenie się nad zwierzęciem jako czującą istotą, tym bardziej, że i tak tam gdzie obecnie zmierza czeka go śmierć.</b></p>
             
             <img src="images/ustawa4.jpeg" alt="Tureckie zwierzęta" style="width: 100%; border-radius: 1rem; margin-top: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
             <p style="margin-top: 0.25rem; font-size: 0.75rem; color: #6b7280; text-align: left;">Źródło: <a href="https://bianet.org/haber/dozens-of-stray-cats-and-dogs-poisoned-to-death-in-turkeys-kocaeli-local-authorities-blamed-300649" target="_blank" style="color: #6b7280; text-decoration: underline;">Dozens of stray cats and dogs poisoned to death in Turkey's Kocaeli, local authorities blamed</a></p>
@@ -1878,16 +2519,96 @@
             <p style="margin-top: 0.25rem; font-size: 0.75rem; color: #6b7280; text-align: left;">Źródło: <a href="https://bianet.org/haber/dozens-of-stray-cats-and-dogs-poisoned-to-death-in-turkeys-kocaeli-local-authorities-blamed-300649" target="_blank" style="color: #6b7280; text-decoration: underline;">Dozens of stray cats and dogs poisoned to death in Turkey's Kocaeli, local authorities blamed</a></p>
             
             <div class="facebook-embeds-row" style="display: flex; gap: 1.5rem; justify-content: center; align-items: center; margin-top: 2rem; flex-wrap: wrap;">
-              <div style="flex: 1; min-width: 267px; max-width: 350px;">
+              <div class="facebook-embed-lower">
                 <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F26319108897689031%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden;width:100%;border-radius:0.75rem;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
               </div>
-              <div style="flex: 1; min-width: 267px; max-width: 350px;">
+              <div class="facebook-embed-lower">
                 <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1725991714731066%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden;width:100%;border-radius:0.75rem;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
               </div>
-              <div style="flex: 1; min-width: 267px; max-width: 350px;">
+              <div class="facebook-embed-lower">
                 <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F4668998893319259%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden;width:100%;border-radius:0.75rem;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
               </div>
             </div>
+            
+            <h2><img src="images/candle.svg" alt="Candle" class="title-icon"> Ofiary ustawy 5911</h2>
+            <p class="new-section-content full-width"> Barbarzyńska regulacja prawna nie odbija się jedynie na zwierzętach. Bezpośrednimi jej ofiarami są również ich miłośnicy, osoby które dokarmiają bezdomne zwierzaki na tureckich ulicach, a nawet po prostu te, które je leczą i przygarniają.
+              <br>
+              Poniżej widzicie młodego mężczyznę pełnego pasji, planów i zaangażowania w swoją pracę. To <b>Baran Kuzukıran</b>, którego nie ma już tutaj z nami. Młody amator weterynarii przyjechał do Polski studiować ją na naszym rodzimym uniwersytecie na lubelszczyźnie. Po uzyskaniu tytułu, gdy wrócił do rodzinnych stron w Turcji - gruchnęła wieść o nowej ustawie mającej na celu "rozwiązanie" problemu bezdomnych zwierząt w kraju. Baran na kilka dni przed śmiercią zrozpaczony zwierzył się sąsiadowi, że nie ma serca wykonywać eutanazji na zwierzętach - czego wymaga od niego nowe prawo. Nie, kiedy całego siebie oddaje temu, by dać im szansę żyć. Jeszcze tego samego miesiąca - lipca 2024 ciało Barana odnaleziono w dzielnicy Güzelbahçe po odebraniu sobie życia. Wolał zakończyć swoje, niż być przez system zmuszonym do zakańczania innych. Nie wytrzymał emocjonalnego obciążenia nowymi regulacjami.</p>
+            
+            <div class="tweets-container">
+              <div class="tweets-left-column">
+                <div class="custom-tweet">
+                <div class="tweet-platform-logo">
+                  <img src="images/x-logo.png" alt="X" class="x-logo">
+                </div>
+                <div class="tweet-header">
+                  <img src="images/custom-tweet-logo.jpg" alt="Patili Direniş" class="tweet-avatar">
+                  <div class="tweet-author">
+                    <div class="tweet-author-top">
+                      <span class="tweet-name">Patili Direniş</span>
+                      <span class="tweet-follow">Obserwuj</span>
+                    </div>
+                    <span class="tweet-handle">@patilidirenis</span>
+                  </div>
+                  <div class="tweet-x-logo">
+                    <img src="images/x-logo.png" alt="X" class="x-logo-small">
+                  </div>
+                </div>
+                <div class="tweet-content">
+                  <p>Veterinarian Baran Kuzukıran, who refused to kill animals in Izmir, committed suicide. He last asked his neighbor, "How can I put them to sleep when I'm doing everything I can to keep them alive?"</p>
+                  <p>This is murder, we all know the murderers.</p>
+                  <p class="tweet-hashtags"><a href="https://twitter.com/hashtag/YasayıGeriÇek" target="_blank">#YasayıGeriÇek</a> <a href="https://twitter.com/hashtag/YasaDeğilCinayet" target="_blank">#YasaDeğilCinayet</a></p>
+                </div>
+                <div class="tweet-images">
+                  <img src="images/custom-tweet1.jpeg" alt="Baran Kuzukıran" class="tweet-image">
+                  <img src="images/custom-tweet2.png" alt="Story" class="tweet-image">
+                </div>
+                <div class="tweet-footer">
+                  <span class="tweet-date">12:18 PM · Jul 29, 2024</span>
+                </div>
+                <div class="tweet-engagement">
+                  <div class="tweet-engagement-item">
+                    <span class="tweet-heart">❤️</span>
+                    <span class="tweet-count">18</span>
+                  </div>
+                  <div class="tweet-engagement-item">
+                    <span class="tweet-icon">💬</span>
+                    <span>Reply</span>
+                  </div>
+                  <div class="tweet-engagement-item">
+                    <span class="tweet-icon">🔗</span>
+                    <span>Copy link</span>
+                  </div>
+                </div>
+                <a href="https://twitter.com/patilidirenis/status/1817867343579455754" target="_blank" class="tweet-read-more">
+                  Read more on X
+                </a>
+                </div>
+                
+                <p class="tweet-below-paragraph">Ülker Güleryüz - urocza staruszka z Altındağ (Ankara). Pieszczotliwie przez lokalsów nazywaną "ciocią Neclą", oddawała całą siebie bezpańskim zwierzętom w stolicy. Pomimo ubogiego stylu życia oferowała schronienie dużej ilości z nich, w podeszłym wieku dalej jako jedyna w okolicy interesowała się tym, by pójść wykarmić te, które wciąż zostały na wolności. Naraziła się tym samym na szykanowanie wśród lokalnej społeczności. Wielu pomagaczy jest narażonych na ostracyzm społeczny, a nawet mandaty. W jej przypadku - próbowano jej odebrać jednego z jej psów, gdy stawiła opór - niedługo później jej dom stanął </p>
+              </div>
+              
+              <div class="twitter-embed-wrapper">
+                <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Yesterday, a 82-year-old woman, Ulker Guleryuz, who was known to her neighbors as Auntie Necla, was burned alive in her house for standing up to municipal employees in Altindag, a section of the Turkish capital of Ankara, who forcibly tried to take her dog away from her.<br><br>Since… <a href="https://t.co/FI36maEbNH">https://t.co/FI36maEbNH</a></p>&mdash; Uzay Bulut (@bulutuzay_) <a href="https://twitter.com/bulutuzay_/status/1892249677677875608?ref_src=twsrc%5Etfw">February 19, 2025</a></blockquote>
+              </div>
+            </div>
+            
+            <p class="tweet-continuation-paragraph">w płomieniach. Ülker nie miała szans. Spłonęła żywcem wraz ze swoimi ukochanymi zwierzętami, ich ciała znaleziono w zgliszczach jej skromnej chatki. Zginęła tak jak żyła - zapomnianina, zostawiona sama sobie, wśród zwierzaków które kochała. Z tego co udało się ustalić sprawcy i okolczności zdarzenia nie zostali znalezieni. Choć będąc szczerym - wątpimy by władze w ogóle próbowały ich szukać. Miała 81 lat.</p>
+            
+            <p class="tweet-continuation-paragraph">Nie pozwólmy, by ich życia poszły na marne, a kolejne zostały brutalnie odbierane. Ku ich pamięci walczmy o te same wartości, które reprezentowali za życia. Ofiarami nie są jedynie Ci, którzy fizycznie już odeszli. Wiele osób w Turcji pomagającym zwierzętom mierzy się z hejtem, ostracyzmem, wandalizmem, a nawet pobiciami z tego tytułu. Są szykanowane w social media, zastraszane przez władze lokalne, potępiane przez sąsiedztwo.</p>
+            
+            <div class="text-with-video-container">
+              <div class="text-with-video-left">
+                <p class="tweet-below-paragraph"> Tutaj macie przykład jak władze zachowują się do jednej z takich osób. Takie zachowania obserwowane na ulicach to norma, szykanowania ze strony innych obywateli nikt nie kara, a bycie świadkiem tego typu sytuacji tylko podjudza w innych poczucie, że mają prawo utrudniać życie osobom, które nie są wobec zwierząt obojętne. <br> <br><br><br><br> Propagandą, zasianiem strachu i nakładaniem co rusz nowych kar za pomoc zwierzętom Turcja próbuje wytępić do zera ludzi z sercem, ludzi zdolnych jeszcze do współczucia. Wielu z tych, których wspieramy lokalnie karmą, lekami i datkami co dzień naraża się wychodząc na ulice nakarmić zagłodzone bezpańskie zwierzaki. <br><br><br><br><br> Nie pozwólmy, by historie opisane powyżej powtarzały się na kolejnych z nich. </p>
+              </div>
+              <div class="text-with-video-right">
+                <div class="facebook-video-embed">
+                  <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Fhaydar.ozkan.ankara%2Fvideos%2F1127075282207801%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden;width:100%;height:100%;border-radius:1rem;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+                </div>
+              </div>
+            </div>
+            
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             
             <h2>Co możesz zrobić, by realnie pomóc tureckim zwierzętom i przyczynić się do uchronienia ich od eksterminacji?</h2>
             
@@ -1902,7 +2623,7 @@
               </div>
               <div class="list-item">
                 <img src="images/X.svg" alt="X" class="list-icon">
-                <p class="list-text"> Jeśli lecisz z Turcji do Polski możesz zostać naszym air-wolontariuszem i zabrać psiaka ze sobą do nowego życia</p>
+                <p class="list-text"> Jeżeli masz auto i możliwość podróży - możesz pomóc w transportach i zabrać psiaki do nowego życia, zwracamy koszta paliwa</p>
               </div>
               <div class="list-item">
                 <img src="images/X.svg" alt="X" class="list-icon">

@@ -315,7 +315,7 @@
     .hero {
       position: relative;
       min-height: 120vh;
-      background: url('images/burcak.jpg') center/cover no-repeat;
+      background: #1f2937 center/cover no-repeat;
       display: flex; align-items: center;
     }
     .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.2)); }
@@ -1066,7 +1066,7 @@
 
   <section id="home" class="hero">
     <div class="hero-content">
-      <h1 id="initiative-title">Ładowanie inicjatywy...</h1>
+      <h1 id="initiative-title"></h1>
     </div>
     
     <!-- Carousel Controls -->
@@ -1088,7 +1088,6 @@
         <!-- Single big card -->
         <article class="card initiative-detail-card" style="grid-column: span 3;">
           <div class="card-body" id="initiative-content">
-            <div class="loading">Ładowanie treści inicjatywy...</div>
           </div>
         </article>
       </div>

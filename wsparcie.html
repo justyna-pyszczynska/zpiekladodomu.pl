@@ -426,14 +426,32 @@
 
     /* FUNDRAISING WIDGETS */
     /* INDEX-LIKE WIDGET CARDS */
-    .cards-3 { display:grid; grid-template-columns: repeat(3,1fr); gap: 1.125rem; --card-h: 475px; }
+    .cards-3 { display:grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; --card-h: 475px;}
     .card { background:#fff; border-radius: 1rem; box-shadow:0 12px 22px rgba(0,0,0,.1); overflow: hidden; display:flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
     .card-placeholder { background: transparent; box-shadow: none; }
-    /* Make widget block identical to index: no extra card chrome or padding */
     .support-card.widgets-block { background: transparent; box-shadow: none; border-radius: 0; }
     .support-card.widgets-block .support-card-content { padding: 0; }
     .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,.15); }
-    .pomagam iframe {text-align: center; transform: scaleX(0.80) scaleY(1.1) translateX(-55px) translateY(10px);}
+    .card.pomagam {
+      height: 440px;
+      overflow: hidden;
+      position: relative;
+    }
+    .card.pomagam .pomagam-overlay {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 150px;
+      background: linear-gradient(to bottom, rgb(255, 255, 255, 0) 0%, rgba(255,255,255,1) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .pomagam iframe {
+      text-align: center;
+      height: 500px;
+      width: 100%;
+    }
     .widget-fade { opacity: 1; transition: opacity .35s ease-in-out; will-change: opacity; }
     .widget-fade.is-fading { opacity: 0; }
     .support-fade { opacity: 1; transition: opacity .35s ease-in-out; will-change: opacity; }
@@ -487,11 +505,16 @@
     }
     .group-content {
       padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
     }
     .group-header {
       position: relative;
       margin-bottom: 0.5rem;
-      height: 88px;
+      min-height: 88px;
+      flex-shrink: 0;
     }
     .group-icon {
       width: 80px;
@@ -553,7 +576,10 @@
       font-weight: 600;
       font-size: 0.8125rem;
       transition: all 0.3s ease;
-      margin: 2.5rem auto 0;
+      margin-top: auto;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 0;
       width: fit-content;
     }
     .button-icon {
@@ -602,6 +628,8 @@
       padding: 1.5rem 1rem 0.5rem 1rem;
       text-align: center;
       line-height: 1.3;
+      flex-shrink: 0;
+      min-height: 3.5rem;
     }
     /* DOG THINKING IMAGE */
     .dog-thinking-image {
@@ -609,6 +637,7 @@
       height: 180px;
       object-fit: contain;
       padding: 2rem 1rem 0.5rem 1rem;
+      flex-shrink: 0;
     }
 
     /* PLACEHOLDER STYLES FOR EMPTY CARD */
@@ -807,19 +836,26 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
-      /* Mobile Fundraising Widget - Better Size (match index) */
+      /* Mobile Fundraising Widget - fill entire card with fixed height */
       .pomagam iframe {
-        zoom: 0.7 !important;
         width: 100% !important;
-        height: 100% !important;
-        margin-left: 0 !important;
+        height: 500px !important;
+        max-height: 500px !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
         transform: none !important;
+        border: none !important;
       }
       /* Mobile Fundraising Card Links (match index) */
       .card-link-mobile {
-        display: block;
-        text-decoration: none;
-        color: inherit;
+        display: block !important;
+        text-decoration: none !important;
+        color: inherit !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
       }
       .card-link-mobile .card { pointer-events: none; }
       .card-link-mobile .card iframe { pointer-events: none; }
@@ -931,8 +967,32 @@
         margin-top: -35vh !important; 
       }
       
+      .support-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 1rem !important;
+        margin: 0 auto !important;
+      }
+      
+      .support-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        border-radius: 1rem !important;
+      }
+      
       .support-card-content { 
         padding: 1.5rem; 
+      }
+      /* Remove padding when cards-3 is inside for full-width cards */
+      .support-card-content:has(.cards-3) {
+        padding: 1.5rem 1rem !important;
+      }
+      /* Text sections inside support-card-content with cards-3 */
+      .support-card-content:has(.cards-3) h2,
+      .support-card-content:has(.cards-3) p {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
       }
       .support-card h2 { 
         font-size: 1.5rem !important; 
@@ -966,14 +1026,34 @@
       
       .cards-3 {
         grid-template-columns: 1fr !important;
-        gap: 1rem !important;
+        gap: 1.5rem !important;
         padding: 0 !important;
+        margin: 0 !important;
+        transform: none !important;
+        justify-content: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
       }
       
       .card {
         width: 100% !important;
         max-width: 100% !important;
       }
+      
+      /* Pomagam cards mobile - fill width and stack vertically */
+      .card.pomagam {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        height: 500px !important;
+        min-height: 500px !important;
+        max-height: 500px !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        border-radius: 1rem !important;
+        position: relative !important;
+      }
+      
       
       /* WIDGETS CONTAINER MOBILE */
       .widgets-container {
@@ -1180,7 +1260,7 @@
         <div class="dropdown">
           <a href="#" class="dropdown-toggle">Teksty</a>
           <div class="dropdown-menu">
-            <a href="#" class="ustawa-link">
+            <a href="ustawa-nr-5911.html" class="ustawa-link">
               Ustawa nr 5911
               <img src="images/exclamation-mark.svg" alt="!" width="18" height="18">
             </a>
@@ -1201,7 +1281,7 @@
     <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
     <a href="#" onclick="closeMobileMenu()">Teksty</a>
     <div class="mobile-teksty-dropdown">
-      <a href="#" onclick="closeMobileMenu()" class="mobile-dropdown-item">Ustawa nr 5911</a>
+      <a href="ustawa-nr-5911.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Ustawa nr 5911</a>
       <a href="articles.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Artykuły</a>
       <a href="inicjatywy.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Inicjatywy</a>
     </div>
@@ -1225,18 +1305,21 @@
             <p class="muted">Każda wpłata – mała czy duża – realnie ratuje życie zwierząt. Dołącz do osób, które już wspierają nasze działania i pomagają nam organizować transporty, leczenie oraz opiekę.</p>
             <div class="cards-3">
               <a id="widget-link-1" href="https://pomagam.pl/zpiekladodomu" target="_blank" class="card-link-mobile widget-fade">
-                <article class="card pomagam">
-                  <iframe id="widget-iframe-1" frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/zpiekladodomu/widget/large"></iframe>
+               <article class="card pomagam">
+                   <iframe id="widget-iframe-1" frameborder="0" width="340" height="400" scrolling="no" src="https://pomagam.pl/zpiekladodomu/widget/large"></iframe>
+                   <div class="pomagam-overlay"></div>
                 </article>
               </a>
               <a id="widget-link-2" href="https://pomagam.pl/aph8gm" target="_blank" class="card-link-mobile widget-fade">
                 <article class="card pomagam">
-                  <iframe id="widget-iframe-2" frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/aph8gm/widget/large"></iframe>
+                  <iframe id="widget-iframe-2" frameborder="0" width="340" height="400" scrolling="no" src="https://pomagam.pl/aph8gm/widget/large" ></iframe>
+                  <div class="pomagam-overlay"></div>
                 </article>
               </a>
               <a id="widget-link-3" href="https://pomagam.pl/hk4tmk" target="_blank" class="card-link-mobile widget-fade">
                 <article class="card pomagam">
-                  <iframe id="widget-iframe-3" frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/hk4tmk/widget/large"></iframe>
+                  <iframe id="widget-iframe-3" frameborder="0" width="340" height="400" scrolling="no" src="https://pomagam.pl/hk4tmk/widget/large" ></iframe>
+                  <div class="pomagam-overlay"></div>
                 </article>
               </a>
             </div>

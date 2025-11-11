@@ -1214,8 +1214,8 @@
       }
       
       // Regular article
-      // Create slug from title for URL
-      const slug = article.title.toLowerCase()
+      // Use slug from article data, or create from title as fallback
+      const slug = article.slug || article.title.toLowerCase()
         .replace(/[ąćęłńóśźż]/g, function(match) {
           const map = {
             'ą': 'a', 'ć': 'c', 'ę': 'e', 'ł': 'l', 'ń': 'n',
@@ -1248,17 +1248,9 @@
       `;
     }
 
-    // Embedded articles data as fallback
+    // Embedded articles data as fallback - ALL COMMENTED OUT
     const embeddedArticles = [
-      {
-        title: "Wioska Burcak - Nasza najnowsza inicjatywa",
-        excerpt: "Poznaj historię naszej najnowszej inicjatywy w Wiosce Burcak, gdzie ratujemy psy i koty z trudnych warunków. Dowiedz się, jak możesz pomóc w tej misji.",
-        category: "Inicjatywy",
-        date: "2024-12-15",
-        read_time: "5 min czytania",
-        image: "images/burcak.jpg",
-        featured: "true"
-      },
+      /* Uncomment articles when ready to publish
       {
         title: "Nowy pies w naszej opiece!",
         excerpt: "Zobacz nasz najnowszy post na Facebooku o psie, który właśnie trafił pod naszą opiekę. Śledź nasze działania na bieżąco!",
@@ -1272,6 +1264,7 @@
       },
       {
         title: "Historia Kokosa - od ulicy do domu",
+        slug: "historia-kokosa",
         excerpt: "Wzruszająca historia o tym, jak Kokos znalazł swój wymarzony dom po trudnych przeżyciach na ulicach Turcji.",
         category: "Historie",
         date: "2024-12-10",
@@ -1281,6 +1274,7 @@
       },
       {
         title: "Jak przygotować dom na nowego psa?",
+        slug: "poradnik-adopcji",
         excerpt: "Kompletny przewodnik dla przyszłych opiekunów - od przygotowania mieszkania po pierwsze dni z nowym członkiem rodziny.",
         category: "Poradniki",
         date: "2024-12-05",
@@ -1290,6 +1284,7 @@
       },
       {
         title: "Opieka weterynaryjna naszych podopiecznych",
+        slug: "opieka-weterynaryjna",
         excerpt: "Dowiedz się, jak zapewniamy kompleksową opiekę medyczną wszystkim psom i kotom w naszej organizacji.",
         category: "Zdrowie",
         date: "2024-12-01",
@@ -1299,6 +1294,7 @@
       },
       {
         title: "Jak organizujemy transport z Turcji do Polski?",
+        slug: "transport-turcja-polska",
         excerpt: "Poznaj szczegóły naszego procesu transportu zwierząt - od przygotowań po bezpieczne dotarcie do nowych domów.",
         category: "Logistyka",
         date: "2024-11-28",
@@ -1308,6 +1304,7 @@
       },
       {
         title: "Zostań wolontariuszem - jak możesz pomóc?",
+        slug: "wolontariat",
         excerpt: "Odkryj różne sposoby, w jakie możesz wesprzeć naszą misję jako wolontariusz - od opieki nad zwierzętami po organizację wydarzeń.",
         category: "Wolontariat",
         date: "2024-11-25",
@@ -1315,6 +1312,7 @@
         image: "images/dog-5.jpg",
         featured: "false"
       }
+      */
     ];
 
     // Function to load articles from .md files
@@ -1328,15 +1326,25 @@
       
       if (isLocalhost) {
         try {
-          // Try to fetch articles list from a directory listing or predefined list
-          const articleFiles = [
-            'wioska-burcak.md',
-            'historia-kokosa.md', 
-            'poradnik-adopcji.md',
-            'opieka-weterynaryjna.md',
-            'transport-turcja-polska.md',
-            'wolontariat.md'
-          ];
+          // Try to fetch articles from manifest
+          let articleFiles = [];
+          try {
+            const manifestResponse = await fetch('content/articles/manifest.json');
+            const manifest = await manifestResponse.json();
+            articleFiles = manifest.articles || [];
+          } catch (manifestError) {
+            // Fallback to hardcoded list if manifest not found
+            console.log('Manifest not found, using fallback list');
+            articleFiles = [
+              // All articles commented out - uncomment when ready to publish
+              // 'sample-article2.md',
+              // 'historia-kokosa.md', 
+              // 'poradnik-adopcji.md',
+              // 'opieka-weterynaryjna.md',
+              // 'transport-turcja-polska.md',
+              // 'wolontariat.md'
+            ];
+          }
 
           const articles = [];
           const featuredArticles = [];
@@ -1353,9 +1361,11 @@
               const content = await response.text();
               console.log(`Loaded ${file}, content length:`, content.length);
               const articleData = parseMarkdownFrontMatter(content);
+              // Add slug from filename
+              articleData.slug = file.replace('.md', '');
               console.log('Parsed article data:', articleData);
               
-              if (articleData.featured === 'true') {
+              if (articleData.featured === 'true' || articleData.featured === true) {
                 featuredArticles.push(articleData);
               } else {
                 articles.push(articleData);
@@ -1397,7 +1407,7 @@
       const featuredArticles = [];
 
       embeddedArticles.forEach(article => {
-        if (article.featured === 'true') {
+        if (article.featured === 'true' || article.featured === true) {
           featuredArticles.push(article);
         } else {
           articles.push(article);

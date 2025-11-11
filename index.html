@@ -391,6 +391,56 @@
         left: 11%;
       }
     }
+    
+    /* Language Selector */
+    .language-selector {
+      position: absolute;
+      right: 12%;
+      top: 38%;
+      transform: translateY(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+    .language-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+      text-decoration: none;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      cursor: pointer;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+    }
+    .language-option:hover {
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
+    .language-icon {
+      width: 40px;
+      height: 27px;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      border-radius: 0;
+      display: block;
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    .language-text {
+      font-family: 'McLaren', cursive;
+      color: #fff;
+      font-size: 0.8rem;
+      text-shadow: 2px 3px 8px rgba(0,0,0,.7);
+      font-weight: 450;
+    }
+    .language-default {
+      font-family: 'Poppins', sans-serif;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.75rem;
+      text-shadow: 1px 2px 6px rgba(0,0,0,.6);
+    }
       .hero-button-left {
         position: absolute;
         top: 64%;
@@ -412,6 +462,13 @@
         width: 180px;
         height: 44px;
       }
+      
+      /* Desktop paw icon size */
+      .hero-button img {
+        width: 16px;
+        height: 16px;
+      }
+      
     .btn { display:inline-flex; align-items:center; gap:.5rem; padding: .6875rem 1.125rem; border:none; border-radius: 9999px; cursor:pointer; font-weight: 700; text-decoration: none; }
     .btn-primary { 
       background: linear-gradient(135deg,#fca5a5,#fde68a); 
@@ -528,21 +585,23 @@
     /* SPLIT SECTION */
     .split { 
       display:grid; 
-      grid-template-columns: 1fr 320px; 
+      grid-template-columns: 1fr 450px; 
       gap: 3rem; 
       align-items: center;
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 4.2rem 0 3rem;
+      min-height: 400px;
     }
     .split-text h3 { font-family: 'McLaren', cursive; }
     .split-text p { 
       display: -webkit-box;
-      -webkit-line-clamp: 8;
+      -webkit-line-clamp: 10;
       -webkit-box-orient: vertical;
       overflow: hidden;
+      line-height: 1.6;
     }
-    .split img { border-radius: 0.75rem; box-shadow: 0 8px 16px rgba(0,0,0,0.1); width: 100%; }
+    .split img { border-radius: 0.75rem; box-shadow: 0 8px 16px rgba(0,0,0,0.1); width: 100%; height: 400px; object-fit: cover; }
     .muted { color: #6b7280; font-size: 0.875rem; line-height: 1.5; }
     
     /* Desktop - Hide mobile card links */
@@ -1293,10 +1352,10 @@
         transform: scale(0.98) !important;
       }
       
-      /* Mobile Wioska Burçak Section */
+      /* Mobile Initiatives Carousel Section */
       .split { 
-        grid-template-columns: 0.45fr 0.55fr !important;
-        gap: 1rem !important;
+        grid-template-columns: 0.52fr 0.48fr !important;
+        gap: 1.5rem !important;
         padding: 0 1rem !important;
         align-items: center !important;
       }
@@ -1305,7 +1364,7 @@
         width: 100% !important;
         max-width: 100% !important;
         margin: 0 !important;
-        height: 280px !important;
+        height: 250px !important;
         object-fit: cover !important;
       }
       
@@ -1324,7 +1383,7 @@
       }
       
       .split-text p { 
-        font-size: 0.7rem !important;
+        font-size: 0.65rem !important;
         line-height: 1.3 !important;
         display: -webkit-box !important;
         -webkit-box-orient: vertical !important;
@@ -1335,15 +1394,20 @@
       }
       
       .split-text .read-more-link {
-        display: none !important;
+        display: inline-block !important;
+        color: #000 !important;
+        text-decoration: none !important;
+        font-weight: 600 !important;
+        font-size: 0.7rem !important;
+        margin-top: 0.75rem !important;
       }
       
-      #burcak-section {
+      #initiative-carousel {
         cursor: pointer !important;
         transition: opacity 0.2s ease, transform 0.2s ease !important;
       }
       
-      #burcak-section:active {
+      #initiative-carousel:active {
         opacity: 0.9 !important;
         transform: scale(0.99) !important;
       }
@@ -1435,6 +1499,11 @@
       .hero-button img {
         width: 8px !important;
         height: 8px !important;
+      }
+      
+      /* Language Selector Mobile */
+      .language-selector {
+        display: none !important;
       }
       
       .overlap { margin-top: -18vh; }
@@ -1995,6 +2064,22 @@
     <div class="hero-subtitle">Wspieraj lub zostań nowym opiekunem!</div>
     <a href="wsparcie.html" class="btn btn-primary hero-button-left" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">Wsparcie</a>
     <a href="adopcje.html" class="btn btn-outline hero-button" style="text-decoration: none; white-space: nowrap;">Wszystkie psiaki <img src="images/paw-icon.svg" alt="paw"></a>
+    
+    <div class="language-selector">
+      <a href="#" class="language-option">
+        <img src="images/en-icon.svg" alt="English" class="language-icon">
+        <span class="language-text">English</span>
+      </a>
+      <a href="#" class="language-option language-center">
+        <img src="images/tr-icon.svg" alt="Türkçe" class="language-icon">
+        <span class="language-text">Türkçe</span>
+      </a>
+      <a href="#" class="language-option">
+        <img src="images/pl-icon.svg" alt="Polski" class="language-icon">
+        <span class="language-text">Polski</span>
+        <span class="language-default">(default)</span>
+      </a>
+    </div>
   </section>
 
   <main class="container">
@@ -2200,17 +2285,18 @@
       }
     });
     
-    // Make Burçak section clickable on mobile
-    /* Commented out - Burçak section removed
+    // Make Initiative section clickable on mobile
     document.addEventListener('DOMContentLoaded', function() {
-      const burcakSection = document.getElementById('burcak-section');
-      if (burcakSection && window.innerWidth <= 900) {
-        burcakSection.addEventListener('click', function() {
-          window.location.href = 'inicjatywa.html';
+      const initiativeSection = document.getElementById('initiative-carousel');
+      if (initiativeSection && window.innerWidth <= 900) {
+        initiativeSection.addEventListener('click', function() {
+          const link = document.getElementById('initiative-link');
+          if (link) {
+            window.location.href = link.getAttribute('href');
+          }
         });
       }
     });
-    */
   </script>
 
   <!-- Fundraiser Carousel Script -->
@@ -2336,18 +2422,17 @@
       </a>
     </section>
 
-    <!-- WIOSKA BURÇAK -->
-    <!-- <section class="section">
-      <div class="split" id="burcak-section">
+    <!-- INITIATIVES CAROUSEL -->
+    <section class="section">
+      <div class="split initiative-carousel-section" id="initiative-carousel">
         <div class="split-text">
-          <h3>Wioska Burçak</h3>
-          <p class="muted" style="margin-top:8px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <p class="muted" style="margin-top:8px">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <a href="inicjatywa.html" class="read-more-link" style="color: #000; text-decoration: none; font-weight: 600; margin-top: 8px; display: inline-block;">Czytaj dalej →</a>
+          <h3 id="initiative-title">Z Piekła do... telewizji!</h3>
+          <p class="muted" id="initiative-description" style="margin-top:8px">Nasza koleżanka <b>Ula Dobrosielska</b>, członkini grupy „Z piekła do domu", napisała wiadomość do <b>Karoliny Skiby</b> – aktywistki prozwierzęcej, żony <b>Krzysztofa Skiby</b>, znanego artysty, felietonisty i autora tekstów piosenek. W liście Ula opowiedziała o tragicznej sytuacji psów w Turcji oraz o ustawie, która weszła w życie 2 sierpnia 2024 roku. Zapytała panią Karolinę, czy chciałaby pomóc nam nagłośnić ten temat i uświadomić Polakom, że psy i koty w Turcji żyją w prawdziwym piekle – zupełnie innym niż obraz „raju", jaki ten kraj pokazuje turystom. Pani Karolina nie wahała się ani chwili – zareagowała natychmiast. Wraz ze swoim mężem Krzysztofem Skibą nagrała film na Instagramie, w którym opowiedzieli o rzezi psów w Turcji i wspomnieli o naszej grupie.</p>
+          <a href="inicjatywa.html?initiative=z-piekla-do-telewizji" id="initiative-link" class="read-more-link" style="color: #000; text-decoration: none; font-weight: 600; margin-top: 8px; display: inline-block;">Czytaj dalej →</a>
         </div>
-        <img src="images/burcak.jpg" alt="Wioska Burçak">
+        <img src="images/tvn.jpeg" alt="Z Piekła do... telewizji!" id="initiative-image">
     </div>
-    </section> -->
+    </section>
 
     <!-- SHOP PRODUCTS - COMMENTED OUT (Products not launched yet) -->
     <!--
@@ -2978,6 +3063,161 @@
           current = (current + 1) % partnerSets.length;
           applyPartnerSet(current);
         }, 8000);
+      }
+    })();
+  </script>
+
+  <!-- Initiatives Carousel Script -->
+  <script>
+    (function() {
+      // Parse front matter from markdown content
+      function parseFrontMatter(text) {
+        const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)/;
+        const match = text.match(frontMatterRegex);
+        if (!match) return {};
+        
+        const frontMatterText = match[1];
+        const contentAfterFrontMatter = match[2] || '';
+        const data = {};
+        const lines = frontMatterText.split('\n');
+        
+        let currentKey = null;
+        let inMultiline = false;
+        let multilineContent = [];
+        
+        for (let line of lines) {
+          if (inMultiline) {
+            // Check if we're still in multiline content (indented lines)
+            if (line.startsWith('  ') || line.trim() === '') {
+              multilineContent.push(line.trim());
+              continue;
+            } else {
+              // End of multiline
+              data[currentKey] = multilineContent.join('\n');
+              inMultiline = false;
+              multilineContent = [];
+            }
+          }
+          
+          const colonIndex = line.indexOf(':');
+          if (colonIndex > 0) {
+            const key = line.substring(0, colonIndex).trim();
+            let value = line.substring(colonIndex + 1).trim();
+            
+            if (value === '|') {
+              // Start of multiline content
+              currentKey = key;
+              inMultiline = true;
+              multilineContent = [];
+            } else {
+              if (value.startsWith('"') && value.endsWith('"')) {
+                value = value.slice(1, -1);
+              }
+              data[key] = value;
+            }
+          }
+        }
+        
+        // Save any remaining multiline content
+        if (inMultiline && currentKey) {
+          data[currentKey] = multilineContent.join('\n');
+        }
+        
+        return data;
+      }
+
+      // Extract and format first 10 lines from content (preserving bold)
+      function extractFirstLines(content, maxLines = 10) {
+        if (!content) return '';
+        
+        // Convert markdown bold to HTML bold, remove other markdown
+        let cleaned = content
+          .replace(/^#+\s+/gm, '') // Remove headers
+          .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>') // Convert markdown bold to HTML bold
+          .replace(/<br\s*\/?>/gi, ' ') // Replace <br> with space
+          .replace(/<div[^>]*>[\s\S]*?<\/div>/gi, '') // Remove div blocks (like iframes)
+          .replace(/<iframe[^>]*>[\s\S]*?<\/iframe>/gi, '') // Remove iframes
+          .replace(/\s+/g, ' ') // Normalize whitespace
+          .trim();
+        
+        // Split into sentences and take first portion
+        const sentences = cleaned.split(/\.\s+/);
+        let result = '';
+        let lineCount = 0;
+        
+        for (let sentence of sentences) {
+          if (lineCount >= maxLines) break;
+          result += sentence + '. ';
+          // Estimate lines (roughly 80 chars per line)
+          lineCount += Math.ceil(sentence.length / 80);
+        }
+        
+        return result.trim();
+      }
+
+      // Load initiatives from manifest
+      async function loadInitiatives() {
+        try {
+          const manifestResponse = await fetch('content/initiatives/manifest.json');
+          const manifest = await manifestResponse.json();
+          const initiativeFiles = manifest.initiatives || [];
+          
+          const initiatives = [];
+          for (const file of initiativeFiles) {
+            const response = await fetch(`content/initiatives/${file}`);
+            const mdContent = await response.text();
+            const initiativeData = parseFrontMatter(mdContent);
+            initiativeData.slug = file.replace('.md', '');
+            initiatives.push(initiativeData);
+          }
+          
+          return initiatives;
+        } catch (error) {
+          console.error('Error loading initiatives:', error);
+          return [];
+        }
+      }
+
+      // Update carousel with initiative data
+      function displayInitiative(initiative) {
+        const titleEl = document.getElementById('initiative-title');
+        const descEl = document.getElementById('initiative-description');
+        const linkEl = document.getElementById('initiative-link');
+        const imageEl = document.getElementById('initiative-image');
+        
+        if (titleEl) titleEl.textContent = initiative.title || 'Initiative';
+        if (descEl) descEl.innerHTML = extractFirstLines(initiative.content || initiative.description || '', 10);
+        if (linkEl) linkEl.setAttribute('href', `inicjatywa.html?initiative=${initiative.slug}`);
+        if (imageEl) {
+          imageEl.setAttribute('src', initiative.image || 'images/default.jpg');
+          imageEl.setAttribute('alt', initiative.title || 'Initiative');
+        }
+      }
+
+      // Initialize carousel
+      async function initCarousel() {
+        const initiatives = await loadInitiatives();
+        if (initiatives.length === 0) return;
+        
+        let currentIndex = 0;
+        
+        // Display first initiative
+        displayInitiative(initiatives[currentIndex]);
+        
+        // Auto-rotate every 10 seconds only if we have multiple initiatives
+        if (initiatives.length > 1) {
+          setInterval(() => {
+            currentIndex = (currentIndex + 1) % initiatives.length;
+            displayInitiative(initiatives[currentIndex]);
+          }, 10000);
+        }
+      }
+
+      // Start carousel when DOM is loaded
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCarousel);
+      } else {
+        initCarousel();
       }
     })();
   </script>
