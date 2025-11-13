@@ -1,0 +1,28 @@
+---
+name: "Szarik, Janek & Gustlik"
+description: " Dalej tli się w ich oczkach odrobina nadziei na los, który się do nich uśmiechnie. Ich wzrok wpatrzony w człowieka nas przytłacza, tak bardzo chcielibyśmy zaoferować im już własnego opiekuna, który tym razem nigdy żadnego z nich nie zawiedzie. Spokojne, przyjazne, zrównoważone psy."
+image: "images/sgj7.jpg"
+images:
+  - "images/sgj7.jpg"
+  - "images/sgj6.jpg"
+  - "images/sgj5.jpg"
+  - "images/sgj4.jpg"
+  - "images/sgj3.jpg"
+  - "images/sgj2.jpg"
+  - "images/sgj1.jpg"
+  - "images/sgj8.jpg"
+  - "images/sgj9.jpg"
+  - "images/sgj10.jpg"
+  - "images/sgj11.jpg" 
+age: "~ 9 lat"
+gender: "Samce"
+size: "Spore"
+special_features:
+  - "Lgną do ludzi"
+  - "Spokojne"
+  - "Zrównoważone"
+  - "Niekonfliktowe"
+story: "To trzy psy, które przyjechały w początkach naszej działalności z mordowni rządowej w Tunceli. Nie miały łatwego życia, teraz jest ich szansa na zaznanie w końcu odrobiny miłości. Lata przeżyły na tureckich brutalnych ulicach, przeżyły odłowienie przez hycli, przeżyły mordownię. Strach pomyśleć jakie sceny widziały te smutne oczy. Do adopcji osobno, jak i w pakiecie."
+video_url:""
+adoption_requirements: ""
+---

@@ -867,6 +867,16 @@
       line-height: 1.7;
       white-space: pre-wrap;
     }
+    .story-section .dog-info-value a {
+      color: #f87171;
+      text-decoration: underline;
+      font-weight: 600;
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    }
+    .story-section .dog-info-value a:hover {
+      color: #dc2626;
+      text-decoration: none;
+    }
     .basic-info-content {
       display: flex;
       flex-direction: column;
@@ -1967,6 +1977,22 @@
     }
     
     // Function to display dog information
+    function formatRichText(text) {
+      if (!text) return '';
+
+      const escaped = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+      const withLinks = escaped.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, label, url) => {
+        const safeUrl = url.replace(/"/g, '&quot;');
+        return `<a class="dog-link" href="${safeUrl}">${label}</a>`;
+      });
+
+      return withLinks.replace(/\n/g, '<br>');
+    }
+
     function displayDogInfo(data) {
       const dogInfo = document.getElementById('dog-info');
       
@@ -1981,7 +2007,7 @@
       const storySectionHtml = data.story && data.story.trim() ? `
         <div class="story-section">
           <div class="dog-info-label">Historia</div>
-          <div class="dog-info-value">${data.story.replace(/\n/g, '<br>')}</div>
+          <div class="dog-info-value">${formatRichText(data.story)}</div>
         </div>
       ` : '';
       
