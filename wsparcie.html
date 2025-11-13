@@ -1316,9 +1316,9 @@
                   <div class="pomagam-overlay"></div>
                 </article>
               </a>
-              <a id="widget-link-3" href="https://pomagam.pl/hk4tmk" target="_blank" class="card-link-mobile widget-fade">
+              <a id="widget-link-3" href="https://pomagam.pl/ctt8rd" target="_blank" class="card-link-mobile widget-fade">
                 <article class="card pomagam">
-                  <iframe id="widget-iframe-3" frameborder="0" width="340" height="400" scrolling="no" src="https://pomagam.pl/hk4tmk/widget/large" ></iframe>
+                  <iframe id="widget-iframe-3" frameborder="0" width="430" height="500" scrolling="no" src="https://pomagam.pl/ctt8rd/widget/large"></iframe>
                   <div class="pomagam-overlay"></div>
                 </article>
               </a>
@@ -1528,37 +1528,19 @@
   <!-- Widgets Carousel (rotating Pomagam widgets) -->
   <script>
     (function() {
-      const widgetSets = [
-        [
-          { href: 'https://pomagam.pl/zpiekladodomu', src: 'https://pomagam.pl/zpiekladodomu/widget/large' },
-          { href: 'https://pomagam.pl/aph8gm', src: 'https://pomagam.pl/aph8gm/widget/large' },
-          { href: 'https://pomagam.pl/hk4tmk', src: 'https://pomagam.pl/hk4tmk/widget/large' }
-        ],
-        [
-          { href: 'https://pomagam.pl/km6bbg', src: 'https://pomagam.pl/km6bbg/widget/large' },
-          { href: 'https://pomagam.pl/zpiekladodomu', src: 'https://pomagam.pl/zpiekladodomu/widget/large' },
-          { href: 'https://pomagam.pl/aph8gm', src: 'https://pomagam.pl/aph8gm/widget/large' }
-        ],
-        [
-          { href: 'https://pomagam.pl/f9effw', src: 'https://pomagam.pl/f9effw/widget/large' },
-          { href: 'https://pomagam.pl/hk4tmk', src: 'https://pomagam.pl/hk4tmk/widget/large' },
-          { href: 'https://pomagam.pl/km6bbg', src: 'https://pomagam.pl/km6bbg/widget/large' }
-        ],
-        [
-          { href: 'https://pomagam.pl/rfbkf6', src: 'https://pomagam.pl/rfbkf6/widget/large' },
-          { href: 'https://pomagam.pl/f9effw', src: 'https://pomagam.pl/f9effw/widget/large' },
-          { href: 'https://pomagam.pl/zpiekladodomu', src: 'https://pomagam.pl/zpiekladodomu/widget/large' }
-        ],
-        [
-          { href: 'https://pomagam.pl/3ywn9d', src: 'https://pomagam.pl/3ywn9d/widget/large' },
-          { href: 'https://pomagam.pl/rfbkf6', src: 'https://pomagam.pl/rfbkf6/widget/large' },
-          { href: 'https://pomagam.pl/aph8gm', src: 'https://pomagam.pl/aph8gm/widget/large' }
-        ]
+      const widgetPool = [
+        { href: 'https://pomagam.pl/zpiekladodomu', src: 'https://pomagam.pl/zpiekladodomu/widget/large' },
+        { href: 'https://pomagam.pl/aph8gm', src: 'https://pomagam.pl/aph8gm/widget/large' },
+        { href: 'https://pomagam.pl/ctt8rd', src: 'https://pomagam.pl/ctt8rd/widget/large' },
+        { href: 'https://pomagam.pl/hk4tmk', src: 'https://pomagam.pl/hk4tmk/widget/large' },
+        { href: 'https://pomagam.pl/km6bbg', src: 'https://pomagam.pl/km6bbg/widget/large' },
+        { href: 'https://pomagam.pl/f9effw', src: 'https://pomagam.pl/f9effw/widget/large' },
+        { href: 'https://pomagam.pl/rfbkf6', src: 'https://pomagam.pl/rfbkf6/widget/large' },
+        { href: 'https://pomagam.pl/3ywn9d', src: 'https://pomagam.pl/3ywn9d/widget/large' }
       ];
 
-      if (!widgetSets.length) return;
+      if (widgetPool.length < 3) return;
 
-      let current = 0;
       const links = [
         document.getElementById('widget-link-1'),
         document.getElementById('widget-link-2'),
@@ -1570,30 +1552,33 @@
         document.getElementById('widget-iframe-3')
       ];
 
-      function applySet(index) {
-        const set = widgetSets[index % widgetSets.length];
-        for (let i = 0; i < 3; i++) {
-          const w = set[i];
-          if (!w) continue;
-          links[i].href = w.href;
-          // Fade out → swap → fade in
-          links[i].classList.add('is-fading');
-          // Small timeout to allow CSS transition to start
+      if (links.some(l => !l) || iframes.some(f => !f)) return;
+
+      let current = 0;
+
+      function applySet(startIndex) {
+        for (let i = 0; i < links.length; i++) {
+          const link = links[i];
+          const iframe = iframes[i];
+          const widget = widgetPool[(startIndex + i) % widgetPool.length];
+
+          if (!link || !iframe || !widget) continue;
+
+          link.classList.add('is-fading');
           setTimeout(() => {
-            iframes[i].src = w.src;
-            links[i].classList.remove('is-fading');
+            link.href = widget.href;
+            iframe.src = widget.src;
+            link.classList.remove('is-fading');
           }, 200);
         }
       }
 
-      // Auto-rotate every 6 seconds
+      applySet(current);
+
       setInterval(() => {
-        current = (current + 1) % widgetSets.length;
+        current = (current + 3) % widgetPool.length;
         applySet(current);
       }, 6000);
-
-      // Initial ensure current set is applied (in case HTML changed)
-      applySet(0);
     })();
   </script>
 
