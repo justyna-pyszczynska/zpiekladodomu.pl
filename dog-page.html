@@ -877,6 +877,14 @@
       color: #dc2626;
       text-decoration: none;
     }
+    .dog-link {
+      font-family: 'McLaren', cursive;
+      color: #1f2937;
+      text-decoration: none;
+    }
+    .dog-link:hover {
+      text-decoration: underline;
+    }
     .basic-info-content {
       display: flex;
       flex-direction: column;
@@ -1951,7 +1959,10 @@
       const dogUrl = `https://zpiekladodomu.pl/dog-page.html?dog=${encodeURIComponent(data.name)}`;
       const dogImage = data.image ? `https://zpiekladodomu.pl/${data.image}` : 'https://zpiekladodomu.pl/images/adopcje-main.jpg';
       const dogTitle = `${data.name} - Pies do adopcji`;
-      const dogDescription = data.description || `Poznaj ${data.name} i pomóż mu/jej znaleźć kochający dom.`;
+      const rawDescription = data.description && data.description.trim()
+        ? data.description
+        : `Poznaj ${data.name} i pomóż mu/jej znaleźć kochający dom.`;
+      const dogDescription = stripMarkdownLinks(rawDescription);
       
       // Update page title
       document.title = dogTitle;
@@ -1961,7 +1972,7 @@
       if (heroH1) heroH1.textContent = data.name;
       
       const heroDes = document.querySelector('.big-card-content .muted');
-      if (heroDes) heroDes.textContent = data.description || '';
+      if (heroDes) heroDes.innerHTML = formatRichText(rawDescription);
       
       // Update Open Graph tags
       document.getElementById('og-url').setAttribute('content', dogUrl);
@@ -1991,6 +2002,11 @@
       });
 
       return withLinks.replace(/\n/g, '<br>');
+    }
+
+    function stripMarkdownLinks(text) {
+      if (!text) return '';
+      return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1');
     }
 
     function displayDogInfo(data) {

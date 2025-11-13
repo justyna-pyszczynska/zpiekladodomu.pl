@@ -533,7 +533,7 @@
         min-height: 0 !important;
       }
     }
-    
+
 
     /* TOUCH OPTIMIZATIONS */
     @media (hover: none) and (pointer: coarse) {
@@ -1126,7 +1126,11 @@
             }
             
             const text = await response.text();
-            data = parseMarkdownFrontMatter(text);
+            if (typeof parseFrontMatter === 'function') {
+              data = parseFrontMatter(text);
+            } else {
+              data = parseMarkdownFrontMatter(text);
+            }
             
             if (!data || !data.name) {
               console.warn(`Invalid data for file: ${file}`);
@@ -1142,8 +1146,10 @@
               card.classList.add('span-2');
             }
             
-            // Truncate description to 4 lines
-            const description = data.description || '';
+            const description = (data.description || '')
+              .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1')
+              .replace(/\s+/g, ' ')
+              .trim();
             
             card.innerHTML = `
               <img src="${data.image || 'images/placeholder.jpg'}" alt="${data.name}" class="circle">
@@ -1171,40 +1177,77 @@
     function parseMarkdownFrontMatter(text) {
       const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
       const match = text.match(frontMatterRegex);
-      
       if (!match) return null;
-      
+
       const frontMatterText = match[1];
       const data = {};
       const lines = frontMatterText.split('\n');
-      
+
       let currentKey = null;
-      
-      for (const line of lines) {
+      let inList = false;
+      let inMultiline = false;
+      let multilineValue = [];
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
         const trimmed = line.trim();
+
+        if (inMultiline) {
+          if (line.startsWith('  ') || line.startsWith('\t')) {
+            multilineValue.push(line.replace(/^\s+/, ''));
+            continue;
+          } else if (trimmed === '') {
+            multilineValue.push('');
+            continue;
+          } else {
+            data[currentKey] = multilineValue.join('\n').trim();
+            multilineValue = [];
+            inMultiline = false;
+          }
+        }
+
         if (trimmed === '') continue;
-        
+
         if (trimmed.startsWith('-') && currentKey) {
-          const listItem = trimmed.substring(1).trim().replace(/"/g, '');
+          const listItem = trimmed.substring(1).trim().replace(/^["']|["']$/g, '');
           if (!Array.isArray(data[currentKey])) {
-            data[currentKey] = [data[currentKey]];
+            data[currentKey] = [];
           }
           data[currentKey].push(listItem);
+          inList = true;
         } else {
           const colonIndex = line.indexOf(':');
           if (colonIndex > 0) {
             currentKey = line.substring(0, colonIndex).trim();
             let value = line.substring(colonIndex + 1).trim();
-            
+
+            if (value === '|') {
+              inMultiline = true;
+              multilineValue = [];
+              inList = false;
+              continue;
+            }
+
+            if (value === '' && !inList) {
+              data[currentKey] = '';
+              inList = false;
+              continue;
+            }
+
             if (value.startsWith('"') && value.endsWith('"')) {
               value = value.slice(1, -1);
             }
-            
+
             data[currentKey] = value;
+            inList = false;
           }
         }
       }
-      
+
+      if (inMultiline && currentKey) {
+        data[currentKey] = multilineValue.join('\n').trim();
+      }
+
       return data;
     }
     
