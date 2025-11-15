@@ -411,6 +411,76 @@
     }
     .center { text-align: center; }
 
+    /* FILTER SECTION */
+    .filter-section {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,.08);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .filter-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .filter-label {
+      font-weight: 600;
+      color: #374151;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    .filter-select {
+      padding: 0.6rem 1rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 0.5rem;
+      background: #fff;
+      color: #222;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 160px;
+    }
+    .filter-select:hover {
+      border-color: #fca5a5;
+    }
+    .filter-select:focus {
+      outline: none;
+      border-color: #000;
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
+    }
+    .btn-reset-filters {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 0.5rem;
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
+      color: #fff;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      margin-left: auto;
+      text-decoration: none;
+    }
+    .btn-reset-filters:hover {
+      background: linear-gradient(135deg,#fbbf24,#f87171);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(252,165,165,0.4);
+    }
+    .filter-results {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+      color: #6b7280;
+      font-size: 0.875rem;
+      text-align: center;
+    }
+
     /* FOOTER */
     footer { 
       background: radial-gradient(circle at 20% 10%, #fde68a, #fecaca 60%, #fee2e2 100%); 
@@ -624,6 +694,34 @@
         height: auto !important;
         min-height: auto !important;
         width: 100% !important;
+      }
+      
+      .filter-section {
+        padding: 1rem !important;
+        margin-bottom: 1.5rem !important;
+      }
+      .filter-container {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.75rem !important;
+      }
+      .filter-label {
+        font-size: 0.85rem !important;
+      }
+      .filter-select {
+        width: 100% !important;
+        min-width: auto !important;
+        padding: 0.625rem 0.875rem !important;
+      }
+      .btn-reset-filters {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-top: 0.25rem !important;
+      }
+      .filter-results {
+        margin-top: 0.75rem !important;
+        padding-top: 0.75rem !important;
+        font-size: 0.8rem !important;
       }
       
       /* Mobile Dog Cards - Horizontal layout */
@@ -961,6 +1059,39 @@
   <main class="container">
     <!-- DONATION + DOG CARDS GRID (2 rows) -->
     <section class="section overlap" id="donations">
+      <!-- Filter Section -->
+      <div class="filter-section">
+        <div class="filter-container">
+          <label for="filter-age" class="filter-label">Wiek:</label>
+          <select id="filter-age" class="filter-select">
+            <option value="">Wszystkie</option>
+            <option value="szczenieta">Szczenięta (&lt; 1 rok)</option>
+            <option value="mlode">Młode (1-3 lata)</option>
+            <option value="dorosle">Dorosłe (3-7 lat)</option>
+            <option value="starsze">Starsze (7+ lat)</option>
+          </select>
+          
+          <label for="filter-size" class="filter-label">Wielkość:</label>
+          <select id="filter-size" class="filter-select">
+            <option value="">Wszystkie</option>
+            <option value="Mini">Mini</option>
+            <option value="Mały">Mały</option>
+            <option value="Średni">Średni</option>
+            <option value="Duży">Duży</option>
+          </select>
+          
+          <label for="filter-gender" class="filter-label">Płeć:</label>
+          <select id="filter-gender" class="filter-select">
+            <option value="">Wszystkie</option>
+            <option value="Samiec">Samiec</option>
+            <option value="Samica">Samica</option>
+          </select>
+          
+          <button id="reset-filters" class="btn-reset-filters">Wyczyść filtry</button>
+        </div>
+        <div class="filter-results" id="filter-results"></div>
+      </div>
+      
       <div class="cards-3" id="dogs-container">
         <!-- Dog cards will be dynamically loaded by JavaScript -->
       </div>
@@ -1085,6 +1216,186 @@
       }
     });
 
+    // Store all dogs for filtering
+    let allDogs = [];
+    
+    // Function to categorize age into filter categories
+    function categorizeAge(ageStr) {
+      if (!ageStr || ageStr === '--' || ageStr === '') {
+        return 'unknown';
+      }
+      
+      // Extract numbers from age string (handles formats like "1.5 roku", "~ 4 miesiące", "~ 2-3 lata")
+      const ageLower = ageStr.toLowerCase();
+      const numbers = ageStr.match(/\d+\.?\d*/g);
+      
+      if (!numbers || numbers.length === 0) {
+        return 'unknown';
+      }
+      
+      // Check for months or years
+      let years = 0;
+      if (ageLower.includes('miesiąc') || ageLower.includes('mies')) {
+        // Convert months to years
+        const months = parseFloat(numbers[0]);
+        years = months / 12;
+      } else if (ageLower.includes('rok') || ageLower.includes('lat')) {
+        // Take the first number (or average if range)
+        if (numbers.length > 1) {
+          years = (parseFloat(numbers[0]) + parseFloat(numbers[1])) / 2;
+        } else {
+          years = parseFloat(numbers[0]);
+        }
+      } else {
+        // Assume years if no unit specified but has number
+        if (numbers.length > 1) {
+          years = (parseFloat(numbers[0]) + parseFloat(numbers[1])) / 2;
+        } else {
+          years = parseFloat(numbers[0]);
+        }
+      }
+      
+      if (years < 1) {
+        return 'szczenieta';
+      } else if (years < 3) {
+        return 'mlode';
+      } else if (years < 7) {
+        return 'dorosle';
+      } else {
+        return 'starsze';
+      }
+    }
+    
+    // Function to normalize size values
+    function normalizeSize(sizeStr) {
+      if (!sizeStr) return '';
+      
+      const size = sizeStr.trim();
+      // Handle variations
+      if (size.includes('Mini') || size === 'Mini') return 'Mini';
+      if (size.includes('Niewielk')) return 'Mały'; // Both "Niewielki" and "Niewielka" are "Mały"
+      if (size.includes('Średn')) return 'Średni';
+      if (size.includes('Spory') || size.includes('Spore') || size.includes('Duż')) return 'Duży'; // "Spory", "Spore", and "Duży" are all "Duży"
+      
+      return size;
+    }
+    
+    // Function to normalize gender values
+    function normalizeGender(genderStr) {
+      if (!genderStr) return '';
+      
+      const gender = genderStr.trim();
+      if (gender === 'Samiec' || gender === 'Samce') return 'Samiec';
+      if (gender === 'Samica' || gender === 'Suczka') return 'Samica'; // Both "Samica" and "Suczka" are "Samica"
+      if (gender === 'Mix') return 'Mix';
+      
+      return gender;
+    }
+    
+    // Function to filter dogs based on selected criteria
+    function filterDogs() {
+      const ageFilter = document.getElementById('filter-age').value;
+      const sizeFilter = document.getElementById('filter-size').value;
+      const genderFilter = document.getElementById('filter-gender').value;
+      
+      const filtered = allDogs.filter(dog => {
+        // Age filter
+        if (ageFilter && dog.ageCategory !== ageFilter) {
+          return false;
+        }
+        
+        // Size filter
+        if (sizeFilter && dog.normalizedSize !== sizeFilter) {
+          return false;
+        }
+        
+        // Gender filter - Mix dogs appear in both Samica and Samiec filters
+        if (genderFilter) {
+          const isMixDog = dog.normalizedGender === 'Mix';
+          // Non-Mix dogs must match exactly
+          if (!isMixDog && dog.normalizedGender !== genderFilter) {
+            return false;
+          }
+          // Mix dogs always match both Samica and Samiec (so they're included)
+        }
+        
+        return true;
+      });
+      
+      displayDogs(filtered);
+      
+      // Update results count
+      const resultsDiv = document.getElementById('filter-results');
+      if (resultsDiv) {
+        const totalCount = allDogs.length;
+        const filteredCount = filtered.length;
+        if (ageFilter || sizeFilter || genderFilter) {
+          resultsDiv.textContent = `Znaleziono ${filteredCount} z ${totalCount} psów`;
+        } else {
+          resultsDiv.textContent = '';
+        }
+      }
+    }
+    
+    // Function to display dogs in the container
+    function displayDogs(dogs) {
+      const container = document.getElementById('dogs-container');
+      if (!container) return;
+      
+      // Clear container
+      container.innerHTML = '';
+      
+      // Randomize order for equal visibility
+      const shuffled = [...dogs]
+        .map(v => ({ v, r: Math.random() }))
+        .sort((a, b) => a.r - b.r)
+        .map(o => o.v);
+      
+      shuffled.forEach(dog => {
+        // Create card
+        const card = document.createElement('article');
+        card.className = 'card dog-card';
+        
+        // Use span-2 for certain dogs if specified
+        if (dog.data.span === '2') {
+          card.classList.add('span-2');
+        }
+        
+        const description = (dog.data.description || '')
+          .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1')
+          .replace(/\s+/g, ' ')
+          .trim();
+        
+        card.innerHTML = `
+          <img src="${dog.data.image || 'images/placeholder.jpg'}" alt="${dog.data.name}" class="circle">
+          <div class="card-body">
+            <h3>${dog.data.name}</h3>
+            <p class="muted dog-description">${description}</p>
+            <div class="card-footer">
+              <a href="dog-page.html?dog=${dog.filename.replace('.md', '')}" class="btn btn-primary">Więcej ↗</a>
+            </div>
+          </div>
+        `;
+        
+        container.appendChild(card);
+      });
+      
+      // Make dog cards clickable on mobile
+      if (window.innerWidth <= 900) {
+        setTimeout(function() {
+          document.querySelectorAll('.dog-card').forEach(card => {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', function(e) {
+              const link = this.querySelector('.card-footer a');
+              if (link && !e.target.closest('.btn')) {
+                window.location.href = link.href;
+              }
+            });
+          });
+        }, 100);
+      }
+    }
+    
     // Dynamic dog loader from .md files
     async function loadDogs() {
       const container = document.getElementById('dogs-container');
@@ -1108,14 +1419,10 @@
         dogFiles = ['dingo.md', 'duo blondi.md', 'gryzia.md', 'tygrysek.md', 'ami.md', 'olo.md', 'sanja.md'];
       }
       
-      // Randomize the order of dogs for equal visibility
-      const shuffledDogs = dogFiles
-        .map(v => ({ v, r: Math.random() }))
-        .sort((a, b) => a.r - b.r)
-        .map(o => o.v);
+      allDogs = [];
       
       try {
-        for (const file of shuffledDogs) {
+        for (const file of dogFiles) {
           let data;
           
           try {
@@ -1137,39 +1444,54 @@
               continue;
             }
             
-            // Create card
-            const card = document.createElement('article');
-            card.className = 'card dog-card';
+            // Categorize and normalize filter fields
+            const ageCategory = categorizeAge(data.age || '');
+            const normalizedSize = normalizeSize(data.size || '');
+            const normalizedGender = normalizeGender(data.gender || '');
             
-            // Use span-2 for certain dogs if specified
-            if (data.span === '2') {
-              card.classList.add('span-2');
-            }
-            
-            const description = (data.description || '')
-              .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1')
-              .replace(/\s+/g, ' ')
-              .trim();
-            
-            card.innerHTML = `
-              <img src="${data.image || 'images/placeholder.jpg'}" alt="${data.name}" class="circle">
-              <div class="card-body">
-                <h3>${data.name}</h3>
-                <p class="muted dog-description">${description}</p>
-                <div class="card-footer">
-                  <a href="dog-page.html?dog=${file.replace('.md', '')}" class="btn btn-primary">Więcej ↗</a>
-                </div>
-              </div>
-            `;
-            
-            container.appendChild(card);
+            allDogs.push({
+              filename: file,
+              data: data,
+              ageCategory: ageCategory,
+              normalizedSize: normalizedSize,
+              normalizedGender: normalizedGender
+            });
           } catch (fetchError) {
             console.error(`Error fetching ${file}:`, fetchError);
             continue;
           }
         }
+        
+        // Initial display (filtered)
+        filterDogs();
       } catch (error) {
         console.error('Error loading dogs:', error);
+      }
+    }
+    
+    // Set up filter event listeners
+    function setupFilters() {
+      const ageFilter = document.getElementById('filter-age');
+      const sizeFilter = document.getElementById('filter-size');
+      const genderFilter = document.getElementById('filter-gender');
+      const resetButton = document.getElementById('reset-filters');
+      
+      if (ageFilter) {
+        ageFilter.addEventListener('change', filterDogs);
+      }
+      if (sizeFilter) {
+        sizeFilter.addEventListener('change', filterDogs);
+      }
+      if (genderFilter) {
+        genderFilter.addEventListener('change', filterDogs);
+      }
+      if (resetButton) {
+        resetButton.addEventListener('click', function() {
+          ageFilter.value = '';
+          sizeFilter.value = '';
+          genderFilter.value = '';
+          filterDogs();
+        });
       }
     }
     
@@ -1253,27 +1575,8 @@
     
     // Load dogs when page is ready
     document.addEventListener('DOMContentLoaded', function() {
+      setupFilters();
       loadDogs();
-      
-      // Make dog cards clickable on mobile
-      if (window.innerWidth <= 900) {
-        setTimeout(function() {
-          document.querySelectorAll('.dog-card').forEach(card => {
-            // Add pointer cursor on mobile
-            card.style.cursor = 'pointer';
-            
-            // Add click handler
-            card.addEventListener('click', function(e) {
-              // Find the button link inside the card
-              const link = this.querySelector('.card-footer a');
-              if (link && !e.target.closest('.btn')) {
-                // If user didn't click the button directly, navigate to dog page
-                window.location.href = link.href;
-              }
-            });
-          });
-        }, 500); // Small delay to ensure cards are loaded
-      }
     });
   </script>
 
