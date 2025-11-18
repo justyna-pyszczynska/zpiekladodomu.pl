@@ -1429,6 +1429,7 @@ ${formObject.additionalInfo || 'Brak'}
       };
       
       // Send email using EmailJS
+      console.log('Sending email...', templateParams);
       emailjs.send('service_2ba70q9', 'template_l54says', templateParams)
         .then(function(response) {
           console.log('SUCCESS!', response.status, response.text);
