@@ -103,6 +103,33 @@ export default async function middleware(request) {
     return;
   }
   
+  // Only modify HTML for social media crawlers, not regular browsers
+  const userAgent = request.headers.get('User-Agent') || '';
+  const isSocialMediaCrawler = 
+    userAgent.includes('facebookexternalhit') ||
+    userAgent.includes('Facebot') ||
+    userAgent.includes('Twitterbot') ||
+    userAgent.includes('LinkedInBot') ||
+    userAgent.includes('WhatsApp') ||
+    userAgent.includes('Slackbot') ||
+    userAgent.includes('SkypeUriPreview') ||
+    userAgent.includes('Applebot') ||
+    userAgent.includes('Googlebot') ||
+    userAgent.includes('bingbot') ||
+    userAgent.includes('crawler') ||
+    userAgent.includes('bot') ||
+    userAgent.includes('spider') ||
+    userAgent.includes('preview') ||
+    userAgent.includes('MetaInspector') ||
+    userAgent.includes('MetaURI') ||
+    userAgent.includes('Pinterest') ||
+    userAgent.includes('Discordbot');
+  
+  // If it's not a social media crawler, let the request pass through normally
+  if (!isSocialMediaCrawler) {
+    return;
+  }
+  
   // Handle both /dog-page and /dog-page.html with dog parameter
   const isDogPage = (url.pathname === '/dog-page' || url.pathname === '/dog-page.html');
   if (!isDogPage || !url.searchParams.has('dog')) {
@@ -138,6 +165,7 @@ export default async function middleware(request) {
     
     if (!dogData || !dogData.name) {
       console.log(`[Middleware] Invalid dog data for: ${dogName}`);
+      // If we can't parse the dog data, return without modifying (let default page show)
       return;
     }
     
@@ -199,8 +227,9 @@ export default async function middleware(request) {
       .trim()
       .substring(0, 200); // Limit description length
     
-    // Get the title
-    const title = `${dogData.name} - Z Piekła do Domu`;
+    // Get the title - ensure dogData.name exists
+    const dogNameForTitle = dogData.name || 'Pies do adopcji';
+    const title = `${dogNameForTitle} - Z Piekła do Domu`;
     
     // Construct the page URL (ensure it matches the request URL)
     const pageUrl = url.href;
