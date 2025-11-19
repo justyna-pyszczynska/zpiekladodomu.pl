@@ -1035,15 +1035,15 @@
             <label for="selectedDog">Który pies Cię interesuje? *</label>
             <select id="selectedDog" name="selectedDog" required style="max-width: 300px;">
               <option value="">Wybierz psa</option>
-              <option value="other">Inny pies (opisz w dodatkowych informacjach)</option>
+              <option value="inny">Inny pies (opisz w dodatkowych informacjach)</option>
             </select>
           </div>
           <div class="form-group">
             <label for="homeType2">Jaki typ domu oferujesz?*</label>
             <select id="homeType2" name="homeType2" required style="max-width: 300px;">
               <option value="">Wybierz</option>
-              <option value="house">Dom stały</option>
-              <option value="apartment">Dom tymczasowy</option>
+              <option value="stały">Dom stały</option>
+              <option value="tymczasowy">Dom tymczasowy</option>
             </select>
           </div>
         </div>
@@ -1079,10 +1079,10 @@
             <label for="homeType">Typ mieszkania *</label>
             <select id="homeType" name="homeType" required style="max-width: 300px;">
               <option value="">Wybierz typ mieszkania</option>
-              <option value="house">Dom jednorodzinny</option>
-              <option value="apartment">Mieszkanie w bloku</option>
-              <option value="townhouse">Kamienica</option>
-              <option value="other">Inne</option>
+              <option value="Dom jednorodzinny">Dom jednorodzinny</option>
+              <option value="Mieszkanie">Mieszkanie w bloku</option>
+              <option value="Kamienica">Kamienica</option>
+              <option value="Inny">Inne</option>
             </select>
           </div>
 
@@ -1101,15 +1101,15 @@
           <div class="form-group">
             <label>Gdzie pies będzie spał i spędzał większość czasu?*</label>
             <div class="checkbox-group">
-              <input type="radio" id="householdAgreementYes" name="householdAgreement" value="tak" required>
+              <input type="radio" id="householdAgreementYes" name="householdAgreement" value="W domu" required>
               <label for="householdAgreementYes">W domu</label>
             </div>
             <div class="checkbox-group">
-              <input type="radio" id="householdAgreementNo" name="householdAgreement" value="nie" required>
+              <input type="radio" id="householdAgreementNo" name="householdAgreement" value="Na podwórku" required>
               <label for="householdAgreementNo">Na podwórku</label>
             </div>
             <div class="checkbox-group">
-              <input type="radio" id="householdAgreementPartial" name="householdAgreement" value="częściowo" required>
+              <input type="radio" id="householdAgreementPartial" name="householdAgreement" value="Inne" required>
               <label for="householdAgreementPartial">Inne - opisz</label>
             </div>
             <div class="form-group" id="householdAgreementTextGroup" style="display: none; margin-top: 0.5rem;">
@@ -1163,15 +1163,15 @@
           <div class="form-group">
             <label>Koszt sprowadzenia psa z Turcji to 2100zł, czy jest Pan/i w stanie pokryć ten koszt, bądź jego część?*</label>
             <div class="checkbox-group">
-              <input type="radio" id="onlineMeetingYes2" name="onlineMeeting2" value="tak" required>
+              <input type="radio" id="onlineMeetingYes2" name="onlineMeeting2" value="Tak, mogę pokryć cały koszt transportu" required>
               <label for="onlineMeetingYes2">Tak, mogę pokryć cały koszt transportu</label>
             </div>
             <div class="checkbox-group">
-              <input type="radio" id="onlineMeetingNo2" name="onlineMeeting2" value="nie" required>
+              <input type="radio" id="onlineMeetingNo2" name="onlineMeeting2" value="Tak, jestem w stanie pokryć część kosztu" required>
               <label for="onlineMeetingNo2">Tak, jestem w stanie pokryć część kosztu</label>
             </div>
             <div class="checkbox-group">
-              <input type="radio" id="onlineMeetingMaybe2" name="onlineMeeting2" value="może" required>
+              <input type="radio" id="onlineMeetingMaybe2" name="onlineMeeting2" value="Nie, nie mam takiej możliwości" required>
               <label for="onlineMeetingMaybe2">Nie, nie mam takiej możliwości</label>
             </div>
           </div>
@@ -1271,6 +1271,7 @@
         let dogFiles = [];
         try {
           const manifestResponse = await fetch('content/dogs/manifest.json');
+          console.log('Manifest response:', manifestResponse);
           if (manifestResponse.ok) {
             const manifest = await manifestResponse.json();
             dogFiles = manifest.dogs || [];
@@ -1299,20 +1300,23 @@
             if (response.ok) {
               const text = await response.text();
               
-              // Parse front matter - simple YAML parser
-              const match = text.match(/^---\s*\n([\s\S]*?)\n---/);
-              if (match) {
-                const frontMatter = match[1];
-                const nameMatch = frontMatter.match(/^name:\s*"([^"]+)"/m);
-                
-                if (nameMatch) {
-                  const dogName = nameMatch[1];
-                  const option = document.createElement('option');
-                  option.value = dogName.toLowerCase().replace(/[^a-z0-9]/g, '');
-                  option.textContent = dogName;
-                  dropdown.insertBefore(option, dropdown.children[dropdown.children.length - 1]);
-                }
+              // Parse front matter using robust parser (same as adopcje.html)
+              let data;
+              if (typeof parseFrontMatter === 'function') {
+                data = parseFrontMatter(text);
+              } else {
+                data = parseMarkdownFrontMatter(text);
               }
+              
+              if (data && data.name) {
+                const dogName = data.name;
+                const option = document.createElement('option');
+                option.value = dogName.toLowerCase().replace(/[^a-z0-9]/g, '');
+                option.textContent = dogName;
+                dropdown.insertBefore(option, dropdown.children[dropdown.children.length - 1]);
+              }
+            } else {
+              console.warn(`Dog file not found: ${file}`);
             }
           } catch (error) {
             console.warn(`Failed to load ${file}:`, error);
@@ -1478,6 +1482,84 @@ ${formObject.additionalInfo || 'Brak'}
       return urlParams.get(name);
     }
 
+    // Helper function to parse markdown front matter (same as adopcje.html)
+    function parseMarkdownFrontMatter(text) {
+      const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+      const match = text.match(frontMatterRegex);
+      if (!match) return null;
+
+      const frontMatterText = match[1];
+      const data = {};
+      const lines = frontMatterText.split('\n');
+
+      let currentKey = null;
+      let inList = false;
+      let inMultiline = false;
+      let multilineValue = [];
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const trimmed = line.trim();
+
+        if (inMultiline) {
+          if (line.startsWith('  ') || line.startsWith('\t')) {
+            multilineValue.push(line.replace(/^\s+/, ''));
+            continue;
+          } else if (trimmed === '') {
+            multilineValue.push('');
+            continue;
+          } else {
+            data[currentKey] = multilineValue.join('\n').trim();
+            multilineValue = [];
+            inMultiline = false;
+          }
+        }
+
+        if (trimmed === '') continue;
+
+        if (trimmed.startsWith('-') && currentKey) {
+          const listItem = trimmed.substring(1).trim().replace(/^["']|["']$/g, '');
+          if (!Array.isArray(data[currentKey])) {
+            data[currentKey] = [];
+          }
+          data[currentKey].push(listItem);
+          inList = true;
+        } else {
+          const colonIndex = line.indexOf(':');
+          if (colonIndex > 0) {
+            currentKey = line.substring(0, colonIndex).trim();
+            let value = line.substring(colonIndex + 1).trim();
+
+            if (value === '|') {
+              inMultiline = true;
+              multilineValue = [];
+              inList = false;
+              continue;
+            }
+
+            if (value === '' && !inList) {
+              data[currentKey] = '';
+              inList = false;
+              continue;
+            }
+
+            if (value.startsWith('"') && value.endsWith('"')) {
+              value = value.slice(1, -1);
+            }
+
+            data[currentKey] = value;
+            inList = false;
+          }
+        }
+      }
+
+      if (inMultiline && currentKey) {
+        data[currentKey] = multilineValue.join('\n').trim();
+      }
+
+      return data;
+    }
+
     // Function to pre-select dog from URL parameter
     function preSelectDog(attempt = 1) {
       const dogName = getUrlParameter('dog');
@@ -1528,6 +1610,9 @@ ${formObject.additionalInfo || 'Brak'}
       document.getElementById('otherPetsNo').addEventListener('change', toggleOtherPetsText);
     });
   </script>
+
+  <!-- Dog Data Loader -->
+  <script src="js/dog-data.js"></script>
 
   <!-- Mobile Menu JavaScript -->
   <script>
