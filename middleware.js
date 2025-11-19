@@ -108,6 +108,8 @@ export default async function middleware(request) {
   const isSocialMediaCrawler = 
     userAgent.includes('facebookexternalhit') ||
     userAgent.includes('Facebot') ||
+    userAgent.includes('facebook') ||
+    userAgent.includes('Meta') ||
     userAgent.includes('Twitterbot') ||
     userAgent.includes('LinkedInBot') ||
     userAgent.includes('WhatsApp') ||
@@ -208,7 +210,7 @@ export default async function middleware(request) {
       dogImage = 'images/adopcje-main.jpg';
     }
     
-    // Construct absolute image URL
+    // Construct absolute image URL - ensure it's HTTPS and fully qualified
     let fullImageUrl;
     if (dogImage.startsWith('http://') || dogImage.startsWith('https://')) {
       fullImageUrl = dogImage;
@@ -216,6 +218,11 @@ export default async function middleware(request) {
       fullImageUrl = `${baseUrl}${dogImage}`;
     } else {
       fullImageUrl = `${baseUrl}/${dogImage}`;
+    }
+    
+    // Ensure HTTPS (Facebook requires HTTPS for images)
+    if (fullImageUrl.startsWith('http://')) {
+      fullImageUrl = fullImageUrl.replace('http://', 'https://');
     }
     
     console.log(`[Middleware] Using image: ${fullImageUrl}`);
@@ -254,6 +261,18 @@ export default async function middleware(request) {
     html = html.replace(
       /<meta\s+property="og:image"[^>]*>/i,
       `<meta property="og:image" content="${escapedImageUrl}">`
+    );
+    
+    // Update image dimensions - Facebook prefers 1200x630 for large image cards
+    // This tells Facebook to use the large image layout (big photo at top)
+    html = html.replace(
+      /<meta\s+property="og:image:width"[^>]*>/i,
+      `<meta property="og:image:width" content="1200">`
+    );
+    
+    html = html.replace(
+      /<meta\s+property="og:image:height"[^>]*>/i,
+      `<meta property="og:image:height" content="630">`
     );
     
     html = html.replace(
