@@ -1,6 +1,6 @@
 ---
 name: "Piorun"
-description: "Kocha być w centrum uwagi, a jego uśmiech skradnie każde serce. To drobny, energiczny psiak radośnie rozdający całusy. Czas by poznał co to znaczy miłość, własny człowiek i własna piłeczka. Będzie wiernym, radosnym kompanem na lata."
+description: "Kocha być w centrum uwagi, a jego uśmiech skradnie każde serce. To drobny, energiczny psiak radośnie rozdający całusy. Czas by poznał co to znaczy miłość, własny człowiek i własna piłeczka. Będzie wiernym, radosnym kompanem na lata. Pomimo przejść zachował pogodę ducha, rozjaśnia każdy dzień naszym wolontariuszom. "
 image: "images/piorun1.jpg"
 images:
   - "images/piorun1.jpg"
