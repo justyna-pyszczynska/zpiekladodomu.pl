@@ -3,7 +3,7 @@ name: "Benny"
 description: |
   Przecudny szczeniaczek ciekawy świata. Szuka miłości i opiekuna, który okaże mu odrobinę serca. Wesoły, pozytywny, lubi pieski.
   Zobacz siostrę: [Beti](dog-page.html?dog=beti)
-image: "images/bruno4.jpg"
+image: "images/benny4.jpg"
 images:
   - "images/benny4.jpg"
   - "images/benny1.jpg"

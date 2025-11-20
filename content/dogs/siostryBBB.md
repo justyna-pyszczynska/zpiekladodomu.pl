@@ -1,7 +1,7 @@
 ---
 name: "Bajka, Bójka & Brawurka"
 description: "Urocze trzy dziewczynki spędzające najważniejsze miesiące swojego rozwoju kiblując w azylu. Nie mają zabawek, wystarczającej socjalizacji, czułości... :( To ciekawe świata dzieciaczki gotowe do drogi do lepszego życia w Europie. Łagodne, wyrosną na średnie pieski, za kolano."
-image: "images/beti1.jpg"
+image: "images/bbb1.jpg"
 images:
   - "images/bbb1.jpg"
   - "images/bbb2.jpg"
