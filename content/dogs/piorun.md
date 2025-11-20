@@ -1,0 +1,24 @@
+---
+name: "Piorun"
+description: "Kocha być w centrum uwagi, a jego uśmiech skradnie każde serce. To drobny, energiczny psiak radośnie rozdający całusy. Czas by poznał co to znaczy miłość, własny człowiek i własna piłeczka. Będzie wiernym, radosnym kompanem na lata."
+image: "images/piorun1.jpg"
+images:
+  - "images/piorun1.jpg"
+  - "images/piorun2.jpg"
+  - "images/piorun3.jpg"
+  - "images/piorun4.jpg"
+  - "images/piorun5.jpg"
+  - "images/piorun6.jpg"
+age: "~ 2 lata"
+gender: "Samiec"
+size: "Niewielki"
+special_features:
+  - "Lgnie do ludzi"
+  - "Pieszczoch"
+  - "Akceptuje inne pieski"
+  - "Energiczny"
+  - "Łagodny"
+story: ""
+video_url: ""
+adoption_requirements: ""
+---
