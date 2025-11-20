@@ -2,7 +2,7 @@
 name: "Beti"
 description: |
   Urocza sunia pełna energii i ciekawości świata. Potrzebuje cierpliwego opiekuna, który pokaże jej, że życie może być bezpieczne i pełne czułości.
-  Zobacz brata: [Bruno](dog-page.html?dog=bruno)
+  Zobacz brata: [Benny](dog-page.html?dog=benny)
 image: "images/beti1.jpg"
 images:
   - "images/beti1.jpg"

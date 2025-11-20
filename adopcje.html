@@ -1300,18 +1300,35 @@
       const genderFilter = document.getElementById('filter-gender').value;
       
       const filtered = allDogs.filter(dog => {
-        // Age filter
-        if (ageFilter && dog.ageCategory !== ageFilter) {
-          return false;
+        // Age filter - only filter if age is specified and dog has a valid age category
+        if (ageFilter) {
+          // If dog has unknown age, include it only if no age filter is selected
+          // But if age filter is selected, exclude unknown ages
+          if (dog.ageCategory === 'unknown') {
+            return false; // Exclude dogs with unknown age when filter is active
+          }
+          if (dog.ageCategory !== ageFilter) {
+            return false;
+          }
         }
         
-        // Size filter
-        if (sizeFilter && dog.normalizedSize !== sizeFilter) {
-          return false;
+        // Size filter - only filter if size is specified and dog has a normalized size
+        if (sizeFilter) {
+          // If dog has no size, exclude it when size filter is active
+          if (!dog.normalizedSize || dog.normalizedSize === '') {
+            return false;
+          }
+          if (dog.normalizedSize !== sizeFilter) {
+            return false;
+          }
         }
         
         // Gender filter - Mix dogs appear in both Samica and Samiec filters
         if (genderFilter) {
+          // If dog has no gender, exclude it when gender filter is active
+          if (!dog.normalizedGender || dog.normalizedGender === '') {
+            return false;
+          }
           const isMixDog = dog.normalizedGender === 'Mix';
           // Non-Mix dogs must match exactly
           if (!isMixDog && dog.normalizedGender !== genderFilter) {
@@ -1341,10 +1358,20 @@
     // Function to display dogs in the container
     function displayDogs(dogs) {
       const container = document.getElementById('dogs-container');
-      if (!container) return;
+      if (!container) {
+        console.error('Dogs container not found!');
+        return;
+      }
+      
+      console.log(`Displaying ${dogs.length} dogs`);
       
       // Clear container
       container.innerHTML = '';
+      
+      if (dogs.length === 0) {
+        container.innerHTML = '<p style="text-align: center; padding: 2rem; color: #666;">Nie znaleziono psów spełniających kryteria.</p>';
+        return;
+      }
       
       // Randomize order for equal visibility
       const shuffled = [...dogs]
@@ -1352,7 +1379,11 @@
         .sort((a, b) => a.r - b.r)
         .map(o => o.v);
       
-      shuffled.forEach(dog => {
+      shuffled.forEach((dog, index) => {
+        if (!dog || !dog.data || !dog.data.name) {
+          console.warn(`Skipping invalid dog at index ${index}:`, dog);
+          return;
+        }
         // Create card
         const card = document.createElement('article');
         card.className = 'card dog-card';
@@ -1450,18 +1481,27 @@
             const normalizedSize = normalizeSize(data.size || '');
             const normalizedGender = normalizeGender(data.gender || '');
             
-            allDogs.push({
-              filename: file,
-              data: data,
-              ageCategory: ageCategory,
-              normalizedSize: normalizedSize,
-              normalizedGender: normalizedGender
-            });
+            // Only add dog if it has at least a name (required)
+            if (data.name) {
+              allDogs.push({
+                filename: file,
+                data: data,
+                ageCategory: ageCategory || 'unknown',
+                normalizedSize: normalizedSize || '',
+                normalizedGender: normalizedGender || ''
+              });
+            } else {
+              console.warn(`Skipping dog from ${file}: missing name`);
+            }
           } catch (fetchError) {
             console.error(`Error fetching ${file}:`, fetchError);
             continue;
           }
         }
+        
+        // Log how many dogs were loaded
+        console.log(`Loaded ${allDogs.length} dogs from ${dogFiles.length} files`);
+        console.log('Dogs loaded:', allDogs.map(d => d.data.name));
         
         // Initial display (filtered)
         filterDogs();

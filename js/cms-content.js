@@ -61,6 +61,20 @@ function parseFrontMatter(text) {
     return data;
 }
 
+// Convert Markdown bold syntax (**text**) to HTML (<strong>text</strong>)
+function convertMarkdownBold(text) {
+    if (!text) return '';
+    // Escape any existing HTML tags to prevent XSS, then convert **text** to <strong>text</strong>
+    // First, escape HTML
+    let html = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    // Then convert **text** to <strong>text</strong>
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    return html;
+}
+
 function updateMainCard(data) {
     // Update main card title
     const mainCardTitle = document.getElementById('main-card-title');
@@ -68,10 +82,10 @@ function updateMainCard(data) {
         mainCardTitle.textContent = data.main_card_title;
     }
     
-    // Update main card content
+    // Update main card content (with Markdown bold conversion)
     const mainCardContent = document.getElementById('main-card-content');
     if (mainCardContent && data.main_card_content) {
-        mainCardContent.textContent = data.main_card_content;
+        mainCardContent.innerHTML = convertMarkdownBold(data.main_card_content);
     }
     
     // Update button text and link

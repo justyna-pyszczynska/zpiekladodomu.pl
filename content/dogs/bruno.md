@@ -1,22 +1,18 @@
 ---
 name: "Bruno"
-description: |
-  Przecudny szczeniaczek ciekawy świata. Szuka miłości i opiekuna, który okaże mu odrobinę serca. Wesoły, pozytywny, lubi pieski.
-  Zobacz siostrę: [Beti](dog-page.html?dog=beti)
-image: "images/bruno4.jpg"
+description: "Bardzo smutny psiak. Jest cudowny do piesków, do ludzi, nie ma w nim grama agresji, dominacji. Ma niewielkie potrzeby i jest niesamowicie spokojny. Potrzebuje jedynie kogoś, kto pokaże mu, że życie potrafi też pozytywnie zaskoczyć. Kto pokaże, że ręka człowieka niesie też wiele przyjemności, że własny ciepły kąt jest możliwy. Tylko tyle i aż tyle. To naprawdę cudna, wdzięczna psina, która nie radzi sobie z azylową rzeczywistością.
+image: "images/bruno1.jpg"
 images:
-  - "images/bruno4.jpg"
   - "images/bruno1.jpg"
   - "images/bruno2.jpg"
-  - "images/bruno3.jpg"
-age: "4 miesiące"
+age: "~ 4-5 lat"
 gender: "Samiec"
-size: "Średni"
+size: "Spory"
 special_features:
-  - "Lgnie do ludzi"
-  - "Pieszczoch"
-  - "Lubi inne psiaki"
+  - "Stonowany"
+  - "Niekonfliktowy"
+  - "Bardzo łagodny"
 story: ""
-video_url: ""
+video_url: "https://www.facebook.com/100004758072304/videos/pcb.1542046107248464/827155523541232"
 adoption_requirements: ""
 ---
