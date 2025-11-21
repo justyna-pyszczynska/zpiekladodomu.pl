@@ -1,0 +1,25 @@
+---
+name: "Ksenia"
+description: "Jest sunią bardzo młodą, ale o dojrzalszej duszy. Spokojna, harmonijna, lubi obserwować otoczenie. Na pewno doceni kawałek ciepłego kąta i zabawy z opiekunem, ale też prostą codzienność, spokój i wspólny relaks. Łagodna, niekonfliktowa, o niecodziennej skradającej serca urodzie."
+image: "images/ksenia1.jpg"
+images:
+  - "images/ksenia1.jpg"
+  - "images/ksenia2.jpg"
+  - "images/ksenia3.jpg"
+  - "images/ksenia4.jpg"
+  - "images/ksenia5.jpg"
+  - "images/ksenia6.jpg"
+  - "images/ksenia7.jpg"
+  - "images/ksenia8.jpg"
+age: "~ 1.5 roku"
+gender: "Suczka"
+size: "Średni"
+special_features:
+  - "Łagodna"
+  - "Gotowa do transportu"
+  - "Niekonfliktowa"
+  - "Akceptuje psy i suczki"
+story: ""
+video_url: ""
+adoption_requirements: ""
+---
