@@ -1,0 +1,26 @@
+---
+name: "Jantar"
+description: "Wycofany, bojaźliwy chłopiec. Bardzo źle znosi schroniskowy hałas, trudno odnaleźć mu spokój. Potrzebuje na już cichego, spokojnego domu, aby mógł poczuć się bezpiecznie oraz opiekuna, który da mu czas na otworzenie się. Potrafi warknąć, gdy podchodzi się do niego zbyt pochopnie. Psiak w typie Cocker-Spaniel potrzebujący odrobiny troski i cierpliwości, by stać się cudownym przyjacielem na lata."
+image: "images/jantar5.jpg"
+images:
+  - "images/jantar5.jpg"
+  - "images/jantar1.jpg"
+  - "images/jantar2.jpg"
+  - "images/jantar3.jpg"
+  - "images/jantar4.jpg"
+  - "images/jantar6.jpg"
+  - "images/jantar7.jpg"
+  - "images/jantar8.jpg"
+age: "~ 3 lata"
+gender: "Samiec"
+size: "Średni"
+special_features:
+  - "Lękliwy"
+  - "Wycofany"
+  - "Potrzebuje czasu"
+  - "W typie rasy"
+  - "Wymaga cierpliwości"
+story: ""
+adoption_requirements: ""
+video_url: ""
+---

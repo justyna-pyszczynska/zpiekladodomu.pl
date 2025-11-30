@@ -6,7 +6,7 @@ Write-Host "Script location: $($MyInvocation.MyCommand.Path)"
 Write-Host "Script directory: $((Split-Path -Parent $MyInvocation.MyCommand.Path))"
 
 $listener = New-Object System.Net.HttpListener
-$listener.Prefixes.Add('http://localhost:8082/')
+$listener.Prefixes.Add('http://localhost:8083/')
 
 try {
     $listener.Start()
@@ -16,9 +16,9 @@ try {
     exit 1
 }
 
-Write-Host "Server started on http://localhost:8082/"
+Write-Host "Server started on http://localhost:8083/"
 Write-Host "Press Ctrl+C to stop the server"
-Write-Host "Open your browser and go to: http://localhost:8082/onas.html"
+Write-Host "Open your browser and go to: http://localhost:8083/onas.html"
 Write-Host "Serving files from: $((Split-Path -Parent $MyInvocation.MyCommand.Path))"
 Write-Host "Waiting for requests..."
 

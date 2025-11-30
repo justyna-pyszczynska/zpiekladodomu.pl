@@ -1,0 +1,26 @@
+---
+name: "Amira"
+description: "Amira to młoda energiczna koleżanka, idealna na przyjaciółkę dla każdego - od domatorów po sportowców :) Jest łagodna, ciekawska i lubi towarzystwo człowieka. Dogaduje się z psiakami. Ma komplet szczepień, jest wykastrowana i gotowa do drogi po lepsze życie u boku swojego opiekuna. "
+image: "images/amira5.jpg"
+images:
+  - "images/amira5.jpg"
+  - "images/amira1.jpg"
+  - "images/amira2.jpg"
+  - "images/amira3.jpg"
+  - "images/amira4.jpg"
+  - "images/amira6.jpg"
+  - "images/amira7.jpg"
+  - "images/amira8.jpg"
+age: "~ 1.5 roku"
+gender: "Suczka"
+size: "Średnia"
+special_features:
+  - "Energiczna"
+  - "Radosna"
+  - "Łagodna"
+  - "Akceptuje inne psiaki"
+  - "Wykastrowana"
+story: ""
+video_url: ""
+adoption_requirements: ""
+---

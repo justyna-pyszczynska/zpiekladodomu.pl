@@ -1,0 +1,26 @@
+---
+name: "Krisi"
+description: "To śliczny drobny kawaler w typie teriera. Zaszczepiony, odrobaczony i zaczipowany. Przyjazny, wesoły psiak ale z charakterem, potrafi być uparty. Uwielbia towarzystwo człowieka obok, jest energiczny."
+image: "images/krisi5.jpg"
+images:
+  - "images/krisi5.jpg"
+  - "images/krisi6.jpg"
+  - "images/krisi3.jpg"
+  - "images/krisi2.jpg"
+  - "images/krisi1.jpg"
+  - "images/krisi4.jpg"
+  - "images/krisi7.jpg"
+age: "~ 8 miesięcy"
+gender: "Samiec"
+size: "Mały"
+special_features:
+  - "Towarzyski"
+  - "Energiczny"
+  - "Drobny"
+  - "Przyjazny"
+  - "Łagodny"
+  - "Uparciuch"
+story: ""
+adoption_requirements: ""
+video_url: ""
+---

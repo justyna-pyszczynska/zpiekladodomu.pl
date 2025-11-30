@@ -1,0 +1,25 @@
+---
+name: "Sonia"
+description: "To drobna, całuśna dziewczyna o przyjaznym, ciepłym uosobieniu. Ma około 35cm wysokości, bystre oczka oprawione brązowym 'eye-linerem' i kocha towarzystwo innych psiaków oraz naszych wolontariuszy. To towarzyska i słodka mikro-przyjaciółka gotowa potowarzyszyć Ci we wspólnym relaksie, podróżach, długich spacerkach. Jest też mimo to dość spokojna i nie powinna niszczyć w domu."
+image: "images/sonia1.jpg"
+images:
+  - "images/sonia1.jpg"
+  - "images/sonia3.jpg"
+  - "images/sonia2.jpg"
+  - "images/sonia4.jpg"
+  - "images/sonia5.jpg"
+age: "~ 1.5 roku"
+gender: "Suczka"
+size: "Mała"
+special_features:
+  - "Łagodna"
+  - "Gotowa do transportu"
+  - "Akceptuje inne pieski"
+  - "Niekonfliktowa"
+  - "Wykastrowana"
+  - "Zaczipowana"
+  - "Towarzyska"
+story: ""
+video_url: ""
+adoption_requirements: ""
+---

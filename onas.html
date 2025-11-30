@@ -481,6 +481,25 @@
       line-height: 1.5;
       margin: 0;
     }
+    .big-card .muted .ustawa-link {
+      color: #000 !important;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: opacity 0.2s ease;
+      position: relative;
+      top: 2px;
+    }
+    .big-card .muted .ustawa-link:hover {
+      opacity: 0.8;
+    }
+    .big-card .muted .ustawa-link img {
+      width: 14px;
+      height: 14px;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
     .big-card .btn {
       align-self: flex-start;
       padding: 1rem 2rem;
@@ -761,7 +780,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
+      /* object-position will be set by individual photo rules below */
       transition: transform 0.3s ease;
     }
     .facebook-photo-overlay {
@@ -849,29 +868,203 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
+      /* object-position will be set by individual photo rules below */
       border-radius: 1rem;
     }
     
-    /* Specific positioning for each dog image */
-    .gallery-grid-five-cards .gallery-item:nth-child(1) .gallery-image {
-      object-position: center 30%;
+    /* Better positioning for main gallery photos */
+    .gallery-grid .facebook-photo-container img,
+    .gallery-grid .gallery-item .gallery-image {
       object-fit: cover;
+      /* object-position will be set by individual photo rules below */
     }
     
-    .gallery-grid-five-cards .gallery-item:nth-child(2) .gallery-image {
-      object-position: center 40%;
+    /* Three-card gallery positioning */
+    .gallery-grid-three-cards .gallery-image {
       object-fit: cover;
+      /* object-position will be set by individual photo rules below */
     }
     
-    .gallery-grid-five-cards .gallery-item:nth-child(4) .gallery-image {
-      object-position: center 35%;
+    /* Five-card gallery - adjust each card */
+    .gallery-grid-five-cards .gallery-item .gallery-image {
       object-fit: cover;
+      /* object-position will be set by individual photo rules below */
     }
     
-    .gallery-grid-five-cards .gallery-item:nth-child(5) .gallery-image {
-      object-position: center 25%;
-      object-fit: cover;
+    /* Individual photo positioning - target each image by filename with high specificity */
+    /* Target all img elements regardless of class - ensures consistency across all galleries */
+    img[src*="dog-4.jpg"],
+    .facebook-photo-img[src*="dog-4.jpg"],
+    .gallery-image[src*="dog-4.jpg"],
+    .gallery-item img[src*="dog-4.jpg"],
+    .facebook-photo-container img[src*="dog-4.jpg"],
+    .image-container img[src*="dog-4.jpg"] { object-position: center 50% !important; }
+    img[src*="dog-5.jpg"],
+    .facebook-photo-img[src*="dog-5.jpg"],
+    .gallery-image[src*="dog-5.jpg"],
+    .gallery-item img[src*="dog-5.jpg"],
+    .facebook-photo-container img[src*="dog-5.jpg"],
+    .image-container img[src*="dog-5.jpg"] { object-position: center 55% !important; }
+    img[src*="dog-6.jpg"],
+    .facebook-photo-img[src*="dog-6.jpg"],
+    .gallery-image[src*="dog-6.jpg"],
+    .gallery-item img[src*="dog-6.jpg"],
+    .facebook-photo-container img[src*="dog-6.jpg"],
+    .image-container img[src*="dog-6.jpg"] { object-position: center 45% !important; }
+    img[src*="dog-7.jpg"],
+    .facebook-photo-img[src*="dog-7.jpg"],
+    .gallery-image[src*="dog-7.jpg"],
+    .gallery-item img[src*="dog-7.jpg"],
+    .facebook-photo-container img[src*="dog-7.jpg"],
+    .image-container img[src*="dog-7.jpg"] { object-position: center 50% !important; }
+    img[src*="dog-8.jpg"],
+    .facebook-photo-img[src*="dog-8.jpg"],
+    .gallery-image[src*="dog-8.jpg"],
+    .gallery-item img[src*="dog-8.jpg"],
+    .facebook-photo-container img[src*="dog-8.jpg"],
+    .image-container img[src*="dog-8.jpg"] { object-position: center 70% !important; }
+    img[src*="dog-9.jpg"],
+    .facebook-photo-img[src*="dog-9.jpg"],
+    .gallery-image[src*="dog-9.jpg"],
+    .gallery-item img[src*="dog-9.jpg"],
+    .facebook-photo-container img[src*="dog-9.jpg"],
+    .image-container img[src*="dog-9.jpg"] { object-position: center 55% !important; }
+    img[src*="dog-10.jpg"],
+    .facebook-photo-img[src*="dog-10.jpg"],
+    .gallery-image[src*="dog-10.jpg"],
+    .gallery-item img[src*="dog-10.jpg"],
+    .facebook-photo-container img[src*="dog-10.jpg"],
+    .image-container img[src*="dog-10.jpg"] { object-position: center 50% !important; }
+    img[src*="dog-11.jpg"],
+    .facebook-photo-img[src*="dog-11.jpg"],
+    .gallery-image[src*="dog-11.jpg"],
+    .gallery-item img[src*="dog-11.jpg"],
+    .facebook-photo-container img[src*="dog-11.jpg"],
+    .image-container img[src*="dog-11.jpg"] { object-position: center 80% !important; }
+    img[src*="dog-12.jpg"],
+    .facebook-photo-img[src*="dog-12.jpg"],
+    .gallery-image[src*="dog-12.jpg"],
+    .gallery-item img[src*="dog-12.jpg"],
+    .facebook-photo-container img[src*="dog-12.jpg"],
+    .image-container img[src*="dog-12.jpg"] { object-position: center 75% !important; }
+    img[src*="dog-15.jpg"],
+    .facebook-photo-img[src*="dog-15.jpg"],
+    .gallery-image[src*="dog-15.jpg"],
+    .gallery-item img[src*="dog-15.jpg"],
+    .facebook-photo-container img[src*="dog-15.jpg"],
+    .image-container img[src*="dog-15.jpg"] { object-position: center 55% !important; }
+    img[src*="dog-16.jpg"],
+    .facebook-photo-img[src*="dog-16.jpg"],
+    .gallery-image[src*="dog-16.jpg"],
+    .gallery-item img[src*="dog-16.jpg"],
+    .facebook-photo-container img[src*="dog-16.jpg"],
+    .image-container img[src*="dog-16.jpg"] { object-position: center 50% !important; }
+    img[src*="dog-17.jpg"],
+    .facebook-photo-img[src*="dog-17.jpg"],
+    .gallery-image[src*="dog-17.jpg"],
+    .gallery-item img[src*="dog-17.jpg"],
+    .facebook-photo-container img[src*="dog-17.jpg"],
+    .image-container img[src*="dog-17.jpg"] { object-position: center 50% !important; }
+    img[src*="bbb2.jpg"],
+    .facebook-photo-img[src*="bbb2.jpg"],
+    .gallery-image[src*="bbb2.jpg"],
+    .gallery-item img[src*="bbb2.jpg"],
+    .facebook-photo-container img[src*="bbb2.jpg"],
+    .image-container img[src*="bbb2.jpg"] { object-position: center 70% !important; }
+    img[src*="ustawa3.jpg"],
+    .facebook-photo-img[src*="ustawa3.jpg"],
+    .gallery-image[src*="ustawa3.jpg"],
+    .gallery-item img[src*="ustawa3.jpg"],
+    .facebook-photo-container img[src*="ustawa3.jpg"],
+    .image-container img[src*="ustawa3.jpg"] { object-position: center 70% !important; }
+    img[src*="patka3.jpg"],
+    .facebook-photo-img[src*="patka3.jpg"],
+    .gallery-image[src*="patka3.jpg"],
+    .gallery-item img[src*="patka3.jpg"],
+    .facebook-photo-container img[src*="patka3.jpg"],
+    .image-container img[src*="patka3.jpg"] { object-position: center 55% !important; }
+    img[src*="piorun1.jpg"],
+    .facebook-photo-img[src*="piorun1.jpg"],
+    .gallery-image[src*="piorun1.jpg"],
+    .gallery-item img[src*="piorun1.jpg"],
+    .facebook-photo-container img[src*="piorun1.jpg"],
+    .image-container img[src*="piorun1.jpg"] { object-position: center 70% !important; }
+    img[src*="insta-post3.jpg"],
+    .facebook-photo-img[src*="insta-post3.jpg"],
+    .gallery-image[src*="insta-post3.jpg"],
+    .gallery-item img[src*="insta-post3.jpg"],
+    .facebook-photo-container img[src*="insta-post3.jpg"],
+    .image-container img[src*="insta-post3.jpg"] { object-position: center 70% !important; }
+    img[src*="cat1.jpg"],
+    .facebook-photo-img[src*="cat1.jpg"],
+    .gallery-image[src*="cat1.jpg"],
+    .gallery-item img[src*="cat1.jpg"],
+    .facebook-photo-container img[src*="cat1.jpg"],
+    .image-container img[src*="cat1.jpg"] { object-position: center 55% !important; }
+    img[src*="tygrysek8.jpg"],
+    .facebook-photo-img[src*="tygrysek8.jpg"],
+    .gallery-image[src*="tygrysek8.jpg"],
+    .gallery-item img[src*="tygrysek8.jpg"],
+    .facebook-photo-container img[src*="tygrysek8.jpg"],
+    .image-container img[src*="tygrysek8.jpg"] { object-position: center 75% !important; }
+    
+    /* Also target background images */
+    .image-container[style*="dog-4.jpg"] {
+      background-position: center 35% !important;
+    }
+    .image-container[style*="dog-5.jpg"] {
+      background-position: center 40% !important;
+    }
+    .image-container[style*="dog-6.jpg"] {
+      background-position: center 25% !important;
+    }
+    .image-container[style*="dog-7.jpg"] {
+      background-position: center 30% !important;
+    }
+    .image-container[style*="dog-8.jpg"] {
+      background-position: center 60% !important;
+    }
+    .image-container[style*="dog-9.jpg"] {
+      background-position: center 40% !important;
+    }
+    .image-container[style*="dog-10.jpg"] {
+      background-position: center 30% !important;
+    }
+    .image-container[style*="dog-11.jpg"] {
+      background-position: center 75% !important;
+    }
+    .image-container[style*="dog-12.jpg"] {
+      background-position: center 70% !important;
+    }
+    .image-container[style*="tygrysek8.jpg"] {
+      background-position: center 70% !important;
+    }
+    .image-container[style*="dog-15.jpg"] {
+      background-position: center 40% !important;
+    }
+    .image-container[style*="dog-16.jpg"] {
+      background-position: center 35% !important;
+    }
+    .image-container[style*="dog-17.jpg"] {
+      background-position: center 30% !important;
+    }
+    .image-container[style*="bbb2.jpg"] {
+      background-position: center 60% !important;
+    }
+    .image-container[style*="ustawa3.jpg"] {
+      background-position: center 60% !important;
+    }
+    .image-container[style*="patka3.jpg"] {
+      background-position: center 40% !important;
+    }
+    .image-container[style*="piorun1.jpg"] {
+      background-position: center 60% !important;
+    }
+    .image-container[style*="insta-post3.jpg"] {
+      background-position: center 60% !important;
+    }
+    .image-container[style*="cat1.jpg"] {
+      background-position: center 40% !important;
     }
     
     .image-container {
@@ -902,8 +1095,9 @@
     }
     
     .sensitive-content.revealed .sensitive-overlay {
-      opacity: 0;
-      pointer-events: none;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      display: none !important;
     }
     
     .visibility-icon-container {
@@ -945,113 +1139,494 @@
     }
 
     .social-widgets-container {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 2rem;
       width: 100%;
+      max-width: 1400px;
       margin: 0 auto;
-      flex-wrap: nowrap;
+      align-items: start;
     }
 
     .facebook-widget-container,
-    .instagram-widget-container {
+    .instagram-widget-container,
+    .tiktok-widget-container {
       text-align: center;
     }
 
+    .tiktok-widget-container {
+      text-align: center;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .facebook-widget-header h2,
-    .instagram-widget-header h2 {
+    .instagram-widget-header h2,
+    .tiktok-widget-header h2 {
       font-size: 1.1rem;
       color: #1f2937;
       margin-bottom: 0.25rem;
     }
 
     .facebook-widget-header p,
-    .instagram-widget-header p {
+    .instagram-widget-header p,
+    .tiktok-widget-header p {
       color: #6b7280;
       font-size: 0.8rem;
       margin-bottom: 0.75rem;
     }
 
-    .fb-widget-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #f9f9fb;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      padding: 8px;
-      width: 500px;
-      height: 200px;
-      max-width: 100%;
-      margin: 0 auto;
+    /* Facebook Widget Link */
+    .fb-widget-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      width: 100%;
+      cursor: pointer;
     }
 
-    .fb-page {
-      border-radius: 16px;
+    /* Facebook Widget */
+    .fb-widget {
+      background: #18191a;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       overflow: hidden;
+      width: 100%;
+      height: 480px;
+      max-width: 100%;
+      margin: 0 auto;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .fb-widget-link:hover .fb-widget {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Facebook Cover/Banner */
+    .fb-cover-container {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+      background: #18191a;
+    }
+
+    .fb-cover-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Facebook Profile Section */
+    .fb-profile-section {
+      padding: 60px 20px 20px 20px;
+      background: #18191a;
+      position: relative;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Profile Picture */
+    .fb-profile-picture {
+      position: absolute;
+      top: -45px;
+      left: 20px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 4px solid #18191a;
+      background: #ffffff;
+      overflow: hidden;
+      padding: 4px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fb-avatar {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      transform: scale(1.15);
+      position: relative;
+      left: 1px;
+    }
+
+    /* Page Info Section */
+    .fb-info-section {
+      margin-top: 10px;
+    }
+
+    .fb-page-name {
+      color: #e4e6eb;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-bottom: 0;
+      line-height: 1.3;
+      white-space: normal;
+      position: absolute;
+      top: -10px;
+      left: 132px;
+      max-width: calc(100% - 152px);
+      text-align: left;
+    }
+
+    /* Facebook Buttons */
+    .fb-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: -8px;
+    }
+
+    .fb-btn-like,
+    .fb-btn-message {
+      flex: 1;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 0.625rem;
+      font-weight: 600;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .fb-btn-icon {
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .fb-btn-like {
+      background: #3a3b3c;
+      color: #e4e6eb;
+    }
+
+    .fb-btn-message {
+      background: #2374e1;
+      color: #ffffff;
+    }
+
+    .fb-widget-link:hover .fb-btn-like {
+      background: #404244;
+    }
+
+    .fb-widget-link:hover .fb-btn-message {
+      background: #1877f2;
+    }
+
+    /* Description Text */
+    .fb-description-title {
+      color: #e4e6eb;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-top: 12px;
+      margin-bottom: 8px;
+      line-height: 1.3;
+      text-align: left;
+    }
+
+    .fb-description-text {
+      color: #b0b3b8;
+      font-size: 0.6rem;
+      font-weight: 400;
+      margin-top: 0;
+      margin-bottom: 16px;
+      line-height: 1.4;
+      text-align: left;
+    }
+
+    /* Info Lines */
+    .fb-info-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 0;
+    }
+
+    .fb-info-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .fb-info-icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    .fb-info-text {
+      color: #b0b3b8;
+      font-size: 0.6875rem;
+      line-height: 1.4;
+    }
+
+    .fb-info-text strong {
+      font-weight: 600;
+      color: #e4e6eb;
+    }
+
+    .fb-link-icon {
+      transform: rotate(-45deg);
+    }
+
+    /* Instagram Widget Link */
+    .insta-widget-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      width: 100%;
+      cursor: pointer;
     }
 
     /* Instagram Widget */
     .insta-widget {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: #f9f9fb;
+      align-items: stretch;
+      background: #ffffff;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      padding: 15px 20px;
-      width: 500px;
-      height: 200px;
+      padding: 0;
+      width: 100%;
+      height: 480px;
       max-width: 100%;
       margin: 0 auto;
-      text-align: center;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .insta-widget:hover {
+    .insta-widget-link:hover .insta-widget {
+      transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      transform: translateY(-1px);
-      transition: all 0.3s ease;
+    }
+
+
+    /* Top Section: Profile Info */
+    .insta-profile-column {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      padding-top: 60px;
+      width: 100%;
+      align-items: flex-start;
+    }
+
+    /* Bottom Section: Posts Row */
+    .insta-posts-row {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      max-width: 420px;
+      margin: 6px auto 0 auto;
+      gap: 4px;
+      padding: 0 8px 8px 8px;
     }
 
     .insta-profile {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
-      text-decoration: none;
-      color: inherit;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      gap: 16px;
+      width: 100%;
     }
 
     .insta-avatar {
-      width: 60px;
-      height: 60px;
+      width: 62px;
+      height: 62px;
       border-radius: 50%;
-      margin-bottom: 10px;
+      margin-bottom: 0;
       object-fit: cover;
-      border: 3px solid #fff;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e7eb;
+      flex-shrink: 0;
     }
 
-    .insta-info h3 {
-      margin: 0 0 5px 0;
-      font-size: 1rem;
-      color: #1f2937;
+    .insta-info {
+      text-align: left;
+      width: 100%;
+    }
+
+    .insta-username {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .insta-username span {
+      font-size: 0.8rem;
+      color: #262626;
       font-weight: 600;
     }
 
-    .insta-info p {
+    .insta-icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Instagram Icon in Top Right Corner */
+    .insta-corner-icon {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 22px;
+      height: 22px;
+      z-index: 10;
+    }
+
+    .insta-logo-icon {
+      left: 42px; /* Position next to the first icon (16px + 22px + 4px gap) */
+      top: 14px; /* Moved up 2px from 16px */
+      width: auto;
+      height: auto;
+      max-height: 28px; /* Limit max height but preserve aspect ratio */
+      object-fit: contain;
+    }
+
+    .insta-description {
+      font-size: 0.6rem;
+      color: #8e8e8e;
+      line-height: 1.2;
       margin: 0;
-      font-size: 0.85rem;
-      color: #6b7280;
-      line-height: 1.3;
+    }
+
+    .insta-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 18px;
+      margin-bottom: 12px;
+      align-self: center;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .insta-stories-image {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-top: 0;
+      object-fit: cover;
+    }
+
+    .insta-btn-follow,
+    .insta-btn-message {
+      flex: 1;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      display: inline-block;
+      pointer-events: none;
+    }
+
+    .insta-btn-follow {
+      background: #0095f6;
+      color: #ffffff;
+      border-color: #0095f6;
+    }
+
+    .insta-widget-link:hover .insta-btn-follow {
+      background: #1877f2;
+      border-color: #1877f2;
+    }
+
+    .insta-btn-message {
+      background: #ffffff;
+      color: #262626;
+      border-color: #dbdbdb;
+    }
+
+    .insta-widget-link:hover .insta-btn-message {
+      background: #fafafa;
+      border-color: #c7c7c7;
+    }
+
+    /* Post Preview Columns */
+    .insta-post-preview {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      min-height: 150px;
+      max-width: 33.333%;
+      display: flex;
+      align-items: stretch;
+      padding: 0;
+    }
+
+    .insta-post-image {
+      width: 100%;
+      height: 100%;
+      min-height: 150px;
+      object-fit: cover;
+      display: block;
+      border-radius: 4px;
+    }
+
+    .insta-post-preview video {
+      width: 100%;
+      height: 100%;
+      min-height: 150px;
+      object-fit: cover;
+      display: block;
+      border-radius: 4px;
     }
 
     /* Remove underlines from any links inside the Instagram widget (desktop) */
     .instagram-widget-container a,
     .insta-widget a {
       text-decoration: none !important;
+    }
+
+    /* TikTok Widget */
+    .tiktok-widget-wrapper {
+      background: #f9f9fb;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 0;
+      width: 600px;
+      height: 480px;
+      max-width: 100%;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tiktok-widget-wrapper .tiktok-embed {
+      width: 100% !important;
+      height: 100% !important;
+      margin: 0;
+      display: block;
+    }
+
+    .tiktok-widget-wrapper .tiktok-embed iframe,
+    .tiktok-widget-wrapper iframe {
+      width: 100% !important;
+      height: 100% !important;
+      border: none;
+      border-radius: 12px;
+      display: block;
     }
 
     .insta-btn {
@@ -1134,12 +1709,13 @@
       .mobile-menu-toggle { display: flex; }
       
       .social-widgets-container {
-        flex-direction: column;
-        gap: 1.5rem;
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
         align-items: center;
         text-align: center;
         margin-top: 4rem !important;
       }
+
       
       /* Add space between widgets and map section */
       .map-section {
@@ -1152,7 +1728,8 @@
       }
       
       .facebook-widget-container,
-      .instagram-widget-container {
+      .instagram-widget-container,
+      .tiktok-widget-container {
         text-align: center;
         width: 100%;
         display: flex;
@@ -1161,49 +1738,117 @@
       }
       /* Remove underlines from any links inside the Instagram widget (mobile) */
       .instagram-widget-container a,
-      .insta-widget a { text-decoration: none !important; }
+      .insta-widget a,
+      .insta-widget-link { text-decoration: none !important; }
       
-      .fb-widget-wrapper,
+      .fb-widget {
+        height: 550px;
+      }
+
+      .fb-cover-container {
+        height: 180px;
+      }
+
+      .fb-profile-picture {
+        width: 85px;
+        height: 85px;
+        top: -35px;
+        border-width: 3px;
+      }
+
+      .fb-page-name {
+        font-size: 0.65rem;
+        white-space: normal;
+        top: -5px;
+        left: 108px;
+        max-width: calc(100% - 128px);
+      }
+
+      .fb-buttons {
+        margin-top: 5px;
+      }
+
+      .fb-btn-like,
+      .fb-btn-message {
+        padding: 4px 8px;
+        font-size: 0.6rem;
+      }
+
+      .fb-btn-icon {
+        width: 10px;
+        height: 10px;
+      }
+      
       .insta-widget {
+        flex-direction: column !important;
         width: 100%;
         max-width: 500px;
-        height: 180px;
         margin: 0 auto;
+        height: 550px;
       }
-      
-      .fb-widget-wrapper {
-        padding: 6px;
+
+      .insta-profile-column {
+        padding: 16px;
+        padding-top: 56px;
       }
-      
-      .insta-widget {
-        padding: 12px 15px;
+
+      .insta-posts-row {
+        flex-direction: column;
+        gap: 8px;
+        padding: 0 8px 8px 8px;
+      }
+
+      .insta-post-preview {
+        min-height: 120px;
+        max-width: calc(33.333% - 6px);
+        flex: 1 1 calc(33.333% - 6px);
+      }
+
+      .insta-post-image,
+      .insta-post-preview video {
+        min-height: 120px;
+      }
+
+      .insta-posts-row {
+        max-width: 100%;
       }
       
       .insta-avatar {
-        width: 50px;
-        height: 50px;
+        width: 56px;
+        height: 56px;
       }
       
-      .insta-info h3 {
-        font-size: 0.9rem;
+      .insta-username span {
+        font-size: 0.75rem;
       }
       
-      .insta-info p {
-        font-size: 0.8rem;
+      .insta-description {
+        font-size: 0.55rem;
+        line-height: 1.2;
+      }
+
+      .insta-btn-follow,
+      .insta-btn-message {
+        padding: 5px 12px;
+        font-size: 0.75rem;
       }
       
-      .insta-btn {
-        padding: 6px 12px;
-        font-size: 0.8rem;
+      .tiktok-widget-wrapper {
+        width: 100%;
+        max-width: 600px;
+        height: 550px;
+        margin: 0 auto;
       }
       
       .facebook-widget-header h2,
-      .instagram-widget-header h2 {
+      .instagram-widget-header h2,
+      .tiktok-widget-header h2 {
         font-size: 1.1rem;
       }
       
       .facebook-widget-header p,
-      .instagram-widget-header p {
+      .instagram-widget-header p,
+      .tiktok-widget-header p {
         font-size: 0.9rem;
       }
       
@@ -1215,13 +1860,13 @@
         width: 100%;
       }
       
-      .widget-link-mobile .fb-widget-wrapper,
+      .widget-link-mobile .fb-widget,
       .widget-link-mobile .insta-widget {
         pointer-events: none;
         cursor: pointer;
       }
       
-      .widget-link-mobile .fb-widget-wrapper iframe,
+      .widget-link-mobile .fb-widget *,
       .widget-link-mobile .insta-widget * {
         pointer-events: none;
       }
@@ -1277,7 +1922,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
+      /* object-position will be set by individual photo rules below */
     }
 
     /* FIVE CARD GALLERY GRID */
@@ -1411,7 +2056,7 @@
       text-decoration: underline;
       font-weight: 700;
     }
-    .footer-copyright { color: #000; font-size: 0.875rem; line-height: 1.4; }
+    .footer-copyright { color: #000; font-size: 0.65rem; line-height: 1.4; }
     .footer-links { display: flex; gap: 7rem; }
     .footer-links .links a {
       position: relative;
@@ -1463,20 +2108,36 @@
       color: #666;
       font-weight: 700;
     }
-    .footer-social { display: flex; flex-direction: column; align-items: flex-end; gap: 3.75rem; }
+    .footer-social { display: flex; flex-direction: column; align-items: flex-end; gap: 2.5rem; }
     .socials { display: flex; gap: 0.75rem; }
     .socials a { 
       display: inline-block; 
       text-decoration: none; 
       transition: all 0.3s ease;
-      width: 48px;
-      height: 48px;
+      width: 40px;
+      height: 40px;
     }
     .socials a:hover {
       transform: scale(1.1);
       opacity: 0.8;
     }
-    .footer-social .footer-copyright { text-align: right; }
+    .footer-social .footer-copyright { 
+      text-align: right; 
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    .footer-social .footer-copyright:not(:last-of-type) {
+      margin-bottom: -1rem;
+    }
+    .footer-social .footer-copyright a {
+      color: #000;
+      font-family: 'McLaren', cursive;
+      text-decoration: none;
+    }
+    .footer-social .footer-copyright a:hover {
+      text-decoration: none;
+      color: #000;
+    }
 
     /* EMAIL ICON STYLING - Desktop only */
     .footer-email img {
@@ -2249,13 +2910,15 @@
       
       /* Mobile Social Widget Headers */
       .facebook-widget-header h2,
-      .instagram-widget-header h2 {
+      .instagram-widget-header h2,
+      .tiktok-widget-header h2 {
         font-size: 1.25rem !important;
         margin-bottom: 0.5rem !important;
       }
       
       .facebook-widget-header p,
-      .instagram-widget-header p {
+      .instagram-widget-header p,
+      .tiktok-widget-header p {
         font-size: 0.85rem !important;
         margin-bottom: 1rem !important;
       }
@@ -2416,15 +3079,29 @@
       }
       
       .socials a {
-        width: 56px !important;
-        height: 56px !important;
+        width: 42px !important;
+        height: 42px !important;
       }
       
       .footer-social .footer-copyright {
         text-align: center !important;
-        font-size: 0.75rem !important;
+        font-size: 0.6rem !important;
         line-height: 1.3 !important;
         width: 100% !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+      }
+      .footer-social .footer-copyright:not(:last-of-type) {
+        margin-bottom: -1.2rem !important;
+      }
+      .footer-social .footer-copyright a {
+        color: #000 !important;
+        font-family: 'McLaren', cursive !important;
+        text-decoration: none !important;
+      }
+      .footer-social .footer-copyright a:hover {
+        text-decoration: none !important;
+        color: #000 !important;
       }
       
       .stat-number {
@@ -2439,35 +3116,75 @@
       
       /* Mobile Social Widgets */
       .social-widgets-container {
-        flex-direction: column;
+        grid-template-columns: 1fr !important;
         gap: 2rem;
         padding: 0 1rem;
       }
+
       
       .facebook-widget-container,
-      .instagram-widget-container {
+      .instagram-widget-container,
+      .tiktok-widget-container {
         width: 100%;
         max-width: 100%;
       }
       
-      .fb-widget-wrapper,
+      .fb-widget,
       .insta-widget {
         width: 100%;
         max-width: 100%;
-        height: 160px;
+        height: 500px;
       }
       
-      .fb-widget-wrapper {
-        padding: 4px;
+      .fb-cover-container {
+        height: 160px;
       }
+
+      .fb-profile-picture {
+        width: 75px;
+        height: 75px;
+        top: -30px;
+        left: 16px;
+        border-width: 3px;
+      }
+
+      .fb-profile-section {
+        padding: 50px 16px 16px 16px;
+      }
+
+      .fb-page-name {
+        font-size: 0.65rem;
+        margin-bottom: 0;
+        white-space: normal;
+        top: 0px;
+        left: 99px;
+        max-width: calc(100% - 115px);
+      }
+
+      .fb-buttons {
+        margin-top: 4px;
+      }
+
+      .fb-btn-like,
+      .fb-btn-message {
+        font-size: 0.6rem;
+        padding: 4px 8px;
+      }
+      
+      .tiktok-widget-wrapper {
+        width: 100%;
+        max-width: 100%;
+        height: 500px;
+      }
+      
       
       .insta-widget {
         padding: 10px 15px;
       }
       
       .insta-avatar {
-        width: 45px;
-        height: 45px;
+        width: 52px;
+        height: 52px;
       }
       
       .insta-info h3 {
@@ -2843,8 +3560,8 @@
         <article class="big-card">
           <div class="big-card-image"></div>
           <div class="big-card-content">
-            <h2 id="main-card-title">Bo każde istnienie<br>ma dla nas znaczenie</h2>
-            <p class="muted" id="main-card-content">Jesteśmy grupą kobiet - wolontariuszek, które założyły inicjatywę <strong>"Z Piekła do Domu"</strong> w marcu 2025 roku. Naszym celem jest ratowanie psów i kotów z trudnych, często śmiertelnych warunków panujących obecnie w Turcji. Na początku była nas garstka, ale projekt nabrał tempa i nadal rośnie w siłę. Dowiedziałyśmy się z mediów i od naszych tureckich znajomych o <strong>ustawie nr 5911</strong>, która została wdrożona w Turcji w 2024 roku. Ustawa ma na celu <strong>całkowitą eskterminacje psów bezdomnych w kraju</strong>. Nie zgadzamy się na takie okrucieństwo. Uważamy, że zwierzęta mają prawo żyć, i to godnie żyć. Szerzymy świadomość. Karmimy, leczymy psy i koty w Turcji, organizujemy transport do Polski i szukamy dobrych, odpowiedzialnych domów adopcyjnych dla naszych skrzywdzonych podopiecznych.</p>
+            <h2 id="main-card-title">Nasza misja</h2>
+            <p class="muted" id="main-card-content">Jesteśmy grupą kobiet - wolontariuszek, które założyły inicjatywę <strong>"Z Piekła do Domu"</strong> w marcu 2025 roku. Naszym celem jest ratowanie psów i kotów z trudnych, często śmiertelnych warunków panujących obecnie w Turcji. Na początku była nas garstka, ale projekt nabrał tempa i nadal rośnie w siłę. Dowiedziałyśmy się z mediów i od naszych tureckich znajomych o <a href="ustawa-nr-5911.html" class="ustawa-link" style="color: #000; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;"><img src="images/exclamation-mark.svg" alt="!" style="width: 14px; height: 14px; vertical-align: middle;"><strong>ustawie nr 5911</strong> <span style="font-size: 0.65em;">(czytaj więcej)</span></a>, która została wdrożona w Turcji w 2024 roku. Ustawa ma na celu <strong>całkowitą eskterminacje psów bezdomnych w kraju</strong>. Nie zgadzamy się na takie okrucieństwo. Uważamy, że zwierzęta mają prawo żyć, i to godnie żyć. Szerzymy świadomość. Karmimy, leczymy psy i koty w Turcji, organizujemy transport do Polski i szukamy dobrych, odpowiedzialnych domów adopcyjnych dla naszych skrzywdzonych podopiecznych.</p>
             <a href="wsparcie.html" class="btn btn-primary" id="main-card-button" style="text-decoration: none;" onclick="window.location.href='wsparcie.html'; return true;">Wspomóż nas ↗</a>
           </div>
         </article>
@@ -2855,47 +3572,133 @@
     <section class="section facebook-widget-section">
       <div class="container">
         <div class="social-widgets-container">
+          <!-- Facebook Widget -->
           <div class="facebook-widget-container">
             <div class="facebook-widget-header">
               <h2>Śledź nas na Facebooku</h2>
-              <p>Bądź na bieżąco z naszymi działaniami i historiami zwierząt</p>
+              <p>Adopcje, newsy i wiele więcej!</p>
             </div>
-            <a href="https://www.facebook.com/profile.php?id=61577219922888" target="_blank" class="widget-link-mobile">
-            <div class="fb-widget-wrapper">
-              <div class="fb-page"
-                data-href="https://www.facebook.com/profile.php?id=61577219922888"
-                data-tabs=""
-                data-width="400"
-                data-height="600"
-                data-small-header="false"
-                data-adapt-container-width="true"
-                data-hide-cover="false"
-                data-show-facepile="true">
+            <a href="https://www.facebook.com/profile.php?id=61577219922888" target="_blank" class="fb-widget-link">
+              <div class="fb-widget">
+                <!-- Banner/Cover Image -->
+                <div class="fb-cover-container">
+                  <img src="images/fb-background.jpg" alt="Facebook cover" class="fb-cover-image">
+                </div>
+                
+                <!-- Profile Section -->
+                <div class="fb-profile-section">
+                  <!-- Profile Picture -->
+                  <div class="fb-profile-picture">
+                    <img src="images/logo.svg" alt="Z Piekła do Domu Logo" class="fb-avatar">
+                  </div>
+                  
+                  <!-- Page Info and Buttons -->
+                  <div class="fb-info-section">
+                    <div class="fb-page-name">
+                      Z piekła do domu - Ratujemy psy i koty z Turcji
+                    </div>
+                    
+                    <div class="fb-buttons">
+                      <span class="fb-btn-like">
+                        <img src="images/like-icon.svg" alt="Like" class="fb-btn-icon">
+                        Lubię to
+                      </span>
+                      <span class="fb-btn-message">
+                        <img src="images/messenger-icon.svg" alt="Message" class="fb-btn-icon">
+                        Wyślij wiadomość
+                      </span>
+                    </div>
+                    
+                    <p class="fb-description-title">Prezentacja</p>
+                    <p class="fb-description-text">Dla nas psy i koty nie mają narodowości. Ratujemy je z tureckich mordowni i dajemy im nowe życie. Nie uratujemy całego świata, ale możemy zmienić świat dla jednego psa.</p>
+                    <div class="fb-info-lines">
+                      <div class="fb-info-line">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#8a8d91" class="fb-info-icon">
+                          <path d="M10 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2h-8l-2-2z"/>
+                        </svg>
+                        <span class="fb-info-text"><strong>Strona</strong> · Zwierzęta</span>
+                      </div>
+                      <div class="fb-info-line">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#8a8d91" class="fb-info-icon">
+                          <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        <span class="fb-info-text">zpiekladodomu@gmail.com</span>
+                      </div>
+                      <div class="fb-info-line">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#8a8d91" class="fb-info-icon fb-link-icon">
+                          <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+                        </svg>
+                        <span class="fb-info-text">zpiekladodomu.pl</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
             </a>
           </div>
           
+          <!-- Instagram Widget -->
           <div class="instagram-widget-container">
             <div class="instagram-widget-header">
               <h2>Śledź nas na Instagramie</h2>
-              <p>Zobacz najnowsze zdjęcia i historie naszych podopiecznych</p>
+              <p>Ważne informacje, tureckie realia</p>
             </div>
-            <a href="https://www.instagram.com/z_piekla_do_domu_/" target="_blank" class="widget-link-mobile">
-            <div class="insta-widget">
-                <div class="insta-profile">
-                <img src="images/logo.svg" 
-                     alt="Z Piekła do Domu Logo" class="insta-avatar">
-                <div class="insta-info">
-                  <h3>@z_piekla_do_domu_</h3>
-                  <p>Profil na Instagramie — zobacz więcej postów!</p>
+            <a href="https://www.instagram.com/z_piekla_do_domu_/" target="_blank" class="insta-widget-link">
+              <div class="insta-widget">
+                <!-- Instagram Icons in Top Left Corner -->
+                <img src="images/instagram.svg" alt="Instagram" class="insta-corner-icon">
+                <img src="images/Instagram-logo.svg" alt="Instagram Logo" class="insta-corner-icon insta-logo-icon">
+                
+                <!-- Top Section: Profile Info -->
+                <div class="insta-profile-column">
+                  <div class="insta-profile">
+                    <img src="images/logo.svg" 
+                         alt="Z Piekła do Domu Logo" class="insta-avatar">
+                    <div class="insta-info">
+                      <div class="insta-username">
+                        <span>z_piekla_do_domu_</span>
+                      </div>
+                      <p class="insta-description">Zwierzęta nie mają narodowości. Ratujemy psy i koty z Turcji, gdzie od 2.08.2024 maja prawdziwe piekło.</p>
+                    </div>
+                  </div>
+                  <div class="insta-buttons">
+                    <span class="insta-btn-follow">Follow</span>
+                    <span class="insta-btn-message">Message</span>
+                  </div>
+                  <img src="images/stories.jpg" alt="Instagram stories" class="insta-stories-image">
                 </div>
+                
+                <!-- Bottom Section: Video and Images -->
+                <div class="insta-posts-row">
+                  <div class="insta-post-preview">
+                    <video src="images/puppies.mp4" class="insta-post-image" autoplay muted loop playsinline></video>
+                  </div>
+                  
+                  <div class="insta-post-preview">
+                    <img src="images/tvn.jpeg" alt="Instagram post" class="insta-post-image" loading="lazy">
+                  </div>
+                  
+                  <div class="insta-post-preview">
+                    <img src="images/insta-post3.jpg" alt="Instagram post" class="insta-post-image" loading="lazy">
+                  </div>
                 </div>
-                <div class="insta-btn">
-                Zobacz na Instagramie
-            </div>
               </div>
             </a>
+          </div>
+          
+          <!-- TikTok Widget -->
+          <div class="tiktok-widget-container">
+          <div class="tiktok-widget-header">
+            <h2>Śledź nas na TikToku</h2>
+            <p>Pomóz naszym zwierzakom polecieć w viral i nagłośnić co dzieje się w Turcji</p>
+          </div>
+          <div class="tiktok-widget-wrapper">
+            <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@zpiekladodomu1" data-unique-id="zpiekladodomu1" data-embed-type="creator" style="max-width: 600px; min-width: 288px;">
+              <section>
+                <a target="_blank" href="https://www.tiktok.com/@zpiekladodomu1?refer=creator_embed">@zpiekladodomu1</a>
+              </section>
+            </blockquote>
+            <script async src="https://www.tiktok.com/embed.js"></script>
           </div>
         </div>
       </div>
@@ -3152,14 +3955,14 @@
         <div class="gallery-grid-five-cards">
           <!-- Left column - 1 smaller card (first row) -->
           <div class="gallery-item image-card">
-            <div class="image-container" style="background-image: url('images/dog-10.jpg'); background-size: cover; background-position: center 75%; background-repeat: no-repeat;">
+            <div class="image-container" style="background-image: url('images/dog-10.jpg'); background-size: cover; background-repeat: no-repeat;">
               <img src="images/dog-10.jpg" alt="Dog 10" class="gallery-image" style="opacity: 0;">
             </div>
           </div>
           
           <!-- Right column - 1 smaller card (first row) -->
           <div class="gallery-item image-card sensitive-content" onclick="toggleSensitiveContent(this)">
-            <div class="image-container" style="background-image: url('images/dog-9.jpg'); background-size: cover; background-position: center 40%; background-repeat: no-repeat;">
+            <div class="image-container" style="background-image: url('images/dog-9.jpg'); background-size: cover; background-repeat: no-repeat;">
               <img src="images/dog-9.jpg" alt="Dog 9" class="gallery-image" style="opacity: 0;">
             </div>
             <div class="sensitive-overlay">
@@ -3188,14 +3991,14 @@
           
           <!-- Left column - 1 smaller card (second row) -->
           <div class="gallery-item image-card">
-            <div class="image-container" style="background-image: url('images/dog-11.jpg'); background-size: cover; background-position: center 70%; background-repeat: no-repeat;">
+            <div class="image-container" style="background-image: url('images/dog-11.jpg'); background-size: cover; background-repeat: no-repeat;">
               <img src="images/dog-11.jpg" alt="Dog 11" class="gallery-image" style="opacity: 0;">
             </div>
           </div>
           
           <!-- Right column - 1 smaller card (second row) -->
           <div class="gallery-item image-card">
-            <div class="image-container" style="background-image: url('images/dog-12.jpg'); background-size: cover; background-position: center 70%; background-repeat: no-repeat;">
+            <div class="image-container" style="background-image: url('images/dog-12.jpg'); background-size: cover; background-repeat: no-repeat;">
               <img src="images/dog-12.jpg" alt="Dog 12" class="gallery-image" style="opacity: 0;">
             </div>
           </div>
@@ -3257,13 +4060,17 @@
       </div>
       <div class="footer-social">
         <div class="socials">
-          <a href="https://www.instagram.com/z_piekla_do_domu_/" aria-label="Instagram" target="_blank"><img src="images/instagram.svg" alt="Instagram" width="48" height="48"></a>
-          <a href="https://www.facebook.com/profile.php?id=61577219922888" aria-label="Facebook" target="_blank"><img src="images/facebook.svg" alt="Facebook" width="48" height="48"></a>
-          <a href="https://x.com/zpiekladodomu" aria-label="X (Twitter)" target="_blank"><img src="images/x-logo.svg" alt="X" width="48" height="48"></a>
+          <a href="https://www.tiktok.com/@zpiekladodomu1" aria-label="TikTok" target="_blank"><img src="images/tiktok-icon.svg" alt="TikTok" width="40" height="40"></a>
+          <a href="https://www.instagram.com/z_piekla_do_domu_/" aria-label="Instagram" target="_blank"><img src="images/instagram.svg" alt="Instagram" width="40" height="40"></a>
+          <a href="https://www.facebook.com/profile.php?id=61577219922888" aria-label="Facebook" target="_blank"><img src="images/facebook.svg" alt="Facebook" width="40" height="40"></a>
+          <a href="https://x.com/zpiekladodomu" aria-label="X (Twitter)" target="_blank"><img src="images/x-logo.svg" alt="X" width="40" height="40"></a>
         </div>
         <div class="footer-copyright">
           <div>Z Piekła do domu 2025 ©</div>
           <div>Wszelkie prawa zastrzeżone</div>
+        </div>
+        <div class="footer-copyright">
+          <div>©Logo autorstwa <b><a href="https://www.facebook.com/magdalena.marcinek.75">Magdaleny Marcinek</a></b></div>
         </div>
       </div>
     </div>
@@ -3472,8 +4279,8 @@
     })();
   </script>
 
-  <!-- CMS Content Loader -->
-  <script src="js/cms-content.js"></script>
+  <!-- CMS Content Loader - Disabled to use static content -->
+  <!-- <script src="js/cms-content.js"></script> -->
 
   <!-- Video Modal -->
   <div id="videoModal" class="video-modal">
@@ -3893,6 +4700,17 @@
 
     function toggleSensitiveContent(element) {
       element.classList.toggle('revealed');
+      // Also update overlay visibility to ensure it works
+      const overlay = element.querySelector('.sensitive-overlay');
+      if (overlay) {
+        if (element.classList.contains('revealed')) {
+          overlay.style.opacity = '0';
+          overlay.style.pointerEvents = 'none';
+        } else {
+          overlay.style.opacity = '1';
+          overlay.style.pointerEvents = 'auto';
+        }
+      }
     }
 
     // Close modal when clicking outside the video
@@ -4048,7 +4866,1209 @@
     // Initialize on load and resize
     document.addEventListener('DOMContentLoaded', initializeCarousels);
     window.addEventListener('resize', initializeCarousels);
+    
+    // Gallery Carousel System - Automatic Rotation
+    // Define multiple sets of Facebook embeds and photos
+    const galleryContentSets = {
+      // First Gallery Section - Main gallery with embeds and photos
+      mainGallery: {
+        facebookEmbeds: [
+          [
+            'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fwatch%2F%3Fv%3D1109763807595155&show_text=false&width=400',
+            'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F1356925742532079&show_text=false&width=400'
+          ],
+          [
+            'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F1193461922687928&show_text=false&width=400',
+            'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F1356925742532079&show_text=false&width=400'
+          ],
+          [
+            'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F1341984180267939&show_text=false&width=400',
+            'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F852596487705627&show_text=false&width=400'
+          ],
+          [
+            'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F812709404987959&show_text=false&width=400',
+            'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F726883566427123&show_text=false&width=400'
+          ],
+          [
+            'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F1327628602396359&show_text=false&width=400',
+            'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fwatch%2F%3Fv%3D1109763807595155&show_text=false&width=400'
+          ],
+          [
+            'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F1326213212562724&show_text=false&width=400',
+            'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F726883566427123&show_text=false&width=400'
+          ]
+        ],
+        photos: [
+          ['images/dog-4.jpg', 'images/dog-5.jpg'],
+          ['images/dog-7.jpg', 'images/dog-8.jpg'],
+          ['images/dog-10.jpg', 'images/dog-11.jpg'],
+              ['images/bbb2.jpg', 'images/ustawa3.jpg'],
+          ['images/patka3.jpg', 'images/piorun1.jpg'],
+          ['images/tygrysek8.jpg', 'images/dog-15.jpg'],
+          ['images/insta-post3.jpg', 'images/dog-16.jpg'],
+          ['images/cat1.jpg', 'images/dog-17.jpg']
+        ]
+      },
+      // Five-card gallery section
+      fiveCardGallery: {
+        facebookEmbed: [
+          'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F1193461922687928&show_text=false&width=400',
+          'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fwatch%2F%3Fv%3D1109763807595155&show_text=false&width=400',
+          'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F1356925742532079&show_text=false&width=400',
+          'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F1341984180267939&show_text=false&width=400',
+          'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F852596487705627&show_text=false&width=400',
+          'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F812709404987959&show_text=false&width=400',
+          'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F726883566427123&show_text=false&width=400',
+          'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F1327628602396359&show_text=false&width=400',
+          'https://www.facebook.com/plugins/video.php?height=700&href=https%3A%2F%2Fwww.facebook.com%2Fzpiekladoddomu%2Fvideos%2F1326213212562724&show_text=false&width=400'
+        ],
+        photos: [
+          ['images/dog-10.jpg', 'images/dog-9.jpg', 'images/dog-11.jpg', 'images/dog-12.jpg'],
+          ['images/dog-7.jpg', 'images/dog-8.jpg', 'images/dog-6.jpg', 'images/dog-4.jpg'],
+          ['images/dog-5.jpg', 'images/dog-10.jpg', 'images/dog-11.jpg', 'images/dog-12.jpg'],
+              ['images/bbb2.jpg', 'images/ustawa3.jpg', 'images/patka3.jpg', 'images/piorun1.jpg'],
+          ['images/tygrysek8.jpg', 'images/dog-15.jpg', 'images/insta-post3.jpg', 'images/dog-16.jpg'],
+          ['images/cat1.jpg', 'images/dog-17.jpg', 'images/dog-4.jpg', 'images/dog-5.jpg']
+        ]
+      }
+    };
+    
+    let galleryCarouselIntervals = {};
+    let currentlyDisplayedPhotos = new Set(); // Track currently displayed photos to avoid duplicates
+    
+    // All available photos pool (including dog-9.jpg for sensitive content card)
+    const allPhotos = [
+      'images/dog-4.jpg', 'images/dog-5.jpg', 'images/dog-6.jpg', 'images/dog-7.jpg',
+      'images/dog-8.jpg', 'images/dog-9.jpg', 'images/dog-10.jpg', 'images/dog-11.jpg', 'images/dog-12.jpg',
+        'images/bbb2.jpg', 'images/ustawa3.jpg', 'images/patka3.jpg', 'images/piorun1.jpg',
+      'images/tygrysek8.jpg', 'images/dog-15.jpg', 'images/insta-post3.jpg', 'images/dog-16.jpg',
+      'images/cat1.jpg', 'images/dog-17.jpg'
+    ];
+    
+    // Shuffle array function
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+    
+    // Get unique photos that aren't currently displayed
+    function getUniquePhotos(count, excludePhotos = []) {
+      // Combine all exclusions: tracking set + explicit exclude list
+      const allExcluded = new Set();
+      currentlyDisplayedPhotos.forEach(photo => allExcluded.add(photo));
+      excludePhotos.forEach(photo => allExcluded.add(photo));
+      
+      // Get all photos that aren't excluded
+      const available = allPhotos.filter(photo => !allExcluded.has(photo));
+      
+      // If we don't have enough unique photos, shuffle all and try to minimize duplicates
+      if (available.length < count) {
+        // Shuffle all photos
+        const shuffled = shuffleArray(allPhotos);
+        // Try to get count photos, preferring non-excluded ones
+        const result = [];
+        const used = new Set();
+        // First pass: add non-excluded photos
+        for (const photo of shuffled) {
+          if (result.length >= count) break;
+          if (!allExcluded.has(photo) && !used.has(photo)) {
+            result.push(photo);
+            used.add(photo);
+          }
+        }
+        // Second pass: add any photos if still needed (avoid duplicates within result)
+        for (const photo of shuffled) {
+          if (result.length >= count) break;
+          if (!used.has(photo)) {
+            result.push(photo);
+            used.add(photo);
+          }
+        }
+        return result;
+      }
+      
+      // Return shuffled available photos
+      return shuffleArray(available).slice(0, count);
+    }
+    
+    // Helper function to get optimal positioning for each photo
+    function getPhotoPosition(photoPath) {
+      const positionMap = {
+        'dog-4.jpg': '50%',      // Increased from 35%
+        'dog-5.jpg': '55%',       // Increased from 40%
+        'dog-6.jpg': '45%',       // Increased from 25%
+        'dog-7.jpg': '50%',       // Increased from 30%
+        'dog-8.jpg': '70%',       // Increased from 60%
+        'dog-9.jpg': '55%',       // Increased from 40%
+        'dog-10.jpg': '50%',      // Increased from 30%
+        'dog-11.jpg': '80%',      // Increased from 75%
+        'dog-12.jpg': '75%',      // Increased from 70%
+        'tygrysek8.jpg': '75%',   // Increased from 70%
+        'dog-15.jpg': '55%',      // Increased from 40%
+        'dog-16.jpg': '50%',      // Increased from 35%
+        'dog-17.jpg': '50%',      // Increased from 30%
+        'bbb2.jpg': '70%',        // Increased from 60%
+        'ustawa3.jpg': '70%',     // Increased from 60%
+        'patka3.jpg': '55%',      // Increased from 40%
+        'piorun1.jpg': '70%',     // Increased from 60%
+        'insta-post3.jpg': '70%', // Increased from 60%
+        'cat1.jpg': '55%'         // Increased from 40%
+      };
+      
+      // Extract filename from path
+      const filename = photoPath.split('/').pop();
+      return positionMap[filename] || '50%'; // Default to 50% if not found (lowered from 30%)
+    }
+    
+    // Helper function to apply positioning to a single image/container (global scope)
+    // Accepts optional photoPathOverride to ensure correct photo is identified
+    function applyPhotoPositioning(img, container, photoPathOverride = null) {
+      if (!img && !container) return;
+      
+      // Use provided photo path if available, otherwise try to extract it
+      let photoPath = photoPathOverride;
+      
+      // Get photo path from multiple sources if not provided - be thorough
+      if (!photoPath) {
+        // 1. Try img src (including full URL, relative path, or attribute)
+        if (img) {
+          const imgSrc = img.src || img.getAttribute('src') || img.getAttribute('data-src') || img.currentSrc || '';
+          if (imgSrc) {
+            // Extract filename from full URL or relative path
+            const photoMatch = imgSrc.match(/images\/[^/]+\.(jpg|jpeg|png|gif|webp)/i) || imgSrc.match(/([^/]+\.(jpg|jpeg|png|gif|webp))/i);
+            if (photoMatch) {
+              // If full path found, use it; otherwise construct from filename
+              photoPath = photoMatch[0].includes('images/') ? photoMatch[0] : 'images/' + photoMatch[1];
+            }
+          }
+        }
+        
+        // 2. Try container background-image
+        if (!photoPath && container) {
+          const bgImage = container.style.backgroundImage || (window.getComputedStyle ? window.getComputedStyle(container).backgroundImage : '') || '';
+          if (bgImage && bgImage !== 'none' && bgImage.includes('url(')) {
+            const bgMatch = bgImage.match(/images\/[^/)]+\.(jpg|jpeg|png|gif|webp)/i);
+            if (bgMatch) {
+              photoPath = bgMatch[0];
+            }
+          }
+        }
+        
+        // 3. Try finding img element inside container if we have container but no img
+        if (!photoPath && container && !img) {
+          const foundImg = container.querySelector('img');
+          if (foundImg) {
+            const imgSrc = foundImg.src || foundImg.getAttribute('src') || '';
+            if (imgSrc) {
+              const photoMatch = imgSrc.match(/images\/[^/]+\.(jpg|jpeg|png|gif|webp)/i) || imgSrc.match(/([^/]+\.(jpg|jpeg|png|gif|webp))/i);
+              if (photoMatch) {
+                photoPath = photoMatch[0].includes('images/') ? photoMatch[0] : 'images/' + photoMatch[1];
+              }
+            }
+          }
+        }
+      }
+      
+      if (photoPath) {
+        const position = getPhotoPosition(photoPath);
+        
+        // Store photo path as data attribute for CSS targeting
+        if (container) {
+          container.setAttribute('data-photo-src', photoPath);
+        }
+        if (img) {
+          img.setAttribute('data-photo-src', photoPath);
+        }
+        
+        // Check if img is hidden (opacity: 0) - if so, container background-image is what's visible
+        let isImgVisible = true;
+        if (img) {
+          const imgOpacity = img.style.opacity || (window.getComputedStyle ? window.getComputedStyle(img).opacity : '1');
+          isImgVisible = imgOpacity !== '0' && imgOpacity !== '0px';
+        }
+        
+        // CRITICAL: Always set BOTH container background-position AND img object-position
+        // Some cards use background-image (when img opacity: 0), others use the actual img
+        
+        // 1. Always set container background-position (works for background-image cards)
+        if (container) {
+          // Force set background-position - remove first then set
+          container.style.setProperty('background-position', `center ${position}`, 'important');
+          
+          // Also update inline style attribute directly
+          let currentStyle = container.getAttribute('style') || '';
+          // Remove existing background-position declarations
+          currentStyle = currentStyle.replace(/background-position\s*:\s*[^;]+;?/gi, '');
+          currentStyle = currentStyle.trim();
+          if (currentStyle && !currentStyle.endsWith(';')) {
+            currentStyle += '; ';
+          }
+          currentStyle += `background-position: center ${position} !important;`;
+          container.setAttribute('style', currentStyle);
+          
+          // Ensure background-size is set if there's a background-image
+          const bgImageCheck = container.style.backgroundImage || (window.getComputedStyle ? window.getComputedStyle(container).backgroundImage : '') || '';
+          if (bgImageCheck && bgImageCheck !== 'none') {
+            container.style.setProperty('background-size', 'cover', 'important');
+          }
+        }
+        
+        // 2. Always set img object-position (works for visible img cards)
+        if (img) {
+          // Apply positioning with maximum priority - use helper function
+          const applyImgPosition = () => {
+            img.style.setProperty('object-fit', 'cover', 'important');
+            img.style.setProperty('object-position', `center ${position}`, 'important');
+            
+            // Also update inline style attribute directly for maximum persistence
+            let imgStyle = img.getAttribute('style') || '';
+            // Remove ALL existing object-position declarations
+            imgStyle = imgStyle.replace(/object-position\s*:\s*[^;!]+(!important)?;?/gi, '');
+            imgStyle = imgStyle.trim();
+            if (imgStyle && !imgStyle.endsWith(';')) {
+              imgStyle += '; ';
+            }
+            imgStyle += `object-position: center ${position} !important;`;
+            img.setAttribute('style', imgStyle);
+          };
+          
+          // Apply immediately
+          applyImgPosition();
+          
+          // Reapply after image loads to ensure it sticks
+          if (!img.complete) {
+            const loadHandler = function() {
+              applyImgPosition();
+              img.removeEventListener('load', loadHandler);
+            };
+            img.addEventListener('load', loadHandler);
+          } else {
+            // Image already loaded, reapply multiple times
+            setTimeout(applyImgPosition, 10);
+            setTimeout(applyImgPosition, 50);
+            setTimeout(applyImgPosition, 150);
+          }
+        }
+        
+        // Update sensitive overlay if needed
+        if (container) {
+          updateSensitiveOverlay(container, photoPath);
+        }
+      }
+    }
+    
+    // Helper function to add/remove sensitive overlay on video embeds
+    function updateSensitiveVideoOverlay(container, videoUrl) {
+      const sensitiveVideoId = '812709404987959';
+      const isSensitiveVideo = videoUrl && videoUrl.includes(sensitiveVideoId);
+      const galleryItem = container.closest('.gallery-item');
+      
+      if (!galleryItem) return;
+      
+      // Check if overlay already exists
+      let overlay = galleryItem.querySelector('.sensitive-overlay');
+      
+      if (isSensitiveVideo) {
+        // Need to show overlay - create if doesn't exist
+        if (!overlay) {
+          overlay = document.createElement('div');
+          overlay.className = 'sensitive-overlay';
+          overlay.innerHTML = `
+            <div class="visibility-icon-container">
+              <div class="visibility-icon"></div>
+              <span class="sensitive-text">Click to view</span>
+            </div>
+          `;
+          galleryItem.style.position = 'relative'; // Ensure positioning context
+          galleryItem.appendChild(overlay);
+          
+          // Add click handler directly to overlay
+          galleryItem.style.cursor = 'pointer';
+          overlay.style.cursor = 'pointer';
+          
+          // Click handler on overlay - this will fire when clicking the overlay
+          overlay.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent event bubbling
+            toggleSensitiveContent(galleryItem);
+          }, false);
+          
+          // Also handle clicks on galleryItem - preserve existing onclick if it exists
+          const originalOnclick = galleryItem.onclick;
+          // Store original onclick in dataset for restoration later
+          if (originalOnclick && !galleryItem.dataset.originalOnclickStored) {
+            galleryItem.dataset.originalOnclickStored = 'true';
+            galleryItem.dataset.originalOnclick = originalOnclick.toString();
+          }
+          galleryItem.onclick = function(e) {
+            // If overlay is visible and click is not on overlay, toggle
+            if (overlay && overlay.style.display !== 'none' && overlay.style.opacity !== '0' && e.target !== overlay && !overlay.contains(e.target)) {
+              toggleSensitiveContent(galleryItem);
+            } else if (galleryItem.classList.contains('revealed') && originalOnclick) {
+              // If revealed and has original handler, use it
+              originalOnclick.call(this, e);
+            }
+          };
+        }
+        overlay.style.display = 'flex';
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'auto';
+      } else {
+        // Hide overlay if it exists
+        if (overlay) {
+          overlay.style.display = 'none';
+          overlay.style.opacity = '0';
+          overlay.style.pointerEvents = 'none';
+        }
+        // Restore original onclick handler if it was stored
+        if (galleryItem.dataset.originalOnclick) {
+          // Restore cursor to default only if no other handler exists
+          if (!galleryItem.onclick || galleryItem.onclick.toString().includes('toggleSensitiveContent')) {
+            galleryItem.style.cursor = '';
+          }
+        } else {
+          // If no original handler was stored, just clear cursor
+          galleryItem.style.cursor = '';
+        }
+      }
+    }
+    
+    // Helper function to add/remove sensitive overlay on any card
+    function updateSensitiveOverlay(container, photoPath) {
+      const sensitivePhotoPath = 'images/dog-9.jpg';
+      // Find the gallery item - could be .gallery-item or parent of .facebook-photo-container
+      let galleryItem = container.closest('.gallery-item');
+      if (!galleryItem && container.classList.contains('facebook-photo-container')) {
+        galleryItem = container.closest('.facebook-photo');
+      }
+      
+      if (!galleryItem) return;
+      
+      // Check if overlay already exists
+      let overlay = galleryItem.querySelector('.sensitive-overlay');
+      const isSensitivePhoto = photoPath === sensitivePhotoPath;
+      
+      if (isSensitivePhoto) {
+        // Need to show overlay - create if doesn't exist
+        if (!overlay) {
+          overlay = document.createElement('div');
+          overlay.className = 'sensitive-overlay';
+          overlay.innerHTML = `
+            <div class="visibility-icon-container">
+              <div class="visibility-icon"></div>
+              <span class="sensitive-text">Click to view</span>
+            </div>
+          `;
+          galleryItem.style.position = 'relative'; // Ensure positioning context
+          galleryItem.appendChild(overlay);
+          
+          // Add click handler directly to overlay
+          galleryItem.style.cursor = 'pointer';
+          overlay.style.cursor = 'pointer';
+          
+          // Click handler on overlay - this will fire when clicking the overlay
+          overlay.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent event bubbling
+            toggleSensitiveContent(galleryItem);
+          }, false);
+          
+          // Also handle clicks on galleryItem (for existing sensitive-content items)
+          if (galleryItem.classList.contains('sensitive-content')) {
+            const originalOnclick = galleryItem.onclick;
+            galleryItem.onclick = function(e) {
+              // If clicking directly on galleryItem and overlay is visible, toggle
+              if (e.target === galleryItem || (overlay && overlay.style.opacity !== '0' && !overlay.contains(e.target))) {
+                toggleSensitiveContent(galleryItem);
+              } else if (originalOnclick) {
+                originalOnclick.call(this, e);
+              }
+            };
+          } else {
+            // For dynamically added overlays
+            galleryItem.onclick = function(e) {
+              if (overlay && overlay.style.opacity !== '0' && e.target !== overlay && !overlay.contains(e.target)) {
+                toggleSensitiveContent(galleryItem);
+              }
+            };
+          }
+        }
+        overlay.style.display = 'flex';
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'auto';
+      } else {
+        // Hide overlay if it exists
+        if (overlay) {
+          overlay.style.display = 'none';
+          overlay.style.opacity = '0';
+          overlay.style.pointerEvents = 'none';
+        }
+        // Remove click handler if not sensitive and not originally sensitive-content
+        if (!galleryItem.classList.contains('sensitive-content')) {
+          galleryItem.style.cursor = '';
+          galleryItem.onclick = null;
+        }
+      }
+    }
+    
+    // Function to get currently displayed photos from DOM
+    function getCurrentlyDisplayedPhotos() {
+      const displayed = new Set();
+      const allImageContainers = document.querySelectorAll('.gallery-item .image-container img, .facebook-photo-container img');
+      
+      allImageContainers.forEach(img => {
+        if (img && img.src) {
+          const photoMatch = img.src.match(/images\/[^/]+\.(jpg|jpeg|png|gif|webp)/i);
+          if (photoMatch) {
+            displayed.add(photoMatch[0]);
+          }
+        }
+      });
+      
+      // Also check background-images on containers
+      const allContainers = document.querySelectorAll('.image-container, .facebook-photo-container');
+      allContainers.forEach(container => {
+        const bgImage = container.style.backgroundImage || (window.getComputedStyle ? window.getComputedStyle(container).backgroundImage : '');
+        if (bgImage && bgImage !== 'none' && bgImage.includes('url(')) {
+          const bgMatch = bgImage.match(/images\/[^/)]+\.(jpg|jpeg|png|gif|webp)/i);
+          if (bgMatch) {
+            displayed.add(bgMatch[0]);
+          }
+        }
+      });
+      
+      return displayed;
+    }
+    
+    function rotateGalleryContent() {
+      // ATOMIC APPROACH: Select ALL new photos for ALL galleries at once
+      // This guarantees no duplicates across galleries
+      
+      // Rebuild tracking from DOM to ensure we have accurate state
+      const currentlyVisible = getCurrentlyDisplayedPhotos();
+      currentlyDisplayedPhotos.clear();
+      currentlyVisible.forEach(photo => {
+        currentlyDisplayedPhotos.add(photo);
+      });
+      
+      // Step 1: Collect all containers that need new photos
+      const mainGallery = document.querySelector('.gallery-grid');
+      const threeCardGallery = document.querySelector('.gallery-grid-three-cards');
+      const fiveCardGallery = document.querySelector('.gallery-grid-five-cards');
+      
+      const containersToUpdate = [];
+      const currentPhotosToReplace = [];
+      
+      // Main gallery photos (2 containers)
+      if (mainGallery) {
+        const photoContainers = mainGallery.querySelectorAll('.facebook-photo-container');
+        photoContainers.forEach(container => {
+          const img = container.querySelector('img');
+          if (img) {
+            // Get current photo from src or background
+            const currentSrc = img.src || '';
+            const photoMatch = currentSrc.match(/images\/[^/]+\.(jpg|jpeg|png|gif|webp)/i);
+            if (photoMatch) {
+              currentPhotosToReplace.push(photoMatch[0]);
+            }
+            containersToUpdate.push({ container: container, type: 'main', img: img });
+          }
+        });
+      }
+      
+      // Three-card gallery (3 containers)
+      if (threeCardGallery) {
+        const photoContainers = threeCardGallery.querySelectorAll('.gallery-item.image-card .image-container');
+        photoContainers.forEach(container => {
+          const img = container.querySelector('img');
+          if (container) {
+            // Get current photo from img src or background-image
+            let currentPhoto = null;
+            if (img && img.src) {
+              const photoMatch = img.src.match(/images\/[^/]+\.(jpg|jpeg|png|gif|webp)/i);
+              if (photoMatch) currentPhoto = photoMatch[0];
+            }
+            if (!currentPhoto) {
+              const bgImage = container.style.backgroundImage || (window.getComputedStyle ? window.getComputedStyle(container).backgroundImage : '');
+              if (bgImage && bgImage.includes('url(')) {
+                const bgMatch = bgImage.match(/images\/[^/)]+\.(jpg|jpeg|png|gif|webp)/i);
+                if (bgMatch) currentPhoto = bgMatch[0];
+              }
+            }
+            if (currentPhoto) {
+              currentPhotosToReplace.push(currentPhoto);
+            }
+            containersToUpdate.push({ container: container, type: 'three', img: img });
+          }
+        });
+      }
+      
+      // Five-card gallery (4 regular + 1 sensitive)
+      if (fiveCardGallery) {
+        const photoContainers = fiveCardGallery.querySelectorAll('.gallery-item.image-card .image-container');
+        photoContainers.forEach(container => {
+          const img = container.querySelector('img');
+          const isSensitive = container.closest('.sensitive-content') !== null;
+          if (container) {
+            // Get current photo from img src or background-image
+            let currentPhoto = null;
+            if (img && img.src) {
+              const photoMatch = img.src.match(/images\/[^/]+\.(jpg|jpeg|png|gif|webp)/i);
+              if (photoMatch) currentPhoto = photoMatch[0];
+            }
+            if (!currentPhoto) {
+              const bgImage = container.style.backgroundImage || (window.getComputedStyle ? window.getComputedStyle(container).backgroundImage : '');
+              if (bgImage && bgImage.includes('url(')) {
+                const bgMatch = bgImage.match(/images\/[^/)]+\.(jpg|jpeg|png|gif|webp)/i);
+                if (bgMatch) currentPhoto = bgMatch[0];
+              }
+            }
+            if (currentPhoto) {
+              currentPhotosToReplace.push(currentPhoto);
+            }
+            containersToUpdate.push({ container: container, type: 'five', img: img, isSensitive: isSensitive });
+          }
+        });
+      }
+      
+      // Step 2: Remove current photos from tracking so they can be replaced
+      currentPhotosToReplace.forEach(photo => {
+        currentlyDisplayedPhotos.delete(photo);
+      });
+      
+      // Step 3: Select ALL new unique photos at once (guarantees no duplicates)
+      const totalPhotosNeeded = containersToUpdate.length;
+      
+      // Build exclusion set: all currently displayed photos EXCEPT the ones we're replacing
+      const excludeSet = new Set();
+      currentlyDisplayedPhotos.forEach(photo => {
+        if (!currentPhotosToReplace.includes(photo)) {
+          excludeSet.add(photo);
+        }
+      });
+      
+      // Select unique photos: first from non-excluded, then fill remaining slots
+      const selectedPhotos = [];
+      const selectedSet = new Set();
+      
+      // Get all non-excluded photos
+      const available = allPhotos.filter(photo => !excludeSet.has(photo));
+      const shuffledAvailable = shuffleArray(available);
+      
+      // Select from available first (these are guaranteed unique)
+      for (const photo of shuffledAvailable) {
+        if (selectedPhotos.length >= totalPhotosNeeded) break;
+        if (photo && !selectedSet.has(photo)) {
+          selectedPhotos.push(photo);
+          selectedSet.add(photo);
+        }
+      }
+      
+      // Fill remaining slots from all photos if needed (avoiding duplicates)
+      if (selectedPhotos.length < totalPhotosNeeded) {
+        const shuffledAll = shuffleArray(allPhotos);
+        for (const photo of shuffledAll) {
+          if (selectedPhotos.length >= totalPhotosNeeded) break;
+          if (photo && !selectedSet.has(photo) && !excludeSet.has(photo)) {
+            selectedPhotos.push(photo);
+            selectedSet.add(photo);
+          }
+        }
+      }
+      
+      // Final fallback: if still not enough, allow any unique photo
+      if (selectedPhotos.length < totalPhotosNeeded) {
+        for (const photo of allPhotos) {
+          if (selectedPhotos.length >= totalPhotosNeeded) break;
+          if (photo && !selectedSet.has(photo)) {
+            selectedPhotos.push(photo);
+            selectedSet.add(photo);
+          }
+        }
+      }
+      
+      // Step 4: Apply photos to containers - FORCE ALL TO CHANGE
+      // Update tracking AFTER photos are applied (in callback)
+      let photoIndex = 0;
+      containersToUpdate.forEach(({ container, img, isSensitive }) => {
+        if (photoIndex < selectedPhotos.length && selectedPhotos[photoIndex] && container) {
+          const newPhotoPath = selectedPhotos[photoIndex];
+          
+          // Ensure we have an img element (create if missing)
+          let targetImg = img;
+          if (!targetImg) {
+            targetImg = document.createElement('img');
+            targetImg.className = 'gallery-image';
+            targetImg.alt = 'Gallery Photo';
+            container.appendChild(targetImg);
+          }
+          
+          // Fade out
+          container.style.opacity = '0';
+          
+          setTimeout(() => {
+            // Update img src
+            targetImg.src = newPhotoPath;
+            targetImg.style.opacity = '1'; // Make sure image is visible
+            
+            // Remove background-image if it exists
+            container.style.backgroundImage = 'none';
+            container.style.backgroundSize = '';
+            container.style.backgroundPosition = '';
+            
+            // Apply positioning IMMEDIATELY with known photo path
+            applyPhotoPositioning(targetImg, container, newPhotoPath);
+            
+            // Preload and fade in
+            const tempImg = new Image();
+            tempImg.onload = () => {
+              container.style.opacity = '1';
+              // Update tracking: add photo as displayed
+              currentlyDisplayedPhotos.add(newPhotoPath);
+              // CRITICAL: Reapply positioning after image loads with photo path to ensure consistency
+              applyPhotoPositioning(targetImg, container, newPhotoPath);
+              // Update sensitive overlay if needed
+              if (isSensitive && newPhotoPath === 'images/dog-9.jpg') {
+                updateSensitiveOverlay(container, newPhotoPath);
+              }
+              // Reapply positioning multiple times with photo path to ensure it sticks
+              setTimeout(() => {
+                applyPhotoPositioning(targetImg, container, newPhotoPath);
+              }, 50);
+              setTimeout(() => {
+                applyPhotoPositioning(targetImg, container, newPhotoPath);
+              }, 150);
+              setTimeout(() => {
+                applyPhotoPositioning(targetImg, container, newPhotoPath);
+              }, 300);
+              if (window.applyPositioningToAllImages) {
+                setTimeout(window.applyPositioningToAllImages, 50);
+              }
+            };
+            tempImg.onerror = () => {
+              // Even if image fails to load, still fade in and update tracking
+              container.style.opacity = '1';
+              currentlyDisplayedPhotos.add(newPhotoPath);
+            };
+            tempImg.src = newPhotoPath;
+          }, 300);
+          
+          photoIndex++;
+        } else if (photoIndex < selectedPhotos.length) {
+          photoIndex++; // Skip if no container but advance index
+        }
+      });
+      
+      // Rotate embeds separately (they don't interfere with photo selection)
+      if (mainGallery) {
+        const embedContainers = mainGallery.querySelectorAll('.facebook-video-embed');
+        if (embedContainers.length === 2) {
+          rotateMainGalleryEmbeds(embedContainers);
+        }
+      }
+      
+      if (fiveCardGallery) {
+        const embedContainer = fiveCardGallery.querySelector('.facebook-video-embed');
+        if (embedContainer) {
+          rotateFiveCardEmbed(embedContainer);
+        }
+      }
+    }
+    
+    function rotateMainGalleryEmbeds(containers) {
+      if (!galleryCarouselIntervals.mainEmbedsIndex) {
+        galleryCarouselIntervals.mainEmbedsIndex = 0;
+      }
+      
+      const currentSet = galleryContentSets.mainGallery.facebookEmbeds[galleryCarouselIntervals.mainEmbedsIndex];
+      
+      containers.forEach((container, index) => {
+        if (currentSet[index]) {
+          const iframe = container.querySelector('iframe');
+          if (iframe) {
+            const videoUrl = currentSet[index];
+            // Fade out
+            container.style.opacity = '0';
+            setTimeout(() => {
+              iframe.src = videoUrl;
+              // Update sensitive overlay if needed
+              updateSensitiveVideoOverlay(container, videoUrl);
+              // Fade in
+              container.style.opacity = '1';
+            }, 300);
+          }
+        }
+      });
+      
+      galleryCarouselIntervals.mainEmbedsIndex = (galleryCarouselIntervals.mainEmbedsIndex + 1) % galleryContentSets.mainGallery.facebookEmbeds.length;
+    }
+    
+    function rotateMainGalleryPhotos(containers) {
+      // Step 1: Get current photos and remove from tracking
+      const currentPhotos = [];
+      containers.forEach(container => {
+        const img = container.querySelector('img');
+        if (img && img.src) {
+          const photoMatch = img.src.match(/images\/[^/]+\.(jpg|jpeg|png|gif|webp)/i);
+          if (photoMatch) {
+            const photoPath = photoMatch[0];
+            currentPhotos.push(photoPath);
+            currentlyDisplayedPhotos.delete(photoPath);
+          }
+        }
+      });
+      
+      // Step 2: Select NEW unique photos (not in tracking, not current)
+      const photoSet = getUniquePhotos(2, currentPhotos);
+      
+      // Step 3: Add new photos to tracking immediately
+      photoSet.forEach(photo => {
+        if (photo) {
+          currentlyDisplayedPhotos.add(photo);
+        }
+      });
+      
+      // Step 4: Apply photos to containers
+      containers.forEach((container, index) => {
+        if (photoSet[index]) {
+          const img = container.querySelector('img');
+          if (img) {
+            const newPhotoPath = photoSet[index];
+            const currentSrc = img.src || '';
+            const currentPhotoMatch = currentSrc.match(/images\/[^/]+\.(jpg|jpeg|png|gif|webp)/i);
+            const currentPhoto = currentPhotoMatch ? currentPhotoMatch[0] : null;
+            
+            // Always apply the new photo - selection logic ensures it's different
+            if (newPhotoPath) {
+              container.style.opacity = '0';
+              setTimeout(() => {
+                img.src = newPhotoPath;
+                applyPhotoPositioning(img, container);
+                const tempImg = new Image();
+                tempImg.onload = () => {
+                  container.style.opacity = '1';
+                  if (window.applyPositioningToAllImages) {
+                    setTimeout(window.applyPositioningToAllImages, 50);
+                  }
+                };
+                tempImg.src = newPhotoPath;
+              }, 300);
+            }
+          }
+        }
+      });
+    }
+    
+    function rotateFiveCardEmbed(container) {
+      if (!galleryCarouselIntervals.fiveCardEmbedIndex) {
+        galleryCarouselIntervals.fiveCardEmbedIndex = 0;
+      }
+      
+      const currentSrc = galleryContentSets.fiveCardGallery.facebookEmbed[galleryCarouselIntervals.fiveCardEmbedIndex];
+      const iframe = container.querySelector('iframe');
+      
+      if (iframe) {
+        container.style.opacity = '0';
+        setTimeout(() => {
+          iframe.src = currentSrc;
+          // Update sensitive overlay if needed
+          updateSensitiveVideoOverlay(container, currentSrc);
+          container.style.opacity = '1';
+        }, 300);
+      }
+      
+      galleryCarouselIntervals.fiveCardEmbedIndex = (galleryCarouselIntervals.fiveCardEmbedIndex + 1) % galleryContentSets.fiveCardGallery.facebookEmbed.length;
+    }
+    
+    function rotateFiveCardPhotos(containers) {
+      const allContainers = Array.from(containers);
+      const sensitiveContainer = allContainers.find(c => c.closest('.sensitive-content'));
+      const regularContainers = allContainers.filter(c => !c.closest('.sensitive-content'));
+      
+      const sensitivePhotoPath = 'images/dog-9.jpg';
+      
+      // Step 1: Get current photos and remove from tracking
+      const currentPhotos = [];
+      allContainers.forEach(container => {
+        const img = container.querySelector('img');
+        if (img && img.src) {
+          const photoMatch = img.src.match(/images\/[^/]+\.(jpg|jpeg|png|gif|webp)/i);
+          if (photoMatch) {
+            const photoPath = photoMatch[0];
+            if (!currentPhotos.includes(photoPath)) {
+              currentPhotos.push(photoPath);
+              currentlyDisplayedPhotos.delete(photoPath);
+            }
+          }
+        }
+      });
+      
+      // Step 2: Select 5 NEW unique photos (not in tracking, not current)
+      let photoSet = getUniquePhotos(5, currentPhotos);
+      
+      // Ensure all photos in set are unique (no duplicates within set)
+      const uniqueSet = [];
+      const seen = new Set();
+      for (const photo of photoSet) {
+        if (photo && !seen.has(photo)) {
+          uniqueSet.push(photo);
+          seen.add(photo);
+        }
+      }
+      // Fill remaining slots if needed
+      while (uniqueSet.length < 5) {
+        const additional = getUniquePhotos(1, [...currentPhotos, ...uniqueSet, ...Array.from(currentlyDisplayedPhotos)]);
+        if (additional[0] && !seen.has(additional[0])) {
+          uniqueSet.push(additional[0]);
+          seen.add(additional[0]);
+        } else {
+          break;
+        }
+      }
+      photoSet = uniqueSet.slice(0, 5);
+      
+      // Step 3: Add new photos to tracking immediately
+      photoSet.forEach(photo => {
+        if (photo) {
+          currentlyDisplayedPhotos.add(photo);
+        }
+      });
+      
+      // Assign photos: first 4 to regular containers, last one to sensitive container
+      const regularPhotoSet = photoSet.slice(0, 4);
+      const sensitivePhoto = photoSet[4] || photoSet[0] || currentPhotos[0]; // Fallback chain
+      
+      // Update sensitive content card
+      if (sensitiveContainer) {
+        const sensitiveItem = sensitiveContainer.closest('.sensitive-content');
+        const overlay = sensitiveItem ? sensitiveItem.querySelector('.sensitive-overlay') : null;
+        const img = sensitiveContainer.querySelector('img');
+        
+        if (img && sensitiveItem) {
+          const currentSrc = img.src || '';
+          const currentPhotoMatch = currentSrc.match(/images\/[^/]+\.(jpg|jpeg|png|gif|webp)/i);
+          const currentPhoto = currentPhotoMatch ? currentPhotoMatch[0] : null;
+          
+          // Always apply the new photo
+          if (sensitivePhoto) {
+            sensitiveContainer.style.opacity = '0';
+            setTimeout(() => {
+              img.src = sensitivePhoto;
+              applyPhotoPositioning(img, sensitiveContainer);
+              const tempImg = new Image();
+              tempImg.onload = () => {
+                sensitiveContainer.style.opacity = '1';
+              };
+              tempImg.src = sensitivePhoto;
+            }, 300);
+          }
+        }
+      }
+      
+      // Update regular photo containers
+      regularContainers.forEach((container, index) => {
+        if (regularPhotoSet[index]) {
+          const img = container.querySelector('img');
+          
+          if (img) {
+            const newSrc = regularPhotoSet[index];
+            const currentSrc = img.src || '';
+            const currentPhotoMatch = currentSrc.match(/images\/[^/]+\.(jpg|jpeg|png|gif|webp)/i);
+            const currentPhoto = currentPhotoMatch ? currentPhotoMatch[0] : null;
+            
+            // Always apply the new photo
+            if (newSrc) {
+              container.style.opacity = '0';
+              setTimeout(() => {
+                img.src = newSrc;
+                applyPhotoPositioning(img, container);
+                const tempImg = new Image();
+                tempImg.onload = () => {
+                  container.style.opacity = '1';
+                };
+                tempImg.src = newSrc;
+              }, 300);
+            }
+          }
+        }
+      });
+    }
+    
+    function rotateThreeCardPhotos(containers) {
+      // Step 1: Get current photos and remove from tracking
+      const currentPhotos = [];
+      containers.forEach(container => {
+        const img = container.querySelector('img');
+        if (img && img.src) {
+          const photoMatch = img.src.match(/images\/[^/]+\.(jpg|jpeg|png|gif|webp)/i);
+          if (photoMatch) {
+            const photoPath = photoMatch[0];
+            if (!currentPhotos.includes(photoPath)) {
+              currentPhotos.push(photoPath);
+              currentlyDisplayedPhotos.delete(photoPath);
+            }
+          }
+        }
+      });
+      
+      // Step 2: Select 3 NEW unique photos (not in tracking, not current)
+      let photoSet = getUniquePhotos(3, currentPhotos);
+      
+      // Ensure all photos in set are unique (no duplicates within set)
+      const uniqueSet = [];
+      const seen = new Set();
+      for (const photo of photoSet) {
+        if (photo && !seen.has(photo)) {
+          uniqueSet.push(photo);
+          seen.add(photo);
+        }
+      }
+      // Fill remaining slots if needed
+      while (uniqueSet.length < 3) {
+        const additional = getUniquePhotos(1, [...currentPhotos, ...uniqueSet, ...Array.from(currentlyDisplayedPhotos)]);
+        if (additional[0] && !seen.has(additional[0])) {
+          uniqueSet.push(additional[0]);
+          seen.add(additional[0]);
+        } else {
+          break;
+        }
+      }
+      photoSet = uniqueSet.slice(0, 3);
+      
+      // Step 3: Add new photos to tracking immediately
+      photoSet.forEach(photo => {
+        if (photo) {
+          currentlyDisplayedPhotos.add(photo);
+        }
+      });
+      
+      // Step 4: Apply photos to containers
+      containers.forEach((container, index) => {
+        if (photoSet[index]) {
+          const img = container.querySelector('img');
+          if (img) {
+            const newPhotoPath = photoSet[index];
+            const currentSrc = img.src || '';
+            const currentPhotoMatch = currentSrc.match(/images\/[^/]+\.(jpg|jpeg|png|gif|webp)/i);
+            const currentPhoto = currentPhotoMatch ? currentPhotoMatch[0] : null;
+            
+            // Always apply the new photo
+            if (newPhotoPath) {
+              container.style.opacity = '0';
+              setTimeout(() => {
+                img.src = newPhotoPath;
+                applyPhotoPositioning(img, container);
+                const tempImg = new Image();
+                tempImg.onload = () => {
+                  container.style.opacity = '1';
+                };
+                tempImg.src = newPhotoPath;
+              }, 300);
+            }
+          }
+        }
+      });
+    }
+    
+    // Initialize carousel rotation on page load
+    function initializeGalleryCarousel() {
+      // Set initial transition styles for smooth carousel rotations
+      if (!document.getElementById('gallery-carousel-transitions')) {
+        const style = document.createElement('style');
+        style.id = 'gallery-carousel-transitions';
+        style.textContent = `
+          .gallery-grid .facebook-video-embed,
+          .gallery-grid .facebook-photo-container,
+          .gallery-grid-three-cards .gallery-item.image-card .image-container,
+          .gallery-grid-five-cards .gallery-item.image-card .image-container,
+          .gallery-grid-five-cards .facebook-video-embed {
+            transition: opacity 0.5s ease-in-out !important;
+          }
+        `;
+        document.head.appendChild(style);
+      }
+      
+      // Initialize click handlers for existing sensitive-content overlays in HTML
+      const existingSensitiveContent = document.querySelectorAll('.sensitive-content');
+      existingSensitiveContent.forEach(element => {
+        const overlay = element.querySelector('.sensitive-overlay');
+        if (overlay && !overlay.dataset.clickHandlerAdded) {
+          overlay.dataset.clickHandlerAdded = 'true';
+          overlay.style.cursor = 'pointer';
+          overlay.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleSensitiveContent(element);
+          }, false);
+        }
+      });
+      
+      // Initialize sensitive overlay visibility and positioning based on initial photos in all cards
+      // Apply positioning to ALL images in the gallery, including those in HTML initially
+      const allImages = document.querySelectorAll('.gallery-item img, .facebook-photo-container img, .image-container img, .gallery-image, .facebook-photo-img');
+      allImages.forEach(img => {
+        const container = img.closest('.image-container, .facebook-photo-container, .gallery-item');
+        applyPhotoPositioning(img, container);
+      });
+      
+      // Also apply positioning to containers that only have background-image (no img tag)
+      const allContainers = document.querySelectorAll('.image-container, .facebook-photo-container');
+      allContainers.forEach(container => {
+        const bgImage = container.style.backgroundImage || window.getComputedStyle(container).backgroundImage;
+        if (bgImage && bgImage !== 'none') {
+          const img = container.querySelector('img');
+          // If no img or img has opacity 0 (background-image is being used), apply positioning to container
+          if (!img || (img && window.getComputedStyle(img).opacity === '0')) {
+            applyPhotoPositioning(img, container);
+          }
+        }
+      });
+      
+      // Initialize sensitive overlay visibility for video embeds
+      const allVideoContainers = document.querySelectorAll('.facebook-video-embed');
+      allVideoContainers.forEach(container => {
+        const iframe = container.querySelector('iframe');
+        if (iframe) {
+          const videoSrc = iframe.src || iframe.getAttribute('src') || '';
+          if (videoSrc) {
+            updateSensitiveVideoOverlay(container, videoSrc);
+          }
+        }
+      });
+      
+      // Make function globally accessible
+      window.applyPositioningToAllImages = function applyPositioningToAllImages() {
+        // Get all containers that might have images
+        const allContainers = document.querySelectorAll('.image-container, .facebook-photo-container, .gallery-item.image-card, .gallery-item.facebook-photo');
+        
+        allContainers.forEach(container => {
+          // Get the img element inside
+          const img = container.querySelector('img');
+          
+          // Get background-image from container
+          const computedStyle = window.getComputedStyle(container);
+          const bgImage = container.style.backgroundImage || computedStyle.backgroundImage;
+          
+          // Determine photo path - prioritize background-image since that's often what's visible
+          let photoPath = null;
+          
+          if (bgImage && bgImage !== 'none' && bgImage.includes('url(')) {
+            const bgMatch = bgImage.match(/images\/[^/)]+\.(jpg|jpeg|png|gif|webp)/i);
+            if (bgMatch) photoPath = bgMatch[0];
+          }
+          
+          // Fallback to img src if background-image didn't work
+          if (!photoPath && img) {
+            const imgSrc = img.src || img.getAttribute('src') || '';
+            const imgMatch = imgSrc.match(/images\/[^/]+\.(jpg|jpeg|png|gif|webp)/i);
+            if (imgMatch) photoPath = imgMatch[0];
+          }
+          
+          // Apply positioning if we found a photo path
+          if (photoPath) {
+            const position = getPhotoPosition(photoPath);
+            
+            // ALWAYS set container background-position (critical for background-image cards)
+            container.style.setProperty('background-position', `center ${position}`, 'important');
+            
+            // Also set in inline style attribute for maximum persistence
+            let inlineStyle = container.getAttribute('style') || '';
+            inlineStyle = inlineStyle.replace(/background-position\s*:\s*[^;]+;?/gi, '').trim();
+            if (inlineStyle && !inlineStyle.endsWith(';')) inlineStyle += '; ';
+            inlineStyle += `background-position: center ${position} !important;`;
+            container.setAttribute('style', inlineStyle);
+            
+            // ALWAYS set img object-position (for visible img cards)
+            if (img) {
+              img.style.setProperty('object-position', `center ${position}`, 'important');
+              
+              // Also set in inline style attribute
+              let imgInlineStyle = img.getAttribute('style') || '';
+              imgInlineStyle = imgInlineStyle.replace(/object-position\s*:\s*[^;]+;?/gi, '').trim();
+              if (imgInlineStyle && !imgInlineStyle.endsWith(';')) imgInlineStyle += '; ';
+              imgInlineStyle += `object-position: center ${position} !important;`;
+              img.setAttribute('style', imgInlineStyle);
+            }
+          }
+        });
+      }
+      
+      // Apply positioning multiple times to catch all images
+      setTimeout(applyPositioningToAllImages, 50);
+      setTimeout(applyPositioningToAllImages, 200);
+      setTimeout(applyPositioningToAllImages, 500);
+      setTimeout(applyPositioningToAllImages, 1000);
+      setTimeout(applyPositioningToAllImages, 2000);
+      
+      // Also run continuously every second for the first 10 seconds
+      let continuousCount = 0;
+      const continuousInterval = setInterval(() => {
+        applyPositioningToAllImages();
+        continuousCount++;
+        if (continuousCount >= 10) {
+          clearInterval(continuousInterval);
+        }
+      }, 1000);
+      
+      // Use MutationObserver to catch dynamically added images
+      const observer = new MutationObserver(function(mutations) {
+        let shouldReapply = false;
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'childList' || mutation.type === 'attributes') {
+            shouldReapply = true;
+          }
+        });
+        if (shouldReapply) {
+          setTimeout(applyPositioningToAllImages, 50);
+        }
+      });
+      
+      // Observe all gallery containers for changes
+      const galleryContainers = document.querySelectorAll('.gallery-grid, .gallery-grid-three-cards, .gallery-grid-five-cards');
+      galleryContainers.forEach(container => {
+        observer.observe(container, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['src', 'style']
+        });
+      });
+      
+      // Also observe image load events
+      document.addEventListener('load', function(e) {
+        if (e.target.tagName === 'IMG' && e.target.closest('.gallery-item, .facebook-photo-container, .image-container')) {
+          const container = e.target.closest('.image-container, .facebook-photo-container, .gallery-item');
+          applyPhotoPositioning(e.target, container);
+        }
+      }, true);
+      
+      // Enhanced rotate function that applies positioning after rotation
+      const originalRotateGalleryContent = rotateGalleryContent;
+      rotateGalleryContent = function() {
+        originalRotateGalleryContent();
+        // Apply positioning after rotation completes
+        setTimeout(applyPositioningToAllImages, 350);
+        setTimeout(applyPositioningToAllImages, 700);
+      };
+      
+      // Start rotating every 6 seconds
+      setInterval(rotateGalleryContent, 6000);
+      
+      // Initial rotation after 6 seconds
+      setTimeout(rotateGalleryContent, 6000);
+    }
+    
+    // Start carousel when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeGalleryCarousel);
+    } else {
+      initializeGalleryCarousel();
+    }
   </script>
+
+  <!-- Instagram Embed Script -->
+  <script async src="//www.instagram.com/embed.js"></script>
 
 </body>
 </html>
