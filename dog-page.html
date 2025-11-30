@@ -572,6 +572,16 @@
       justify-content: center;
     }
     
+    /* Local video file styling */
+    .video-embed-container video {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      border-radius: 1.5rem;
+      display: block;
+      background: #000;
+    }
+    
     /* Multi-video container styling */
     .video-embed-container.multi-video {
       background: transparent;
@@ -2146,7 +2156,7 @@
       const videoSection = document.getElementById('video-section');
       const videoContainer = document.getElementById('video-container');
       
-      if (!videoUrl) {
+      if (!videoUrl || videoUrl.trim() === '') {
         // Hide video section if no video URL
         if (videoSection) {
           videoSection.style.display = 'none';
@@ -2163,11 +2173,37 @@
       if (videoContainer) {
         // Check if it's a local video file (MP4, WEBM, etc.)
         const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.avi'];
-        const isLocalVideo = videoExtensions.some(ext => videoUrl.toLowerCase().endsWith(ext));
+        const videoUrlLower = videoUrl.toLowerCase();
+        const isLocalVideo = videoExtensions.some(ext => videoUrlLower.endsWith(ext.toLowerCase()));
         
         if (isLocalVideo) {
           // Local video file - use HTML5 video tag
-          videoContainer.innerHTML = `<video controls autoplay muted loop playsinline style="width: 100%; max-width: 800px; height: auto; border-radius: 1.5rem; display: block; margin: 0 auto;"><source src="${videoUrl}" type="video/mp4">Twoja przeglądarka nie obsługuje odtwarzania wideo.</video>`;
+          console.log('Loading local video:', videoUrl);
+          const videoTag = document.createElement('video');
+          videoTag.controls = true;
+          videoTag.autoplay = true;
+          videoTag.muted = true;
+          videoTag.loop = true;
+          videoTag.playsInline = true;
+          videoTag.preload = 'auto';
+          videoTag.style.cssText = 'width: 100%; max-width: 800px; height: auto; border-radius: 1.5rem; display: block; margin: 0 auto; background: #000;';
+          
+          const source = document.createElement('source');
+          source.src = videoUrl;
+          source.type = 'video/mp4';
+          videoTag.appendChild(source);
+          
+          videoTag.addEventListener('error', function(e) {
+            console.error('Video load error:', e);
+            console.error('Video URL:', videoUrl);
+          });
+          
+          videoTag.addEventListener('loadeddata', function() {
+            console.log('Video loaded successfully:', videoUrl);
+          });
+          
+          videoContainer.innerHTML = '';
+          videoContainer.appendChild(videoTag);
         } else if (videoUrl.includes('facebook.com')) {
           // Facebook embed - use plugin format to avoid X-Frame-Options error
           const encodedUrl = encodeURIComponent(videoUrl);

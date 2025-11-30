@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalendarz Adwentowy 2025 - Z Piekła do Domu</title>
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zpiekladodomu.pl/calendar.html">
+  <meta property="og:title" content="Kalendarz Adwentowy 2025 - Z Piekła do Domu">
+  <meta property="og:description" content="Kalendarz Adwentowy 2025 - odkrywaj codziennie nowe treści i wspieraj naszą misję ratowania zwierząt z Turcji.">
+  <meta property="og:image" content="https://zpiekladodomu.pl/images/logo-big.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="pl_PL">
+  <meta property="og:site_name" content="Z Piekła do Domu">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://zpiekladodomu.pl/calendar.html">
+  <meta name="twitter:title" content="Kalendarz Adwentowy 2025 - Z Piekła do Domu">
+  <meta name="twitter:description" content="Kalendarz Adwentowy 2025 - odkrywaj codziennie nowe treści i wspieraj naszą misję ratowania zwierząt z Turcji.">
+  <meta name="twitter:image" content="https://zpiekladodomu.pl/images/logo-big.png">
+  
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+  <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fafafa; color: #222; }
+    img { display: block; max-width: 100%; }
+
+    /* CONTAINERS */
+    .container { width: min(1200px, 100%); margin: 0 auto; }
+
+    /* NAVBAR */
+    header {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1200px, 92%);
+      z-index: 10;
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      min-height: 52px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px; font-weight: 600; font-family: 'McLaren', cursive; font-size: 1rem;
+    }
+    .brand img { width: 28px; height: 28px; }
+    .menu { display: flex; align-items: center; gap: 14px; }
+    .menu a {
+      text-decoration: none;
+      color: #222; 
+      font-weight: 500;
+      padding: 8px 12px; 
+      border-radius: 10px; 
+      transition: all 0.3s ease;
+    }
+    .menu a:hover {
+      background: rgba(0,0,0,0.05);
+      color: #374151;
+    }
+    .menu a.cta { 
+      background: linear-gradient(135deg,#ffedd5,#fecaca); 
+      font-weight: 700; 
+      transition: all 0.3s ease;
+    }
+    .menu a.cta:hover {
+      background: linear-gradient(135deg,#fbbf24,#f87171);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(251,191,36,0.4);
+    }
+
+    /* Dropdown Menu */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-toggle {
+      cursor: pointer;
+    }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      border-radius: 12px;
+      padding: 8px 0;
+      min-width: 200px;
+      z-index: 1000;
+      margin-top: 8px;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    
+    .dropdown-menu a {
+      display: block;
+      padding: 8px 16px;
+      color: #222;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border-radius: 0;
+      position: relative;
+    }
+    
+    .dropdown-menu a:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 16px;
+      right: 16px;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.1);
+    }
+    
+    .dropdown-menu a:hover {
+      background: rgba(0,0,0,0.05);
+      color: #1f2937;
+      font-weight: 600;
+    }
+    
+    .dropdown-menu a.ustawa-link {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      line-height: 1.4;
+    }
+    
+    .dropdown-menu a.ustawa-link img {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: -2px;
+      display: block;
+    }
+
+    /* Mobile Menu Toggle Button */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      gap: 4px;
+    }
+    
+    .hamburger-line {
+      width: 25px;
+      height: 3px;
+      background: #222;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    /* Mobile Menu Overlay */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      padding: 0 1rem;
+    }
+    
+    .mobile-menu.active {
+      display: flex;
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .mobile-menu a {
+      text-decoration: none;
+      color: #222;
+      font-weight: 600;
+      font-size: 1.25rem;
+      padding: 12px 24px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu a:hover {
+      background: rgba(0,0,0,0.05);
+      transform: scale(1.05);
+    }
+    
+    .mobile-menu a.cta {
+      background: linear-gradient(135deg,#ffedd5,#fecaca);
+      font-weight: 700;
+    }
+    
+    .mobile-menu-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      line-height: 1;
+      color: #222;
+      cursor: pointer;
+      padding: 0;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-close:hover {
+      background: rgba(0,0,0,0.1);
+      transform: rotate(90deg);
+    }
+    
+    .mobile-menu a.cta:hover {
+      background: linear-gradient(135deg,#fbbf24,#f87171);
+      transform: scale(1.05);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 120vh;
+      background: url('images/christmas-background.jpg') center 30%/cover no-repeat;
+      display: flex; 
+      align-items: center;
+      width: 100%;
+    }
+    .hero::after { 
+      content:""; 
+      position:absolute; 
+      inset:0; 
+      background: linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.02)); 
+    }
+    .hero-decor {
+      position: absolute;
+      top: 38%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: auto;
+      height: auto;
+      max-width: 700px;
+      z-index: 2;
+    }
+    
+    .hero-content { 
+      position: relative; 
+      z-index: 3; 
+      width: 100%; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff; 
+    }
+    .hero h1 { 
+      font-family: 'McLaren', cursive; 
+      font-size: clamp(52px, 8vw, 62px); 
+      line-height: 1.2; 
+      font-weight: 450;
+      text-shadow: 3px 4px 16px rgba(0,0,0,.9), 2px 2px 8px rgba(0,0,0,.95), 0 0 10px rgba(0,0,0,.8);
+      border-radius: 0.5rem;
+      display: inline-block;
+      position: absolute;
+      top: 9%;
+      left: 50%;
+      transform: translate(-50%, -89%);
+      z-index: 3;
+      text-align: center;
+    }
+
+    /* SECTIONS */
+    .section { padding: 3rem 0; }
+    .overlap { margin-top: -39.5vh; position: relative; z-index: 2; }
+    .big-card-container { 
+      display: flex; 
+      flex-direction: column;
+      align-items: center;
+      width: min(1200px, 100%);
+      margin: 0 auto;
+    }
+     .big-card { 
+       background: url('images/wesolych-swiat.svg') center center no-repeat;
+       background-size: cover;
+       border-radius: 1.5rem; 
+       box-shadow: 0 20px 40px rgba(0,0,0,.15); 
+       overflow: visible; 
+       width: 100%;
+       height: 715px;
+       display: flex;
+       align-items: flex-start;
+       justify-content: center;
+       transition: transform 0.3s ease, box-shadow 0.3s ease;
+       position: relative;
+       padding: 0.5rem;
+       padding-bottom: 2rem;
+       box-sizing: border-box;
+     }
+     
+     .big-card-deco-left,
+     .big-card-deco-right {
+       position: absolute;
+       top: -7rem;
+       width: 300px;
+       height: 300px;
+       z-index: 0;
+       filter: brightness(0.7) contrast(1.1);
+     }
+     
+     .big-card-deco-left {
+       left: -4rem;
+     }
+     
+     .big-card-deco-right {
+       right: -4rem;
+     }
+     .big-card-gifts {
+       position: absolute;
+       bottom: -2rem;
+       right: -5rem;
+       width: 300px;
+       height: auto;
+       z-index: 1;
+     }
+    .big-card:hover { 
+      transform: translateY(-8px); 
+      box-shadow: 0 30px 60px rgba(0,0,0,.2); 
+    }
+    .big-card-image {
+      display: none;
+    }
+     .big-card-content {
+       flex: 1;
+       padding: 0;
+       display: flex;
+       align-items: flex-start;
+       justify-content: center;
+       width: 100%;
+       height: 100%;
+       padding-top: 1rem;
+     }
+    
+     /* Advent Calendar Grid */
+     .advent-calendar-grid {
+       display: grid;
+       grid-template-columns: repeat(7, 1fr);
+       grid-template-rows: repeat(5, 1fr);
+       gap: 6px;
+       width: 86%;
+       max-width: none;
+       aspect-ratio: 7 / 5.6;
+       padding: 0.5rem;
+       box-sizing: border-box;
+       align-items: stretch;
+       margin: 0 auto;
+     }
+     
+     .advent-door {
+       background: rgba(255, 255, 255, 0.66);
+       border: 2px dashed rgba(150, 150, 150, 0.8);
+       border-radius: 6px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       position: relative;
+       cursor: pointer;
+       transition: all 0.3s ease;
+       min-width: 0;
+       min-height: 0;
+       width: 100%;
+       height: 100%;
+     }
+     
+     /* Ensure all square doors are the same size - matching door 4 */
+     .advent-door:not(.vertical):not(.horizontal):not(.large-square) {
+       aspect-ratio: 1 / 1;
+     }
+     
+     /* Vertical rectangles - span 2 rows */
+     .advent-door.vertical {
+       grid-row: span 2;
+       aspect-ratio: 1 / 2;
+     }
+     
+     /* Horizontal rectangles - span 2 columns */
+     .advent-door.horizontal {
+       grid-column: span 2;
+       aspect-ratio: 2 / 1;
+     }
+     
+     /* Large square doors - span 2 columns and 2 rows */
+     .advent-door.large-square {
+       grid-column: span 2;
+       grid-row: span 2;
+       aspect-ratio: 1 / 1;
+     }
+    
+    .advent-door:empty {
+      background: transparent;
+      border: none;
+      cursor: default;
+      visibility: hidden;
+      min-height: 0;
+      aspect-ratio: auto;
+    }
+    
+    .advent-door:hover:not(:empty) {
+      background: rgba(255, 255, 255, 0.8);
+      transform: scale(1.05);
+    }
+    
+    .advent-door-number {
+      font-family: 'McLaren', cursive;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #ffffff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 
+                   1px 1px 3px rgba(0, 0, 0, 0.95),
+                   0 0 3px rgba(0, 0, 0, 1),
+                   -1px -1px 2px rgba(0, 0, 0, 0.8);
+      position: relative;
+      z-index: 1;
+      line-height: 1;
+    }
+    
+    .advent-door.large-square .advent-door-number {
+      font-size: 3rem;
+    }
+    
+    .advent-door.vertical .advent-door-number {
+      font-size: 1.8rem;
+    }
+    
+     .advent-door.horizontal .advent-door-number {
+       font-size: 1.6rem;
+     }
+     
+     /* Snow Effect */
+     .snowflake {
+       position: fixed;
+       top: -10px;
+       color: white;
+       font-size: 1em;
+       opacity: 0.8;
+       pointer-events: none;
+       user-select: none;
+     }
+     
+     /* Door Opening Animation */
+     .advent-door {
+       transform-style: preserve-3d;
+       transition: transform 0.6s ease-out;
+     }
+     
+     .advent-door.opening {
+       transform-origin: left center;
+       animation: doorOpen 0.8s ease-out forwards;
+     }
+     
+     .advent-door.opening-right {
+       transform-origin: right center;
+       animation: doorOpenRight 0.8s ease-out forwards;
+     }
+     
+     @keyframes doorOpen {
+       0% {
+         transform: perspective(1000px) rotateY(0deg);
+       }
+       100% {
+         transform: perspective(1000px) rotateY(-110deg);
+       }
+     }
+     
+     @keyframes doorOpenRight {
+       0% {
+         transform: perspective(1000px) rotateY(0deg);
+       }
+       100% {
+         transform: perspective(1000px) rotateY(110deg);
+       }
+     }
+     
+     .advent-door.opened {
+       pointer-events: none;
+     }
+     
+     /* Pop-up Modal for Door Content */
+     .door-modal-overlay {
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       background: rgba(0, 0, 0, 0.7);
+       display: none;
+       align-items: center;
+       justify-content: center;
+       z-index: 1000;
+       backdrop-filter: blur(5px);
+     }
+     
+     .door-modal-overlay.active {
+       display: flex;
+     }
+     
+     .door-modal-card {
+       background: white;
+       border-radius: 1.5rem;
+       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+       max-width: 90%;
+       max-height: 90vh;
+       width: 800px;
+       padding: 2rem;
+       position: relative;
+       overflow-y: auto;
+       animation: modalAppear 0.3s ease-out;
+     }
+     
+     @keyframes modalAppear {
+       0% {
+         opacity: 0;
+         transform: scale(0.9) translateY(-20px);
+       }
+       100% {
+         opacity: 1;
+         transform: scale(1) translateY(0);
+       }
+     }
+     
+     .door-modal-close {
+       position: absolute;
+       top: 1rem;
+       right: 1rem;
+       background: rgba(0, 0, 0, 0.1);
+       border: none;
+       border-radius: 50%;
+       width: 40px;
+       height: 40px;
+       font-size: 1.5rem;
+       cursor: pointer;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       transition: all 0.3s ease;
+       z-index: 10;
+     }
+     
+     .door-modal-close:hover {
+       background: rgba(0, 0, 0, 0.2);
+       transform: rotate(90deg);
+     }
+     
+     .door-modal-content {
+       width: 100%;
+       height: 100%;
+     }
+     
+     .door-modal-content iframe {
+       width: 100%;
+       height: 80vh;
+       border: none;
+       border-radius: 0.5rem;
+     }
+    .big-card h2 {
+      font-family: 'McLaren', cursive;
+      font-size: clamp(2rem, 2.5vw, 2.5rem);
+      color: #1f2937;
+      margin: 0;
+      line-height: 1.2;
+    }
+    .big-card .muted {
+      color: #6b7280;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .muted { color: #6b7280; font-size: 0.875rem; line-height: 1.5; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding: .6875rem 1.125rem; border:none; border-radius: 9999px; cursor:pointer; font-weight: 700; font-family: 'McLaren', cursive; }
+    .btn-primary { 
+      background: linear-gradient(135deg,#fca5a5,#fde68a); 
+      color:#fff; 
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg,#f87171,#fbbf24);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(252,165,165,0.4);
+    }
+    .center { text-align: center; }
+
+    /* FOOTER */
+    footer { 
+      background: #fff; 
+      padding: 3rem 0 2rem 0; 
+      margin-top: 2.25rem; 
+    }
+    .footer-grid { display:grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
+    .footer-brand { display:flex; align-items:center; gap: 1.5rem; }
+    .footer-brand img { width: 10rem; height: 10rem; }
+    .footer-content { flex: 1; margin-top: 0.25rem; }
+    .footer-title { font-family: 'McLaren', cursive; font-size: 1.3rem; color: #000; margin: 0 0 1rem 0; line-height: 1.3; }
+    .footer-email { 
+      display: flex; 
+      align-items: center; 
+      margin-bottom: 1rem; 
+      flex-wrap: wrap;
+      word-break: break-all;
+      gap: 0.5rem;
+    }
+    .footer-email svg { color: #000; transition: color 0.3s ease; }
+    .footer-email:hover svg { color: #666; }
+    .footer-email a { 
+      color: #000; 
+      text-decoration: none; 
+      font-size: 0.9rem; 
+      transition: all 0.3s ease;
+      word-break: break-all;
+      max-width: 100%;
+      overflow-wrap: break-word;
+    }
+    .footer-email a:hover {
+      color: #666;
+      text-decoration: underline;
+      font-weight: 700;
+    }
+    .footer-copyright { color: #000; font-size: 0.65rem; line-height: 1.4; }
+    .footer-links { display: flex; gap: 7rem; }
+    .footer-links .links a {
+      position: relative;
+      display: inline-block;
+      font-weight: 500;
+      transition: font-weight 0.3s ease, color 0.3s ease;
+    }
+
+    .footer-links .links a::after {
+      content: attr(data-text);
+      visibility: hidden;
+      font-weight: 700;
+      height: 0;
+      overflow: hidden;
+      pointer-events: none;
+      display: block;
+    }
+
+    .footer-links .links a:hover {
+      font-weight: 700;
+      color: #666;
+    }
+    .links-column h4 { 
+      color: #000; 
+      font-size: 1rem; 
+      margin: 0 0 1rem 0; 
+      font-weight: 600; 
+      white-space: nowrap; 
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .links-column h4:hover {
+      font-weight: 700;
+      color: #333;
+    }
+    .links { display: flex; flex-direction: column; gap: 0.5rem; }
+    .links a { 
+      color: #000; 
+      text-decoration: none; 
+      font-size: 0.875rem; 
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      font-weight: 400;
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+    .links a:hover {
+      color: #666;
+      font-weight: 700;
+    }
+    .footer-social { display: flex; flex-direction: column; align-items: flex-end; gap: 2.5rem; }
+    .socials { display: flex; gap: 0.75rem; }
+    .socials a { 
+      display: inline-block; 
+      text-decoration: none; 
+      transition: all 0.3s ease;
+      width: 40px;
+      height: 40px;
+    }
+    .socials a:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+    .footer-social .footer-copyright { 
+      text-align: right; 
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    .footer-social .footer-copyright:not(:last-of-type) {
+      margin-bottom: -1rem;
+    }
+    .footer-social .footer-copyright a {
+      color: #000;
+      font-family: 'McLaren', cursive;
+      text-decoration: none;
+    }
+    .footer-social .footer-copyright a:hover {
+      text-decoration: none;
+      color: #000;
+    }
+
+    /* EMAIL ICON STYLING - Desktop only */
+    .footer-email img {
+      width: 25px;
+      height: 25px;
+      max-width: 25px;
+      max-height: 25px;
+      min-width: 25px;
+      min-height: 25px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      /* Global mobile styles */
+      body {
+        width: 100%;
+        overflow-x: hidden;
+      }
+      
+      .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 1rem;
+      }
+      
+      header { 
+        top: 8px; 
+        width: 95%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .navbar { 
+        padding: 6px 12px; 
+        width: 100%;
+        min-height: 45px;
+      }
+      
+      .menu { 
+        display: none;
+      }
+      
+      .mobile-menu-toggle {
+        display: flex;
+      }
+      
+      /* Mobile Hero Section */
+      .hero {
+        min-height: 100vh;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        position: relative;
+        overflow: visible;
+      }
+      
+      .hero-content {
+        margin-left: 5%;
+        width: 90%;
+      }
+      
+      .hero h1 {
+        padding-top: 8rem;
+        font-size: clamp(36px, 10vw, 48px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      
+      .overlap {
+        margin-top: -30vh;
+      }
+      
+      .big-card {
+        flex-direction: column;
+        height: auto;
+      }
+      
+      .big-card-image {
+        height: 300px;
+        padding-right: 0;
+        justify-content: center;
+      }
+      
+      .big-card-content {
+        padding: 2rem 1.5rem;
+      }
+      
+      footer {
+        padding: 2rem 0 1.5rem 0;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .footer-links {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      
+      .footer-social {
+        align-items: flex-start;
+      }
+      
+      .footer-social .footer-copyright {
+        text-align: left;
+      }
+      
+      .footer-email img {
+        width: clamp(14px, 3.5vw, 20px) !important;
+        height: clamp(14px, 3.5vw, 20px) !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="brand">
+        <a href="index.html" style="display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit;">
+          <img src="images/logo.svg" alt="Logo">
+          <span>Z Piekła Do Domu</span>
+        </a>
+      </div>
+      <!-- Hamburger Menu Button -->
+      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      
+      <nav class="menu">
+        <a href="index.html">Strona główna</a>
+        <a href="adopcje.html">Adopcje</a>
+        <div class="dropdown">
+          <a href="#" class="dropdown-toggle">Teksty</a>
+          <div class="dropdown-menu">
+            <a href="ustawa-nr-5911.html" class="ustawa-link">
+              Ustawa nr 5911
+              <img src="images/exclamation-mark.svg" alt="!" width="18" height="18">
+            </a>
+            <a href="articles.html">Artykuły</a>
+            <a href="inicjatywy.html">Inicjatywy</a>
+          </div>
+        </div>
+        <a href="onas.html">O nas</a>
+        <a href="wsparcie.html" class="cta">Wsparcie</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close menu">×</button>
+    <a href="index.html" onclick="closeMobileMenu()">Strona główna</a>
+    <a href="adopcje.html" onclick="closeMobileMenu()">Adopcje</a>
+    <a href="#" onclick="closeMobileMenu()">Teksty</a>
+    <div class="mobile-teksty-dropdown">
+      <a href="ustawa-nr-5911.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Ustawa nr 5911</a>
+      <a href="articles.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Artykuły</a>
+      <a href="inicjatywy.html" onclick="closeMobileMenu()" class="mobile-dropdown-item">Inicjatywy</a>
+    </div>
+    <a href="onas.html" onclick="closeMobileMenu()">O nas</a>
+    <a href="wsparcie.html" class="cta" onclick="closeMobileMenu()">Wsparcie</a>
+  </div>
+
+  <section id="home" class="hero">
+    <img src="images/decor.svg" alt="" class="hero-decor">
+    <div class="hero-content">
+      <h1>Kalendarz<br>Adwentowy<br>2025</h1>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- BIG CARD SECTION -->
+    <section class="section overlap" id="calendar-section">
+      <div class="big-card-container">
+        <article class="big-card">
+          <img src="images/deco.svg" alt="" class="big-card-deco-left">
+          <img src="images/decoright.svg" alt="" class="big-card-deco-right">
+          <img src="images/gifts.svg" alt="" class="big-card-gifts">
+          <div class="big-card-image"></div>
+          <div class="big-card-content">
+             <div class="advent-calendar-grid">
+               <!-- Row 1: Col1=1, Col2=4, Col3=16, Col4-5=14(horizontal), Col6=17, Col7=10 -->
+               <div class="advent-door"><span class="advent-door-number">1</span></div>
+               <div class="advent-door"><span class="advent-door-number">4</span></div>
+               <div class="advent-door"><span class="advent-door-number">16</span></div>
+               <div class="advent-door horizontal" style="grid-column: 4 / 6;"><span class="advent-door-number">14</span></div>
+               <div class="advent-door"><span class="advent-door-number">17</span></div>
+               <div class="advent-door"><span class="advent-door-number">10</span></div>
+               
+               <!-- Row 2: Col1=8(vertical spans 2 rows), Col2-3=6(large square), Col4=19, Col5=9, Col6=21(vertical), Col7=13(vertical) -->
+               <div class="advent-door vertical" style="grid-column: 1; grid-row: 2 / 4;"><span class="advent-door-number">8</span></div>
+               <div class="advent-door large-square" style="grid-column: 2 / 4; grid-row: 2 / 4;"><span class="advent-door-number">6</span></div>
+               <div class="advent-door" style="grid-column: 4; grid-row: 2;"><span class="advent-door-number">19</span></div>
+               <div class="advent-door" style="grid-column: 5; grid-row: 2;"><span class="advent-door-number">9</span></div>
+               <div class="advent-door vertical" style="grid-column: 6; grid-row: 2 / 4;"><span class="advent-door-number">21</span></div>
+               <div class="advent-door vertical" style="grid-column: 7; grid-row: 2 / 4;"><span class="advent-door-number">13</span></div>
+               
+               <!-- Row 3: Col1=empty(part of 8), Col2-3=empty(part of 6), Col4=3, Col5=2, Col6=empty(part of 21), Col7=empty(part of 13) -->
+               <div class="advent-door" style="grid-column: 4; grid-row: 3;"><span class="advent-door-number">3</span></div>
+               <div class="advent-door" style="grid-column: 5; grid-row: 3;"><span class="advent-door-number">2</span></div>
+               
+               <!-- Row 4: Col1=12, Col2=5, Col3=11, Col4=15, Col5=20, Col6-7=24(large square) -->
+               <div class="advent-door"><span class="advent-door-number">12</span></div>
+               <div class="advent-door"><span class="advent-door-number">5</span></div>
+               <div class="advent-door"><span class="advent-door-number">11</span></div>
+               <div class="advent-door"><span class="advent-door-number">15</span></div>
+               <div class="advent-door"><span class="advent-door-number">20</span></div>
+               <div class="advent-door large-square" style="grid-column: 6 / 8; grid-row: 4 / 6;"><span class="advent-door-number">24</span></div>
+               
+               <!-- Row 5: Col1=7, Col2=22, Col3-4=23(horizontal), Col5=18, Col6-7=empty(part of 24) -->
+               <div class="advent-door"><span class="advent-door-number">7</span></div>
+               <div class="advent-door"><span class="advent-door-number">22</span></div>
+               <div class="advent-door horizontal" style="grid-column: 3 / 5;"><span class="advent-door-number">23</span></div>
+               <div class="advent-door"><span class="advent-door-number">18</span></div>
+               <div class="advent-door"></div>
+               <div class="advent-door"></div>
+             </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <img src="images/logo.svg" alt="Logo" width="120" height="120">
+          <div class="footer-content">
+            <h2 class="footer-title">Z Piekła do Domu - ratujemy psy i koty z Turcji</h2>
+            <div class="footer-email">
+              <img src="images/email-icon.svg" alt="Email">
+              <a href="mailto:zpiekladodomu@gmail.com">zpiekladodomu@gmail.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="links-column">
+          <h4>Linki</h4>
+          <div class="links">
+            <a href="https://www.facebook.com/profile.php?id=61577219922888" data-text="Fanpage">Fanpage</a>
+            <a href="inicjatywy.html" data-text="Nasze inicjatywy">Nasze inicjatywy</a>
+            <a href="https://www.facebook.com/groups/1483167953136280" data-text="Dołącz do grupy">Dołącz do grupy</a>
+            <a href="#" data-text="Współpraca">Współpraca</a>
+          </div>
+        </div>
+        <div class="links-column">
+          <h4>Zobacz też</h4>
+          <div class="links">
+            <a href="#" data-text="Wioska Burçak">Wioska Burçak</a>
+            <a href="#" data-text="Pani Adalet">Pani Adalet</a>
+            <a href="articles.html" data-text="Artykuły">Artykuły</a>
+            <a href="https://patronite.pl/zpiekladodomu" target="_blank" rel="noopener noreferrer" data-text="Zostań sponsorem">Zostań sponsorem</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-social">
+        <div class="socials">
+          <a href="https://www.tiktok.com/@zpiekladodomu1" aria-label="TikTok" target="_blank"><img src="images/tiktok-icon.svg" alt="TikTok" width="40" height="40"></a>
+          <a href="https://www.instagram.com/z_piekla_do_domu_/" aria-label="Instagram" target="_blank"><img src="images/instagram.svg" alt="Instagram" width="40" height="40"></a>
+          <a href="https://www.facebook.com/profile.php?id=61577219922888" aria-label="Facebook" target="_blank"><img src="images/facebook.svg" alt="Facebook" width="40" height="40"></a>
+          <a href="https://x.com/zpiekladodomu" aria-label="X (Twitter)" target="_blank"><img src="images/x-logo.svg" alt="X" width="40" height="40"></a>
+        </div>
+        <div class="footer-copyright">
+          <div>Z Piekła do domu 2025 ©</div>
+          <div>Wszelkie prawa zastrzeżone</div>
+        </div>
+        <div class="footer-copyright">
+          <div>©Logo autorstwa <b><a href="https://www.facebook.com/magdalena.marcinek.75">Magdaleny Marcinek</a></b></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Door Modal Pop-up -->
+  <div class="door-modal-overlay" id="doorModal">
+    <div class="door-modal-card">
+      <button class="door-modal-close" onclick="closeDoorModal()">×</button>
+      <div class="door-modal-content" id="doorModalContent">
+        <!-- Content will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const toggleButton = document.querySelector('.mobile-menu-toggle');
+      mobileMenu.classList.toggle('active');
+      toggleButton.classList.toggle('active');
+    }
+
+    function closeMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const toggleButton = document.querySelector('.mobile-menu-toggle');
+      mobileMenu.classList.remove('active');
+      toggleButton.classList.remove('active');
+    }
+
+     // Close mobile menu when clicking outside
+     document.addEventListener('click', function(event) {
+       const mobileMenu = document.getElementById('mobileMenu');
+       const toggleButton = document.querySelector('.mobile-menu-toggle');
+       const isClickInsideMenu = mobileMenu.contains(event.target);
+       const isClickOnToggle = toggleButton.contains(event.target);
+       
+       if (!isClickInsideMenu && !isClickOnToggle && mobileMenu.classList.contains('active')) {
+         closeMobileMenu();
+       }
+     });
+     
+     // Snow Effect
+     function createSnowflake() {
+       const snowflake = document.createElement('div');
+       snowflake.classList.add('snowflake');
+       snowflake.textContent = '❄';
+       
+       snowflake.style.left = Math.random() * window.innerWidth + 'px';
+       snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+       
+       document.body.appendChild(snowflake);
+       
+       const fallDuration = Math.random() * 5 + 5;
+       
+       snowflake.animate(
+         [
+           { transform: `translateY(0px)` },
+           { transform: `translateY(${window.innerHeight + 50}px)` }
+         ],
+         {
+           duration: fallDuration * 1000,
+           easing: 'linear'
+         }
+       );
+       
+       setTimeout(() => snowflake.remove(), fallDuration * 1000);
+     }
+     
+     setInterval(createSnowflake, 150);
+     
+     // Door Opening Animation
+     function openDoor(door) {
+       // Check if door is already opened
+       if (door.classList.contains('opened') || door.classList.contains('opening')) {
+         return;
+       }
+       
+       // Get the door number
+       const doorNumberElement = door.querySelector('.advent-door-number');
+       const doorNumber = doorNumberElement ? doorNumberElement.textContent.trim() : null;
+       
+       // Mark door as opening
+       door.classList.add('opening');
+       
+       // Determine which side to hinge from (alternate or random)
+       // For visual variety, we'll alternate based on door position
+       const doorIndex = Array.from(door.parentElement.children).indexOf(door);
+       if (doorIndex % 2 === 0) {
+         // Even index - open from left
+         door.classList.add('opening');
+       } else {
+         // Odd index - open from right
+         door.classList.remove('opening');
+         door.classList.add('opening-right');
+       }
+       
+       // Open corresponding HTML page in modal after animation
+       if (doorNumber && !isNaN(doorNumber) && parseInt(doorNumber) >= 1 && parseInt(doorNumber) <= 24) {
+         setTimeout(() => {
+           openDoorModal(doorNumber + '.html');
+         }, 600); // Open slightly before animation completes
+       }
+       
+       // Mark as opened after animation
+       setTimeout(() => {
+         door.classList.add('opened');
+         door.classList.remove('opening', 'opening-right');
+       }, 800);
+     }
+     
+     // Door Modal Functions
+     function openDoorModal(url) {
+       const modal = document.getElementById('doorModal');
+       const modalContent = document.getElementById('doorModalContent');
+       
+       // Create iframe to load the content
+       modalContent.innerHTML = `<iframe src="${url}"></iframe>`;
+       
+       // Show modal
+       modal.classList.add('active');
+       
+       // Prevent body scroll when modal is open
+       document.body.style.overflow = 'hidden';
+     }
+     
+     function closeDoorModal() {
+       const modal = document.getElementById('doorModal');
+       const modalContent = document.getElementById('doorModalContent');
+       
+       // Hide modal
+       modal.classList.remove('active');
+       
+       // Clear content
+       setTimeout(() => {
+         modalContent.innerHTML = '';
+       }, 300);
+       
+       // Restore body scroll
+       document.body.style.overflow = '';
+     }
+     
+     // Close modal when clicking outside
+     document.addEventListener('click', function(event) {
+       const modal = document.getElementById('doorModal');
+       if (event.target === modal) {
+         closeDoorModal();
+       }
+     });
+     
+     // Close modal with Escape key
+     document.addEventListener('keydown', function(event) {
+       if (event.key === 'Escape') {
+         closeDoorModal();
+       }
+     });
+     
+     // Add click event listeners to all doors
+     document.addEventListener('DOMContentLoaded', function() {
+       const doors = document.querySelectorAll('.advent-door:not(:empty)');
+       doors.forEach(door => {
+         door.addEventListener('click', function() {
+           openDoor(this);
+         });
+       });
+     });
+   </script>
+ 
+ </body>
+ </html>
+
