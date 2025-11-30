@@ -19,6 +19,6 @@ special_features:
   - "Nienachalny"
   - "Lubi towarzystwo człowieka"
 story: ""
-video_url: "neo9.mp4"
+video_url: ""images/neo9.mp4""
 adoption_requirements: ""
 ---

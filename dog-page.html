@@ -2161,7 +2161,14 @@
       
       // Create video embed
       if (videoContainer) {
-        if (videoUrl.includes('facebook.com')) {
+        // Check if it's a local video file (MP4, WEBM, etc.)
+        const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.avi'];
+        const isLocalVideo = videoExtensions.some(ext => videoUrl.toLowerCase().endsWith(ext));
+        
+        if (isLocalVideo) {
+          // Local video file - use HTML5 video tag
+          videoContainer.innerHTML = `<video controls autoplay muted loop playsinline style="width: 100%; max-width: 800px; height: auto; border-radius: 1.5rem; display: block; margin: 0 auto;"><source src="${videoUrl}" type="video/mp4">Twoja przeglądarka nie obsługuje odtwarzania wideo.</video>`;
+        } else if (videoUrl.includes('facebook.com')) {
           // Facebook embed - use plugin format to avoid X-Frame-Options error
           const encodedUrl = encodeURIComponent(videoUrl);
           const pluginUrl = `https://www.facebook.com/plugins/video.php?height=800&href=${encodedUrl}&show_text=false&width=450`;
@@ -2211,7 +2218,14 @@
         validUrls.forEach((videoUrl, index) => {
           const videoWrapper = document.createElement('div');
           
-          if (videoUrl.includes('facebook.com')) {
+          // Check if it's a local video file (MP4, WEBM, etc.)
+          const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.avi'];
+          const isLocalVideo = videoExtensions.some(ext => videoUrl.toLowerCase().endsWith(ext));
+          
+          if (isLocalVideo) {
+            // Local video file - use HTML5 video tag
+            videoWrapper.innerHTML = `<video controls autoplay muted loop playsinline style="width: 100%; max-width: 800px; height: auto; border-radius: 1.5rem; display: block; margin: 0 auto;"><source src="${videoUrl}" type="video/mp4">Twoja przeglądarka nie obsługuje odtwarzania wideo.</video>`;
+          } else if (videoUrl.includes('facebook.com')) {
             // Facebook embed
             const encodedUrl = encodeURIComponent(videoUrl);
             const pluginUrl = `https://www.facebook.com/plugins/video.php?height=800&href=${encodedUrl}&show_text=false&width=450`;

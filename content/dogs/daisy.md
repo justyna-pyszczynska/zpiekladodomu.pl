@@ -15,6 +15,6 @@ special_features:
   - "Akceptuje inne psiaki"
   - "Wykastrowana"
 story: ""
-video_url: "daisy.mp4"
+video_url: "images/daisy.mp4"
 adoption_requirements: ""
 ---
