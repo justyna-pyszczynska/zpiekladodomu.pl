@@ -1,0 +1,148 @@
+// Supabase Free Tier Analytics - Zero Vercel Resources
+// Copy this code to api/track.js and configure Supabase
+
+// Install: npm install @supabase/supabase-js
+
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY;
+
+const supabase = supabaseUrl && supabaseKey 
+  ? createClient(supabaseUrl, supabaseKey)
+  : null;
+
+export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  
+  if (req.method === 'POST') {
+    if (!supabase) {
+      console.error('Supabase not configured. Set SUPABASE_URL and SUPABASE_KEY');
+      return res.status(500).json({ error: 'Analytics not configured' });
+    }
+    
+    try {
+      const data = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+      
+      // Insert tracking data into Supabase
+      const { error } = await supabase
+        .from('analytics')
+        .insert([{
+          path: data.path,
+          session_id: data.sessionId,
+          referrer: data.referrer,
+          timestamp: data.timestamp,
+          user_agent: data.userAgent,
+          screen_width: data.screenWidth,
+          screen_height: data.screenHeight,
+          language: data.language,
+          timezone: data.timezone
+        }]);
+      
+      if (error) {
+        console.error('Supabase error:', error);
+        return res.status(500).json({ error: 'Failed to store analytics' });
+      }
+      
+      return res.status(200).json({ success: true });
+    } catch (error) {
+      console.error('Tracking error:', error);
+      return res.status(500).json({ error: 'Failed to process tracking' });
+    }
+  }
+  
+  if (req.method === 'GET') {
+    if (!supabase) {
+      return res.status(200).json({
+        message: 'Supabase not configured',
+        totalPageViews: 0,
+        uniqueSessions: 0,
+        totalPages: 0,
+        dailyStats: {},
+        topPages: []
+      });
+    }
+    
+    try {
+      // Get total page views
+      const { count: totalViews } = await supabase
+        .from('analytics')
+        .select('*', { count: 'exact', head: true });
+      
+      // Get unique sessions (last 30 days)
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      
+      const { data: sessions } = await supabase
+        .from('analytics')
+        .select('session_id')
+        .gte('timestamp', thirtyDaysAgo.toISOString());
+      
+      const uniqueSessions = new Set(sessions?.map(s => s.session_id)).size;
+      
+      // Get top pages (last 30 days)
+      const { data: pageViews } = await supabase
+        .from('analytics')
+        .select('path')
+        .gte('timestamp', thirtyDaysAgo.toISOString());
+      
+      const pageCounts = {};
+      pageViews?.forEach(p => {
+        pageCounts[p.path] = (pageCounts[p.path] || 0) + 1;
+      });
+      
+      const topPages = Object.entries(pageCounts)
+        .map(([path, views]) => ({ path, views }))
+        .sort((a, b) => b.views - a.views)
+        .slice(0, 20);
+      
+      // Get daily stats (last 30 days)
+      const { data: dailyData } = await supabase
+        .from('analytics')
+        .select('timestamp, session_id')
+        .gte('timestamp', thirtyDaysAgo.toISOString())
+        .order('timestamp', { ascending: false });
+      
+      const dailyStats = {};
+      dailyData?.forEach(entry => {
+        const date = new Date(entry.timestamp).toISOString().split('T')[0];
+        if (!dailyStats[date]) {
+          dailyStats[date] = { pageViews: 0, uniqueSessions: new Set() };
+        }
+        dailyStats[date].pageViews++;
+        if (entry.session_id) {
+          dailyStats[date].uniqueSessions.add(entry.session_id);
+        }
+      });
+      
+      // Convert Sets to counts
+      Object.keys(dailyStats).forEach(date => {
+        dailyStats[date].uniqueSessions = dailyStats[date].uniqueSessions.size;
+      });
+      
+      return res.status(200).json({
+        totalPageViews: totalViews || 0,
+        uniqueSessions: uniqueSessions || 0,
+        totalPages: Object.keys(pageCounts).length,
+        dailyStats,
+        topPages,
+        lastUpdated: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Error fetching analytics:', error);
+      return res.status(500).json({ error: 'Failed to fetch analytics' });
+    }
+  }
+  
+  return res.status(405).json({ error: 'Method not allowed' });
+}
+
+
+
+

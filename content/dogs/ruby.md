@@ -1,5 +1,6 @@
 ---
 name: "Ruby"
+disabled: true
 description: "Przepiękna, bardzo przyjazna i energiczna suczka, która zaraża pozytywną energią. Ma 3 lata, jest wysterylizowana i gotowa, by wyruszyć do swojego wymarzonego domu. W swoim życiu przeszła już sporo - chorowała na dirofilariozę ale dzięki leczeniu dziś jest w pełni zdrowa. Los sprawił też, że ma tylko trzy łapki - brakuje jej lewej tylnej. Mimo tego radzi sobie świetnie, jest aktywna, ciekawa świata i nie pozwala, by jej niepełnosprawność ograniczała radość z życia. Ruby szuka kochającego, troskliwego opiekuna, który da jej ciepło i stabilność. Zasługuje na dom, w którym ktoś dostrzeże, jaka jest wyjątkowa - nie przez to, czego jej brakuje, ale przez to, ile serca ma do podarowania."
 image: "images/ruby7.jpg"
 images:

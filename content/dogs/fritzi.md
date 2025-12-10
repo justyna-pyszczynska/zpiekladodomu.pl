@@ -1,0 +1,25 @@
+---
+name: "Fritz"
+description: "To niesamowicie uroczy, ale wycofany psiak. Potrzebuje chwili, by zaufać. Jest drobny, szczuplutkiej budowy, ma w sobie geny beagle. Coraz ciekawiej podchodzi do świata i obcych, co dzień poznaje czym jest bezpieczeństwo. Coraz częściej wychodzi z budy. Szukamy dla niego wyjątkowej osoby, która zrozumie jego wrażliwą naturę, doceni takiego psiaka i pomoże mu zbudować pewność siebie. Jest niekonfliktowy, nie wymagający, potrzebuje jedynie odrobiny miłości i ciepłego kąta. Będzie niesamowicie wdzięcznym kompanem, nie ma w sobie grama agresji."
+image: "images/fritz1.jpg"
+images:
+  - "images/fritz1.jpg"
+  - "images/fritz2.jpg"
+  - "images/fritz3.jpg"
+  - "images/fritz4.jpg"
+  - "images/fritz5.jpg"
+  - "images/fritz6.jpg"
+  - "images/fritz7.jpg"
+age: "~ 3 lata"
+gender: "Samiec"
+size: "Średni"
+special_features:
+  - "Wstydliwy"
+  - "Łagodny"
+  - "Potrzebuje czasu"
+  - "Wykastrowany"
+  - "Akceptuje psy i suczki"
+story: ""
+video_url: "images/fritz.mp4"
+adoption_requirements: ""
+---

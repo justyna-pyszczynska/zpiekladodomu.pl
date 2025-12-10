@@ -1,0 +1,26 @@
+---
+name: "Buster"
+description: "To łagodny, młody kawaler skłonny do wspólnych zabaw i kontaktu. Nie jest jednak nachalnym wulkanem energii. Ma w sobie mnóstwo bystrości, chęci do poznawania świata i ludzi wokół. To psiak dość elastyczny, który dopasuje się do wielu różnych typów domu, od domatorów po sportowców. Nie jest konfliktowy, ma w sobie jednak sporo siły i wyraźne geny amstaffa. Potrzebuje przewodnika, odrobiny czułości i zaangażowania, aby stać się cudownym przyjacielem całej rodziny."
+image: "images/buster8.jpg"
+images:
+  - "images/buster8.jpg"
+  - "images/buster1.jpg"
+  - "images/buster2.jpg"
+  - "images/buster3.jpg"
+  - "images/buster4.jpg"
+  - "images/buster5.jpg"
+  - "images/buster6.jpg"
+  - "images/buster7.jpg"
+age: "~ 3 lata"
+gender: "Samiec"
+size: "Średni"
+special_features:
+  - "Dogaduje się z psami"
+  - "Lubi towarzystwo człowieka"
+  - "Energiczny"
+  - "Łagodny"
+  - "W typie rasy"
+story: ""
+adoption_requirements: ""
+video_url: ""
+---

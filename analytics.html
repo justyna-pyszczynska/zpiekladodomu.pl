@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics Dashboard - Z Piekła do Domu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f5f5;
+      color: #222;
+      padding: 2rem;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    header {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    
+    h1 {
+      font-family: 'McLaren', cursive;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .last-updated {
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .stat-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .stat-label {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #222;
+    }
+    
+    .section {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    
+    .section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      font-family: 'McLaren', cursive;
+    }
+    
+    .page-list {
+      list-style: none;
+    }
+    
+    .page-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .page-item:last-child {
+      border-bottom: none;
+    }
+    
+    .page-path {
+      font-family: 'Courier New', monospace;
+      color: #333;
+    }
+    
+    .page-views {
+      font-weight: 600;
+      color: #666;
+    }
+    
+    .refresh-btn {
+      background: #000;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .refresh-btn:hover {
+      background: #333;
+      transform: translateY(-2px);
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: #666;
+    }
+    
+    .error {
+      background: #fee;
+      color: #c00;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-bottom: 2rem;
+      color: #856404;
+    }
+    
+    .daily-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .daily-stat {
+      background: #f9f9f9;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      text-align: center;
+    }
+    
+    .daily-stat-date {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .daily-stat-views {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Analytics Dashboard</h1>
+      <p class="last-updated">Last updated: <span id="lastUpdated">Loading...</span></p>
+    </header>
+    
+    <div class="note">
+      <strong>Note:</strong> This is a basic analytics dashboard. For persistent storage, configure Vercel KV or another database service in the API endpoint.
+    </div>
+    
+    <div id="loading" class="loading">Loading analytics data...</div>
+    <div id="error" class="error" style="display: none;"></div>
+    
+    <div id="dashboard" style="display: none;">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Total Page Views</div>
+          <div class="stat-value" id="totalViews">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Unique Sessions</div>
+          <div class="stat-value" id="uniqueSessions">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total Pages</div>
+          <div class="stat-value" id="totalPages">0</div>
+        </div>
+      </div>
+      
+      <div class="section">
+        <h2>Top Pages</h2>
+        <ul class="page-list" id="topPages"></ul>
+      </div>
+      
+      <div class="section">
+        <h2>Daily Statistics</h2>
+        <div class="daily-stats" id="dailyStats"></div>
+      </div>
+      
+      <button class="refresh-btn" onclick="loadAnalytics()">Refresh Data</button>
+    </div>
+  </div>
+  
+  <script>
+    async function loadAnalytics() {
+      const loadingEl = document.getElementById('loading');
+      const errorEl = document.getElementById('error');
+      const dashboardEl = document.getElementById('dashboard');
+      
+      loadingEl.style.display = 'block';
+      errorEl.style.display = 'none';
+      dashboardEl.style.display = 'none';
+      
+      try {
+        const response = await fetch('/api/track');
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to load analytics');
+        }
+        
+        // Update stats
+        document.getElementById('totalViews').textContent = data.totalPageViews || 0;
+        document.getElementById('uniqueSessions').textContent = data.uniqueSessions || 0;
+        document.getElementById('totalPages').textContent = data.totalPages || 0;
+        document.getElementById('lastUpdated').textContent = data.lastUpdated || 'Never';
+        
+        // Update top pages
+        const topPagesEl = document.getElementById('topPages');
+        if (data.topPages && data.topPages.length > 0) {
+          topPagesEl.innerHTML = data.topPages.map(page => `
+            <li class="page-item">
+              <span class="page-path">${page.path}</span>
+              <span class="page-views">${page.views} views</span>
+            </li>
+          `).join('');
+        } else {
+          topPagesEl.innerHTML = '<li class="page-item">No page views yet</li>';
+        }
+        
+        // Update daily stats
+        const dailyStatsEl = document.getElementById('dailyStats');
+        if (data.dailyStats && Object.keys(data.dailyStats).length > 0) {
+          const sortedDays = Object.entries(data.dailyStats)
+            .sort((a, b) => b[0].localeCompare(a[0]))
+            .slice(0, 30);
+          
+          dailyStatsEl.innerHTML = sortedDays.map(([date, stats]) => `
+            <div class="daily-stat">
+              <div class="daily-stat-date">${date}</div>
+              <div class="daily-stat-views">${stats.pageViews || 0}</div>
+              <div style="font-size: 0.8rem; color: #666; margin-top: 0.25rem;">
+                ${stats.uniqueSessions?.length || 0} sessions
+              </div>
+            </div>
+          `).join('');
+        } else {
+          dailyStatsEl.innerHTML = '<div>No daily statistics available</div>';
+        }
+        
+        loadingEl.style.display = 'none';
+        dashboardEl.style.display = 'block';
+        
+      } catch (error) {
+        console.error('Error loading analytics:', error);
+        loadingEl.style.display = 'none';
+        errorEl.textContent = `Error: ${error.message}`;
+        errorEl.style.display = 'block';
+      }
+    }
+    
+    // Load on page load
+    loadAnalytics();
+    
+    // Auto-refresh every 30 seconds
+    setInterval(loadAnalytics, 30000);
+  </script>
+  <script src="/js/analytics.js"></script>
+</body>
+</html>

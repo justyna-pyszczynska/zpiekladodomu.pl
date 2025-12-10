@@ -1,0 +1,25 @@
+---
+name: "Lilifer"
+description: "To uosobienie słodkości poznało już bardzo wiele nieszczęść. Jej 'właścicielem' był policjant, który bez skrupułów oddał to psie dziecko do rządowej mordowni na pewną śmierć. Cudem ratunek dla niej przyszedł na czas. Na szczęście pomimo trudnych doświadczeń jest dalej bardzo pogodną i radosną towarzyszką zabaw. Uwielbia ludzi, poznawać życie, nowe zapachy, bawić się i szaleć. Lubi inne psiaki. Będzie idealną przyjaciółką dla osoby ceniącej sobie aktywny czas z psiakiem."
+image: "images/lilifer2.jpg"
+images:
+  - "images/lilifer2.jpg"
+  - "images/lilifer5.jpg"
+  - "images/lilifer6.jpg"
+  - "images/lilifer3.jpg"
+  - "images/lilifer4.jpg"
+  - "images/lilifer1.jpg"
+age: "~ 6 miesięcy"
+gender: "Suczka"
+size: "Średni"
+special_features:
+  - "Energiczna"
+  - "Łagodna"
+  - "Niekonfliktowa"
+  - "Skora do zabawy"
+  - "Towarzyska"
+  - "Radosna"
+story: ""
+video_url: "https://www.facebook.com/100002543043361/videos/pcb.1915868402671894/851937373985279"
+adoption_requirements: ""
+---

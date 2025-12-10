@@ -81,6 +81,13 @@ function parseFrontMatter(text) {
           value = value.slice(1, -1);
         }
         
+        // Convert boolean strings to actual booleans
+        if (value === 'true') {
+          value = true;
+        } else if (value === 'false') {
+          value = false;
+        }
+        
         // If the value is empty and this is a known list field, initialize as array
         if (value === '' && (currentKey === 'special_features' || currentKey === 'images' || currentKey === 'video_urls')) {
           data[currentKey] = [];
