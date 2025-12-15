@@ -349,8 +349,21 @@
     .card { background:#fff; border-radius: 1rem; box-shadow:0 12px 22px rgba(0,0,0,.1); overflow: hidden; height: var(--card-h); display:flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
     .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,.15); }
     .card-body { padding: .875rem 1rem 1rem; display:flex; flex-direction: column; gap: .5rem; flex: 1; }
-    .dog-card { text-align: center;}
+    .dog-card { text-align: center; position: relative;}
     .dog-card .circle { width: 14rem; height: 14rem; border-radius: 50%; object-fit: cover; margin: 1rem auto 0.75rem; }
+    .dog-card-disabled-icon {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 32px;
+      height: 32px;
+      z-index: 10;
+    }
+    .dog-card-disabled-icon img {
+      width: 100%;
+      height: 100%;
+      filter: brightness(0) saturate(100%) invert(45%) sepia(97%) saturate(1905%) hue-rotate(176deg) brightness(93%) contrast(92%);
+    }
     .dog-card h3 { font-family: 'McLaren', cursive; font-size: 1.25rem; margin-bottom: 0.5rem; }
     .dog-card .dog-description {
       display: -webkit-box;
@@ -428,20 +441,90 @@
     .filter-label {
       font-weight: 600;
       color: #374151;
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       white-space: nowrap;
     }
     .filter-select {
-      padding: 0.6rem 1rem;
+      padding: 0.45rem 0.8rem;
       border: 2px solid #e5e7eb;
       border-radius: 0.5rem;
       background: #fff;
       color: #222;
       font-family: 'Poppins', sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       cursor: pointer;
       transition: all 0.3s ease;
       min-width: 160px;
+    }
+    .filter-search {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-width: 200px;
+    }
+    .filter-search-icon {
+      position: absolute;
+      left: 0.8rem;
+      width: 14px;
+      height: 14px;
+      pointer-events: none;
+      opacity: 0.5;
+      z-index: 1;
+    }
+    .filter-search-input {
+      padding: 0.45rem 0.8rem 0.45rem 2.4rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 0.5rem;
+      background: #fff;
+      color: #222;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.75rem;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+    .filter-search-input:hover {
+      border-color: #fca5a5;
+    }
+    .filter-search-input:focus {
+      outline: none;
+      border-color: #000;
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
+    }
+    .filter-search-input::placeholder {
+      color: #9ca3af;
+    }
+    .filter-disabled-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 2px solid #e5e7eb;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+      align-self: center;
+      margin-left: 0.5rem;
+    }
+    .filter-disabled-toggle:hover {
+      border-color: #fca5a5;
+    }
+    .filter-disabled-toggle.active {
+      background-color: #46a4e1;
+      border-color: #46a4e1;
+    }
+    .filter-disabled-toggle img {
+      width: 20px;
+      height: 20px;
+      transition: all 0.3s ease;
+    }
+    .filter-disabled-toggle:not(.active) img {
+      filter: brightness(0) saturate(100%) invert(45%) sepia(97%) saturate(1905%) hue-rotate(176deg) brightness(93%) contrast(92%);
+    }
+    .filter-disabled-toggle.active img {
+      filter: brightness(0) invert(1);
     }
     .filter-select:hover {
       border-color: #fca5a5;
@@ -452,14 +535,14 @@
       box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
     }
     .btn-reset-filters {
-      padding: 0.6rem 1.2rem;
+      padding: 0.45rem 0.9rem;
       border: none;
       border-radius: 0.5rem;
       background: linear-gradient(135deg,#ffedd5,#fecaca);
       color: #fff;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
       font-family: 'Poppins', sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -729,6 +812,22 @@
         min-width: auto !important;
         padding: 0.625rem 0.875rem !important;
       }
+      .filter-search {
+        width: 100% !important;
+        min-width: auto !important;
+      }
+      .filter-search-input {
+        width: 100% !important;
+        padding: 0.625rem 0.875rem 0.625rem 2.5rem !important;
+      }
+      .filter-disabled-toggle {
+        width: 36px !important;
+        height: 36px !important;
+      }
+      .filter-disabled-toggle img {
+        width: 18px !important;
+        height: 18px !important;
+      }
       .btn-reset-filters {
         width: 100% !important;
         margin-left: 0 !important;
@@ -761,6 +860,12 @@
         height: 7.5rem !important;
         margin: 0 0.875rem 0 0 !important;
         flex-shrink: 0 !important;
+      }
+      .dog-card-disabled-icon {
+        width: 28px !important;
+        height: 28px !important;
+        top: 0.75rem !important;
+        right: 0.75rem !important;
       }
       
       .dog-card .card-body {
@@ -1104,7 +1209,6 @@
           <label for="filter-size" class="filter-label">Wielkość:</label>
           <select id="filter-size" class="filter-select">
             <option value="">Wszystkie</option>
-            <option value="Mini">Mini</option>
             <option value="Mały">Mały</option>
             <option value="Średni">Średni</option>
             <option value="Duży">Duży</option>
@@ -1116,6 +1220,15 @@
             <option value="Samiec">Samiec</option>
             <option value="Samica">Samica</option>
           </select>
+          
+          <div class="filter-search">
+            <img src="images/lupka.svg" alt="Search" class="filter-search-icon">
+            <input type="text" id="filter-search" class="filter-search-input" placeholder="Szukaj po imieniu...">
+          </div>
+          
+          <div class="filter-disabled-toggle" id="filter-disabled-toggle" title="Pokaż tylko niepełnosprawne">
+            <img src="images/invalid.svg" alt="Niepełnosprawny">
+          </div>
           
           <button id="reset-filters" class="btn-reset-filters">Wyczyść filtry</button>
         </div>
@@ -1332,8 +1445,26 @@
       const ageFilter = document.getElementById('filter-age').value;
       const sizeFilter = document.getElementById('filter-size').value;
       const genderFilter = document.getElementById('filter-gender').value;
+      const searchQuery = document.getElementById('filter-search').value.trim().toLowerCase();
+      const disabledToggle = document.getElementById('filter-disabled-toggle');
+      const disabledFilterActive = disabledToggle && disabledToggle.classList.contains('active');
       
       const filtered = allDogs.filter(dog => {
+        // Disabled filter - show only disabled dogs when active
+        if (disabledFilterActive) {
+          if (dog.data.disabled !== true && dog.data.disabled !== 'true') {
+            return false;
+          }
+        }
+        
+        // Search filter - filter by dog name
+        if (searchQuery) {
+          const dogName = (dog.data.name || '').toLowerCase();
+          if (!dogName.includes(searchQuery)) {
+            return false;
+          }
+        }
+        
         // Age filter - only filter if age is specified and dog has a valid age category
         if (ageFilter) {
           // If dog has unknown age, include it only if no age filter is selected
@@ -1381,7 +1512,7 @@
       if (resultsDiv) {
         const totalCount = allDogs.length;
         const filteredCount = filtered.length;
-        if (ageFilter || sizeFilter || genderFilter) {
+        if (ageFilter || sizeFilter || genderFilter || disabledFilterActive || searchQuery) {
           resultsDiv.textContent = `Znaleziono ${filteredCount} z ${totalCount} psów`;
         } else {
           resultsDiv.textContent = '';
@@ -1432,7 +1563,12 @@
           .replace(/\s+/g, ' ')
           .trim();
         
+        const disabledIcon = (dog.data.disabled === true || dog.data.disabled === 'true') 
+          ? '<div class="dog-card-disabled-icon"><img src="images/invalid.svg" alt="Niepełnosprawny"></div>' 
+          : '';
+        
         card.innerHTML = `
+          ${disabledIcon}
           <img src="${dog.data.image || 'images/placeholder.jpg'}" alt="${dog.data.name}" class="circle">
           <div class="card-body">
             <h3>${dog.data.name}</h3>
@@ -1560,11 +1696,27 @@
       if (genderFilter) {
         genderFilter.addEventListener('change', filterDogs);
       }
+      const searchInput = document.getElementById('filter-search');
+      const disabledToggle = document.getElementById('filter-disabled-toggle');
+      
+      if (searchInput) {
+        searchInput.addEventListener('input', filterDogs);
+      }
+      
+      if (disabledToggle) {
+        disabledToggle.addEventListener('click', function() {
+          this.classList.toggle('active');
+          filterDogs();
+        });
+      }
+      
       if (resetButton) {
         resetButton.addEventListener('click', function() {
           ageFilter.value = '';
           sizeFilter.value = '';
           genderFilter.value = '';
+          if (searchInput) searchInput.value = '';
+          if (disabledToggle) disabledToggle.classList.remove('active');
           filterDogs();
         });
       }

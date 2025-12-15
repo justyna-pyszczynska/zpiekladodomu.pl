@@ -870,6 +870,27 @@
       object-fit: cover;
       /* object-position will be set by individual photo rules below */
       border-radius: 1rem;
+      display: block;
+    }
+    /* Hide alt text when image is not loaded or has opacity 0 */
+    .gallery-image:not([src]),
+    .gallery-image[src=""],
+    .image-container img:not([src]),
+    .image-container img[src=""] {
+      display: none !important;
+    }
+    /* Hide alt text on images with opacity 0 - use font-size 0 trick */
+    .gallery-image[style*="opacity: 0"],
+    .image-container img[style*="opacity: 0"] {
+      font-size: 0 !important;
+      line-height: 0 !important;
+      color: transparent !important;
+    }
+    /* Ensure alt text never shows by using negative text-indent */
+    .gallery-image,
+    .image-container img {
+      text-indent: -9999px;
+      overflow: hidden;
     }
     
     /* Better positioning for main gallery photos */
@@ -5501,9 +5522,12 @@
           if (!targetImg) {
             targetImg = document.createElement('img');
             targetImg.className = 'gallery-image';
-            targetImg.alt = 'Gallery Photo';
+            targetImg.alt = ''; // Empty alt to prevent text showing
             container.appendChild(targetImg);
           }
+          
+          // Hide alt text display - ensure image is set to display properly
+          targetImg.style.display = 'block';
           
           // Fade out
           container.style.opacity = '0';
@@ -5512,6 +5536,7 @@
             // Update img src
             targetImg.src = newPhotoPath;
             targetImg.style.opacity = '1'; // Make sure image is visible
+            targetImg.style.display = 'block'; // Ensure it's displayed
             
             // Remove background-image if it exists
             container.style.backgroundImage = 'none';
@@ -5524,6 +5549,9 @@
             // Preload and fade in
             const tempImg = new Image();
             tempImg.onload = () => {
+              // Ensure image is visible and displayed properly
+              targetImg.style.opacity = '1';
+              targetImg.style.display = 'block';
               container.style.opacity = '1';
               // Update tracking: add photo as displayed
               currentlyDisplayedPhotos.add(newPhotoPath);
@@ -5548,8 +5576,17 @@
               }
             };
             tempImg.onerror = () => {
-              // Even if image fails to load, still fade in and update tracking
+              // If image fails to load, hide the image element to prevent alt text from showing
+              targetImg.style.display = 'none';
+              targetImg.style.opacity = '0';
+              // Keep container visible but don't show broken image or alt text
               container.style.opacity = '1';
+              // Restore background-image as fallback if available
+              if (newPhotoPath) {
+                container.style.backgroundImage = `url('${newPhotoPath}')`;
+                container.style.backgroundSize = 'cover';
+                container.style.backgroundRepeat = 'no-repeat';
+              }
               currentlyDisplayedPhotos.add(newPhotoPath);
             };
             tempImg.src = newPhotoPath;
